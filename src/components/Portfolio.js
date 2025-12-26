@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Briefcase, ... } from './ui/Icons';
+
 import {
   Menu, X, Github, Linkedin, Mail, Phone, MapPin, Code, Database, Instagram,
   Server, Briefcase, GraduationCap, ChevronRight
@@ -19,9 +21,9 @@ export default function Portfolio() {
 
   const competences = [
     { nom: 'Développement Web', icone: Code, niveau: 85, details: 'HTML, CSS, JavaScript, React' },
-    { nom: 'Backend', icone: Server, niveau: 75, details: 'PHP, Node.js, API REST' },
-    { nom: 'Bases de Données', icone: Database, niveau: 80, details: 'MySQL, MongoDB' },
-    { nom: 'Programmation', icone: Code, niveau: 70, details: 'Java, Python, C++' }
+    { nom: 'Backend', icone: Server, niveau: 70, details: 'PHP, Node.js, API REST' },
+    { nom: 'Bases de Données', icone: Database, niveau: 80, details: 'MySQL' },
+    { nom: 'Programmation', icone: Code, niveau: 65, details: ' Python' }
   ];
 
   const projets = [
@@ -33,7 +35,6 @@ export default function Portfolio() {
       difficulte: 'Débutant',
       details: 'Une calculatrice interactive qui permet d\'effectuer les opérations mathématiques de base : addition, soustraction, multiplication et division.',
       fonctionnalites: ['Addition, soustraction, multiplication, division', 'Interface responsive', 'Affichage des résultats', 'Bouton clear pour réinitialiser'],
-      liveUrl: 'https://moha4848.github.io/calculatrice',
       repoUrl: 'https://github.com/moha4848/calculatrice'
     },
     {
@@ -44,7 +45,6 @@ export default function Portfolio() {
       difficulte: 'Débutant',
       details: 'Une application simple pour créer, marquer comme terminées et supprimer des tâches. Les données sont sauvegardées dans le navigateur.',
       fonctionnalites: ['Ajouter des tâches', 'Marquer comme terminé', 'Supprimer des tâches', 'Compteur de tâches'],
-      liveUrl: 'https://moha4848.github.io/todo',
       repoUrl: 'https://github.com/moha4848/todo'
     },
     {
@@ -55,7 +55,6 @@ export default function Portfolio() {
       difficulte: 'Débutant',
       details: 'Un formulaire de contact professionnel avec validation en temps réel des champs email, téléphone et message.',
       fonctionnalites: ['Validation email', 'Validation téléphone', 'Messages d\'erreur', 'Design moderne'],
-      liveUrl: 'https://moha4848.github.io/contact',
       repoUrl: 'https://github.com/moha4848/contact'
     },
     {
@@ -66,7 +65,6 @@ export default function Portfolio() {
       difficulte: 'Intermédiaire',
       details: 'Une galerie d\'images interactive avec possibilité d\'agrandir les images en plein écran et de naviguer entre elles.',
       fonctionnalites: ['Affichage en grille', 'Mode plein écran', 'Navigation entre images', 'Animations fluides'],
-      liveUrl: 'https://moha4848.github.io/gallery',
       repoUrl: 'https://github.com/moha4848/gallery'
     },
     {
@@ -77,7 +75,7 @@ export default function Portfolio() {
       difficulte: 'Débutant',
       details: 'Une horloge numérique qui affiche l\'heure et la date en temps réel avec un design élégant.',
       fonctionnalites: ['Heure en temps réel', 'Date du jour', 'Format 24h', 'Design animé'],
-      liveUrl: 'https://moha4848.github.io/clock',
+    
       repoUrl: 'https://github.com/moha4848/clock'
     },
     {
@@ -88,7 +86,7 @@ export default function Portfolio() {
       difficulte: 'Intermédiaire',
       details: 'Application de quiz avec questions à choix multiples, système de score et affichage des bonnes réponses.',
       fonctionnalites: ['Questions multiples', 'Calcul du score', 'Feedback immédiat', 'Affichage du résultat final'],
-      liveUrl: 'https://moha4848.github.io/quiz',
+     
       repoUrl: 'https://github.com/moha4848/quiz'
     }
   ];
@@ -300,7 +298,7 @@ export default function Portfolio() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3 text-slate-300">
                 <MapPin className="text-blue-400" size={20} />
-                <span>Maroc</span>
+                <span>Hay Samara1, Oujda – Maroc</span>
               </div>
               <div className="flex items-center space-x-3 text-slate-300">
                 <Mail className="text-blue-400" size={20} />
@@ -312,7 +310,7 @@ export default function Portfolio() {
               </div>
               <div className="flex items-center space-x-3 text-slate-300">
                 <GraduationCap className="text-blue-400" size={20} />
-                <span>ISTA Lazaret, Oujda | 2024 – 2026</span>
+                <span>ISTA Lazaret, Oujda</span>
               </div>
             </div>
           </div>
@@ -402,17 +400,7 @@ export default function Portfolio() {
                       Détails <ChevronRight size={20} />
                     </button>
 
-                    {projet.liveUrl && (
-                      <a
-                        href={projet.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm"
-                        aria-label={`Voir le projet ${projet.titre}`}
-                      >
-                        Voir le projet
-                      </a>
-                    )}
+                  
 
                     {projet.repoUrl && (
                       <a
@@ -447,16 +435,7 @@ export default function Portfolio() {
               <h2 className="text-3xl font-bold">{selectedProject.titre}</h2>
 
               <div className="flex items-center gap-3">
-                {selectedProject.liveUrl && (
-                  <a
-                    href={selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm"
-                  >
-                    Voir le projet
-                  </a>
-                )}
+                
 
                 {selectedProject.repoUrl && (
                   <a
