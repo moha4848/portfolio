@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Briefcase, ... } from './ui/Icons';
 
 import {
   Menu, X, Github, Linkedin, Mail, Phone, MapPin, Code, Database, Instagram,
-  Server, Briefcase, GraduationCap, ChevronRight
+  Server,  GraduationCap, ChevronRight
 } from './ui/Icons';
+
 import CalculatriceDemo from './demos/CalculatriceDemo';
 import TodoDemo from './demos/TodoDemo';
 import ContactDemo from './demos/ContactDemo';
