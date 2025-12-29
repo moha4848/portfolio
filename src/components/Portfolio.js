@@ -988,7 +988,7 @@ const translations = {
 export default function Portfolio() {
   const [lang, setLang] = useState('fr');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('accueil');
+const [, setActiveSection] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
 
