@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&display=swap');
+
+.emoji-flag {
+  font-family: 'Noto Color Emoji', 'Noto Emoji', 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
+.flag-spin:hover {
+  animation: spin-flag 0.5s ease;
+}
+
+@keyframes spin-flag {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

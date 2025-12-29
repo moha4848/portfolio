@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ChevronDown,
-  ChevronRight,
-  X,
-  Menu,
-  ExternalLink,
-  MapPin,
-  Mail,
-  Phone,
-  GraduationCap,
-  Github,
-  Linkedin,
-  Instagram
+import {
+  Menu, X, Github, Linkedin, Mail, Phone, MapPin, Code, Database, Instagram,
+  Server, GraduationCap, ChevronRight, Globe, ChevronDown, ExternalLink
 } from 'lucide-react';
-
 
 // Composants de démonstration
 const CalculatriceDemo = () => (
@@ -116,7 +105,7 @@ const QuizDemo = () => (
   </div>
 );
 
-
+// Traductions COMPLÈTES
 const translations = {
   fr: {
     nav: ['Accueil', 'À Propos', 'Compétences', 'Projets', 'Formation', 'Contact'],
@@ -220,14 +209,13 @@ const translations = {
     viewLive: 'Voir en direct',
     proficiency: 'Maîtrise'
   },
-
   en: {
     nav: ['Home', 'About', 'Skills', 'Projects', 'Education', 'Contact'],
     role: 'Digital Development Intern - ISTA',
     downloadCV: 'Download CV',
     contactMe: 'Contact Me',
     aboutTitle: 'About Me',
-    aboutText1: "I am a motivated and passionate IT student, currently training as a Specialized Technician in Computer Development at ISTA. My training has allowed me to acquire solid skills in web development, programming, and database management.",
+    aboutText1: "Motivated student passionate about computer science, I am currently training as a Specialized Technician in IT Development at ISTA. My training has allowed me to acquire solid skills in web development, programming, and database management.",
     aboutText2: "I am constantly looking for new challenges and enjoy learning new technologies. My goal is to contribute to innovative projects and develop my professional skills.",
     skillsTitle: 'My Skills',
     skills: [
@@ -264,21 +252,21 @@ const translations = {
       {
         titre: 'Image Gallery',
         description: 'Responsive gallery with lightbox effect',
-        details: 'An interactive image gallery with the ability to enlarge images to full screen and navigate between them.',
-        fonctionnalites: ['Grid display', 'Full screen mode', 'Image navigation', 'Smooth animations'],
+        details: 'An interactive image gallery with the ability to enlarge images in full screen and navigate between them.',
+        fonctionnalites: ['Grid display', 'Full-screen mode', 'Image navigation', 'Smooth animations'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
         titre: 'Digital Clock',
         description: 'Real-time clock with date',
-        details: 'A digital clock that displays time and date in real time with an elegant design.',
-        fonctionnalites: ['Real-time clock', "Today's date", '24-hour format', 'Animated design'],
+        details: 'A digital clock that displays the time and date in real-time with an elegant design.',
+        fonctionnalites: ['Real-time', 'Current date', '24h format', 'Animated design'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
         titre: 'Interactive Quiz',
-        description: 'Quiz with score and correction',
-        details: 'Quiz application with multiple choice questions, scoring system, and correct answers display.',
+        description: 'Quiz with scoring and correction',
+        details: 'Quiz application with multiple choice questions, scoring system, and display of correct answers.',
         fonctionnalites: ['Multiple questions', 'Score calculation', 'Immediate feedback', 'Final result display'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
@@ -299,9 +287,9 @@ const translations = {
       },
       {
         titre: 'Baccalaureate in Physical Sciences',
-        etablissement: 'Larbi al-Houssaini High School',
+        etablissement: 'Lycée Larbi al-Houssaini',
         periode: '2023 - 2024',
-        description: 'Physical Sciences option'
+        description: 'Physical Sciences Option'
       }
     ],
     contactTitle: 'Contact Me',
@@ -323,19 +311,18 @@ const translations = {
     viewLive: 'View Live',
     proficiency: 'Proficiency'
   },
-
   ar: {
-    nav: ['الرئيسية', 'من أنا', 'المهارات', 'المشاريع', 'التعليم', 'اتصل بي'],
+    nav: ['الرئيسية', 'عني', 'المهارات', 'المشاريع', 'التكوين', 'اتصل'],
     role: 'متدرب في التطوير الرقمي - ISTA',
     downloadCV: 'تحميل السيرة الذاتية',
     contactMe: 'اتصل بي',
-    aboutTitle: 'من أنا',
-    aboutText1: "أنا طالب في مجال تقنية المعلومات متحمس وشغوف، أتدرب حاليًا كفني متخصص في تطوير الحاسوب في معهد ISTA. تدريبي مكنني من اكتساب مهارات قوية في تطوير الويب، البرمجة، وإدارة قواعد البيانات.",
-    aboutText2: "أبحث دائمًا عن تحديات جديدة وأستمتع بتعلم التقنيات الحديثة. هدفي هو المساهمة في مشاريع مبتكرة وتطوير مهاراتي المهنية.",
+    aboutTitle: 'عني',
+    aboutText1: "طالب متحمس ومهتم بعلوم الحاسوب، أتابع حاليًا تكوينًا كتقني متخصص في التطوير المعلوماتي في ISTA. لقد سمح لي تكويني باكتساب مهارات قوية في تطوير الويب والبرمجة وإدارة قواعد البيانات.",
+    aboutText2: "أبحث باستمرار عن تحديات جديدة وأحب تعلم تقنيات جديدة. هدفي هو المساهمة في مشاريع مبتكرة وتطوير مهاراتي المهنية.",
     skillsTitle: 'مهاراتي',
     skills: [
       { nom: 'تطوير الويب', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
-      { nom: 'الخلفية', details: 'PHP, Node.js, REST API', icon: '⚙️' },
+      { nom: 'الخادم الخلفي', details: 'PHP, Node.js, API REST', icon: '⚙️' },
       { nom: 'قواعد البيانات', details: 'MySQL, MongoDB', icon: '🗃️' },
       { nom: 'البرمجة', details: 'Python, Java', icon: '💻' },
       { nom: 'الأدوات', details: 'Git, VS Code, Figma', icon: '🛠️' },
@@ -345,66 +332,66 @@ const translations = {
     projects: [
       {
         titre: 'آلة حاسبة بسيطة',
-        description: 'آلة حاسبة مع عمليات أساسية وواجهة عصرية',
-        details: 'آلة حاسبة تفاعلية تؤدي العمليات الحسابية الأساسية: الجمع، الطرح، الضرب، والقسمة.',
-        fonctionnalites: ['الجمع، الطرح، الضرب، القسمة', 'واجهة متجاوبة', 'عرض النتائج', 'زر مسح لإعادة التعيين'],
+        description: 'آلة حاسبة بعمليات أساسية وواجهة حديثة',
+        details: 'آلة حاسبة تفاعلية تسمح بإجراء العمليات الحسابية الأساسية: الجمع والطرح والضرب والقسمة.',
+        fonctionnalites: ['جمع، طرح، ضرب، قسمة', 'واجهة متجاوبة', 'عرض النتائج', 'زر مسح لإعادة التعيين'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
         titre: 'قائمة المهام',
         description: 'تطبيق لإدارة مهامك اليومية',
-        details: 'تطبيق بسيط لإنشاء المهام، وضع علامة كمكتملة، وحذف المهام. يتم حفظ البيانات في المتصفح.',
-        fonctionnalites: ['إضافة المهام', 'وضع علامة كمكتملة', 'حذف المهام', 'عداد المهام'],
+        details: 'تطبيق بسيط لإنشاء المهام ووضع علامة عليها كمكتملة وحذفها. يتم حفظ البيانات في المتصفح.',
+        fonctionnalites: ['إضافة مهام', 'وضع علامة كمكتملة', 'حذف المهام', 'عداد المهام'],
         technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage']
       },
       {
-        titre: 'نموذج الاتصال',
+        titre: 'نموذج اتصال',
         description: 'نموذج مع التحقق من البيانات',
-        details: 'نموذج اتصال احترافي مع التحقق في الوقت الفعلي لحقول البريد الإلكتروني، الهاتف، والرسالة.',
-        fonctionnalites: ['التحقق من البريد الإلكتروني', 'التحقق من الهاتف', 'رسائل الخطأ', 'تصميم عصري'],
+        details: 'نموذج اتصال احترافي مع التحقق في الوقت الفعلي من حقول البريد الإلكتروني والهاتف والرسالة.',
+        fonctionnalites: ['التحقق من البريد الإلكتروني', 'التحقق من الهاتف', 'رسائل خطأ', 'تصميم حديث'],
         technologies: ['HTML', 'CSS', 'JavaScript', 'Regex']
       },
       {
         titre: 'معرض الصور',
-        description: 'معرض متجاوب مع تأثير lightbox',
-        details: 'معرض صور تفاعلي مع إمكانية تكبير الصور إلى الشاشة الكاملة والتنقل بينها.',
-        fonctionnalites: ['عرض شبكي', 'وضع الشاشة الكاملة', 'التنقل بين الصور', 'حركات سلسة'],
+        description: 'معرض متجاوب مع تأثير صندوق الضوء',
+        details: 'معرض صور تفاعلي مع إمكانية تكبير الصور بملء الشاشة والتنقل بينها.',
+        fonctionnalites: ['عرض شبكي', 'وضع ملء الشاشة', 'التنقل بين الصور', 'رسوم متحركة سلسة'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
         titre: 'ساعة رقمية',
-        description: 'ساعة حقيقية مع التاريخ',
+        description: 'ساعة في الوقت الفعلي مع التاريخ',
         details: 'ساعة رقمية تعرض الوقت والتاريخ في الوقت الفعلي بتصميم أنيق.',
-        fonctionnalites: ['ساعة حقيقية', 'تاريخ اليوم', 'تنسيق 24 ساعة', 'تصميم متحرك'],
+        fonctionnalites: ['الوقت الفعلي', 'تاريخ اليوم', 'تنسيق 24 ساعة', 'تصميم متحرك'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
         titre: 'اختبار تفاعلي',
-        description: 'اختبار مع النقاط والتصحيح',
-        details: 'تطبيق اختبار مع أسئلة متعددة الخيارات، نظام النقاط، وعرض الإجابات الصحيحة.',
-        fonctionnalites: ['أسئلة متعددة', 'حساب النقاط', 'تغذية راجعة فورية', 'عرض النتيجة النهائية'],
+        description: 'اختبار مع النتيجة والتصحيح',
+        details: 'تطبيق اختبار مع أسئلة متعددة الخيارات ونظام النقاط وعرض الإجابات الصحيحة.',
+        fonctionnalites: ['أسئلة متعددة', 'حساب النتيجة', 'تعليقات فورية', 'عرض النتيجة النهائية'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
     difficulty: { beginner: 'مبتدئ', intermediate: 'متوسط', advanced: 'متقدم' },
-    details: 'تفاصيل',
+    details: 'التفاصيل',
     viewCode: 'عرض الكود',
     description: 'الوصف',
     techUsed: 'التقنيات المستخدمة',
-    features: 'المميزات',
-    formationTitle: 'التعليم',
+    features: 'الميزات',
+    formationTitle: 'التكوين',
     formations: [
       {
-        titre: 'فني متخصص في التطوير الرقمي',
-        etablissement: 'معهد ISTA لازاريت، وجدة',
+        titre: 'تقني متخصص في التطوير الرقمي',
+        etablissement: 'ISTA Lazaret، وجدة',
         periode: '2024 - 2026',
-        description: 'تدريب كامل في تطوير الويب (DEVOWSF)'
+        description: 'تكوين كامل في تطوير الويب (DEVOWSF)'
       },
       {
-        titre: 'بكالوريا علوم فيزيائية',
+        titre: 'بكالوريا العلوم الفيزيائية',
         etablissement: 'ثانوية العربي الحسيني',
         periode: '2023 - 2024',
-        description: 'تخصص العلوم الفيزيائية'
+        description: 'شعبة العلوم الفيزيائية'
       }
     ],
     contactTitle: 'اتصل بي',
@@ -419,22 +406,21 @@ const translations = {
     sendMessage: 'إرسال الرسالة',
     nameRequired: 'الاسم مطلوب',
     invalidEmail: 'بريد إلكتروني غير صالح',
-    messageTooShort: 'الرسالة قصيرة جدًا (10 أحرف على الأقل)',
-    footer: '© 2025 ملف التعريف. جميع الحقوق محفوظة.',
-    footerCredit: 'تم الإنشاء بواسطة متدرب ISTA',
+    messageTooShort: 'الرسالة قصيرة جدًا (الحد الأدنى 10 أحرف)',
+    footer: '© 2025 بورتفوليو. جميع الحقوق محفوظة.',
+    footerCredit: 'أنشأه متدرب ISTA',
     close: 'إغلاق',
     viewLive: 'عرض مباشر',
-    proficiency: 'الإتقان'
+    proficiency: 'المستوى'
   },
-
   es: {
-    nav: ['Inicio', 'Sobre mí', 'Habilidades', 'Proyectos', 'Formación', 'Contacto'],
+    nav: ['Inicio', 'Acerca de', 'Habilidades', 'Proyectos', 'Formación', 'Contacto'],
     role: 'Pasante en Desarrollo Digital - ISTA',
     downloadCV: 'Descargar CV',
     contactMe: 'Contáctame',
-    aboutTitle: 'Sobre Mí',
-    aboutText1: "Soy un estudiante de TI motivado y apasionado, actualmente en formación como Técnico Especializado en Desarrollo Informático en ISTA. Mi formación me ha permitido adquirir sólidas habilidades en desarrollo web, programación y gestión de bases de datos.",
-    aboutText2: "Constantemente busco nuevos desafíos y disfruto aprendiendo nuevas tecnologías. Mi objetivo es contribuir a proyectos innovadores y desarrollar mis habilidades profesionales.",
+    aboutTitle: 'Acerca de Mí',
+    aboutText1: "Estudiante motivado y apasionado por la informática, actualmente estoy en formación como Técnico Especializado en Desarrollo Informático en ISTA. Mi formación me ha permitido adquirir habilidades sólidas en desarrollo web, programación y gestión de bases de datos.",
+    aboutText2: "Estoy constantemente buscando nuevos desafíos y me encanta aprender nuevas tecnologías. Mi objetivo es contribuir a proyectos innovadores y desarrollar mis habilidades profesionales.",
     skillsTitle: 'Mis Habilidades',
     skills: [
       { nom: 'Desarrollo Web', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
@@ -449,8 +435,8 @@ const translations = {
       {
         titre: 'Calculadora Simple',
         description: 'Calculadora con operaciones básicas e interfaz moderna',
-        details: 'Una calculadora interactiva que realiza operaciones matemáticas básicas: suma, resta, multiplicación y división.',
-        fonctionnalites: ['Suma, resta, multiplicación, división', 'Interfaz responsive', 'Visualización de resultados', 'Botón clear para reiniciar'],
+        details: 'Una calculadora interactiva que permite realizar operaciones matemáticas básicas: suma, resta, multiplicación y división.',
+        fonctionnalites: ['Suma, resta, multiplicación, división', 'Interfaz responsive', 'Visualización de resultados', 'Botón de borrado para reiniciar'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
@@ -463,14 +449,14 @@ const translations = {
       {
         titre: 'Formulario de Contacto',
         description: 'Formulario con validación de datos',
-        details: 'Un formulario de contacto profesional con validación en tiempo real de campos de correo electrónico, teléfono y mensaje.',
-        fonctionnalites: ['Validación de correo', 'Validación de teléfono', 'Mensajes de error', 'Diseño moderno'],
+        details: 'Un formulario de contacto profesional con validación en tiempo real de los campos de correo electrónico, teléfono y mensaje.',
+        fonctionnalites: ['Validación de correo electrónico', 'Validación de teléfono', 'Mensajes de error', 'Diseño moderno'],
         technologies: ['HTML', 'CSS', 'JavaScript', 'Regex']
       },
       {
         titre: 'Galería de Imágenes',
         description: 'Galería responsive con efecto lightbox',
-        details: 'Una galería de imágenes interactiva con posibilidad de ampliar imágenes a pantalla completa y navegar entre ellas.',
+        details: 'Una galería de imágenes interactiva con la posibilidad de ampliar imágenes en pantalla completa y navegar entre ellas.',
         fonctionnalites: ['Visualización en cuadrícula', 'Modo pantalla completa', 'Navegación entre imágenes', 'Animaciones fluidas'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
@@ -478,20 +464,20 @@ const translations = {
         titre: 'Reloj Digital',
         description: 'Reloj en tiempo real con fecha',
         details: 'Un reloj digital que muestra la hora y la fecha en tiempo real con un diseño elegante.',
-        fonctionnalites: ['Reloj en tiempo real', 'Fecha actual', 'Formato 24 horas', 'Diseño animado'],
+        fonctionnalites: ['Tiempo en tiempo real', 'Fecha del día', 'Formato 24h', 'Diseño animado'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       },
       {
-        titre: 'Cuestionario Interactivo',
-        description: 'Cuestionario con puntuación y corrección',
-        details: 'Aplicación de cuestionario con preguntas de opción múltiple, sistema de puntuación y visualización de respuestas correctas.',
+        titre: 'Quiz Interactivo',
+        description: 'Quiz con puntuación y corrección',
+        details: 'Aplicación de quiz con preguntas de opción múltiple, sistema de puntuación y visualización de respuestas correctas.',
         fonctionnalites: ['Preguntas múltiples', 'Cálculo de puntuación', 'Retroalimentación inmediata', 'Visualización del resultado final'],
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
     difficulty: { beginner: 'Principiante', intermediate: 'Intermedio', advanced: 'Avanzado' },
     details: 'Detalles',
-    viewCode: 'Ver Código',
+    viewCode: 'Ver código',
     description: 'Descripción',
     techUsed: 'Tecnologías Utilizadas',
     features: 'Características',
@@ -505,7 +491,7 @@ const translations = {
       },
       {
         titre: 'Bachillerato en Ciencias Físicas',
-        etablissement: 'Instituto Larbi al-Houssaini',
+        etablissement: 'Lycée Larbi al-Houssaini',
         periode: '2023 - 2024',
         description: 'Opción Ciencias Físicas'
       }
@@ -513,7 +499,7 @@ const translations = {
     contactTitle: 'Contáctame',
     contactInfo: 'Información',
     contactMessage: 'Mensaje',
-    email: 'Correo Electrónico',
+    email: 'Correo electrónico',
     phone: 'Teléfono',
     location: 'Ubicación',
     yourName: 'Tu nombre',
@@ -521,13 +507,13 @@ const translations = {
     yourMessage: 'Tu mensaje',
     sendMessage: 'Enviar Mensaje',
     nameRequired: 'El nombre es requerido',
-    invalidEmail: 'Correo electrónico inválido',
-    messageTooShort: 'Mensaje demasiado corto (mínimo 10 caracteres)',
-    footer: '© 2025 Portafolio. Todos los derechos reservados.',
+    invalidEmail: 'Correo electrónico no válido',
+    messageTooShort: 'Mensaje demasiado corto (mín. 10 caracteres)',
+    footer: '© 2025 Portfolio. Todos los derechos reservados.',
     footerCredit: 'Creado por un pasante de ISTA',
     close: 'Cerrar',
-    viewLive: 'Ver en Vivo',
-    proficiency: 'Competencia'
+    viewLive: 'Ver en vivo',
+    proficiency: 'Dominio'
   }
 };
 
@@ -541,9 +527,9 @@ export default function Portfolio() {
   const t = translations[lang];
   const isRTL = lang === 'ar';
 
-
+  // الأعلام
   const languages = [
-    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-blue-500 to-red-500', },
+    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-blue-500 to-red-500' },
     { code: 'en', label: 'English', flag: '🇬🇧', color: 'from-blue-600 to-red-600' },
     { code: 'ar', label: 'العربية', flag: '🇲🇦', color: 'from-red-500 to-green-500' },
     { code: 'es', label: 'Español', flag: '🇪🇸', color: 'from-red-600 to-yellow-500' }
@@ -577,6 +563,35 @@ export default function Portfolio() {
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
   const [contactErrors, setContactErrors] = useState({});
 
+  // وظيفة تغيير اللغة
+  const handleLanguageChange = (languageCode) => {
+    setLang(languageCode);
+    setLangMenuOpen(false);
+    if (menuOpen) setMenuOpen(false);
+  };
+
+  // إغلاق القائمة عند الضغط خارجها
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langMenuOpen && !event.target.closest('.language-selector')) {
+        setLangMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [langMenuOpen]);
+
+  // وظيفة التنقل بين الأقسام
+  const scrollToSection = (sectionId) => {
+    setActiveSection(sectionId);
+    setMenuOpen(false);
+    document.getElementById(sectionId)?.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  };
+
   const validateContact = () => {
     const errs = {};
     if (!contactForm.name.trim()) errs.name = t.nameRequired;
@@ -595,22 +610,6 @@ export default function Portfolio() {
     setContactErrors({});
   };
 
-  const scrollToSection = (section) => {
-    setActiveSection(section);
-    setMenuOpen(false);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (langMenuOpen && !event.target.closest('.language-selector')) {
-        setLangMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [langMenuOpen]);
-
   return (
     <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <style>{`
@@ -624,73 +623,104 @@ export default function Portfolio() {
           font-size: 1.5rem;
           line-height: 1;
         }
-        
-        .gradient-border {
-          position: relative;
-        }
-        
-        .gradient-border::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          padding: 2px;
-          background: linear-gradient(45deg, #3b82f6, #06b6d4);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-        }
       `}</style>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm shadow-xl z-50 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-8">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Portfolio
-              </div>
+            {/* Logo */}
+            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Portfolio
+            </div>
 
-              {/* Desktop Menu */}
-              <div className="hidden md:flex items-center space-x-6">
-                {t.nav.map((item, index) => {
-                  const sectionIds = ['accueil-section', 'propos-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
-                  return (
-                    <button
-                      key={item}
-                      onClick={() => {
-                        scrollToSection(item.toLowerCase());
-                        document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }}
-                      className="relative group px-3 py-2 text-slate-300 hover:text-white transition-colors"
-                    >
-                      <span className="relative z-10">{item}</span>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                    </button>
-                  );
-                })}
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-8">
+              {t.nav.map((item, index) => {
+                const sectionIds = ['accueil-section', 'propos-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
+                return (
+                  <button
+                    key={item}
+                    onClick={() => scrollToSection(sectionIds[index])}
+                    className="relative group px-3 py-2 text-slate-300 hover:text-white transition-colors"
+                  >
+                    <span className="relative z-10">{item}</span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  </button>
+                );
+              })}
+
+              {/* Language Selector - Desktop */}
+              <div className="relative language-selector ml-4">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLangMenuOpen(!langMenuOpen);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  aria-label="Select language"
+                >
+                  <span className="text-xl font-bold">
+                    {lang === 'fr' ? '🇫🇷' : lang === 'en' ? '🇬🇧' : lang === 'ar' ? '🇲🇦' : '🇪🇸'}
+                  </span>
+                  <span className="font-bold text-white">
+                    {lang.toUpperCase()}
+                  </span>
+                  <ChevronDown size={16} className={langMenuOpen ? 'rotate-180' : ''} />
+                </button>
+                
+                {langMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-56 bg-gradient-to-b from-slate-900 to-slate-950 rounded-xl shadow-2xl overflow-hidden border border-slate-700 z-50">
+                    <div className="p-3">
+                      <p className="text-sm font-bold text-slate-300 mb-3 px-2">🌍 Select Language</p>
+                      
+                      <div className="space-y-2">
+                        {languages.map((language) => (
+                          <button
+                            key={language.code}
+                            onClick={() => {
+                              setLang(language.code);
+                              setLangMenuOpen(false);
+                            }}
+                            className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${
+                              lang === language.code 
+                                ? 'bg-blue-900/40 border border-blue-500/30' 
+                                : 'hover:bg-slate-800'
+                            }`}
+                          >
+                            <span className="text-xl">
+                              {language.flag}
+                            </span>
+                            <div className="flex-1 text-left">
+                              <span className="font-medium block">{language.label}</span>
+                              <span className="text-xs text-slate-400">{language.code.toUpperCase()}</span>
+                            </div>
+                            {lang === language.code && (
+                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Language Selector and Menu Button */}
-            <div className="flex items-center gap-4">
-              {/* Language Selector */}
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-3">
+              {/* Language Selector for Mobile */}
               <div className="relative language-selector">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setLangMenuOpen(!langMenuOpen);
                   }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 transition-all duration-300 border border-slate-700 hover:border-blue-500/50 shadow-lg"
-                  aria-label="Select language"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 transition-all duration-300 border border-slate-700 hover:border-blue-500/50"
                 >
-                  <span className="emoji-flag text-xl">
+                  <span className="text-xl">
                     {languages.find(l => l.code === lang)?.flag}
                   </span>
-                  <span className="text-sm font-medium hidden sm:block">
-                    {languages.find(l => l.code === lang)?.code.toUpperCase()}
-                  </span>
-                  <ChevronDown size={16} className={langMenuOpen ? 'rotate-180 transition-transform' : ''} />
                 </button>
                 
                 {langMenuOpen && (
@@ -699,33 +729,26 @@ export default function Portfolio() {
                       {languages.map((language) => (
                         <button
                           key={language.code}
-                          onClick={() => {
-                            setLang(language.code);
-                            setLangMenuOpen(false);
-                          }}
+                          onClick={() => handleLanguageChange(language.code)}
                           className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
                             lang === language.code 
                               ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30' 
                               : 'hover:bg-slate-800/80'
                           }`}
                         >
-                          <span className="emoji-flag text-xl">{language.flag}</span>
+                          <span className="text-xl">{language.flag}</span>
                           <span className="flex-1 text-left font-medium">{language.label}</span>
-                          {lang === language.code && (
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                          )}
                         </button>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-
-              {/* Mobile Menu Button */}
+              
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
-                className="md:hidden p-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300"
+                className="p-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300"
               >
                 {menuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -736,37 +759,36 @@ export default function Portfolio() {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
+            {/* Language Selection in Mobile Menu */}
             <div className="p-4 border-b border-slate-800">
+              <p className="text-sm font-bold text-slate-300 mb-3 px-2">🌍 Select Language</p>
               <div className="grid grid-cols-2 gap-2">
                 {languages.map((language) => (
                   <button
                     key={language.code}
-                    onClick={() => {
-                      setLang(language.code);
-                      setMenuOpen(false);
-                    }}
+                    onClick={() => handleLanguageChange(language.code)}
                     className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all ${
                       lang === language.code 
                         ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30 border border-blue-500/50' 
                         : 'bg-slate-800 hover:bg-slate-700 border border-slate-700'
                     }`}
                   >
-                    <span className="emoji-flag text-2xl mb-1">{language.flag}</span>
+                    <span className="text-2xl mb-1">{language.flag}</span>
                     <span className="text-sm font-medium">{language.label}</span>
                   </button>
                 ))}
               </div>
             </div>
             
+            {/* Navigation Items in Mobile Menu */}
             {t.nav.map((item, index) => {
               const sectionIds = ['accueil-section', 'propos-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
               return (
                 <button
                   key={item}
                   onClick={() => {
-                    scrollToSection(item.toLowerCase());
+                    scrollToSection(sectionIds[index]);
                     setMenuOpen(false);
-                    document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
                   className="w-full text-left px-6 py-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800/50 flex items-center justify-between group"
                 >
@@ -782,8 +804,7 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section id="accueil-section" className="pt-32 pb-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          {/* Avatar with profile image */}
-          <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 animate-gradient">
+          <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500">
             <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 shadow-2xl">
               <img
                 src="/profile.jpeg"
@@ -794,27 +815,25 @@ export default function Portfolio() {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient-text">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
             Yousfi Mohammed
           </h1>
 
-          <p className="text-xl md:text-2xl text-blue-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-blue-300 mb-8 max-w-2xl mx-auto">
             {t.role}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-  href="/CV_Yousfi_Mohammed.pdf"
-  download="CV_Yousfi_Mohammed.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
->
-  <span>{t.downloadCV}</span>
-  <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
-</a>
+              href="/CV_Yousfi_Mohammed.pdf"
+              download="CV_Yousfi_Mohammed.pdf"
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
+            >
+              <span>{t.downloadCV}</span>
+              <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
+            </a>
             <button 
-              onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSection('contact-section')}
               className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-slate-700 hover:border-blue-500/50"
             >
               {t.contactMe}
@@ -826,62 +845,38 @@ export default function Portfolio() {
       {/* À Propos */}
       <section id="propos-section" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {t.aboutTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          </div>
-          
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {t.aboutTitle}
+            </span>
+          </h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-slate-300 leading-relaxed">
+            <div>
+              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
                 {t.aboutText1}
               </p>
               <p className="text-lg text-slate-300 leading-relaxed">
                 {t.aboutText2}
               </p>
-              
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                {[
-                  { icon: MapPin, label: 'Hay Samara1, Oujda' },
-                  { icon: Mail, label: 'myousfi610@gmail.com' },
-                  { icon: Phone, label: '+212 716 288 974' },
-                  { icon: GraduationCap, label: 'ISTA Lazaret, Oujda' }
-                ].map((item, idx) => (
-                  <div key={idx} className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/30 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-2 rounded-lg">
-                      <item.icon className="text-blue-400" size={20} />
-                    </div>
-                    <span className="text-sm font-medium text-slate-300">{item.label}</span>
-                  </div>
-                ))}
-              </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Mes Intérêts
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: '💻', title: 'Développement Web', desc: 'Frontend & Backend' },
-                  { icon: '📱', title: 'Applications Mobiles', desc: 'React Native' },
-                  { icon: '🎨', title: 'UI/UX Design', desc: 'Figma, Adobe XD' },
-                  { icon: '📊', title: 'Data Science', desc: 'Python, Machine Learning' },
-                  { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
-                  { icon: '🔒', title: 'Cybersécurité', desc: 'Sécurité des applications' }
-                ].map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/50 hover:from-slate-800 hover:to-slate-900 transition-all duration-300 border border-slate-700/30 hover:border-blue-500/30 group">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-2xl">{item.icon}</span>
-                      <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors">{item.title}</h4>
-                    </div>
-                    <p className="text-sm text-slate-400">{item.desc}</p>
-                  </div>
-                ))}
+            <div className="space-y-4">
+              <div className={`flex items-center space-x-3 text-slate-300 ${isRTL ? 'space-x-reverse' : ''}`}>
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-600 p-2 rounded-lg">
+                  <MapPin className="text-white" size={20} />
+                </div>
+                <span>Hay Samara1, Oujda – {lang === 'ar' ? 'المغرب' : lang === 'es' ? 'Marruecos' : 'Maroc'}</span>
+              </div>
+              <div className={`flex items-center space-x-3 text-slate-300 ${isRTL ? 'space-x-reverse' : ''}`}>
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-600 p-2 rounded-lg">
+                  <Mail className="text-white" size={20} />
+                </div>
+                <span>myousfi610@gmail.com</span>
+              </div>
+              <div className={`flex items-center space-x-3 text-slate-300 ${isRTL ? 'space-x-reverse' : ''}`}>
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-600 p-2 rounded-lg">
+                  <Phone className="text-white" size={20} />
+                </div>
+                <span>+212 716 288 974</span>
               </div>
             </div>
           </div>
@@ -891,14 +886,11 @@ export default function Portfolio() {
       {/* Compétences */}
       <section id="competences-section" className="py-20 px-4 bg-gradient-to-b from-slate-900/50 to-transparent">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {t.skillsTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {t.skillsTitle}
+            </span>
+          </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {t.skills.map((skill, index) => (
@@ -934,14 +926,11 @@ export default function Portfolio() {
       {/* Projets */}
       <section id="projets-section" className="py-20 px-4 bg-gradient-to-b from-slate-900/30 to-transparent">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {t.projectsTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {t.projectsTitle}
+            </span>
+          </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projets.map((projet, idx) => {
@@ -1156,14 +1145,11 @@ export default function Portfolio() {
       {/* Formation */}
       <section id="formation-section" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {t.formationTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {t.formationTitle}
+            </span>
+          </h2>
           
           <div className="max-w-3xl mx-auto">
             <div className="relative">
@@ -1193,14 +1179,11 @@ export default function Portfolio() {
       {/* Contact */}
       <section id="contact-section" className="py-20 px-4 bg-gradient-to-b from-transparent to-slate-900/50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                {t.contactTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {t.contactTitle}
+            </span>
+          </h2>
           
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -1342,7 +1325,11 @@ export default function Portfolio() {
             </div>
           </div>
           
-          
+          <div className="text-center mt-8 pt-8 border-t border-slate-800/30">
+            <p className="text-sm text-slate-500">
+              Made with ❤️ using React & Tailwind CSS
+            </p>
+          </div>
         </div>
       </footer>
     </div>
