@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   ChevronDown,
   ChevronRight,
+  ChevronLeft, 
   X,
   Menu,
   ExternalLink,
@@ -11,110 +12,318 @@ import {
   GraduationCap,
   Github,
   Linkedin,
-  Instagram
+  Instagram,
+  Check,
+  Trash2
 } from 'lucide-react';
 
+const repoMap = {
+  1: "calculatrice",
+  2: "todo",
+  3: "contact",
+  4: "gallery",
+  5: "clock",
+  6: "quiz",
+};
 
-// Composants de démonstration
-const CalculatriceDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">Calculatrice</div>
-    <div className="bg-slate-900/80 p-4 rounded-lg">
-      <div className="h-8 bg-slate-800 rounded mb-4 flex items-center justify-end px-3 text-xl">
-        0
+/* ================= CALCULATRICE ================= */
+export const CalculatriceDemo = () => {
+  const [display, setDisplay] = useState('0');
+  const [operation, setOperation] = useState('');
+  const [previousValue, setPreviousValue] = useState('');
+
+  const handleNumber = (num) => {
+    setDisplay(display === '0' ? num : display + num);
+  };
+
+  const handleOperation = (op) => {
+    setOperation(op);
+    setPreviousValue(display);
+    setDisplay('0');
+  };
+
+  const calculate = () => {
+    const prev = parseFloat(previousValue);
+    const current = parseFloat(display);
+    let result;
+
+    switch (operation) {
+      case '+': result = prev + current; break;
+      case '-': result = prev - current; break;
+      case '×': result = prev * current; break;
+      case '÷': result = current !== 0 ? prev / current : 'Erreur'; break;
+      default: return;
+    }
+
+    setDisplay(result.toString());
+    setOperation('');
+    setPreviousValue('');
+  };
+
+  const clear = () => {
+    setDisplay('0');
+    setOperation('');
+    setPreviousValue('');
+  };
+
+  const handleButtonClick = (btn) => {
+    if (btn === 'C') clear();
+    else if (btn === '=') calculate();
+    else if (['+','-','×','÷'].includes(btn)) handleOperation(btn);
+    else if (btn === '.' && !display.includes('.')) setDisplay(display + '.');
+    else handleNumber(btn);
+  };
+
+  return (
+    <div className="p-6 bg-slate-800 rounded-xl">
+      <div className="text-center text-xl mb-4 text-blue-400 font-bold">Calculatrice</div>
+      <div className="bg-slate-900 p-4 rounded-lg">
+        <div className="text-right text-green-400 text-3xl mb-4">{display}</div>
+        <div className="grid grid-cols-4 gap-3">
+          {['7','8','9','÷','4','5','6','×','1','2','3','-','C','0','.','+'].map(btn => (
+            <button
+              key={btn}
+              onClick={() => handleButtonClick(btn)}
+              className="h-12 bg-slate-700 rounded-lg hover:bg-slate-600"
+            >
+              {btn}
+            </button>
+          ))}
+          <button
+            onClick={() => handleButtonClick('=')}
+            className="col-span-4 h-12 bg-green-600 rounded-lg hover:bg-green-700"
+          >
+            =
+          </button>
+        </div>
       </div>
-      <div className="grid grid-cols-4 gap-3">
-        {['7','8','9','+','4','5','6','-','1','2','3','×','C','0','=','÷'].map((btn) => (
-          <div key={btn} className="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 h-12 rounded-lg flex items-center justify-center hover:from-blue-800/40 hover:to-cyan-800/40 transition-all cursor-pointer">
-            {btn}
-          </div>
+    </div>
+  );
+};
+
+/* ================= TODO ================= */
+export const TodoDemo = () => {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+
+  const addTask = () => {
+    if (!newTask.trim()) return;
+    setTasks([...tasks, { id: Date.now(), text: newTask, done: false }]);
+    setNewTask('');
+  };
+
+  const toggleTask = (id) => {
+    setTasks(tasks.map(t => t.id === id ? { ...t, done: !t.done } : t));
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter(t => t.id !== id));
+  };
+
+  return (
+    <div className="p-6 bg-slate-800 rounded-xl">
+      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">Todo List</h2>
+      {tasks.map(task => (
+        <div key={task.id} className="flex justify-between bg-slate-700 p-2 mb-2 rounded">
+          <span
+            onClick={() => toggleTask(task.id)}
+            className={task.done ? 'line-through cursor-pointer' : 'cursor-pointer'}
+          >
+            {task.text}
+          </span>
+          <button onClick={() => deleteTask(task.id)}>
+            <Trash2 size={18} />
+          </button>
+        </div>
+      ))}
+      <input
+        value={newTask}
+        onChange={e => setNewTask(e.target.value)}
+        onKeyDown={e => e.key === 'Enter' && addTask()}
+        className="w-full p-2 mt-2 bg-slate-900 rounded"
+        placeholder="Nouvelle tâche"
+      />
+    </div>
+  );
+};
+
+/* ================= CONTACT ================= */
+export const ContactDemo = () => {
+  const [form, setForm] = useState({ nom: '', email: '', message: '' });
+  const [errors, setErrors] = useState({});
+  const [sent, setSent] = useState(false);
+
+  const validate = () => {
+    const e = {};
+    if (!form.nom) e.nom = 'Nom requis';
+    if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email invalide';
+    if (form.message.length < 10) e.message = 'Message trop court';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const submit = (ev) => {
+    ev.preventDefault();
+    if (validate()) setSent(true);
+  };
+
+  if (sent) return <div className="p-6 bg-green-800 rounded-xl">Message envoyé ✅</div>;
+
+  return (
+    <form onSubmit={submit} className="p-6 bg-slate-800 rounded-xl space-y-3">
+      <input
+        className="w-full p-2 bg-slate-900 rounded"
+        placeholder="Nom"
+        onChange={e => setForm({ ...form, nom: e.target.value })}
+      />
+      {errors.nom && <p className="text-red-500">{errors.nom}</p>}
+
+      <input
+        className="w-full p-2 bg-slate-900 rounded"
+        placeholder="Email"
+        onChange={e => setForm({ ...form, email: e.target.value })}
+      />
+      {errors.email && <p className="text-red-500">{errors.email}</p>}
+
+      <textarea
+        className="w-full p-2 bg-slate-900 rounded"
+        placeholder="Message"
+        onChange={e => setForm({ ...form, message: e.target.value })}
+      />
+      {errors.message && <p className="text-red-500">{errors.message}</p>}
+
+      <button className="w-full bg-blue-600 p-2 rounded">Envoyer</button>
+    </form>
+  );
+};
+
+/* ================= GALLERY ================= */
+export const GalleryDemo = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const images = [
+    { id: 1, title: 'Lever de soleil', emoji: '🌅', color: 'from-purple-500 to-pink-500' },
+    { id: 2, title: 'Paysage', emoji: '🏞️', color: 'from-blue-500 to-cyan-500' },
+    { id: 3, title: 'Océan', emoji: '🌊', color: 'from-green-500 to-emerald-500' },
+    { id: 4, title: 'Ville', emoji: '🏙️', color: 'from-orange-500 to-red-500' },
+    { id: 5, title: 'Montagne', emoji: '🏔️', color: 'from-indigo-500 to-purple-500' },
+    { id: 6, title: 'Aurore', emoji: '🌄', color: 'from-yellow-500 to-orange-500' },
+  ];
+
+  if (selectedImage) {
+    return (
+      <div className="p-6 bg-slate-800 rounded-xl">
+        <button
+          onClick={() => setSelectedImage(null)}
+          className="flex items-center gap-2 text-slate-300 mb-4 hover:text-white"
+        >
+          <ChevronLeft size={20} />
+          Retour
+        </button>
+
+        <div
+          className={`h-64 rounded-xl bg-gradient-to-br ${selectedImage.color} flex items-center justify-center mb-4`}
+        >
+          <span className="text-8xl">{selectedImage.emoji}</span>
+        </div>
+
+        <h2 className="text-center text-xl font-bold text-white">
+          {selectedImage.title}
+        </h2>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6 bg-slate-800 rounded-xl">
+      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">Gallery</h2>
+      <div className="grid grid-cols-2 gap-4">
+        {images.map(img => (
+          <button
+            key={img.id}
+            onClick={() => setSelectedImage(img)}
+            className={`h-32 rounded-lg bg-gradient-to-br ${img.color} flex flex-col items-center justify-center hover:scale-105 transition-transform`}
+          >
+            <span className="text-5xl mb-2">{img.emoji}</span>
+            <span className="text-sm font-semibold text-white">{img.title}</span>
+          </button>
         ))}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const TodoDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">To-Do List</div>
-    <div className="space-y-3">
-      <div className="flex items-center justify-between bg-slate-900/80 p-3 rounded-lg">
-        <div className="flex items-center gap-3">
-          <div className="w-6 h-6 rounded-full border-2 border-green-500 flex items-center justify-center">
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          </div>
-          <span>Faire les courses</span>
-        </div>
-      </div>
-      <div className="flex items-center justify-between bg-slate-900/80 p-3 rounded-lg">
-        <div className="flex items-center gap-3">
-          <div className="w-6 h-6 rounded-full border-2 border-slate-600"></div>
-          <span>Réviser React</span>
-        </div>
-      </div>
-      <div className="flex items-center gap-2 p-3 bg-slate-900/50 rounded-lg">
-        <input type="text" placeholder="Ajouter une tâche..." className="bg-transparent flex-1 outline-none" />
-        <button className="bg-gradient-to-r from-blue-600 to-cyan-600 px-3 py-1 rounded-lg text-sm">+</button>
-      </div>
+/* ================= CLOCK ================= */
+export const ClockDemo = () => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const i = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(i);
+  }, []);
+
+  return (
+    <div className="p-6 bg-slate-800 rounded-xl text-center">
+      <div className="text-4xl text-green-400 font-mono">{time.toLocaleTimeString()}</div>
+      <div className="text-slate-300">{time.toLocaleDateString()}</div>
     </div>
-  </div>
-);
+  );
+};
 
-const ContactDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">Contact Form</div>
-    <div className="space-y-3">
-      <input type="text" placeholder="Nom" className="w-full bg-slate-900/80 p-3 rounded-lg border border-slate-700/50" />
-      <input type="email" placeholder="Email" className="w-full bg-slate-900/80 p-3 rounded-lg border border-slate-700/50" />
-      <textarea placeholder="Message" rows="3" className="w-full bg-slate-900/80 p-3 rounded-lg border border-slate-700/50"></textarea>
-      <button className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 p-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-        Envoyer
-      </button>
+/* ================= QUIZ ================= */
+export const QuizDemo = () => {
+  const questions = [
+    { q: 'Que signifie HTML ?', a: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language'], c: 0 },
+    { q: 'Quel langage est utilisé pour le style ?', a: ['JavaScript', 'CSS', 'Python'], c: 1 },
+    { q: 'Que signifie CSS ?', a: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System'], c: 1 }
+  ];
+
+  const [i, setI] = useState(0);
+  const [score, setScore] = useState(0);
+  const [answered, setAnswered] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+
+  const answer = (index) => {
+    if (answered) return;
+    setAnswered(true);
+    if (index === questions[i].c) setScore(s => s + 1);
+
+    setTimeout(() => {
+      if (i < questions.length - 1) setI(i + 1);
+      else setShowResult(true);
+      setAnswered(false);
+    }, 1000);
+  };
+
+  const reset = () => {
+    setI(0); setScore(0); setShowResult(false); setAnswered(false);
+  };
+
+  if (showResult) return (
+    <div className="p-6 bg-slate-800 rounded-xl text-center">
+      <h2 className="text-xl mb-4 text-blue-400 font-bold">Quiz Terminé!</h2>
+      <p className="text-green-400 text-3xl mb-4">{score} / {questions.length}</p>
+      <button onClick={reset} className="bg-blue-600 p-2 rounded">Recommencer</button>
     </div>
-  </div>
-);
+  );
 
-const GalleryDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">Gallery</div>
-    <div className="grid grid-cols-2 gap-3">
-      {[1,2,3,4].map((i) => (
-        <div key={i} className="bg-slate-900/80 aspect-square rounded-lg flex items-center justify-center">
-          <div className="text-4xl">📷</div>
-        </div>
+  return (
+    <div className="p-6 bg-slate-800 rounded-xl">
+      <h2 className="text-xl mb-4 text-blue-400 font-bold">Quiz</h2>
+      <p className="mb-4 text-white">{questions[i].q}</p>
+      {questions[i].a.map((opt, idx) => (
+        <button
+          key={idx}
+          onClick={() => answer(idx)}
+          className="block w-full p-2 mb-2 bg-slate-700 rounded text-white"
+        >
+          {opt}
+        </button>
       ))}
+      <p className="mt-2 text-green-400">Score: {score}</p>
     </div>
-  </div>
-);
-
-const ClockDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">Digital Clock</div>
-    <div className="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 p-6 rounded-xl">
-      <div className="text-4xl font-mono text-center mb-2 font-bold">14:30:45</div>
-      <div className="text-center text-slate-300">Lundi 15 Décembre 2025</div>
-    </div>
-  </div>
-);
-
-const QuizDemo = () => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700/50">
-    <div className="text-center text-2xl mb-4 font-bold text-blue-400">Quiz</div>
-    <div className="space-y-4">
-      <div className="bg-slate-900/80 p-4 rounded-lg">
-        <div className="font-semibold mb-3">Question 1/5</div>
-        <div className="text-lg mb-4">Quel langage est utilisé pour le style web ?</div>
-        <div className="space-y-2">
-          {['HTML', 'CSS', 'JavaScript', 'Python'].map((opt, i) => (
-            <div key={i} className={`p-3 rounded-lg ${i === 1 ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/40 border border-blue-500/30' : 'bg-slate-800/50'}`}>
-              {opt}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 
 const translations = {
@@ -476,7 +685,7 @@ const translations = {
       },
       {
         titre: 'Reloj Digital',
-        description: 'Reloj en tiempo real con fecha',
+        description: 'Reloj en tiempo réel con fecha',
         details: 'Un reloj digital que muestra la hora y la fecha en tiempo real con un diseño elegante.',
         fonctionnalites: ['Reloj en tiempo real', 'Fecha actual', 'Formato 24 horas', 'Diseño animado'],
         technologies: ['HTML', 'CSS', 'JavaScript']
@@ -523,7 +732,7 @@ const translations = {
     nameRequired: 'El nombre es requerido',
     invalidEmail: 'Correo electrónico inválido',
     messageTooShort: 'Mensaje demasiado corto (mínimo 10 caracteres)',
-    footer: '© 2025 Portafolio. Todos los derechos reservados.',
+    footer: '© 2025 Portafolio. Todos los droits réservados.',
     footerCredit: 'Creado por un pasante de ISTA',
     close: 'Cerrar',
     viewLive: 'Ver en Vivo',
@@ -541,9 +750,8 @@ export default function Portfolio() {
   const t = translations[lang];
   const isRTL = lang === 'ar';
 
-
   const languages = [
-    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-blue-500 to-red-500', },
+    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-blue-500 to-red-500' },
     { code: 'en', label: 'English', flag: '🇬🇧', color: 'from-blue-600 to-red-600' },
     { code: 'ar', label: 'العربية', flag: '🇲🇦', color: 'from-red-500 to-green-500' },
     { code: 'es', label: 'Español', flag: '🇪🇸', color: 'from-red-600 to-yellow-500' }
@@ -804,15 +1012,15 @@ export default function Portfolio() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-  href="/CV_Yousfi_Mohammed.pdf"
-  download="CV_Yousfi_Mohammed.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
->
-  <span>{t.downloadCV}</span>
-  <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
-</a>
+              href="/CV_Yousfi_Mohammed.pdf"
+              download="CV_Yousfi_Mohammed.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
+            >
+              <span>{t.downloadCV}</span>
+              <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
+            </a>
             <button 
               onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-slate-700 hover:border-blue-500/50"
@@ -942,10 +1150,12 @@ export default function Portfolio() {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projets.map((projet, idx) => {
               const projectData = t.projects[idx];
+              const repoName = repoMap[projet.id];
+
               return (
                 <div
                   key={projet.id}
@@ -954,27 +1164,15 @@ export default function Portfolio() {
                   <div className="h-48 bg-gradient-to-br from-blue-900/40 via-cyan-900/40 to-blue-900/40 flex items-center justify-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                     <div className="relative z-10 p-4">
-                      {projet.demo === 'calculatrice' && (
-                        <div className="text-6xl">🧮</div>
-                      )}
-                      {projet.demo === 'todo' && (
-                        <div className="text-6xl">✅</div>
-                      )}
-                      {projet.demo === 'contact' && (
-                        <div className="text-6xl">📧</div>
-                      )}
-                      {projet.demo === 'gallery' && (
-                        <div className="text-6xl">🖼️</div>
-                      )}
-                      {projet.demo === 'clock' && (
-                        <div className="text-6xl">🕒</div>
-                      )}
-                      {projet.demo === 'quiz' && (
-                        <div className="text-6xl">❓</div>
-                      )}
+                      {projet.demo === 'calculatrice' && <div className="text-6xl">🧮</div>}
+                      {projet.demo === 'todo' && <div className="text-6xl">✅</div>}
+                      {projet.demo === 'contact' && <div className="text-6xl">📧</div>}
+                      {projet.demo === 'gallery' && <div className="text-6xl">🖼️</div>}
+                      {projet.demo === 'clock' && <div className="text-6xl">🕒</div>}
+                      {projet.demo === 'quiz' && <div className="text-6xl">❓</div>}
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">
@@ -990,11 +1188,11 @@ export default function Portfolio() {
                         {t.difficulty[projet.difficulte]}
                       </span>
                     </div>
-                    
+
                     <p className="text-slate-400 mb-4 line-clamp-2">
                       {projectData.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-6">
                       {projet.technologies.map((tech, i) => (
                         <span
@@ -1005,19 +1203,22 @@ export default function Portfolio() {
                         </span>
                       ))}
                     </div>
-                    
+
                     <div className={`flex items-center justify-between pt-4 border-t border-slate-800/50 ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <button
-                        onClick={() => setSelectedProject({...projet, ...projectData})}
+                        onClick={() => setSelectedProject({ ...projet, ...projectData })}
                         className="flex items-center text-blue-400 hover:text-blue-300 transition-colors group"
                       >
                         <span className="mr-2">{t.details}</span>
-                        <ChevronRight size={18} className={`transition-transform duration-300 group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`} />
+                        <ChevronRight
+                          size={18}
+                          className={`transition-transform duration-300 group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`}
+                        />
                       </button>
-                      
+
                       <div className="flex items-center gap-2">
                         <a
-                          href={`https://github.com/moha4848/${['calculatrice', 'todo', 'contact', 'gallery', 'clock', 'quiz'][idx]}`}
+                          href={`https://github.com/moha4848/${repoName}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-blue-500/50"
@@ -1048,17 +1249,17 @@ export default function Portfolio() {
               <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 {selectedProject.titre}
               </h2>
-              
+
               <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <a
-                  href={`https://github.com/moha4848/${['calculatrice', 'todo', 'contact', 'gallery', 'clock', 'quiz'][selectedProject.id - 1]}`}
+                  href={`https://github.com/moha4848/${repoMap[selectedProject.id]}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg"
                 >
                   <Github size={18} /> {t.viewCode}
                 </a>
-                
+
                 <button
                   onClick={() => setSelectedProject(null)}
                   className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 p-2.5 rounded-lg transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-red-500/50"
@@ -1068,7 +1269,7 @@ export default function Portfolio() {
                 </button>
               </div>
             </div>
-            
+
             <div className="p-8">
               <div className="mb-8">
                 {selectedProject.id === 1 && <CalculatriceDemo />}
@@ -1078,7 +1279,7 @@ export default function Portfolio() {
                 {selectedProject.id === 5 && <ClockDemo />}
                 {selectedProject.id === 6 && <QuizDemo />}
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <div>
@@ -1087,7 +1288,7 @@ export default function Portfolio() {
                     </h3>
                     <p className="text-slate-300 text-lg leading-relaxed">{selectedProject.details}</p>
                   </div>
-                  
+
                   <div>
                     <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                       {t.features}
@@ -1104,7 +1305,7 @@ export default function Portfolio() {
                     </ul>
                   </div>
                 </div>
-                
+
                 <div>
                   <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                     {t.techUsed}
@@ -1119,7 +1320,7 @@ export default function Portfolio() {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50">
                     <h4 className="text-xl font-bold mb-4 text-white">Niveau de Difficulté</h4>
                     <div className="flex items-center justify-between mb-2">
@@ -1274,7 +1475,7 @@ export default function Portfolio() {
                     placeholder={t.yourName}
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.name ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''}`}
+                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.name ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''} text-white`}
                   />
                   {contactErrors.name && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.name}</p>}
                 </div>
@@ -1285,7 +1486,7 @@ export default function Portfolio() {
                     placeholder={t.yourEmail}
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.email ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''}`}
+                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.email ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''} text-white`}
                   />
                   {contactErrors.email && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.email}</p>}
                 </div>
@@ -1296,7 +1497,7 @@ export default function Portfolio() {
                     rows="5"
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.message ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner resize-none ${isRTL ? 'text-right' : ''}`}
+                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.message ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner resize-none ${isRTL ? 'text-right' : ''} text-white`}
                   ></textarea>
                   {contactErrors.message && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.message}</p>}
                 </div>
@@ -1341,8 +1542,6 @@ export default function Portfolio() {
               </a>
             </div>
           </div>
-          
-          
         </div>
       </footer>
     </div>

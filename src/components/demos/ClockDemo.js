@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const ClockDemo = () => {
+export const ClockDemo = () => {
   const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
+  useEffect(()=>{
+    const i=setInterval(()=>setTime(new Date()),1000);
+    return ()=>clearInterval(i);
+  },[]);
   return (
-    <div className="text-center">
-      <div className="bg-slate-950 rounded-lg p-8 inline-block">
-        <div className="text-6xl font-mono font-bold text-green-400 mb-4">
-          {time.toLocaleTimeString('fr-FR')}
-        </div>
-        <div className="text-2xl text-slate-400">
-          {time.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-        </div>
-      </div>
+    <div className="p-6 bg-slate-800 rounded-xl text-center">
+      <div className="text-4xl text-green-400 font-mono">{time.toLocaleTimeString()}</div>
+      <div className="text-slate-300">{time.toLocaleDateString()}</div>
     </div>
   );
 };
-
-export default ClockDemo;
