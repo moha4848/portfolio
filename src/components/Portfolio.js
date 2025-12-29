@@ -27,7 +27,7 @@ const repoMap = {
 };
 
 /* ================= CALCULATRICE ================= */
-export const CalculatriceDemo = () => {
+export const CalculatriceDemo = ({ t }) => {
   const [display, setDisplay] = useState('0');
   const [operation, setOperation] = useState('');
   const [previousValue, setPreviousValue] = useState('');
@@ -51,7 +51,7 @@ export const CalculatriceDemo = () => {
       case '+': result = prev + current; break;
       case '-': result = prev - current; break;
       case '×': result = prev * current; break;
-      case '÷': result = current !== 0 ? prev / current : 'Erreur'; break;
+      case '÷': result = current !== 0 ? prev / current : 'Error'; break;
       default: return;
     }
 
@@ -76,7 +76,9 @@ export const CalculatriceDemo = () => {
 
   return (
     <div className="p-6 bg-slate-800 rounded-xl">
-      <div className="text-center text-xl mb-4 text-blue-400 font-bold">Calculatrice</div>
+      <div className="text-center text-xl mb-4 text-blue-400 font-bold">
+        {t.calculatorTitle}
+      </div>
       <div className="bg-slate-900 p-4 rounded-lg">
         <div className="text-right text-green-400 text-3xl mb-4">{display}</div>
         <div className="grid grid-cols-4 gap-3">
@@ -102,7 +104,7 @@ export const CalculatriceDemo = () => {
 };
 
 /* ================= TODO ================= */
-export const TodoDemo = () => {
+export const TodoDemo = ({ t }) => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
@@ -122,7 +124,9 @@ export const TodoDemo = () => {
 
   return (
     <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">Todo List</h2>
+      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">
+        {t.todoTitle}
+      </h2>
       {tasks.map(task => (
         <div key={task.id} className="flex justify-between bg-slate-700 p-2 mb-2 rounded">
           <span
@@ -141,23 +145,23 @@ export const TodoDemo = () => {
         onChange={e => setNewTask(e.target.value)}
         onKeyDown={e => e.key === 'Enter' && addTask()}
         className="w-full p-2 mt-2 bg-slate-900 rounded"
-        placeholder="Nouvelle tâche"
+        placeholder={t.newTaskPlaceholder}
       />
     </div>
   );
 };
 
 /* ================= CONTACT ================= */
-export const ContactDemo = () => {
+export const ContactDemo = ({ t }) => {
   const [form, setForm] = useState({ nom: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
 
   const validate = () => {
     const e = {};
-    if (!form.nom) e.nom = 'Nom requis';
-    if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email invalide';
-    if (form.message.length < 10) e.message = 'Message trop court';
+    if (!form.nom) e.nom = t.nameRequired;
+    if (!/\S+@\S+\.\S+/.test(form.email)) e.email = t.invalidEmail;
+    if (form.message.length < 10) e.message = t.messageTooShort;
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -167,47 +171,47 @@ export const ContactDemo = () => {
     if (validate()) setSent(true);
   };
 
-  if (sent) return <div className="p-6 bg-green-800 rounded-xl">Message envoyé ✅</div>;
+  if (sent) return <div className="p-6 bg-green-800 rounded-xl">{t.messageSent} ✅</div>;
 
   return (
     <form onSubmit={submit} className="p-6 bg-slate-800 rounded-xl space-y-3">
       <input
         className="w-full p-2 bg-slate-900 rounded"
-        placeholder="Nom"
+        placeholder={t.yourName}
         onChange={e => setForm({ ...form, nom: e.target.value })}
       />
       {errors.nom && <p className="text-red-500">{errors.nom}</p>}
 
       <input
         className="w-full p-2 bg-slate-900 rounded"
-        placeholder="Email"
+        placeholder={t.yourEmail}
         onChange={e => setForm({ ...form, email: e.target.value })}
       />
       {errors.email && <p className="text-red-500">{errors.email}</p>}
 
       <textarea
         className="w-full p-2 bg-slate-900 rounded"
-        placeholder="Message"
+        placeholder={t.yourMessage}
         onChange={e => setForm({ ...form, message: e.target.value })}
       />
       {errors.message && <p className="text-red-500">{errors.message}</p>}
 
-      <button className="w-full bg-blue-600 p-2 rounded">Envoyer</button>
+      <button className="w-full bg-blue-600 p-2 rounded">{t.sendMessage}</button>
     </form>
   );
 };
 
 /* ================= GALLERY ================= */
-export const GalleryDemo = () => {
+export const GalleryDemo = ({ t }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const images = [
-    { id: 1, title: 'Lever de soleil', emoji: '🌅', color: 'from-purple-500 to-pink-500' },
-    { id: 2, title: 'Paysage', emoji: '🏞️', color: 'from-blue-500 to-cyan-500' },
-    { id: 3, title: 'Océan', emoji: '🌊', color: 'from-green-500 to-emerald-500' },
-    { id: 4, title: 'Ville', emoji: '🏙️', color: 'from-orange-500 to-red-500' },
-    { id: 5, title: 'Montagne', emoji: '🏔️', color: 'from-indigo-500 to-purple-500' },
-    { id: 6, title: 'Aurore', emoji: '🌄', color: 'from-yellow-500 to-orange-500' },
+    { id: 1, title: t.galleryImages.sunrise, emoji: '🌅', color: 'from-purple-500 to-pink-500' },
+    { id: 2, title: t.galleryImages.landscape, emoji: '🏞️', color: 'from-blue-500 to-cyan-500' },
+    { id: 3, title: t.galleryImages.ocean, emoji: '🌊', color: 'from-green-500 to-emerald-500' },
+    { id: 4, title: t.galleryImages.city, emoji: '🏙️', color: 'from-orange-500 to-red-500' },
+    { id: 5, title: t.galleryImages.mountain, emoji: '🏔️', color: 'from-indigo-500 to-purple-500' },
+    { id: 6, title: t.galleryImages.aurora, emoji: '🌄', color: 'from-yellow-500 to-orange-500' },
   ];
 
   if (selectedImage) {
@@ -218,7 +222,7 @@ export const GalleryDemo = () => {
           className="flex items-center gap-2 text-slate-300 mb-4 hover:text-white"
         >
           <ChevronLeft size={20} />
-          Retour
+          {t.back}
         </button>
 
         <div
@@ -236,7 +240,9 @@ export const GalleryDemo = () => {
 
   return (
     <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">Gallery</h2>
+      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">
+        {t.galleryTitle}
+      </h2>
       <div className="grid grid-cols-2 gap-4">
         {images.map(img => (
           <button
@@ -254,7 +260,7 @@ export const GalleryDemo = () => {
 };
 
 /* ================= CLOCK ================= */
-export const ClockDemo = () => {
+export const ClockDemo = ({ t }) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -271,13 +277,8 @@ export const ClockDemo = () => {
 };
 
 /* ================= QUIZ ================= */
-export const QuizDemo = () => {
-  const questions = [
-    { q: 'Que signifie HTML ?', a: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language'], c: 0 },
-    { q: 'Quel langage est utilisé pour le style ?', a: ['JavaScript', 'CSS', 'Python'], c: 1 },
-    { q: 'Que signifie CSS ?', a: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System'], c: 1 }
-  ];
-
+export const QuizDemo = ({ t }) => {
+  const questions = t.quizQuestions;
   const [i, setI] = useState(0);
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -301,15 +302,15 @@ export const QuizDemo = () => {
 
   if (showResult) return (
     <div className="p-6 bg-slate-800 rounded-xl text-center">
-      <h2 className="text-xl mb-4 text-blue-400 font-bold">Quiz Terminé!</h2>
+      <h2 className="text-xl mb-4 text-blue-400 font-bold">{t.quizFinished}</h2>
       <p className="text-green-400 text-3xl mb-4">{score} / {questions.length}</p>
-      <button onClick={reset} className="bg-blue-600 p-2 rounded">Recommencer</button>
+      <button onClick={reset} className="bg-blue-600 p-2 rounded">{t.restart}</button>
     </div>
   );
 
   return (
     <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-xl mb-4 text-blue-400 font-bold">Quiz</h2>
+      <h2 className="text-xl mb-4 text-blue-400 font-bold">{t.quizTitle}</h2>
       <p className="mb-4 text-white">{questions[i].q}</p>
       {questions[i].a.map((opt, idx) => (
         <button
@@ -320,11 +321,10 @@ export const QuizDemo = () => {
           {opt}
         </button>
       ))}
-      <p className="mt-2 text-green-400">Score: {score}</p>
+      <p className="mt-2 text-green-400">{t.score}: {score}</p>
     </div>
   );
 };
-
 
 const translations = {
   fr: {
@@ -335,15 +335,21 @@ const translations = {
     aboutTitle: 'À Propos de Moi',
     aboutText1: "Étudiant motivé et passionné par l'informatique, je suis actuellement en formation de Technicien Spécialisé en Développement Informatique à l'ISTA. Ma formation m'a permis d'acquérir des compétences solides en développement web, programmation et gestion de bases de données.",
     aboutText2: "Je suis constamment à la recherche de nouveaux défis et j'aime apprendre de nouvelles technologies. Mon objectif est de contribuer à des projets innovants et de développer mes compétences professionnelles.",
+    address: 'Hay Samara1, Oujda',
+    school: 'ISTA Lazaret, Oujda',
+    phoneNumber: '+212 716 288 974',
+    email: 'myousfi610@gmail.com',
+    
     skillsTitle: 'Mes Compétences',
     skills: [
       { nom: 'Développement Web', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
       { nom: 'Backend', details: 'PHP, Node.js, API REST', icon: '⚙️' },
-      { nom: 'Bases de Données', details: 'MySQL, MongoDB', icon: '🗃️' },
-      { nom: 'Programmation', details: 'Python, Java', icon: '💻' },
+      { nom: 'Bases de Données', details: 'MySQL', icon: '🗃️' },
+      { nom: 'Programmation', details: 'Python', icon: '💻' },
       { nom: 'Outils', details: 'Git, VS Code, Figma', icon: '🛠️' },
       { nom: 'Soft Skills', details: 'Communication, Travail d\'équipe', icon: '🤝' }
     ],
+    
     projectsTitle: 'Mes Projets',
     projects: [
       {
@@ -389,12 +395,14 @@ const translations = {
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
+    
     difficulty: { beginner: 'Débutant', intermediate: 'Intermédiaire', advanced: 'Avancé' },
     details: 'Détails',
     viewCode: 'Voir le code',
     description: 'Description',
     techUsed: 'Technologies utilisées',
     features: 'Fonctionnalités',
+    
     formationTitle: 'Formation',
     formations: [
       {
@@ -410,12 +418,23 @@ const translations = {
         description: 'Option Sciences Physiques'
       }
     ],
+    
+    interestsTitle: 'Mes Intérêts',
+    interests: [
+      { icon: '💻', title: 'Développement Web', desc: 'Frontend & Backend' },
+      { icon: '📱', title: 'Applications Mobiles', desc: 'React Native' },
+      { icon: '🎨', title: 'UI/UX Design', desc: 'Figma' },
+      { icon: '📊', title: 'Data Science', desc: 'Python' },
+      { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
+      { icon: '🔒', title: 'Cybersécurité', desc: 'Sécurité des applications' }
+    ],
+    
     contactTitle: 'Contactez-moi',
     contactInfo: 'Informations',
     contactMessage: 'Message',
-    email: 'Email',
-    phone: 'Téléphone',
-    location: 'Localisation',
+    emailLabel: 'Email',
+    phoneLabel: 'Téléphone',
+    locationLabel: 'Localisation',
     yourName: 'Votre nom',
     yourEmail: 'Votre email',
     yourMessage: 'Votre message',
@@ -423,11 +442,53 @@ const translations = {
     nameRequired: 'Le nom est requis',
     invalidEmail: 'Email invalide',
     messageTooShort: 'Message trop court (min 10 caractères)',
+    messageSent: 'Message envoyé',
+    
     footer: '© 2025 Portfolio. Tous droits réservés.',
     footerCredit: 'Créé par un stagiaire ISTA',
     close: 'Fermer',
     viewLive: 'Voir en direct',
-    proficiency: 'Maîtrise'
+    proficiency: 'Maîtrise',
+    myInterests: 'Mes Intérêts',
+    followMe: 'Suivez-moi',
+    
+    // Démos
+    calculatorTitle: 'Calculatrice',
+    todoTitle: 'Liste de Tâches',
+    newTaskPlaceholder: 'Nouvelle tâche',
+    galleryTitle: 'Galerie',
+    back: 'Retour',
+    galleryImages: {
+      sunrise: 'Lever de soleil',
+      landscape: 'Paysage',
+      ocean: 'Océan',
+      city: 'Ville',
+      mountain: 'Montagne',
+      aurora: 'Aurore'
+    },
+    quizTitle: 'Quiz',
+    quizFinished: 'Quiz Terminé!',
+    restart: 'Recommencer',
+    score: 'Score',
+    quizQuestions: [
+      { 
+        q: 'Que signifie HTML ?', 
+        a: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language'], 
+        c: 0 
+      },
+      { 
+        q: 'Quel langage est utilisé pour le style ?', 
+        a: ['JavaScript', 'CSS', 'Python'], 
+        c: 1 
+      },
+      { 
+        q: 'Que signifie CSS ?', 
+        a: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System'], 
+        c: 1 
+      }
+    ],
+    
+    country: 'Maroc'
   },
 
   en: {
@@ -438,15 +499,21 @@ const translations = {
     aboutTitle: 'About Me',
     aboutText1: "I am a motivated and passionate IT student, currently training as a Specialized Technician in Computer Development at ISTA. My training has allowed me to acquire solid skills in web development, programming, and database management.",
     aboutText2: "I am constantly looking for new challenges and enjoy learning new technologies. My goal is to contribute to innovative projects and develop my professional skills.",
+    address: 'Hay Samara1, Oujda',
+    school: 'ISTA Lazaret, Oujda',
+    phoneNumber: '+212 716 288 974',
+    email: 'myousfi610@gmail.com',
+    
     skillsTitle: 'My Skills',
     skills: [
       { nom: 'Web Development', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
       { nom: 'Backend', details: 'PHP, Node.js, REST API', icon: '⚙️' },
-      { nom: 'Databases', details: 'MySQL, MongoDB', icon: '🗃️' },
-      { nom: 'Programming', details: 'Python, Java', icon: '💻' },
+      { nom: 'Databases', details: 'MySQL', icon: '🗃️' },
+      { nom: 'Programming', details: 'Python', icon: '💻' },
       { nom: 'Tools', details: 'Git, VS Code, Figma', icon: '🛠️' },
       { nom: 'Soft Skills', details: 'Communication, Teamwork', icon: '🤝' }
     ],
+    
     projectsTitle: 'My Projects',
     projects: [
       {
@@ -492,12 +559,14 @@ const translations = {
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
+    
     difficulty: { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' },
     details: 'Details',
     viewCode: 'View Code',
     description: 'Description',
     techUsed: 'Technologies Used',
     features: 'Features',
+    
     formationTitle: 'Education',
     formations: [
       {
@@ -513,12 +582,23 @@ const translations = {
         description: 'Physical Sciences option'
       }
     ],
+    
+    interestsTitle: 'My Interests',
+    interests: [
+      { icon: '💻', title: 'Web Development', desc: 'Frontend & Backend' },
+      { icon: '📱', title: 'Mobile Applications', desc: 'React Native' },
+      { icon: '🎨', title: 'UI/UX Design', desc: 'Figma' },
+      { icon: '📊', title: 'Data Science', desc: 'Python' },
+      { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
+      { icon: '🔒', title: 'Cybersecurity', desc: 'Application Security' }
+    ],
+    
     contactTitle: 'Contact Me',
     contactInfo: 'Information',
     contactMessage: 'Message',
-    email: 'Email',
-    phone: 'Phone',
-    location: 'Location',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    locationLabel: 'Location',
     yourName: 'Your name',
     yourEmail: 'Your email',
     yourMessage: 'Your message',
@@ -526,11 +606,53 @@ const translations = {
     nameRequired: 'Name is required',
     invalidEmail: 'Invalid email',
     messageTooShort: 'Message too short (min 10 characters)',
+    messageSent: 'Message sent',
+    
     footer: '© 2025 Portfolio. All rights reserved.',
     footerCredit: 'Created by an ISTA intern',
     close: 'Close',
     viewLive: 'View Live',
-    proficiency: 'Proficiency'
+    proficiency: 'Proficiency',
+    myInterests: 'My Interests',
+    followMe: 'Follow Me',
+    
+    // Démos
+    calculatorTitle: 'Calculator',
+    todoTitle: 'Todo List',
+    newTaskPlaceholder: 'New task',
+    galleryTitle: 'Gallery',
+    back: 'Back',
+    galleryImages: {
+      sunrise: 'Sunrise',
+      landscape: 'Landscape',
+      ocean: 'Ocean',
+      city: 'City',
+      mountain: 'Mountain',
+      aurora: 'Aurora'
+    },
+    quizTitle: 'Quiz',
+    quizFinished: 'Quiz Finished!',
+    restart: 'Restart',
+    score: 'Score',
+    quizQuestions: [
+      { 
+        q: 'What does HTML stand for?', 
+        a: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language'], 
+        c: 0 
+      },
+      { 
+        q: 'Which language is used for styling?', 
+        a: ['JavaScript', 'CSS', 'Python'], 
+        c: 1 
+      },
+      { 
+        q: 'What does CSS stand for?', 
+        a: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System'], 
+        c: 1 
+      }
+    ],
+    
+    country: 'Morocco'
   },
 
   ar: {
@@ -541,15 +663,21 @@ const translations = {
     aboutTitle: 'من أنا',
     aboutText1: "أنا طالب في مجال تقنية المعلومات متحمس وشغوف، أتدرب حاليًا كفني متخصص في تطوير الحاسوب في معهد ISTA. تدريبي مكنني من اكتساب مهارات قوية في تطوير الويب، البرمجة، وإدارة قواعد البيانات.",
     aboutText2: "أبحث دائمًا عن تحديات جديدة وأستمتع بتعلم التقنيات الحديثة. هدفي هو المساهمة في مشاريع مبتكرة وتطوير مهاراتي المهنية.",
+    address: 'حي الصمارة 1، وجدة',
+    school: 'معهد ISTA لازاريت، وجدة',
+    phoneNumber: '+212 716 288 974',
+    email: 'myousfi610@gmail.com',
+    
     skillsTitle: 'مهاراتي',
     skills: [
       { nom: 'تطوير الويب', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
       { nom: 'الخلفية', details: 'PHP, Node.js, REST API', icon: '⚙️' },
-      { nom: 'قواعد البيانات', details: 'MySQL, MongoDB', icon: '🗃️' },
-      { nom: 'البرمجة', details: 'Python, Java', icon: '💻' },
+      { nom: 'قواعد البيانات', details: 'MySQL', icon: '🗃️' },
+      { nom: 'البرمجة', details: 'Python', icon: '💻' },
       { nom: 'الأدوات', details: 'Git, VS Code, Figma', icon: '🛠️' },
       { nom: 'المهارات الناعمة', details: 'التواصل، العمل الجماعي', icon: '🤝' }
     ],
+    
     projectsTitle: 'مشاريعي',
     projects: [
       {
@@ -595,12 +723,14 @@ const translations = {
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
+    
     difficulty: { beginner: 'مبتدئ', intermediate: 'متوسط', advanced: 'متقدم' },
     details: 'تفاصيل',
     viewCode: 'عرض الكود',
     description: 'الوصف',
     techUsed: 'التقنيات المستخدمة',
     features: 'المميزات',
+    
     formationTitle: 'التعليم',
     formations: [
       {
@@ -616,12 +746,23 @@ const translations = {
         description: 'تخصص العلوم الفيزيائية'
       }
     ],
+    
+    interestsTitle: 'اهتماماتي',
+    interests: [
+      { icon: '💻', title: 'تطوير الويب', desc: 'الواجهة الأمامية والخلفية' },
+      { icon: '📱', title: 'تطبيقات الهاتف', desc: 'React Native' },
+      { icon: '🎨', title: 'تصميم واجهة المستخدم/تجربة المستخدم', desc: 'Figma' },
+      { icon: '📊', title: 'علم البيانات', desc: 'Python' },
+      { icon: '☁️', title: 'الحوسبة السحابية', desc: 'AWS, Docker' },
+      { icon: '🔒', title: 'الأمن السيبراني', desc: 'أمن التطبيقات' }
+    ],
+    
     contactTitle: 'اتصل بي',
     contactInfo: 'المعلومات',
     contactMessage: 'الرسالة',
-    email: 'البريد الإلكتروني',
-    phone: 'الهاتف',
-    location: 'الموقع',
+    emailLabel: 'البريد الإلكتروني',
+    phoneLabel: 'الهاتف',
+    locationLabel: 'الموقع',
     yourName: 'اسمك',
     yourEmail: 'بريدك الإلكتروني',
     yourMessage: 'رسالتك',
@@ -629,11 +770,53 @@ const translations = {
     nameRequired: 'الاسم مطلوب',
     invalidEmail: 'بريد إلكتروني غير صالح',
     messageTooShort: 'الرسالة قصيرة جدًا (10 أحرف على الأقل)',
+    messageSent: 'تم إرسال الرسالة',
+    
     footer: '© 2025 ملف التعريف. جميع الحقوق محفوظة.',
     footerCredit: 'تم الإنشاء بواسطة متدرب ISTA',
     close: 'إغلاق',
     viewLive: 'عرض مباشر',
-    proficiency: 'الإتقان'
+    proficiency: 'الإتقان',
+    myInterests: 'اهتماماتي',
+    followMe: 'تابعني',
+    
+    // Démos
+    calculatorTitle: 'آلة حاسبة',
+    todoTitle: 'قائمة المهام',
+    newTaskPlaceholder: 'مهمة جديدة',
+    galleryTitle: 'معرض الصور',
+    back: 'رجوع',
+    galleryImages: {
+      sunrise: 'شروق الشمس',
+      landscape: 'منظر طبيعي',
+      ocean: 'محيط',
+      city: 'مدينة',
+      mountain: 'جبل',
+      aurora: 'شفق'
+    },
+    quizTitle: 'اختبار',
+    quizFinished: 'تم الانتهاء من الاختبار!',
+    restart: 'إعادة البدء',
+    score: 'النقاط',
+    quizQuestions: [
+      { 
+        q: 'ماذا تعني HTML؟', 
+        a: ['لغة ترميز النص التشعبي', 'لغة عالية التقنية الحديثة', 'أداة ترميز النص المنزلي'], 
+        c: 0 
+      },
+      { 
+        q: 'أي لغة تستخدم للتنسيق؟', 
+        a: ['جافا سكريبت', 'CSS', 'بايثون'], 
+        c: 1 
+      },
+      { 
+        q: 'ماذا تعني CSS؟', 
+        a: ['أوراق أنماط الكمبيوتر', 'أوراق الأنماط المتتالية', 'نظام أنماط إبداعي'], 
+        c: 1 
+      }
+    ],
+    
+    country: 'المغرب'
   },
 
   es: {
@@ -644,15 +827,21 @@ const translations = {
     aboutTitle: 'Sobre Mí',
     aboutText1: "Soy un estudiante de TI motivado y apasionado, actualmente en formación como Técnico Especializado en Desarrollo Informático en ISTA. Mi formación me ha permitido adquirir sólidas habilidades en desarrollo web, programación y gestión de bases de datos.",
     aboutText2: "Constantemente busco nuevos desafíos y disfruto aprendiendo nuevas tecnologías. Mi objetivo es contribuir a proyectos innovadores y desarrollar mis habilidades profesionales.",
+    address: 'Hay Samara1, Oujda',
+    school: 'ISTA Lazaret, Oujda',
+    phoneNumber: '+212 716 288 974',
+    email: 'myousfi610@gmail.com',
+    
     skillsTitle: 'Mis Habilidades',
     skills: [
       { nom: 'Desarrollo Web', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
       { nom: 'Backend', details: 'PHP, Node.js, API REST', icon: '⚙️' },
-      { nom: 'Bases de Datos', details: 'MySQL, MongoDB', icon: '🗃️' },
-      { nom: 'Programación', details: 'Python, Java', icon: '💻' },
+      { nom: 'Bases de Datos', details: 'MySQL', icon: '🗃️' },
+      { nom: 'Programación', details: 'Python', icon: '💻' },
       { nom: 'Herramientas', details: 'Git, VS Code, Figma', icon: '🛠️' },
       { nom: 'Habilidades Blandas', details: 'Comunicación, Trabajo en equipo', icon: '🤝' }
     ],
+    
     projectsTitle: 'Mis Proyectos',
     projects: [
       {
@@ -698,33 +887,46 @@ const translations = {
         technologies: ['HTML', 'CSS', 'JavaScript']
       }
     ],
+    
     difficulty: { beginner: 'Principiante', intermediate: 'Intermedio', advanced: 'Avanzado' },
     details: 'Detalles',
     viewCode: 'Ver Código',
     description: 'Descripción',
     techUsed: 'Tecnologías Utilizadas',
     features: 'Características',
+    
     formationTitle: 'Formación',
     formations: [
       {
         titre: 'Técnico Especializado en Desarrollo Digital',
         etablissement: 'ISTA Lazaret, Oujda',
-        periode: '2024 - 2026',
+        periodo: '2024 - 2026',
         description: 'Formación completa en desarrollo web (DEVOWSF)'
       },
       {
         titre: 'Bachillerato en Ciencias Físicas',
         etablissement: 'Instituto Larbi al-Houssaini',
-        periode: '2023 - 2024',
+        periodo: '2023 - 2024',
         description: 'Opción Ciencias Físicas'
       }
     ],
+    
+    interestsTitle: 'Mis Intereses',
+    interests: [
+      { icon: '💻', title: 'Desarrollo Web', desc: 'Frontend y Backend' },
+      { icon: '📱', title: 'Aplicaciones Móviles', desc: 'React Native' },
+      { icon: '🎨', title: 'Diseño UI/UX', desc: 'Figma' },
+      { icon: '📊', title: 'Ciencia de Datos', desc: 'Python' },
+      { icon: '☁️', title: 'Computación en la Nube', desc: 'AWS, Docker' },
+      { icon: '🔒', title: 'Ciberseguridad', desc: 'Seguridad de aplicaciones' }
+    ],
+    
     contactTitle: 'Contáctame',
     contactInfo: 'Información',
     contactMessage: 'Mensaje',
-    email: 'Correo Electrónico',
-    phone: 'Teléfono',
-    location: 'Ubicación',
+    emailLabel: 'Correo Electrónico',
+    phoneLabel: 'Teléfono',
+    locationLabel: 'Ubicación',
     yourName: 'Tu nombre',
     yourEmail: 'Tu correo electrónico',
     yourMessage: 'Tu mensaje',
@@ -732,11 +934,54 @@ const translations = {
     nameRequired: 'El nombre es requerido',
     invalidEmail: 'Correo electrónico inválido',
     messageTooShort: 'Mensaje demasiado corto (mínimo 10 caracteres)',
-    footer: '© 2025 Portafolio. Todos los droits réservados.',
+    messageSent: 'Mensaje enviado',
+    
+    footer: '© 2025 Portafolio. Todos los derechos reservados.',
     footerCredit: 'Creado por un pasante de ISTA',
     close: 'Cerrar',
     viewLive: 'Ver en Vivo',
-    proficiency: 'Competencia'
+    proficiency: 'Competencia',
+    myInterests: 'Mis Intereses',
+    followMe: 'Sígueme',
+    
+    // Démos
+    calculatorTitle: 'Calculadora',
+    todoTitle: 'Lista de Tareas',
+    newTaskPlaceholder: 'Nueva tarea',
+    galleryTitle: 'Galería',
+    back: 'Volver',
+    galleryImages: {
+      sunrise: 'Amanecer',
+      landscape: 'Paisaje',
+      ocean: 'Océano',
+      city: 'Ciudad',
+      mountain: 'Montaña',
+      aurora: 'Aurora'
+    },
+    quizTitle: 'Cuestionario',
+    quizFinished: '¡Cuestionario Terminado!',
+    restart: 'Reiniciar',
+    score: 'Puntuación',
+    quizQuestions: [
+      { 
+        q: '¿Qué significa HTML?', 
+        a: ['HyperText Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language'], 
+        c: 0 
+      },
+      { 
+        q: '¿Qué lenguaje se usa para el estilo?', 
+        a: ['JavaScript', 'CSS', 'Python'], 
+        c: 1 
+      },
+      { 
+        q: '¿Qué significa CSS?', 
+        a: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System'], 
+        c: 1 
+      }
+    ],
+    
+
+    country: 'Marruecos'
   }
 };
 
@@ -759,9 +1004,9 @@ export default function Portfolio() {
 
   const competences = [
     { niveau: 90, color: 'from-blue-500 to-cyan-500' },
-    { niveau: 75, color: 'from-purple-500 to-pink-500' },
+    { niveau: 65, color: 'from-purple-500 to-pink-500' },
     { niveau: 85, color: 'from-green-500 to-emerald-500' },
-    { niveau: 70, color: 'from-orange-500 to-yellow-500' },
+    { niveau: 60, color: 'from-orange-500 to-yellow-500' },
     { niveau: 80, color: 'from-indigo-500 to-blue-500' },
     { niveau: 85, color: 'from-teal-500 to-cyan-500' }
   ];
@@ -831,22 +1076,6 @@ export default function Portfolio() {
           font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
           font-size: 1.5rem;
           line-height: 1;
-        }
-        
-        .gradient-border {
-          position: relative;
-        }
-        
-        .gradient-border::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          padding: 2px;
-          background: linear-gradient(45deg, #3b82f6, #06b6d4);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
         }
       `}</style>
 
@@ -1054,10 +1283,10 @@ export default function Portfolio() {
               
               <div className="grid grid-cols-2 gap-4 pt-6">
                 {[
-                  { icon: MapPin, label: 'Hay Samara1, Oujda' },
-                  { icon: Mail, label: 'myousfi610@gmail.com' },
-                  { icon: Phone, label: '+212 716 288 974' },
-                  { icon: GraduationCap, label: 'ISTA Lazaret, Oujda' }
+                  { icon: MapPin, label: t.address },
+                  { icon: Mail, label: t.email },
+                  { icon: Phone, label: t.phoneNumber },
+                  { icon: GraduationCap, label: t.school }
                 ].map((item, idx) => (
                   <div key={idx} className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/30 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-2 rounded-lg">
@@ -1071,17 +1300,10 @@ export default function Portfolio() {
             
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 shadow-2xl">
               <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Mes Intérêts
+                {t.interestsTitle}
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: '💻', title: 'Développement Web', desc: 'Frontend & Backend' },
-                  { icon: '📱', title: 'Applications Mobiles', desc: 'React Native' },
-                  { icon: '🎨', title: 'UI/UX Design', desc: 'Figma, Adobe XD' },
-                  { icon: '📊', title: 'Data Science', desc: 'Python, Machine Learning' },
-                  { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
-                  { icon: '🔒', title: 'Cybersécurité', desc: 'Sécurité des applications' }
-                ].map((item, idx) => (
+                {t.interests.map((item, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/50 hover:from-slate-800 hover:to-slate-900 transition-all duration-300 border border-slate-700/30 hover:border-blue-500/30 group">
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-2xl">{item.icon}</span>
@@ -1272,12 +1494,12 @@ export default function Portfolio() {
 
             <div className="p-8">
               <div className="mb-8">
-                {selectedProject.id === 1 && <CalculatriceDemo />}
-                {selectedProject.id === 2 && <TodoDemo />}
-                {selectedProject.id === 3 && <ContactDemo />}
-                {selectedProject.id === 4 && <GalleryDemo />}
-                {selectedProject.id === 5 && <ClockDemo />}
-                {selectedProject.id === 6 && <QuizDemo />}
+                {selectedProject.id === 1 && <CalculatriceDemo t={t} />}
+                {selectedProject.id === 2 && <TodoDemo t={t} />}
+                {selectedProject.id === 3 && <ContactDemo t={t} />}
+                {selectedProject.id === 4 && <GalleryDemo t={t} />}
+                {selectedProject.id === 5 && <ClockDemo t={t} />}
+                {selectedProject.id === 6 && <QuizDemo t={t} />}
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
@@ -1322,7 +1544,7 @@ export default function Portfolio() {
                   </div>
 
                   <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50">
-                    <h4 className="text-xl font-bold mb-4 text-white">Niveau de Difficulté</h4>
+                    <h4 className="text-xl font-bold mb-4 text-white">{t.difficulty[selectedProject.difficulte]}</h4>
                     <div className="flex items-center justify-between mb-2">
                       <span className={`text-sm px-4 py-2 rounded-full font-semibold ${
                         selectedProject.difficulte === 'beginner'
@@ -1333,7 +1555,7 @@ export default function Portfolio() {
                       }`}>
                         {t.difficulty[selectedProject.difficulte]}
                       </span>
-                      <span className="text-sm text-slate-400">Projet {selectedProject.id}/6</span>
+                      <span className="text-sm text-slate-400">{t.project} {selectedProject.id}/6</span>
                     </div>
                     <div className="w-full bg-slate-800/50 rounded-full h-3">
                       <div
@@ -1413,10 +1635,10 @@ export default function Portfolio() {
                     <Mail size={24} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">{t.email}</p>
+                    <p className="text-sm text-slate-400 mb-1">{t.emailLabel}</p>
                     <p className="font-semibold text-white hover:text-blue-400 transition-colors cursor-pointer" 
                        onClick={() => window.location.href = `mailto:${LINKS.email}`}>
-                      {LINKS.email}
+                      {t.email}
                     </p>
                   </div>
                 </div>
@@ -1426,8 +1648,8 @@ export default function Portfolio() {
                     <Phone size={24} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">{t.phone}</p>
-                    <p className="font-semibold text-white">+212 716 288 974</p>
+                    <p className="text-sm text-slate-400 mb-1">{t.phoneLabel}</p>
+                    <p className="font-semibold text-white">{t.phoneNumber}</p>
                   </div>
                 </div>
                 
@@ -1436,13 +1658,13 @@ export default function Portfolio() {
                     <MapPin size={24} className="text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 mb-1">{t.location}</p>
-                    <p className="font-semibold text-white">Hay Samara1, Oujda – {lang === 'ar' ? 'المغرب' : lang === 'es' ? 'Marruecos' : 'Maroc'}</p>
+                    <p className="text-sm text-slate-400 mb-1">{t.locationLabel}</p>
+                    <p className="font-semibold text-white">{t.address} – {t.country}</p>
                   </div>
                 </div>
                 
                 <div className="pt-6">
-                  <h4 className="text-lg font-bold mb-4 text-white">Suivez-moi</h4>
+                  <h4 className="text-lg font-bold mb-4 text-white">{t.followMe}</h4>
                   <div className="flex gap-3">
                     {[
                       { icon: Github, href: LINKS.github, label: 'GitHub' },
