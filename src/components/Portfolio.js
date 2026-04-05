@@ -1208,16 +1208,16 @@ const [, setActiveSection] = useState('home');
                     e.stopPropagation();
                     setLangMenuOpen(!langMenuOpen);
                   }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/50 hover:bg-white/10 transition-all duration-500 shadow-lg"
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/50 hover:bg-white/10 transition-all duration-300 group"
                   aria-label="Select language"
                 >
-                  <span className="emoji-flag text-xl">
-                    {languages.find(l => l.code === lang)?.flag}
+                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                    <Languages size={18} strokeWidth={2} />
+                  </div>
+                  <span className="text-xs font-bold tracking-widest hidden sm:block text-slate-300 group-hover:text-white transition-colors">
+                    {lang.toUpperCase()}
                   </span>
-                  <span className="text-sm font-medium hidden sm:block">
-                    {languages.find(l => l.code === lang)?.code.toUpperCase()}
-                  </span>
-                  <ChevronDown size={16} className={langMenuOpen ? 'rotate-180 transition-transform' : ''} />
+                  <ChevronDown size={14} className={`text-slate-500 transition-transform duration-300 ${langMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
                 {langMenuOpen && (
@@ -1236,8 +1236,12 @@ const [, setActiveSection] = useState('home');
                               : 'hover:bg-slate-800/80'
                           }`}
                         >
-                          <span className="emoji-flag text-xl">{language.flag}</span>
-                          <span className="flex-1 text-left font-medium">{language.label}</span>
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-lg ${
+                            lang === language.code ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-800 text-slate-400'
+                          }`}>
+                            <span className="emoji-flag">{language.flag}</span>
+                          </div>
+                          <span className="flex-1 text-left font-bold text-sm tracking-wide">{language.label}</span>
                           {lang === language.code && (
                             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                           )}
