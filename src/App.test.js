@@ -1,8 +1,6 @@
-import React from 'react';
-import Portfolio from './components/Portfolio';
+import { render } from '@testing-library/react';
+import App from './App';
 
-function App() {
-  return <Portfolio />;
-}
-
-export default App;
+test('renders App without crashing', () => {
+  render(<App />);
+});

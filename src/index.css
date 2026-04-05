@@ -3,18 +3,392 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ========================
+   DESIGN TOKENS
+   ======================== */
+:root {
+  --accent-a: #06b6d4;      /* cyan-500   */
+  --accent-b: #0ea5e9;      /* sky-500    */
+  --accent-c: #6366f1;      /* indigo-500 */
+  --accent-glow: rgba(6, 182, 212, 0.25);
+  --card-bg: rgba(15, 23, 42, 0.55);
+  --card-border: rgba(255, 255, 255, 0.07);
+  --card-hover-border: rgba(6, 182, 212, 0.35);
+  --nav-bg: rgba(2, 6, 23, 0.75);
+}
+
+/* ========================
+   BASE
+   ======================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply text-slate-100;
+  background-color: #020617;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6,182,212,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 80%, rgba(99,102,241,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 0% 60%, rgba(14,165,233,0.07) 0%, transparent 60%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========================
+   TYPOGRAPHY
+   ======================== */
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ========================
+   GLASSMORPHISM
+   ======================== */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(.22,.68,0,1.2);
+}
+
+.glass-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow:
+    0 8px 40px rgba(6, 182, 212, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  transform: translateY(-5px);
+}
+
+.glass-nav {
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  box-shadow: 0 1px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================
+   ACCENT BADGE / TAG
+   ======================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  color: #67e8f9;
+}
+
+/* ========================
+   BACKGROUND GLOWS
+   ======================== */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(130px);
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.glow-primary {
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(14,165,233,0.06) 60%, transparent 80%);
+  top: -25%;
+  left: -20%;
+  animation: glow-drift-a 28s infinite alternate ease-in-out;
+}
+
+.glow-secondary {
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.06) 60%, transparent 80%);
+  bottom: -20%;
+  right: -15%;
+  animation: glow-drift-b 34s infinite alternate-reverse ease-in-out;
+}
+
+.glow-tertiary {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%);
+  top: 40%;
+  right: 20%;
+  animation: glow-drift-c 22s infinite alternate ease-in-out;
+}
+
+@keyframes glow-drift-a {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8%, 12%) scale(1.15); }
+}
+@keyframes glow-drift-b {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-8%, -10%) scale(1.2); }
+}
+@keyframes glow-drift-c {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(-5%, 8%) scale(1.1) rotate(15deg); }
+}
+
+/* ========================
+   GRADIENT TEXT SHINE
+   ======================== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-a) 0%, var(--accent-b) 50%, var(--accent-c) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+}
+
+.text-gradient-animate {
+  background: linear-gradient(135deg, #06b6d4, #0ea5e9, #6366f1, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% auto;
+  animation: text-shine 6s linear infinite;
+}
+
+@keyframes text-shine {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ========================
+   SECTION DIVIDER
+   ======================== */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-c));
+  border-radius: 9999px;
+  margin: 0 auto;
+}
+
+/* ========================
+   BUTTONS
+   ======================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-c));
+  color: white;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%) skewX(-20deg);
+  transition: transform 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(200%) skewX(-20deg);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 35px rgba(6, 182, 212, 0.5), 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.04);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ========================
+   SKILL PROGRESS BAR
+   ======================== */
+.skill-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-c));
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+  transition: width 1.2s cubic-bezier(.22,.68,0,1.2);
+}
+
+/* ========================
+   EMOJI FLAGS
+   ======================== */
 .emoji-flag {
   font-family: 'Noto Color Emoji', 'Noto Emoji', 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   display: inline-block;
+  line-height: 1;
 }
 
-.flag-spin:hover {
-  animation: spin-flag 0.5s ease;
+/* ========================
+   SCROLLBAR
+   ======================== */
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-@keyframes spin-flag {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-a), var(--accent-c));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #67e8f9, #818cf8);
+}
+
+/* ========================
+   INPUT FIELDS
+   ======================== */
+.form-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.875rem;
+  padding: 1rem 1.25rem;
+  color: white;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.form-input:focus {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1), 0 0 20px rgba(6, 182, 212, 0.05);
+}
+
+.form-input.error {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ========================
+   TIMELINE (Formation)
+   ======================== */
+.timeline-line {
+  position: absolute;
+  left: 1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent-a), var(--accent-c), transparent);
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-c));
+  box-shadow: 0 0 12px var(--accent-glow);
+  border: 2px solid #020617;
+  flex-shrink: 0;
+}
+
+/* ========================
+   MISC HELPERS
+   ======================== */
+.hover-glow:hover {
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.55));
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.04) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.card-shine:hover::after {
+  left: 125%;
+}
+
+/* ========================
+   FADE-IN ANIMATION
+   ======================== */
+@keyframes fade-up {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
 }

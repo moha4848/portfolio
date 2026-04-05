@@ -13,8 +13,55 @@ import {
   Github,
   Linkedin,
   Instagram,
-  Trash2
+  Trash2,
+  Globe,
+  Server,
+  Database,
+  Code,
+  Wrench,
+  Users,
+  Calculator,
+  CheckSquare,
+  Image,
+  Clock,
+  HelpCircle,
+  Smartphone,
+  Palette,
+  BarChart3,
+  Cloud,
+  Lock,
+  Search,
+  Layout,
+  Cpu
 } from 'lucide-react';
+
+const IconMapper = ({ iconKey, size = 24, className = "" }) => {
+  const icons = {
+    globe: Globe,
+    server: Server,
+    database: Database,
+    code: Code,
+    wrench: Wrench,
+    users: Users,
+    calculator: Calculator,
+    todo: CheckSquare,
+    mail: Mail,
+    image: Image,
+    clock: Clock,
+    quiz: HelpCircle,
+    smartphone: Smartphone,
+    palette: Palette,
+    barchart: BarChart3,
+    cloud: Cloud,
+    lock: Lock,
+    search: Search,
+    layout: Layout,
+    cpu: Cpu
+  };
+  const IconComponent = icons[iconKey] || Globe;
+  return <IconComponent size={size} className={className} strokeWidth={1.5} />;
+};
+
 
 const repoMap = {
   1: "calculatrice",
@@ -74,18 +121,18 @@ export const CalculatriceDemo = ({ t }) => {
   };
 
   return (
-    <div className="p-6 bg-slate-800 rounded-xl">
-      <div className="text-center text-xl mb-4 text-blue-400 font-bold">
+    <div className="p-6 glass-card rounded-2xl">
+      <div className="text-center text-xl mb-4 text-cyan-400 font-bold">
         {t.calculatorTitle}
       </div>
-      <div className="bg-slate-900 p-4 rounded-lg">
+      <div className="bg-slate-950/50 p-4 rounded-xl border border-white/5">
         <div className="text-right text-green-400 text-3xl mb-4">{display}</div>
         <div className="grid grid-cols-4 gap-3">
           {['7','8','9','÷','4','5','6','×','1','2','3','-','C','0','.','+'].map(btn => (
             <button
               key={btn}
               onClick={() => handleButtonClick(btn)}
-              className="h-12 bg-slate-700 rounded-lg hover:bg-slate-600"
+              className="h-12 glass-card hover:bg-violet-600/20 transition-all"
             >
               {btn}
             </button>
@@ -122,12 +169,12 @@ export const TodoDemo = ({ t }) => {
   };
 
   return (
-    <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">
+    <div className="p-6 glass-card rounded-2xl">
+      <h2 className="text-center text-xl mb-4 text-cyan-400 font-bold">
         {t.todoTitle}
       </h2>
       {tasks.map(task => (
-        <div key={task.id} className="flex justify-between bg-slate-700 p-2 mb-2 rounded">
+        <div key={task.id} className="flex justify-between bg-violet-900/20 p-3 mb-2 rounded-lg border border-cyan-500/10">
           <span
             onClick={() => toggleTask(task.id)}
             className={task.done ? 'line-through cursor-pointer' : 'cursor-pointer'}
@@ -173,7 +220,7 @@ export const ContactDemo = ({ t }) => {
   if (sent) return <div className="p-6 bg-green-800 rounded-xl">{t.messageSent} ✅</div>;
 
   return (
-    <form onSubmit={submit} className="p-6 bg-slate-800 rounded-xl space-y-3">
+    <form onSubmit={submit} className="p-6 glass-card rounded-2xl space-y-3">
       <input
         className="w-full p-2 bg-slate-900 rounded"
         placeholder={t.yourName}
@@ -195,7 +242,7 @@ export const ContactDemo = ({ t }) => {
       />
       {errors.message && <p className="text-red-500">{errors.message}</p>}
 
-      <button className="w-full bg-blue-600 p-2 rounded">{t.sendMessage}</button>
+      <button className="w-full bg-violet-600 p-2 rounded">{t.sendMessage}</button>
     </form>
   );
 };
@@ -206,8 +253,8 @@ export const GalleryDemo = ({ t }) => {
 
   const images = [
     { id: 1, title: t.galleryImages.sunrise, emoji: '🌅', color: 'from-purple-500 to-pink-500' },
-    { id: 2, title: t.galleryImages.landscape, emoji: '🏞️', color: 'from-blue-500 to-cyan-500' },
-    { id: 3, title: t.galleryImages.ocean, emoji: '🌊', color: 'from-green-500 to-emerald-500' },
+    { id: 2, title: t.galleryImages.landscape, emoji: '🏞️', color: 'from-cyan-500 to-indigo-500' },
+    { id: 3, title: t.galleryImages.ocean, emoji: '🌊', color: 'from-green-500 to-pink-' },
     { id: 4, title: t.galleryImages.city, emoji: '🏙️', color: 'from-orange-500 to-red-500' },
     { id: 5, title: t.galleryImages.mountain, emoji: '🏔️', color: 'from-indigo-500 to-purple-500' },
     { id: 6, title: t.galleryImages.aurora, emoji: '🌄', color: 'from-yellow-500 to-orange-500' },
@@ -215,7 +262,7 @@ export const GalleryDemo = ({ t }) => {
 
   if (selectedImage) {
     return (
-      <div className="p-6 bg-slate-800 rounded-xl">
+      <div className="p-6 glass-card rounded-2xl">
         <button
           onClick={() => setSelectedImage(null)}
           className="flex items-center gap-2 text-slate-300 mb-4 hover:text-white"
@@ -238,8 +285,8 @@ export const GalleryDemo = ({ t }) => {
   }
 
   return (
-    <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-center text-xl mb-4 text-blue-400 font-bold">
+    <div className="p-6 glass-card rounded-2xl">
+      <h2 className="text-center text-xl mb-4 text-cyan-400 font-bold">
         {t.galleryTitle}
       </h2>
       <div className="grid grid-cols-2 gap-4">
@@ -268,7 +315,7 @@ export const ClockDemo = ({ t }) => {
   }, []);
 
   return (
-    <div className="p-6 bg-slate-800 rounded-xl text-center">
+    <div className="p-6 glass-card rounded-2xl text-center">
       <div className="text-4xl text-green-400 font-mono">{time.toLocaleTimeString()}</div>
       <div className="text-slate-300">{time.toLocaleDateString()}</div>
     </div>
@@ -300,16 +347,16 @@ export const QuizDemo = ({ t }) => {
   };
 
   if (showResult) return (
-    <div className="p-6 bg-slate-800 rounded-xl text-center">
-      <h2 className="text-xl mb-4 text-blue-400 font-bold">{t.quizFinished}</h2>
+    <div className="p-6 glass-card rounded-2xl text-center">
+      <h2 className="text-xl mb-4 text-cyan-400 font-bold">{t.quizFinished}</h2>
       <p className="text-green-400 text-3xl mb-4">{score} / {questions.length}</p>
-      <button onClick={reset} className="bg-blue-600 p-2 rounded">{t.restart}</button>
+      <button onClick={reset} className="bg-violet-600 p-2 rounded">{t.restart}</button>
     </div>
   );
 
   return (
-    <div className="p-6 bg-slate-800 rounded-xl">
-      <h2 className="text-xl mb-4 text-blue-400 font-bold">{t.quizTitle}</h2>
+    <div className="p-6 glass-card rounded-2xl">
+      <h2 className="text-xl mb-4 text-cyan-400 font-bold">{t.quizTitle}</h2>
       <p className="mb-4 text-white">{questions[i].q}</p>
       {questions[i].a.map((opt, idx) => (
         <button
@@ -341,13 +388,14 @@ const translations = {
     
     skillsTitle: 'Mes Compétences',
     skills: [
-      { nom: 'Développement Web', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
-      { nom: 'Backend', details: 'PHP, Node.js, API REST', icon: '⚙️' },
-      { nom: 'Bases de Données', details: 'MySQL', icon: '🗃️' },
-      { nom: 'Programmation', details: 'Python', icon: '💻' },
-      { nom: 'Outils', details: 'Git, VS Code, Figma', icon: '🛠️' },
-      { nom: 'Soft Skills', details: 'Communication, Travail d\'équipe', icon: '🤝' }
+      { nom: 'Développement Web', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
+      { nom: 'Backend', details: 'PHP, Node.js, API REST', icon: 'server' },
+      { nom: 'Bases de Données', details: 'MySQL', icon: 'database' },
+      { nom: 'Programmation', details: 'Python', icon: 'code' },
+      { nom: 'Outils', details: 'Git, VS Code, Figma', icon: 'wrench' },
+      { nom: 'Soft Skills', details: 'Communication, Travail d\'équipe', icon: 'users' }
     ],
+
     
     projectsTitle: 'Mes Projets',
     projects: [
@@ -420,13 +468,14 @@ const translations = {
     
     interestsTitle: 'Mes Intérêts',
     interests: [
-      { icon: '💻', title: 'Développement Web', desc: 'Frontend & Backend' },
-      { icon: '📱', title: 'Applications Mobiles', desc: 'React Native' },
-      { icon: '🎨', title: 'UI/UX Design', desc: 'Figma' },
-      { icon: '📊', title: 'Data Science', desc: 'Python' },
-      { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
-      { icon: '🔒', title: 'Cybersécurité', desc: 'Sécurité des applications' }
+      { icon: 'code', title: 'Développement Web', desc: 'Frontend & Backend' },
+      { icon: 'smartphone', title: 'Applications Mobiles', desc: 'React Native' },
+      { icon: 'palette', title: 'UI/UX Design', desc: 'Figma' },
+      { icon: 'barchart', title: 'Data Science', desc: 'Python' },
+      { icon: 'cloud', title: 'Cloud Computing', desc: 'AWS, Docker' },
+      { icon: 'lock', title: 'Cybersécurité', desc: 'Sécurité des applications' }
     ],
+
     
     contactTitle: 'Contactez-moi',
     contactInfo: 'Informations',
@@ -505,13 +554,14 @@ const translations = {
     
     skillsTitle: 'My Skills',
     skills: [
-      { nom: 'Web Development', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
-      { nom: 'Backend', details: 'PHP, Node.js, REST API', icon: '⚙️' },
-      { nom: 'Databases', details: 'MySQL', icon: '🗃️' },
-      { nom: 'Programming', details: 'Python', icon: '💻' },
-      { nom: 'Tools', details: 'Git, VS Code, Figma', icon: '🛠️' },
-      { nom: 'Soft Skills', details: 'Communication, Teamwork', icon: '🤝' }
+      { nom: 'Web Development', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
+      { nom: 'Backend', details: 'PHP, Node.js, REST API', icon: 'server' },
+      { nom: 'Databases', details: 'MySQL', icon: 'database' },
+      { nom: 'Programming', details: 'Python', icon: 'code' },
+      { nom: 'Tools', details: 'Git, VS Code, Figma', icon: 'wrench' },
+      { nom: 'Soft Skills', details: 'Communication, Teamwork', icon: 'users' }
     ],
+
     
     projectsTitle: 'My Projects',
     projects: [
@@ -584,13 +634,14 @@ const translations = {
     
     interestsTitle: 'My Interests',
     interests: [
-      { icon: '💻', title: 'Web Development', desc: 'Frontend & Backend' },
-      { icon: '📱', title: 'Mobile Applications', desc: 'React Native' },
-      { icon: '🎨', title: 'UI/UX Design', desc: 'Figma' },
-      { icon: '📊', title: 'Data Science', desc: 'Python' },
-      { icon: '☁️', title: 'Cloud Computing', desc: 'AWS, Docker' },
-      { icon: '🔒', title: 'Cybersecurity', desc: 'Application Security' }
+      { icon: 'code', title: 'Web Development', desc: 'Frontend & Backend' },
+      { icon: 'smartphone', title: 'Mobile Applications', desc: 'React Native' },
+      { icon: 'palette', title: 'UI/UX Design', desc: 'Figma' },
+      { icon: 'barchart', title: 'Data Science', desc: 'Python' },
+      { icon: 'cloud', title: 'Cloud Computing', desc: 'AWS, Docker' },
+      { icon: 'lock', title: 'Cybersecurity', desc: 'Application Security' }
     ],
+
     
     contactTitle: 'Contact Me',
     contactInfo: 'Information',
@@ -669,13 +720,14 @@ const translations = {
     
     skillsTitle: 'مهاراتي',
     skills: [
-      { nom: 'تطوير الويب', details: 'HTML, CSS, JavaScript, React', icon: '🌐' },
-      { nom: 'الخلفية', details: 'PHP, Node.js, REST API', icon: '⚙️' },
-      { nom: 'قواعد البيانات', details: 'MySQL', icon: '🗃️' },
-      { nom: 'البرمجة', details: 'Python', icon: '💻' },
-      { nom: 'الأدوات', details: 'Git, VS Code, Figma', icon: '🛠️' },
-      { nom: 'المهارات الناعمة', details: 'التواصل، العمل الجماعي', icon: '🤝' }
+      { nom: 'تطوير الويب', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
+      { nom: 'الخلفية', details: 'PHP, Node.js, REST API', icon: 'server' },
+      { nom: 'قواعد البيانات', details: 'MySQL', icon: 'database' },
+      { nom: 'البرمجة', details: 'Python', icon: 'code' },
+      { nom: 'الأدوات', details: 'Git, VS Code, Figma', icon: 'wrench' },
+      { nom: 'المهارات الناعمة', details: 'التواصل، العمل الجماعي', icon: 'users' }
     ],
+
     
     projectsTitle: 'مشاريعي',
     projects: [
@@ -748,13 +800,14 @@ const translations = {
     
     interestsTitle: 'اهتماماتي',
     interests: [
-      { icon: '💻', title: 'تطوير الويب', desc: 'الواجهة الأمامية والخلفية' },
-      { icon: '📱', title: 'تطبيقات الهاتف', desc: 'React Native' },
-      { icon: '🎨', title: 'تصميم واجهة المستخدم/تجربة المستخدم', desc: 'Figma' },
-      { icon: '📊', title: 'علم البيانات', desc: 'Python' },
-      { icon: '☁️', title: 'الحوسبة السحابية', desc: 'AWS, Docker' },
-      { icon: '🔒', title: 'الأمن السيبراني', desc: 'أمن التطبيقات' }
+      { icon: 'code', title: 'تطوير الويب', desc: 'الواجهة الأمامية والخلفية' },
+      { icon: 'smartphone', title: 'تطبيقات الهاتف', desc: 'React Native' },
+      { icon: 'palette', title: 'تصميم واجهة المستخدم/تجربة المستخدم', desc: 'Figma' },
+      { icon: 'barchart', title: 'علم البيانات', desc: 'Python' },
+      { icon: 'cloud', title: 'الحوسبة السحابية', desc: 'AWS, Docker' },
+      { icon: 'lock', title: 'الأمن السيبراني', desc: 'أمن التطبيقات' }
     ],
+
     
     contactTitle: 'اتصل بي',
     contactInfo: 'المعلومات',
@@ -912,13 +965,14 @@ const translations = {
     
     interestsTitle: 'Mis Intereses',
     interests: [
-      { icon: '💻', title: 'Desarrollo Web', desc: 'Frontend y Backend' },
-      { icon: '📱', title: 'Aplicaciones Móviles', desc: 'React Native' },
-      { icon: '🎨', title: 'Diseño UI/UX', desc: 'Figma' },
-      { icon: '📊', title: 'Ciencia de Datos', desc: 'Python' },
-      { icon: '☁️', title: 'Computación en la Nube', desc: 'AWS, Docker' },
-      { icon: '🔒', title: 'Ciberseguridad', desc: 'Seguridad de aplicaciones' }
+      { icon: 'code', title: 'Desarrollo Web', desc: 'Frontend y Backend' },
+      { icon: 'smartphone', title: 'Aplicaciones Móviles', desc: 'React Native' },
+      { icon: 'palette', title: 'Diseño UI/UX', desc: 'Figma' },
+      { icon: 'barchart', title: 'Ciencia de Datos', desc: 'Python' },
+      { icon: 'cloud', title: 'Computación en la Nube', desc: 'AWS, Docker' },
+      { icon: 'lock', title: 'Ciberseguridad', desc: 'Seguridad de aplicaciones' }
     ],
+
     
     contactTitle: 'Contáctame',
     contactInfo: 'Información',
@@ -990,24 +1044,44 @@ export default function Portfolio() {
 const [, setActiveSection] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [dynamicProfile, setDynamicProfile] = useState({});
 
-  const t = translations[lang];
+  useEffect(() => {
+    // Fetch dynamic profile settings
+    fetch('http://localhost:8000/api/profile')
+      .then(res => res.json())
+      .then(data => {
+        // Map keys to match translation structure if necessary
+        const mappedData = {};
+        if (data.role) mappedData.role = data.role;
+        if (data.phone) mappedData.phoneNumber = data.phone;
+        if (data.email) mappedData.email = data.email;
+        if (data.address) mappedData.address = data.address;
+        if (data.school) mappedData.school = data.school;
+        if (data.about) mappedData.aboutText1 = data.about; // Using about for the first section
+        
+        setDynamicProfile(mappedData);
+      })
+      .catch(err => console.error('Error fetching profile:', err));
+  }, []);
+
+  const t = { ...translations[lang], ...dynamicProfile };
   const isRTL = lang === 'ar';
 
   const languages = [
-    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-blue-500 to-red-500' },
-    { code: 'en', label: 'English', flag: '🇬🇧', color: 'from-blue-600 to-red-600' },
+    { code: 'fr', label: 'Français', flag: '🇫🇷', color: 'from-violet-500 to-red-500' },
+    { code: 'en', label: 'English', flag: '🇬🇧', color: 'from-violet-600 to-red-600' },
     { code: 'ar', label: 'العربية', flag: '🇲🇦', color: 'from-red-500 to-green-500' },
     { code: 'es', label: 'Español', flag: '🇪🇸', color: 'from-red-600 to-yellow-500' }
   ];
 
   const competences = [
-    { niveau: 90, color: 'from-blue-500 to-cyan-500' },
+    { niveau: 90, color: 'from-cyan-500 to-indigo-500' },
     { niveau: 65, color: 'from-purple-500 to-pink-500' },
-    { niveau: 85, color: 'from-green-500 to-emerald-500' },
+    { niveau: 85, color: 'from-green-500 to-pink-' },
     { niveau: 60, color: 'from-orange-500 to-yellow-500' },
-    { niveau: 80, color: 'from-indigo-500 to-blue-500' },
-    { niveau: 85, color: 'from-teal-500 to-cyan-500' }
+    { niveau: 80, color: 'from-indigo-500 to-violet-' },
+    { niveau: 85, color: 'from-teal-500 to-fuchsia-500' }
   ];
 
   const projets = [
@@ -1053,6 +1127,16 @@ const [, setActiveSection] = useState('home');
   };
 
   useEffect(() => {
+    fetch('http://localhost:8000/api/track-visit', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).catch(err => console.error('Failed to track visit', err));
+  }, []);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (langMenuOpen && !event.target.closest('.language-selector')) {
         setLangMenuOpen(false);
@@ -1064,7 +1148,7 @@ const [, setActiveSection] = useState('home');
   }, [langMenuOpen]);
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen text-white ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         * {
@@ -1078,12 +1162,19 @@ const [, setActiveSection] = useState('home');
         }
       `}</style>
 
+      {/* Background Glows */}
+      <div className="bg-glow glow-primary"></div>
+      <div className="bg-glow glow-secondary"></div>
+      <div className="bg-glow glow-tertiary"></div>
+
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm shadow-xl z-50 border-b border-slate-800">
+      <nav className="fixed top-0 w-full glass-nav z-50">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-8">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 Portfolio
               </div>
 
@@ -1101,7 +1192,7 @@ const [, setActiveSection] = useState('home');
                       className="relative group px-3 py-2 text-slate-300 hover:text-white transition-colors"
                     >
                       <span className="relative z-10">{item}</span>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
                     </button>
                   );
                 })}
@@ -1117,7 +1208,7 @@ const [, setActiveSection] = useState('home');
                     e.stopPropagation();
                     setLangMenuOpen(!langMenuOpen);
                   }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 transition-all duration-300 border border-slate-700 hover:border-blue-500/50 shadow-lg"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/50 hover:bg-white/10 transition-all duration-500 shadow-lg"
                   aria-label="Select language"
                 >
                   <span className="emoji-flag text-xl">
@@ -1141,7 +1232,7 @@ const [, setActiveSection] = useState('home');
                           }}
                           className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
                             lang === language.code 
-                              ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30' 
+                              ? 'bg-gradient-to-r from-cyan-900/40 to-indigo-900/30' 
                               : 'hover:bg-slate-800/80'
                           }`}
                         >
@@ -1161,7 +1252,7 @@ const [, setActiveSection] = useState('home');
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
-                className="md:hidden p-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300"
+                className="md:hidden p-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300"
               >
                 {menuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -1183,7 +1274,7 @@ const [, setActiveSection] = useState('home');
                     }}
                     className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all ${
                       lang === language.code 
-                        ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30 border border-blue-500/50' 
+                        ? 'bg-gradient-to-r from-cyan-900/40 to-indigo-900/30 border border-cyan-500/50' 
                         : 'bg-slate-800 hover:bg-slate-700 border border-slate-700'
                     }`}
                   >
@@ -1207,7 +1298,7 @@ const [, setActiveSection] = useState('home');
                   className="w-full text-left px-6 py-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800/50 flex items-center justify-between group"
                 >
                   <span className="font-medium">{item}</span>
-                  <ChevronRight size={20} className="text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                  <ChevronRight size={20} className="text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
                 </button>
               );
             })}
@@ -1219,7 +1310,7 @@ const [, setActiveSection] = useState('home');
       <section id="accueil-section" className="pt-32 pb-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           {/* Avatar with profile image */}
-          <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 animate-gradient">
+          <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-cyan-400 via-sky-400 to-indigo-500">
             <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 shadow-2xl">
               <img
                 src="/profile.jpeg"
@@ -1230,11 +1321,11 @@ const [, setActiveSection] = useState('home');
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent animate-gradient-text">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gradient-animate">
             Yousfi Mohammed
           </h1>
 
-          <p className="text-xl md:text-2xl text-blue-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-cyan-300/80 mb-8 max-w-2xl mx-auto leading-relaxed font-light">
             {t.role}
           </p>
 
@@ -1244,14 +1335,14 @@ const [, setActiveSection] = useState('home');
               download="CV_Yousfi_Mohammed.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
+              className="btn-primary flex items-center justify-center gap-3 group"
             >
               <span>{t.downloadCV}</span>
               <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
             </a>
             <button 
               onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-slate-700 hover:border-blue-500/50"
+              className="btn-secondary"
             >
               {t.contactMe}
             </button>
@@ -1264,11 +1355,11 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.aboutTitle}
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -1287,9 +1378,9 @@ const [, setActiveSection] = useState('home');
                   { icon: Phone, label: t.phoneNumber },
                   { icon: GraduationCap, label: t.school }
                 ].map((item, idx) => (
-                  <div key={idx} className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/30 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-2 rounded-lg">
-                      <item.icon className="text-blue-400" size={20} />
+                  <div key={idx} className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/30 hover:border-cyan-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-2.5 rounded-lg shadow-inner">
+                      <item.icon className="text-cyan-400" size={22} strokeWidth={1.5} />
                     </div>
                     <span className="text-sm font-medium text-slate-300">{item.label}</span>
                   </div>
@@ -1298,19 +1389,22 @@ const [, setActiveSection] = useState('home');
             </div>
             
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.interestsTitle}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {t.interests.map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/50 hover:from-slate-800 hover:to-slate-900 transition-all duration-300 border border-slate-700/30 hover:border-blue-500/30 group">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-2xl">{item.icon}</span>
-                      <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors">{item.title}</h4>
+                  <div key={idx} className="p-4 rounded-xl bg-slate-900/50 hover:bg-slate-800/80 transition-all duration-300 border border-slate-700/30 hover:border-cyan-500/30 group glass-card">
+                    <div className="flex items-center gap-4 mb-3">
+                       <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 group-hover:border-cyan-500/40 transition-colors shrink-0">
+                         <IconMapper iconKey={item.icon} size={20} className="text-cyan-400 group-hover:scale-110 transition-transform" />
+                       </div>
+                      <h4 className="font-semibold text-white group-hover:text-cyan-400 transition-colors">{item.title}</h4>
                     </div>
                     <p className="text-sm text-slate-400">{item.desc}</p>
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -1322,30 +1416,31 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.skillsTitle}
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {t.skills.map((skill, index) => (
-              <div key={index} className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 hover:transform hover:scale-[1.02] group">
+              <div key={index} className="glass-card p-6 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 hover:transform hover:scale-[1.02] group">
                 <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-3 rounded-xl group-hover:from-blue-600/30 group-hover:to-cyan-600/30 transition-all">
-                    <span className="text-2xl">{skill.icon}</span>
+                  <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-3 rounded-xl shadow-inner border border-white/5 group-hover:from-cyan-500/25 group-hover:to-indigo-500/25 transition-all">
+                    <IconMapper iconKey={skill.icon} size={26} className="text-cyan-400" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{skill.nom}</h3>
+                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">{skill.nom}</h3>
                     <p className="text-sm text-slate-400 mt-1">{skill.details}</p>
                   </div>
                 </div>
+
                 
                 <div className="mt-6">
                   <div className="flex justify-between mb-2">
                     <span className="text-sm text-slate-400">{t.proficiency}</span>
-                    <span className="text-sm font-semibold text-blue-400">{competences[index].niveau}%</span>
+                    <span className="text-sm font-semibold text-cyan-400">{competences[index].niveau}%</span>
                   </div>
                   <div className="w-full bg-slate-800/50 rounded-full h-2.5 overflow-hidden">
                     <div
@@ -1365,11 +1460,11 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.projectsTitle}
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1380,23 +1475,25 @@ const [, setActiveSection] = useState('home');
               return (
                 <div
                   key={projet.id}
-                  className="bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300 border border-slate-700/30 shadow-2xl hover:shadow-3xl group"
+                  className="glass-card rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-3xl group"
                 >
-                  <div className="h-48 bg-gradient-to-br from-blue-900/40 via-cyan-900/40 to-blue-900/40 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div className="relative z-10 p-4">
-                      {projet.demo === 'calculatrice' && <div className="text-6xl">🧮</div>}
-                      {projet.demo === 'todo' && <div className="text-6xl">✅</div>}
-                      {projet.demo === 'contact' && <div className="text-6xl">📧</div>}
-                      {projet.demo === 'gallery' && <div className="text-6xl">🖼️</div>}
-                      {projet.demo === 'clock' && <div className="text-6xl">🕒</div>}
-                      {projet.demo === 'quiz' && <div className="text-6xl">❓</div>}
+
+                  <div className="h-48 bg-gradient-to-br from-cyan-900/20 via-indigo-900/20 to-sky-900/20 flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                    <div className="relative z-10 p-6 rounded-3xl bg-slate-900/40 backdrop-blur-md border border-white/10 text-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.15)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] transition-all duration-500">
+                      {projet.demo === 'calculatrice' && <Calculator size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'todo' && <CheckSquare size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'contact' && <Mail size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'gallery' && <Image size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'clock' && <Clock size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'quiz' && <HelpCircle size={64} strokeWidth={1.5} />}
                     </div>
+
                   </div>
 
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-xl font-bold group-hover:text-cyan-400 transition-colors">
                         {projectData.titre}
                       </h3>
                       <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
@@ -1418,7 +1515,7 @@ const [, setActiveSection] = useState('home');
                       {projet.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 text-blue-400 px-3 py-1.5 rounded-lg text-xs font-medium border border-blue-500/20"
+                          className="bg-gradient-to-r from-cyan-900/20 to-indigo-900/20 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-medium border border-cyan-500/20"
                         >
                           {tech}
                         </span>
@@ -1428,11 +1525,12 @@ const [, setActiveSection] = useState('home');
                     <div className={`flex items-center justify-between pt-4 border-t border-slate-800/50 ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <button
                         onClick={() => setSelectedProject({ ...projet, ...projectData })}
-                        className="flex items-center text-blue-400 hover:text-blue-300 transition-colors group"
+                        className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors group"
                       >
                         <span className="mr-2">{t.details}</span>
                         <ChevronRight
                           size={18}
+                          strokeWidth={2}
                           className={`transition-transform duration-300 group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`}
                         />
                       </button>
@@ -1442,9 +1540,9 @@ const [, setActiveSection] = useState('home');
                           href={`https://github.com/moha4848/${repoName}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-blue-500/50"
+                          className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-cyan-500/50"
                         >
-                          <Github size={16} /> {t.viewCode}
+                          <Github size={16} strokeWidth={1.5} /> {t.viewCode}
                         </a>
                       </div>
                     </div>
@@ -1467,7 +1565,7 @@ const [, setActiveSection] = useState('home');
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-700/50 p-8 flex justify-between items-center backdrop-blur-sm z-10">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {selectedProject.titre}
               </h2>
 
@@ -1476,7 +1574,7 @@ const [, setActiveSection] = useState('home');
                   href={`https://github.com/moha4848/${repoMap[selectedProject.id]}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg"
+                  className="bg-gradient-to-r from-cyan-500 to-indigo-600 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:from-cyan-600 hover:to-indigo-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg"
                 >
                   <Github size={18} /> {t.viewCode}
                 </a>
@@ -1504,20 +1602,20 @@ const [, setActiveSection] = useState('home');
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                       {t.description}
                     </h3>
                     <p className="text-slate-300 text-lg leading-relaxed">{selectedProject.details}</p>
                   </div>
 
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                       {t.features}
                     </h3>
                     <ul className="space-y-3">
                       {selectedProject.fonctionnalites.map((fonc, i) => (
                         <li key={i} className={`flex items-start text-slate-300 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
-                          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-1 rounded-full mt-1 flex-shrink-0">
+                          <div className="bg-gradient-to-r from-cyan-500 to-indigo-600 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] p-1 rounded-full mt-1 flex-shrink-0">
                             <ChevronRight className={`text-white ${isRTL ? 'rotate-180' : ''}`} size={16} />
                           </div>
                           <span className={`${isRTL ? 'mr-3' : 'ml-3'}`}>{fonc}</span>
@@ -1528,14 +1626,14 @@ const [, setActiveSection] = useState('home');
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                     {t.techUsed}
                   </h3>
                   <div className="flex flex-wrap gap-3 mb-8">
                     {selectedProject.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className="bg-gradient-to-r from-blue-900/40 to-cyan-900/40 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg border border-blue-500/30"
+                        className="bg-gradient-to-r from-cyan-900/30 to-indigo-900/30 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg border border-cyan-500/30"
                       >
                         {tech}
                       </span>
@@ -1560,7 +1658,7 @@ const [, setActiveSection] = useState('home');
                       <div
                         className={`h-3 rounded-full transition-all duration-1000 ${
                           selectedProject.difficulte === 'beginner'
-                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 w-1/3'
+                            ? 'bg-gradient-to-r from-green-500 to-pink- w-1/3'
                             : selectedProject.difficulte === 'intermediate'
                             ? 'bg-gradient-to-r from-yellow-500 to-orange-500 w-2/3'
                             : 'bg-gradient-to-r from-red-500 to-pink-500 w-full'
@@ -1580,28 +1678,28 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.formationTitle}
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
           
           <div className="max-w-3xl mx-auto">
             <div className="relative">
-              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/30 via-cyan-500/30 to-blue-500/30 md:left-1/2 md:transform md:-translate-x-1/2"></div>
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-500/30 via-sky-500/30 to-violet-/30 md:left-1/2 md:transform md:-translate-x-1/2"></div>
               
               {t.formations.map((formation, index) => (
                 <div key={index} className={`relative mb-12 last:mb-0 ${index % 2 === 0 ? 'md:pr-8 md:text-right md:mr-auto md:w-1/2' : 'md:pl-8 md:text-left md:ml-auto md:w-1/2'}`}>
-                  <div className="absolute top-6 -left-3 w-6 h-6 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 border-4 border-slate-900 shadow-lg md:left-1/2 md:transform md:-translate-x-1/2"></div>
+                  <div className="absolute top-6 -left-3 w-5 h-5 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 border-2 border-[#020617] shadow-[0_0_14px_rgba(6,182,212,0.5)] md:left-1/2 md:transform md:-translate-x-1/2"></div>
                   
                   <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700/50 shadow-xl ml-10 md:ml-0">
                     <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end' : 'md:items-start'}`}>
-                      <span className="text-blue-400 text-sm font-semibold mb-2 px-3 py-1 bg-blue-900/30 rounded-full inline-block">
+                      <span className="text-cyan-400 text-sm font-semibold mb-2 px-3 py-1 bg-cyan-900/20 rounded-full inline-block">
                         {formation.periode}
                       </span>
                       <h3 className="text-xl font-bold text-white mb-2">{formation.titre}</h3>
-                      <p className="text-cyan-400 font-medium mb-3">{formation.etablissement}</p>
+                      <p className="text-sky- font-medium mb-3">{formation.etablissement}</p>
                       <p className="text-slate-400">{formation.description}</p>
                     </div>
                   </div>
@@ -1617,11 +1715,11 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
                 {t.contactTitle}
               </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12">
@@ -1629,22 +1727,22 @@ const [, setActiveSection] = useState('home');
               <h3 className="text-2xl font-bold mb-6 text-white">{t.contactInfo}</h3>
               
               <div className="space-y-6">
-                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-3 rounded-xl">
-                    <Mail size={24} className="text-blue-400" />
+                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-3 rounded-xl">
+                    <Mail size={24} className="text-cyan-400" strokeWidth={1.5} />
                   </div>
                   <div>
                     <p className="text-sm text-slate-400 mb-1">{t.emailLabel}</p>
-                    <p className="font-semibold text-white hover:text-blue-400 transition-colors cursor-pointer" 
+                    <p className="font-semibold text-white hover:text-cyan-400 transition-colors cursor-pointer" 
                        onClick={() => window.location.href = `mailto:${LINKS.email}`}>
                       {t.email}
                     </p>
                   </div>
                 </div>
                 
-                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-3 rounded-xl">
-                    <Phone size={24} className="text-blue-400" />
+                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-3 rounded-xl">
+                    <Phone size={24} className="text-cyan-400" strokeWidth={1.5} />
                   </div>
                   <div>
                     <p className="text-sm text-slate-400 mb-1">{t.phoneLabel}</p>
@@ -1652,9 +1750,9 @@ const [, setActiveSection] = useState('home');
                   </div>
                 </div>
                 
-                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 p-3 rounded-xl">
-                    <MapPin size={24} className="text-blue-400" />
+                <div className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-3 rounded-xl">
+                    <MapPin size={24} className="text-cyan-400" strokeWidth={1.5} />
                   </div>
                   <div>
                     <p className="text-sm text-slate-400 mb-1">{t.locationLabel}</p>
@@ -1676,9 +1774,9 @@ const [, setActiveSection] = useState('home');
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={social.label}
-                        className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-blue-600 hover:to-cyan-600 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-blue-500/50 shadow-lg"
+                        className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-cyan-600 hover:to-indigo-700 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-cyan-500/50 shadow-lg"
                       >
-                        <social.icon size={22} className="text-white" />
+                        <social.icon size={22} className="text-white" strokeWidth={1.5} />
                       </a>
                     ))}
                   </div>
@@ -1696,7 +1794,7 @@ const [, setActiveSection] = useState('home');
                     placeholder={t.yourName}
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.name ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''} text-white`}
+                    className={`form-input ${contactErrors.name ? 'error' : ''} ${isRTL ? 'text-right' : ''}`}
                   />
                   {contactErrors.name && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.name}</p>}
                 </div>
@@ -1707,7 +1805,7 @@ const [, setActiveSection] = useState('home');
                     placeholder={t.yourEmail}
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.email ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner ${isRTL ? 'text-right' : ''} text-white`}
+                    className={`form-input ${contactErrors.email ? 'error' : ''} ${isRTL ? 'text-right' : ''}`}
                   />
                   {contactErrors.email && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.email}</p>}
                 </div>
@@ -1718,17 +1816,17 @@ const [, setActiveSection] = useState('home');
                     rows="5"
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className={`w-full bg-gradient-to-br from-slate-900 to-slate-950 border ${contactErrors.message ? 'border-red-500/50' : 'border-slate-700/50'} rounded-xl px-5 py-4 focus:outline-none focus:border-blue-500/50 transition-colors duration-300 shadow-inner resize-none ${isRTL ? 'text-right' : ''} text-white`}
+                    className={`form-input resize-none ${contactErrors.message ? 'error' : ''} ${isRTL ? 'text-right' : ''}`}
                   ></textarea>
                   {contactErrors.message && <p className="text-red-500 text-sm mt-2 ml-1">{contactErrors.message}</p>}
                 </div>
                 
                 <button
                   onClick={handleSendMessage}
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:from-cyan-600 hover:to-indigo-700 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-[1.02] shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group"
                 >
                   <span>{t.sendMessage}</span>
-                  <Mail size={20} className="group-hover:translate-x-1 transition-transform" />
+                  <Mail size={20} className="group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
                 </button>
               </div>
             </div>
@@ -1741,7 +1839,7 @@ const [, setActiveSection] = useState('home');
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+              <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-2">
                 Portfolio
               </div>
               <p className="text-slate-400">{t.footer}</p>
@@ -1750,16 +1848,16 @@ const [, setActiveSection] = useState('home');
             
             <div className="flex items-center gap-4">
               <a href={LINKS.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-blue-600 hover:to-cyan-600 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-blue-500/50 shadow-lg">
-                <Github size={20} className="text-white" />
+                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-cyan-600 hover:to-indigo-700 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-cyan-500/50 shadow-lg">
+                <Github size={20} className="text-white" strokeWidth={1.5} />
               </a>
               <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-blue-600 hover:to-cyan-600 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-blue-500/50 shadow-lg">
-                <Linkedin size={20} className="text-white" />
+                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-cyan-600 hover:to-indigo-700 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-cyan-500/50 shadow-lg">
+                <Linkedin size={20} className="text-white" strokeWidth={1.5} />
               </a>
               <a href={LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-blue-600 hover:to-cyan-600 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-blue-500/50 shadow-lg">
-                <Instagram size={20} className="text-white" />
+                 className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-cyan-600 hover:to-indigo-700 p-3 rounded-xl transition-all duration-300 hover:scale-110 border border-slate-700 hover:border-cyan-500/50 shadow-lg">
+                <Instagram size={20} className="text-white" strokeWidth={1.5} />
               </a>
             </div>
           </div>
