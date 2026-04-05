@@ -173,6 +173,58 @@
                     </div>
                 </section>
 
+                <!-- Security Forge: Password Update -->
+                <section id="security" class="bg-slate-900/40 border border-white/5 rounded-[40px] overflow-hidden shadow-2xl">
+                    <div class="p-8 lg:p-12">
+                        <div class="flex items-center justify-between mb-10">
+                            <div>
+                                <h2 class="text-3xl font-black text-white tracking-tighter uppercase italic">Security Forge</h2>
+                                <p class="text-slate-500 mt-2 font-medium">Strengthen your account with a high-entropy password.</p>
+                            </div>
+                            @if (session('status') === 'password-updated')
+                                <div class="px-6 py-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-black uppercase tracking-widest animate-bounce">
+                                    Cipher Updated
+                                </div>
+                            @endif
+                        </div>
+
+                        <form method="post" action="{{ route('password.update') }}" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            @csrf
+                            @method('put')
+
+                            <div class="space-y-3">
+                                <label class="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] ml-1">Current Password</label>
+                                <input type="password" name="current_password" class="w-full bg-slate-950 border border-white/5 rounded-2xl px-6 py-5 focus:border-cyan-500/50 focus:ring-0 transition-all text-white font-medium shadow-inner">
+                                @if($errors->updatePassword->has('current_password'))
+                                    <p class="text-xs text-red-500 font-bold ml-1 uppercase tracking-tighter">{{ $errors->updatePassword->first('current_password') }}</p>
+                                @endif
+                            </div>
+
+                            <div class="space-y-3">
+                                <label class="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] ml-1">New Password</label>
+                                <input type="password" name="password" class="w-full bg-slate-950 border border-white/5 rounded-2xl px-6 py-5 focus:border-indigo-500/50 focus:ring-0 transition-all text-white font-medium shadow-inner">
+                                @if($errors->updatePassword->has('password'))
+                                    <p class="text-xs text-red-500 font-bold ml-1 uppercase tracking-tighter">{{ $errors->updatePassword->first('password') }}</p>
+                                @endif
+                            </div>
+
+                            <div class="space-y-3">
+                                <label class="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] ml-1">Confirm Identity</label>
+                                <input type="password" name="password_confirmation" class="w-full bg-slate-950 border border-white/5 rounded-2xl px-6 py-5 focus:border-purple-500/50 focus:ring-0 transition-all text-white font-medium shadow-inner">
+                                @if($errors->updatePassword->has('password_confirmation'))
+                                    <p class="text-xs text-red-500 font-bold ml-1 uppercase tracking-tighter">{{ $errors->updatePassword->first('password_confirmation') }}</p>
+                                @endif
+                            </div>
+
+                            <div class="md:col-span-3 flex justify-end pt-4">
+                                <button type="submit" class="group relative px-12 py-5 bg-gradient-to-r from-red-600/80 to-purple-700/80 text-white rounded-2xl font-black uppercase tracking-widest hover:scale-[1.05] active:scale-95 transition-all shadow-2xl shadow-red-500/20">
+                                    Re-key Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
                 <!-- Audience Table -->
                 <section id="audience" class="bg-slate-900/10 border border-white/5 rounded-[40px] overflow-hidden relative">
                     <div class="p-8 lg:p-12">
