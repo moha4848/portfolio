@@ -24,6 +24,10 @@ class ProfileSettingController extends Controller
             'school' => 'nullable|string',
         ]);
 
+        if (isset($data['email'])) {
+            $data['email'] = strtolower($data['email']);
+        }
+
         foreach ($data as $key => $value) {
             ProfileSetting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
