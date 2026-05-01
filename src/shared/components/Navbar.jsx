@@ -25,8 +25,8 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       <div className="backdrop-blur-lg bg-white/70 dark:bg-slate-900/70 border border-white/20 dark:border-slate-800/50 rounded-2xl shadow-2xl px-6 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-          YM
+        <Link to="/" className="flex items-center">
+          <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
