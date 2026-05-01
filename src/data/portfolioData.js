@@ -29,6 +29,8 @@ export const translations = {
     details: 'Détails', viewCode: 'Voir le code', description: 'Description', techUsed: 'Technologies utilisées', features: 'Fonctionnalités',
     formationTitle: 'Formation',
     formations: [
+      { titre: 'Projet SOUK SaaS Platform', etablissement: 'Projet Personnel', periode: '2024', description: 'Développement d’une plateforme SaaS multi-tenant de type marketplace (Laravel + React).' },
+      { titre: 'Stage – ONEE', etablissement: 'Office National de l\'Électricité et de l\'Eau Potable', periode: '2024', description: 'Développement d’une application de gestion de laboratoire et de suivi des équipements techniques.' },
       { titre: 'Technicien Spécialisé en Développement Digital', etablissement: 'ISTA Lazaret, Oujda', periode: '2024 - 2026', description: 'Formation complète en développement web (DEVOWSF)' },
       { titre: 'Baccalauréat Sciences Physiques', etablissement: 'Lycée Larbi al-Houssaini', periode: '2023 - 2024', description: 'Option Sciences Physiques' }
     ],
@@ -57,6 +59,8 @@ export const translations = {
     details: 'Details', viewCode: 'View Code', description: 'Description', techUsed: 'Technologies Used', features: 'Features',
     formationTitle: 'Education',
     formations: [
+      { titre: 'SOUK SaaS Platform', etablissement: 'Personal Project', periode: '2024', description: 'Developed a multi-tenant marketplace SaaS platform using Laravel and React.' },
+      { titre: 'Internship – ONEE', etablissement: 'National Office of Electricity and Drinking Water', periode: '2024', description: 'Developed a laboratory management and technical equipment tracking application.' },
       { titre: 'Specialized Technician in Digital Development', etablissement: 'ISTA Lazaret, Oujda', periode: '2024 - 2026', description: 'Complete training in web development (DEVOWSF)' },
       { titre: 'Baccalaureate in Physical Sciences', etablissement: 'Larbi al-Houssaini High School', periode: '2023 - 2024', description: 'Physical Sciences option' }
     ],
@@ -85,6 +89,8 @@ export const translations = {
     details: 'تفاصيل', viewCode: 'عرض الكود', description: 'الوصف', techUsed: 'التقنيات المستخدمة', features: 'المميزات',
     formationTitle: 'التعليم',
     formations: [
+      { titre: 'منصة SOUK SaaS', etablissement: 'مشروع شخصي', periode: '2024', description: 'تطوير منصة سوق إلكتروني متعددة المتاجر باستخدام Laravel و React.' },
+      { titre: 'تدريب – ONEE', etablissement: 'المكتب الوطني للكهرباء والماء الصالح للشرب', periode: '2024', description: 'تطوير تطبيق لإدارة المختبرات وتتبع المعدات التقنية.' },
       { titre: 'فني متخصص في التطوير الرقمي', etablissement: 'معهد ISTA لازاريت، وجدة', periode: '2024 - 2026', description: 'تدريب كامل في تطوير الويب (DEVOWSF)' },
       { titre: 'بكالوريا علوم فيزيائية', etablissement: 'ثانوية العربي الحسيني', periode: '2023 - 2024', description: 'تخصص العلوم الفيزيائية' }
     ],
@@ -113,6 +119,8 @@ export const translations = {
     details: 'Detalles', viewCode: 'Ver Código', description: 'Descripción', techUsed: 'Tecnologías Utilizadas', features: 'Características',
     formationTitle: 'Formación',
     formations: [
+      { titre: 'Plataforma SOUK SaaS', etablissement: 'Proyecto Personal', periode: '2024', description: 'Desarrollo de una plataforma SaaS de mercado multitienda usando Laravel y React.' },
+      { titre: 'Prácticas – ONEE', etablissement: 'Oficina Nacional de Electricidad y Agua Potable', periode: '2024', description: 'Desarrollo de una aplicación de gestión de laboratorios y seguimiento de equipos técnicos.' },
       { titre: 'Técnico Especializado en Desarrollo Digital', etablissement: 'ISTA Lazaret, Oujda', periode: '2024 - 2026', description: 'Formación completa en desarrollo web (DEVOWSF)' },
       { titre: 'Bachillerato en Ciencias Físicas', etablissement: 'Instituto Larbi al-Houssaini', periode: '2023 - 2024', description: 'Opción Ciencias Físicas' }
     ],
