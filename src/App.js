@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { AppRouter } from './app/AppRouter';
@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <HashRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-600">
             {/* Global Background Elements */}
             <div className="fixed inset-0 z-0 pointer-events-none">
@@ -25,7 +25,7 @@ function App() {
             </main>
             <Footer />
           </div>
-        </HashRouter>
+        </BrowserRouter>
       </LanguageProvider>
     </ThemeProvider>
   );
