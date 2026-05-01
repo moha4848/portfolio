@@ -16,7 +16,7 @@ export const Footer = () => {
             Yousfi Mohammed
           </p>
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-            © {new Date().getFullYear()} — Built with React & Framer Motion
+            © {new Date().getFullYear()} — Créé par un stagiaire ISTA
           </p>
         </div>
 

@@ -98,34 +98,34 @@ export const portfolioData = {
   ],
   experience: [
     {
-      fr: { title: "Projet SOUK SaaS Platform", place: "Projet Personnel", period: "2024", desc: "Conception et développement d'une architecture multi-tenant, gestion des rôles et tableaux de bord vendeurs." },
-      en: { title: "SOUK SaaS Platform Project", place: "Personal Project", period: "2024", desc: "Design and development of a multi-tenant architecture, role management, and seller dashboards." },
-      ar: { title: "مشروع منصة SOUK SaaS", place: "مشروع شخصي", period: "2024", desc: "تصميم وتطوير بنية متعددة المتاجر، إدارة الأدوار ولوحات تحكم البائعين." },
-      es: { title: "Proyecto Plataforma SOUK SaaS", place: "Proyecto Personal", period: "2024", desc: "Diseño y desarrollo de una arquitectura multitienda, gestión de roles y tableros para vendedores." }
+      fr: { title: "Projet SOUK SaaS Platform", place: "Projet Personnel", period: "2024", desc: "Développement d’une plateforme SaaS multi-tenant de type marketplace (Laravel + React)." },
+      en: { title: "SOUK SaaS Platform Project", place: "Personal Project", period: "2024", desc: "Development of a multi-tenant SaaS marketplace platform (Laravel + React)." },
+      ar: { title: "مشروع منصة SOUK SaaS", place: "مشروع شخصي", period: "2024", desc: "تطوير منصة SaaS متعددة المتاجر من نوع marketplace (Laravel + React)." },
+      es: { title: "Proyecto Plataforma SOUK SaaS", place: "Proyecto Personal", period: "2024", desc: "Desarrollo de una plataforma SaaS multitienda tipo marketplace (Laravel + React)." }
     },
     {
-      fr: { title: "Stage Développeur", place: "ONEE (Lab Management)", period: "2024", desc: "Développement d'une application interne pour la gestion de laboratoire et le suivi des équipements." },
-      en: { title: "Developer Intern", place: "ONEE (Lab Management)", period: "2024", desc: "Development of an internal application for laboratory management and equipment tracking." },
-      ar: { title: "متدرب مطور", place: "ONEE (إدارة المختبرات)", period: "2024", desc: "تطوير تطبيق داخلي لإدارة المختبرات وتتبع المعدات." },
-      es: { title: "Pasante Desarrollador", place: "ONEE (Gestión de Lab)", period: "2024", desc: "Desarrollo de una aplicación interna para la gestión de laboratorios y seguimiento de equipos." }
+      fr: { title: "Stage – ONEE", place: "Office National de l'Électricité et de l'Eau Potable", period: "2024", desc: "Développement d’une application de gestion de laboratoire et de suivi des équipements techniques." },
+      en: { title: "Internship – ONEE", place: "National Office of Electricity and Drinking Water", period: "2024", desc: "Development of a laboratory management application and tracking of technical equipment." },
+      ar: { title: "تدريب – ONEE", place: "المكتب الوطني للكهرباء والماء الصالح للشرب", period: "2024", desc: "تطوير تطبيق لإدارة المختبرات وتتبع المعدات التقنية." },
+      es: { title: "Pasantía – ONEE", place: "Oficina Nacional de Electricidad y Agua Potable", period: "2024", desc: "Desarrollo de una aplicación de gestión de laboratorios y seguimiento de equipos técnicos." }
     }
   ],
   education: [
     {
-      fr: { title: "TS en Développement Digital", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "Formation approfondie en développement web, mobile et gestion de projet." },
-      en: { title: "TS in Digital Development", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "In-depth training in web, mobile development and project management." },
-      ar: { title: "تقني متخصص في التطوير الرقمي", place: "معهد ISTA لازاريت، وجدة", period: "2024 - 2026", desc: "تكوين معمق في تطوير الويب، الجوال وإدارة المشاريع." },
-      es: { title: "TS en Desarrollo Digital", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "Formación profunda en desarrollo web, móvil y gestión de proyectos." }
+      fr: { title: "Technicien Spécialisé en Développement Digital", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "Formation complète en développement web (DEVOWSF)" },
+      en: { title: "Specialized Technician in Digital Development", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "Complete training in web development (DEVOWSF)" },
+      ar: { title: "تقني متخصص في التطوير الرقمي", place: "معهد ISTA لازاريت، وجدة", period: "2024 - 2026", desc: "تكوين كامل في تطوير الويب (DEVOWSF)" },
+      es: { title: "Técnico Especializado en Desarrollo Digital", place: "ISTA Lazaret, Oujda", period: "2024 - 2026", desc: "Formación completa en desarrollo web (DEVOWSF)" }
     },
     {
-      fr: { title: "Baccalauréat Sciences Physiques", place: "Lycée Larbi al-Houssaini", period: "2023 - 2024", desc: "Option Sciences Physiques avec mention." },
-      en: { title: "Physics Sciences Baccalaureate", place: "Larbi al-Houssaini High School", period: "2023 - 2024", desc: "Physics Sciences option with honors." },
-      ar: { title: "بكالوريا العلوم الفيزيائية", place: "ثانوية العربي الحسيني", period: "2023 - 2024", desc: "شعبة العلوم الفيزيائية بميزة." },
-      es: { title: "Bachillerato en Ciencias Físicas", place: "Instituto Larbi al-Houssaini", period: "2023 - 2024", desc: "Opción de Ciencias Físicas con mención." }
+      fr: { title: "Baccalauréat Sciences Physiques", place: "Lycée Larbi al-Houssaini", period: "2023 - 2024", desc: "Option Sciences Physiques" },
+      en: { title: "Physics Sciences Baccalaureate", place: "Larbi al-Houssaini High School", period: "2023 - 2024", desc: "Physics Sciences option" },
+      ar: { title: "بكالوريا العلوم الفيزيائية", place: "ثانوية العربي الحسيني", period: "2023 - 2024", desc: "شعبة العلوم الفيزيائية" },
+      es: { title: "Bachillerato en Ciencias Físicas", place: "Instituto Larbi al-Houssaini", period: "2023 - 2024", desc: "Opción de Ciencias Físicas" }
     }
   ],
   nav: {
-    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Mon Parcours", contact: "Contact", dashboard: "Tableau de Bord" },
+    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Formation", contact: "Contact", dashboard: "Tableau de Bord" },
     en: { home: "Home", about: "About", skills: "Skills", projects: "Projects", experience: "Experience & Education", contact: "Contact", dashboard: "Dashboard" },
     ar: { home: "الرئيسية", about: "حول", skills: "المهارات", projects: "المشاريع", experience: "الخبرة والتعليم", contact: "اتصل بنا", dashboard: "لوحة التحكم" },
     es: { home: "Inicio", about: "Sobre mí", skills: "Habilidades", projects: "Proyectos", experience: "Experiencia y Formación", contact: "Contacto", dashboard: "Panel de Control" }
