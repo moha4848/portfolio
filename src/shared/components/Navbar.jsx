@@ -5,7 +5,6 @@ import { portfolioData } from '../../data/portfolioData';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { motion } from 'framer-motion';
-import logo from '../../logo.png';
 
 export const Navbar = () => {
   const { language } = useLanguage();
@@ -26,7 +25,7 @@ export const Navbar = () => {
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       <div className="backdrop-blur-lg bg-white/70 dark:bg-slate-900/70 border border-white/20 dark:border-slate-800/50 rounded-2xl shadow-2xl px-6 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Logo" className="h-10 w-auto" />
+          <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}

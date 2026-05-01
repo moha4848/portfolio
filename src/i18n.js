@@ -824,7 +824,7 @@ export default function Portfolio() {
           <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500">
             <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 shadow-2xl">
               <img
-                src="/profile.jpeg"
+                src={process.env.PUBLIC_URL + '/profile.jpeg'}
                 alt="Yousfi Mohammed"
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 loading="eager"
@@ -1320,7 +1320,7 @@ export default function Portfolio() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start mb-4">
-                <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+                <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-10 w-auto" />
               </div>
               <p className="text-slate-400">{t.footer}</p>
               <p className="text-sm text-slate-500 mt-2">{t.footerCredit}</p>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { translations, languages } from '../../data/portfolioData';
-import logo from '../../logo.png';
 
 export default function Navbar({ lang, setLang }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,7 +38,7 @@ export default function Navbar({ lang, setLang }) {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+              <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop Menu */}

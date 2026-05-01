@@ -78,7 +78,7 @@ const Home = () => {
             className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white dark:border-slate-900 shadow-2xl rotate-3"
           >
             <img 
-              src="/profile.jpeg" 
+              src={process.env.PUBLIC_URL + '/profile.jpeg'}
               alt="Yousfi Mohammed" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110"
             />

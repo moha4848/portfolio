@@ -12,7 +12,7 @@ export default function Home({ lang }) {
         <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-500 animate-gradient">
           <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 shadow-2xl">
             <img
-              src="/profile.jpeg"
+              src={process.env.PUBLIC_URL + '/profile.jpeg'}
               alt="Yousfi Mohammed"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               loading="eager"
