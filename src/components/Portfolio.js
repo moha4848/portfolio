@@ -1364,29 +1364,25 @@ const [, setActiveSection] = useState('home');
         }
       `}</style>
 
-      {/* Background */}
-      <div className="fixed inset-0 bg-subtle opacity-40 pointer-events-none -z-10"></div>
+      {/* Background Layer */}
+      <div className="fixed inset-0 bg-mesh pointer-events-none -z-10"></div>
+      <div className="fixed inset-0 opacity-[0.02] pointer-events-none -z-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
 
       {/* Navigation */}
-      <nav className="nav-pro">
-        <div className="nav-container">
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10">
-              <img src="/profile.jpeg" alt="Yousfi" className="w-full h-full object-cover" />
-            </div>
-            <div className="text-sm font-bold tracking-tight text-white uppercase">
-              Yousfi Mohammed
-            </div>
+      <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+        <div className="nav-pill flex justify-between items-center shadow-2xl">
+          <div className="text-xl font-black tracking-tighter text-white">
+            YM <span className="text-sky-500">.</span>
           </div>
 
-          <div className="hidden md:flex gap-6">
+          <div className="hidden md:flex gap-8">
             {t.nav.map((item, index) => {
               const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
               return (
                 <button
                   key={item}
                   onClick={() => document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth' })}
-                  className="nav-link"
+                  className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-sky-400 transition-colors"
                 >
                   {item}
                 </button>
@@ -1394,22 +1390,26 @@ const [, setActiveSection] = useState('home');
             })}
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="px-3 py-1.5 rounded-md border border-[#30363d] bg-[#161b22] text-xs font-semibold text-white hover:border-[#8b949e] transition-all flex items-center gap-2"
-            >
-              {lang.toUpperCase()} <ChevronDown size={12} className={langMenuOpen ? 'rotate-180' : ''} />
-            </button>
-            {langMenuOpen && (
-              <div className="absolute top-16 right-8 w-40 bg-[#161b22] border border-[#30363d] rounded-md shadow-xl z-[101]">
-                {languages.map((l) => (
-                  <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-3 text-xs text-left text-white hover:bg-[#30363d] flex gap-2">
-                    <span>{l.flag}</span> {l.label}
-                  </button>
-                ))}
-              </div>
-            )}
+          <div className="flex items-center gap-4">
+            {/* Language Selector */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+              >
+                <span className="text-[10px] font-black text-white">{lang.toUpperCase()}</span>
+                <ChevronDown size={12} className={`text-slate-500 transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {langMenuOpen && (
+                <div className="absolute top-full right-0 mt-4 w-40 glass-panel rounded-2xl overflow-hidden z-[60]">
+                  {languages.map((l) => (
+                    <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-4 text-xs text-left text-white hover:bg-white/5 flex gap-3">
+                      <span>{l.flag}</span> {l.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white">
               <Menu size={20} />
             </button>
@@ -1419,64 +1419,89 @@ const [, setActiveSection] = useState('home');
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-[#0d1117] z-[99] md:hidden flex flex-col items-center justify-center gap-6">
-          {t.nav.map((item, index) => {
-            const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
-            return (
-              <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-xl font-bold text-white">
-                {item}
-              </button>
-            );
-          })}
+        <div className="fixed inset-0 bg-[#020617] z-[55] md:hidden flex flex-col items-center justify-center gap-10">
+          {t.nav.map((item, index) => (
+            <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'][index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-4xl font-black text-white tracking-tighter italic">
+              {item}
+            </button>
+          ))}
         </div>
       )}
 
-      {/* Hero */}
-      <section id="accueil-section" className="section-container flex flex-col md:flex-row items-center gap-16 min-h-[90vh]">
-        <div className="flex-1 space-y-8">
-          <div className="badge-pro w-fit">{t.role}</div>
-          <h1 className="text-5xl md:text-7xl leading-tight">
-            Building digital <br /> 
-            <span className="text-[#58a6ff]">experiences</span> that matter.
-          </h1>
-          <p className="text-xl text-slate-400 max-w-lg">
-            {t.aboutText1.substring(0, 160)}...
-          </p>
-          <div className="flex gap-4">
-            <a href="/CV_Yousfi_Mohammed.pdf" download className="btn-primary">
-              {t.downloadCV}
-            </a>
-            <button onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })} className="btn-outline">
-              {t.contactMe}
-            </button>
+      {/* Hero Section */}
+      <section id="accueil-section" className="min-h-screen flex items-center justify-center px-4 pt-20">
+        <div className="max-w-6xl w-full grid md:grid-cols-2 gap-16 items-center">
+          <div className="animate-fade-up">
+            <div className="badge-saas mb-6 w-fit">{t.role}</div>
+            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] text-hero-gradient">
+              Full Stack <br /> 
+              <span className="text-white">Developer</span>
+            </h1>
+            <p className="text-xl text-slate-400 mb-12 max-w-lg leading-relaxed">
+              {t.aboutText1.substring(0, 180)}...
+            </p>
+            <div className="flex flex-wrap gap-6">
+              <button 
+                onClick={() => document.getElementById('projets-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-premium"
+              >
+                View Projects <ArrowRight size={20} />
+              </button>
+              <button 
+                onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-premium-outline"
+              >
+                {t.contactMe}
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden border-2 border-[#30363d] shadow-2xl">
-          <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover" />
+
+          <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <div className="aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl relative z-10">
+              <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover scale-105" />
+            </div>
+            {/* Decorative Elements */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-sky-500/20 blur-3xl rounded-full"></div>
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
+            <div className="absolute top-1/2 -right-6 p-6 glass-panel rounded-3xl z-20">
+              <div className="text-3xl font-black text-white">2+</div>
+              <div className="text-[10px] font-black uppercase text-sky-400 tracking-tighter">Years of Experience</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* About */}
-      <section id="propos-section" className="section-container">
-        <div className="pro-card">
-          <h2 className="text-3xl mb-8">{t.aboutTitle}</h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="md:col-span-2 space-y-6 text-slate-300 text-lg">
-              <p>{t.aboutText1}</p>
-              <p>{t.aboutText2}</p>
-            </div>
-            <div className="space-y-6">
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">{t.contactInfo}</div>
-              {[
-                { icon: MapPin, val: t.address },
-                { icon: Mail, val: t.email },
-                { icon: Phone, val: t.phoneNumber }
-              ].map((i, idx) => (
-                <div key={idx} className="flex items-center gap-4 text-sm text-slate-400">
-                  <div className="p-2 rounded bg-[#21262d] border border-[#30363d]">
-                    <i.icon size={16} />
+      {/* About Section */}
+      <section id="propos-section" className="py-32 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
+            <div className="animate-fade-up">
+              <h2 className="text-4xl md:text-5xl font-black mb-8 text-white">{t.aboutTitle}</h2>
+              <div className="space-y-6 text-lg text-slate-400 leading-relaxed">
+                <p>{t.aboutText1}</p>
+                <p>{t.aboutText2}</p>
+              </div>
+              <div className="mt-12 grid grid-cols-2 gap-6">
+                {[
+                  { icon: Mail, val: t.email, label: 'Email' },
+                  { icon: MapPin, val: t.address, label: 'Location' }
+                ].map((item, idx) => (
+                  <div key={idx} className="saas-card !p-6">
+                    <item.icon size={20} className="text-sky-500 mb-3" />
+                    <div className="text-[10px] uppercase font-bold text-slate-500 mb-1">{item.label}</div>
+                    <div className="text-xs font-bold text-white truncate">{item.val}</div>
                   </div>
-                  <span>{i.val}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+              {t.skills.slice(0, 4).map((skill, idx) => (
+                <div key={idx} className="saas-card flex flex-col items-center text-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-500">
+                    <IconMapper iconKey={skill.icon} size={24} />
+                  </div>
+                  <div className="font-bold text-sm text-white">{skill.nom}</div>
                 </div>
               ))}
             </div>
@@ -1484,17 +1509,22 @@ const [, setActiveSection] = useState('home');
         </div>
       </section>
 
-      {/* Experience */}
-      <section id="experience-section" className="section-container">
-        <h2 className="text-3xl mb-12">{t.experienceTitle}</h2>
-        <div className="timeline-pro">
-          {t.experiences.map((exp, idx) => (
-            <div key={idx} className="timeline-item">
-              <div className="badge-pro mb-4">{exp.periode}</div>
-              <h3 className="text-2xl mb-4">{exp.titre}</h3>
-              <p className="text-slate-400 text-lg leading-relaxed max-w-3xl">{exp.description}</p>
-            </div>
-          ))}
+      {/* Experience Timeline */}
+      <section id="experience-section" className="py-32 px-4 bg-slate-900/20">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.experienceTitle}</h2>
+          <div className="timeline-track space-y-16">
+            {t.experiences.map((exp, idx) => (
+              <div key={idx} className="relative animate-fade-up">
+                <div className="timeline-dot"></div>
+                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+                  <h3 className="text-2xl font-bold text-white">{exp.titre}</h3>
+                  <div className="badge-saas h-fit">{exp.periode}</div>
+                </div>
+                <p className="text-lg text-slate-400 leading-relaxed">{exp.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1542,41 +1572,64 @@ const [, setActiveSection] = useState('home');
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projets-section" className="section-container">
-        <h2 className="text-3xl mb-12">{t.projectsTitle}</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {projets.map((projet, idx) => {
-            const projectData = t.projects[idx];
-            return (
-              <div key={projet.id} className="pro-card flex flex-col justify-between">
-                <div>
-                  <div className="aspect-video bg-[#0d1117] border border-[#30363d] rounded-md mb-6 flex items-center justify-center text-slate-800">
-                    {projet.demo === 'calculatrice' && <Calculator size={60} />}
-                    {projet.demo === 'todo' && <CheckSquare size={60} />}
-                    {projet.demo === 'contact' && <Mail size={60} />}
-                    {projet.demo === 'gallery' && <Image size={60} />}
-                    {projet.demo === 'clock' && <Clock size={60} />}
-                    {projet.demo === 'quiz' && <HelpCircle size={60} />}
-                    {projet.demo === 'souk' && <Layout size={60} />}
+      {/* Projects Grid */}
+      <section id="projets-section" className="py-32 px-4 bg-slate-900/10">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.projectsTitle}</h2>
+          <div className="grid md:grid-cols-2 gap-10">
+            {projets.map((projet, idx) => {
+              const projectData = t.projects[idx];
+              return (
+                <div key={projet.id} className="saas-card group !p-0">
+                  <div className="aspect-video relative overflow-hidden bg-slate-950">
+                    <div className="absolute inset-0 flex items-center justify-center text-slate-800 transition-transform duration-700 group-hover:scale-110">
+                      {projet.demo === 'calculatrice' && <Calculator size={120} />}
+                      {projet.demo === 'todo' && <CheckSquare size={120} />}
+                      {projet.demo === 'contact' && <Mail size={120} />}
+                      {projet.demo === 'gallery' && <Image size={120} />}
+                      {projet.demo === 'clock' && <Clock size={120} />}
+                      {projet.demo === 'quiz' && <HelpCircle size={120} />}
+                      {projet.demo === 'souk' && <Layout size={120} />}
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60"></div>
+                    <div className="absolute top-6 right-6">
+                      <div className="badge-saas !bg-white/10 !backdrop-blur-md">{t.difficulty[projet.difficulte]}</div>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold">{projectData.titre}</h3>
-                    <div className="badge-pro">{t.difficulty[projet.difficulte]}</div>
+                  
+                  <div className="p-10">
+                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-sky-400 transition-colors">{projectData.titre}</h3>
+                    <p className="text-lg text-slate-400 mb-8 line-clamp-2 leading-relaxed">{projectData.description}</p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-10">
+                      {projet.technologies.map((tech, i) => (
+                        <span key={i} className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-white/5 rounded-full border border-white/5 text-slate-500">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                      <button 
+                        onClick={() => setSelectedProject({ ...projet, ...projectData })}
+                        className="text-white font-bold text-sm flex items-center gap-2 hover:text-sky-400 transition-colors"
+                      >
+                        {t.details} <ChevronRight size={18} />
+                      </button>
+                      <a 
+                        href={`https://github.com/moha4848/${repoMap[projet.id]}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                      >
+                        <Github size={20} />
+                      </a>
+                    </div>
                   </div>
-                  <p className="text-slate-400 text-sm mb-6 line-clamp-3">{projectData.description}</p>
                 </div>
-                <div className="flex gap-4 pt-4 border-t border-[#30363d]">
-                  <button onClick={() => setSelectedProject({ ...projet, ...projectData })} className="text-[#58a6ff] text-sm font-bold hover:underline">
-                    {t.details} →
-                  </button>
-                  <a href={`https://github.com/moha4848/${repoMap[projet.id]}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 text-sm hover:text-white transition-colors">
-                    GitHub
-                  </a>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -1700,20 +1753,48 @@ const [, setActiveSection] = useState('home');
         </div>
       )}
 
-      {/* Education */}
-      <section id="formation-section" className="section-container">
-        <h2 className="text-3xl mb-12">{t.formationTitle}</h2>
-        <div className="timeline-pro">
-          {t.formations.map((f, idx) => (
-            <div key={idx} className="timeline-item">
-              <div className="badge-pro mb-4">{f.periode}</div>
-              <h3 className="text-2xl mb-2">{f.titre}</h3>
-              <p className="text-[#58a6ff] font-bold mb-4">{f.etablissement}</p>
-              <p className="text-slate-400 max-w-2xl">{f.description}</p>
-            </div>
-          ))}
+      {/* Education Timeline */}
+      <section id="formation-section" className="py-32 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.formationTitle}</h2>
+          <div className="timeline-track space-y-16">
+            {t.formations.map((f, idx) => (
+              <div key={idx} className="relative animate-fade-up">
+                <div className="timeline-dot"></div>
+                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{f.titre}</h3>
+                    <div className="text-sky-400 font-bold text-sm tracking-tight">{f.etablissement}</div>
+                  </div>
+                  <div className="badge-saas h-fit">{f.periode}</div>
+                </div>
+                <p className="text-lg text-slate-400 leading-relaxed">{f.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Contact Footer */}
+      <footer id="contact-section" className="py-20 px-4 border-t border-white/5">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-5xl font-black text-white mb-8 tracking-tighter">Ready to build something <span className="text-sky-500">great?</span></h2>
+          <div className="flex justify-center gap-8 mb-12">
+            {[
+              { icon: Github, url: 'https://github.com/moha4848' },
+              { icon: Mail, url: `mailto:${t.email}` },
+              { icon: ExternalLink, url: '#' }
+            ].map((item, idx) => (
+              <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all shadow-xl">
+                <item.icon size={24} />
+              </a>
+            ))}
+          </div>
+          <div className="text-xs font-bold text-slate-600 uppercase tracking-widest">
+            &copy; 2024 Yousfi Mohammed • Full Stack Engineer
+          </div>
+        </div>
+      </footer>
 
       {/* Contact */}
       <section id="contact-section" className="py-20 px-4 bg-gradient-to-b from-transparent to-slate-900/50">
