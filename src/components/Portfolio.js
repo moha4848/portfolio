@@ -1364,281 +1364,188 @@ const [, setActiveSection] = useState('home');
         }
       `}</style>
 
-      {/* Background Glows */}
-      <div className="bg-glow glow-primary"></div>
-      <div className="bg-glow glow-secondary"></div>
-      <div className="bg-glow glow-tertiary"></div>
-
+      {/* Background Subtle Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full"></div>
+      </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full glass-nav z-50">
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-8">
-              <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                Portfolio
-              </div>
-
-              {/* Desktop Menu */}
-              <div className="hidden md:flex items-center space-x-6">
-                {t.nav.map((item, index) => {
-                  const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
-                  return (
-                    <button
-                      key={item}
-                      onClick={() => {
-                        scrollToSection(item.toLowerCase());
-                        document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }}
-                      className="relative group px-3 py-2 text-slate-300 hover:text-white transition-colors"
-                    >
-                      <span className="relative z-10">{item}</span>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Language Selector and Menu Button */}
-            <div className="flex items-center gap-4">
-              {/* Language Selector */}
-              <div className="relative language-selector">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setLangMenuOpen(!langMenuOpen);
-                  }}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-500/50 hover:bg-white/10 transition-all duration-300 group"
-                  aria-label="Select language"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                    <Languages size={18} strokeWidth={2} />
-                  </div>
-                  <span className="text-xs font-bold tracking-widest hidden sm:block text-slate-300 group-hover:text-white transition-colors">
-                    {lang.toUpperCase()}
-                  </span>
-                  <ChevronDown size={14} className={`text-slate-500 transition-transform duration-300 ${langMenuOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                {langMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-gradient-to-b from-slate-900 to-slate-950 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden border border-slate-700/50 z-50">
-                    <div className="p-2">
-                      {languages.map((language) => (
-                        <button
-                          key={language.code}
-                          onClick={() => {
-                            setLang(language.code);
-                            setLangMenuOpen(false);
-                          }}
-                          className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
-                            lang === language.code 
-                              ? 'bg-gradient-to-r from-cyan-900/40 to-indigo-900/30' 
-                              : 'hover:bg-slate-800/80'
-                          }`}
-                        >
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-lg ${
-                            lang === language.code ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                            <span className="emoji-flag">{language.flag}</span>
-                          </div>
-                          <span className="flex-1 text-left font-bold text-sm tracking-wide">{language.label}</span>
-                          {lang === language.code && (
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
-                className="md:hidden p-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300"
-              >
-                {menuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl glass-nav rounded-2xl z-50 px-6 py-4 flex justify-between items-center shadow-2xl">
+        <div className="text-xl font-bold tracking-tight text-white">
+          YM <span className="text-blue-500">.</span>
         </div>
 
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <div className="md:hidden bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
-            <div className="p-4 border-b border-slate-800">
-              <div className="grid grid-cols-2 gap-2">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
+          {t.nav.map((item, index) => {
+            const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
+            return (
+              <button
+                key={item}
+                onClick={() => {
+                  scrollToSection(item.toLowerCase());
+                  document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-4">
+          {/* Language Selector */}
+          <div className="relative language-selector">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLangMenuOpen(!langMenuOpen);
+              }}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+            >
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
+                {lang}
+              </span>
+              <ChevronDown size={14} className={`text-slate-500 transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {langMenuOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-slate-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                 {languages.map((language) => (
                   <button
                     key={language.code}
                     onClick={() => {
                       setLang(language.code);
-                      setMenuOpen(false);
+                      setLangMenuOpen(false);
                     }}
-                    className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all ${
-                      lang === language.code 
-                        ? 'bg-gradient-to-r from-cyan-900/40 to-indigo-900/30 border border-cyan-500/50' 
-                        : 'bg-slate-800 hover:bg-slate-700 border border-slate-700'
-                    }`}
+                    className={`w-full flex items-center gap-3 p-3 text-sm hover:bg-white/5 transition-all ${lang === language.code ? 'text-blue-500' : 'text-slate-400'}`}
                   >
-                    <span className="emoji-flag text-2xl mb-1">{language.flag}</span>
-                    <span className="text-sm font-medium">{language.label}</span>
+                    <span>{language.flag}</span>
+                    <span className="font-medium">{language.label}</span>
                   </button>
                 ))}
               </div>
-            </div>
-            
-            {t.nav.map((item, index) => {
-              const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
-              return (
-                <button
-                  key={item}
-                  onClick={() => {
-                    scrollToSection(item.toLowerCase());
-                    setMenuOpen(false);
-                    document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                  className="w-full text-left px-6 py-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800/50 flex items-center justify-between group"
-                >
-                  <span className="font-medium">{item}</span>
-                  <ChevronRight size={20} className="text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
-                </button>
-              );
-            })}
+            )}
           </div>
-        )}
+
+          {/* Mobile Menu Button */}
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white">
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-slate-950 z-40 md:hidden flex flex-col items-center justify-center gap-8">
+          {t.nav.map((item, index) => {
+            const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
+            return (
+              <button
+                key={item}
+                onClick={() => {
+                  scrollToSection(item.toLowerCase());
+                  setMenuOpen(false);
+                  document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="text-2xl font-bold text-white"
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section id="accueil-section" className="pt-32 pb-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Avatar with profile image */}
-          <div className="w-40 h-40 rounded-full mx-auto mb-8 p-1.5 bg-gradient-to-br from-cyan-400 via-sky-400 to-indigo-500">
-            <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 shadow-2xl">
-              <img
-                src="/profile.jpeg"
-                alt="Yousfi Mohammed"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                loading="eager"
-              />
+      <section id="accueil-section" className="min-h-screen flex items-center px-4 pt-20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div className="reveal-anim">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-wider mb-6">
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+              {t.role}
+            </div>
+            <h1 className="text-6xl md:text-7xl font-extrabold mb-6 leading-tight">
+              Yousfi <br />
+              <span className="text-pro-gradient">Mohammed</span>
+            </h1>
+            <p className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed">
+              {t.aboutText1.substring(0, 150)}...
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="/CV_Yousfi_Mohammed.pdf" download className="btn-pro">
+                {t.downloadCV} <ExternalLink size={18} />
+              </a>
+              <button 
+                onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-pro-outline"
+              >
+                {t.contactMe}
+              </button>
             </div>
           </div>
-          
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gradient-animate">
-            Yousfi Mohammed
-          </h1>
 
-          <p className="text-xl md:text-2xl text-cyan-300/80 mb-8 max-w-2xl mx-auto leading-relaxed font-light">
-            {t.role}
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="/CV_Yousfi_Mohammed.pdf"
-              download="CV_Yousfi_Mohammed.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary flex items-center justify-center gap-3 group"
-            >
-              <span>{t.downloadCV}</span>
-              <ExternalLink size={20} className="group-hover:translate-y-0.5 transition-transform" />
-            </a>
-            <button 
-              onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-secondary"
-            >
-              {t.contactMe}
-            </button>
+          <div className="relative reveal-anim" style={{ animationDelay: '0.2s' }}>
+            <div className="aspect-square rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
+              <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="absolute -bottom-6 -left-6 pro-card p-6 flex items-center gap-4 shadow-2xl">
+              <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-500">
+                <Code size={24} />
+              </div>
+              <div>
+                <div className="text-xl font-bold">2+ Ans</div>
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider">Expérience</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* À Propos */}
-      <section id="propos-section" className="py-20 px-4">
+      <section id="propos-section" className="py-32 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                {t.aboutTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-slate-300 leading-relaxed">
-                {t.aboutText1}
-              </p>
-              <p className="text-lg text-slate-300 leading-relaxed">
-                {t.aboutText2}
-              </p>
-              
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                {[
-                  { icon: MapPin, label: t.address },
-                  { icon: Mail, label: t.email },
-                  { icon: Phone, label: t.phoneNumber },
-                  { icon: GraduationCap, label: t.school }
-                ].map((item, idx) => (
-                  <div key={idx} className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/30 hover:border-cyan-500/30 transition-all duration-300 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                    <div className="bg-gradient-to-br from-cyan-500/15 to-indigo-500/15 p-2.5 rounded-lg shadow-inner">
-                      <item.icon className="text-cyan-400" size={22} strokeWidth={1.5} />
-                    </div>
-                    <span className="text-sm font-medium text-slate-300">{item.label}</span>
-                  </div>
-                ))}
+          <div className="grid md:grid-cols-2 gap-20">
+            <div>
+              <h2 className="text-4xl font-bold mb-8 text-pro-gradient">{t.aboutTitle}</h2>
+              <div className="pro-card">
+                <p className="text-lg text-slate-300 leading-relaxed mb-6">{t.aboutText1}</p>
+                <p className="text-lg text-slate-300 leading-relaxed">{t.aboutText2}</p>
               </div>
             </div>
-            
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                {t.interestsTitle}
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {t.interests.map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-slate-900/50 hover:bg-slate-800/80 transition-all duration-300 border border-slate-700/30 hover:border-cyan-500/30 group glass-card">
-                    <div className="flex items-center gap-4 mb-3">
-                       <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20 group-hover:border-cyan-500/40 transition-colors shrink-0">
-                         <IconMapper iconKey={item.icon} size={20} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-                       </div>
-                      <h4 className="font-semibold text-white group-hover:text-cyan-400 transition-colors">{item.title}</h4>
-                    </div>
-                    <p className="text-sm text-slate-400">{item.desc}</p>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { icon: MapPin, label: t.address },
+                { icon: Mail, label: t.email },
+                { icon: Phone, label: t.phoneNumber },
+                { icon: GraduationCap, label: t.school }
+              ].map((item, idx) => (
+                <div key={idx} className="pro-card !p-6 flex flex-col gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500">
+                    <item.icon size={20} />
                   </div>
-                ))}
-
-              </div>
+                  <span className="text-sm font-medium text-slate-300 truncate">{item.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Expérience */}
-      <section id="experience-section" className="py-20 px-4">
+      <section id="experience-section" className="py-32 px-4 bg-slate-950/30">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                {t.experienceTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="space-y-8">
+          <h2 className="text-4xl font-bold mb-16 text-pro-gradient text-center">{t.experienceTitle}</h2>
+          <div className="max-w-4xl mx-auto space-y-12">
             {t.experiences.map((exp, idx) => (
-              <div key={idx} className="glass-card p-8 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300">
-                <div className="flex flex-col md:flex-row justify-between mb-4 gap-4">
+              <div key={idx} className="pro-timeline-item">
+                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
                   <h3 className="text-2xl font-bold text-white">{exp.titre}</h3>
-                  <span className="text-cyan-400 font-semibold px-4 py-1.5 bg-cyan-900/20 rounded-full h-fit">
-                    {exp.periode}
-                  </span>
+                  <span className="pro-badge h-fit w-fit">{exp.periode}</span>
                 </div>
-                <p className="text-slate-300 text-lg leading-relaxed">{exp.description}</p>
+                <p className="text-slate-400 text-lg leading-relaxed">{exp.description}</p>
               </div>
             ))}
           </div>
@@ -1690,97 +1597,47 @@ const [, setActiveSection] = useState('home');
       </section>
 
       {/* Projets */}
-      <section id="projets-section" className="py-20 px-4 bg-gradient-to-b from-slate-900/30 to-transparent">
+      <section id="projets-section" className="py-32 px-4 bg-slate-950/20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                {t.projectsTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-4xl font-bold mb-16 text-pro-gradient text-center">{t.projectsTitle}</h2>
+          <div className="grid md:grid-cols-2 gap-8">
             {projets.map((projet, idx) => {
               const projectData = t.projects[idx];
               const repoName = repoMap[projet.id];
-
               return (
-                <div
-                  key={projet.id}
-                  className="glass-card rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-3xl group"
-                >
-
-                  <div className="h-48 bg-gradient-to-br from-cyan-900/20 via-indigo-900/20 to-sky-900/20 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-                    <div className="relative z-10 p-6 rounded-3xl bg-slate-900/40 backdrop-blur-md border border-white/10 text-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.15)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] transition-all duration-500">
-                      {projet.demo === 'calculatrice' && <Calculator size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'todo' && <CheckSquare size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'contact' && <Mail size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'gallery' && <Image size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'clock' && <Clock size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'quiz' && <HelpCircle size={64} strokeWidth={1.5} />}
-                      {projet.demo === 'souk' && <Layout size={64} strokeWidth={1.5} />}
+                <div key={projet.id} className="pro-card group !p-0 overflow-hidden">
+                  <div className="aspect-video bg-slate-900 flex items-center justify-center relative overflow-hidden">
+                    <div className="text-slate-800 group-hover:scale-110 transition-transform duration-500">
+                      {projet.demo === 'calculatrice' && <Calculator size={100} />}
+                      {projet.demo === 'todo' && <CheckSquare size={100} />}
+                      {projet.demo === 'contact' && <Mail size={100} />}
+                      {projet.demo === 'gallery' && <Image size={100} />}
+                      {projet.demo === 'clock' && <Clock size={100} />}
+                      {projet.demo === 'quiz' && <HelpCircle size={100} />}
+                      {projet.demo === 'souk' && <Layout size={100} />}
                     </div>
-
+                    <div className="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                       <button onClick={() => setSelectedProject({ ...projet, ...projectData })} className="btn-pro">
+                         {t.details}
+                       </button>
+                    </div>
                   </div>
-
-                  <div className="p-6">
+                  <div className="p-8">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold group-hover:text-cyan-400 transition-colors">
-                        {projectData.titre}
-                      </h3>
-                      <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
-                        projet.difficulte === 'beginner'
-                          ? 'bg-green-900/30 text-green-400 border border-green-500/30'
-                          : projet.difficulte === 'intermediate'
-                          ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
-                          : 'bg-red-900/30 text-red-400 border border-red-500/30'
-                      }`}>
-                        {t.difficulty[projet.difficulte]}
-                      </span>
+                      <h3 className="text-2xl font-bold">{projectData.titre}</h3>
+                      <span className="pro-badge">{t.difficulty[projet.difficulte]}</span>
                     </div>
-
-                    <p className="text-slate-400 mb-4 line-clamp-2">
-                      {projectData.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <p className="text-slate-400 mb-6 line-clamp-2">{projectData.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-8">
                       {projet.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="bg-gradient-to-r from-cyan-900/20 to-indigo-900/20 text-cyan-400 px-3 py-1.5 rounded-lg text-xs font-medium border border-cyan-500/20"
-                        >
+                        <span key={i} className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded uppercase font-bold tracking-widest text-slate-500">
                           {tech}
                         </span>
                       ))}
                     </div>
-
-                    <div className={`flex items-center justify-between pt-4 border-t border-slate-800/50 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                      <button
-                        onClick={() => setSelectedProject({ ...projet, ...projectData })}
-                        className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors group"
-                      >
-                        <span className="mr-2">{t.details}</span>
-                        <ChevronRight
-                          size={18}
-                          strokeWidth={2}
-                          className={`transition-transform duration-300 group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`}
-                        />
-                      </button>
-
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={`https://github.com/moha4848/${repoName}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 transition-all duration-300 hover:scale-105 border border-slate-700 hover:border-cyan-500/50"
-                        >
-                          <Github size={16} strokeWidth={1.5} /> {t.viewCode}
-                        </a>
-                      </div>
-                    </div>
+                    <a href={`https://github.com/moha4848/${repoName}`} target="_blank" rel="noopener noreferrer" className="btn-pro-outline w-full">
+                      <Github size={18} /> {t.viewCode}
+                    </a>
                   </div>
                 </div>
               );
@@ -1910,38 +1767,20 @@ const [, setActiveSection] = useState('home');
       )}
 
       {/* Formation */}
-      <section id="formation-section" className="py-20 px-4">
+      <section id="formation-section" className="py-32 px-4 bg-slate-950/10">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                {t.formationTitle}
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="relative">
-              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-violet-500/30 via-sky-500/30 to-violet-/30 md:left-1/2 md:transform md:-translate-x-1/2"></div>
-              
-              {t.formations.map((formation, index) => (
-                <div key={index} className={`relative mb-12 last:mb-0 ${index % 2 === 0 ? 'md:pr-8 md:text-right md:mr-auto md:w-1/2' : 'md:pl-8 md:text-left md:ml-auto md:w-1/2'}`}>
-                  <div className="absolute top-6 -left-3 w-5 h-5 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 border-2 border-[#020617] shadow-[0_0_14px_rgba(6,182,212,0.5)] md:left-1/2 md:transform md:-translate-x-1/2"></div>
-                  
-                  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700/50 shadow-xl ml-10 md:ml-0">
-                    <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-end' : 'md:items-start'}`}>
-                      <span className="text-cyan-400 text-sm font-semibold mb-2 px-3 py-1 bg-cyan-900/20 rounded-full inline-block">
-                        {formation.periode}
-                      </span>
-                      <h3 className="text-xl font-bold text-white mb-2">{formation.titre}</h3>
-                      <p className="text-sky- font-medium mb-3">{formation.etablissement}</p>
-                      <p className="text-slate-400">{formation.description}</p>
-                    </div>
-                  </div>
+          <h2 className="text-4xl font-bold mb-16 text-pro-gradient text-center">{t.formationTitle}</h2>
+          <div className="max-w-4xl mx-auto space-y-12">
+            {t.formations.map((form, idx) => (
+              <div key={idx} className="pro-timeline-item">
+                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+                  <h3 className="text-2xl font-bold text-white">{form.titre}</h3>
+                  <span className="pro-badge h-fit w-fit">{form.periode}</span>
                 </div>
-              ))}
-            </div>
+                <p className="text-blue-500 font-bold mb-2">{form.etablissement}</p>
+                <p className="text-slate-400 text-lg leading-relaxed">{form.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
