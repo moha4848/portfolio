@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageWrapper } from '../../shared/components/PageWrapper';
-import { Card, GlassCard } from '../../shared/ui';
+import { Card, GlassCard, Button } from '../../shared/ui';
 import { useLanguage } from '../../context/LanguageContext';
 import { portfolioData } from '../../data/portfolioData';
+import { Login } from './Login';
 import { 
   BarChart3, 
   Users, 
@@ -11,13 +12,33 @@ import {
   TrendingUp, 
   Clock, 
   Globe2, 
-  LayoutDashboard 
+  LayoutDashboard,
+  LogOut
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Dashboard = () => {
   const { language } = useLanguage();
   const t = portfolioData.nav[language];
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check session storage on load
+  useEffect(() => {
+    const auth = sessionStorage.getItem('dashboard_auth');
+    if (auth === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    sessionStorage.setItem('dashboard_auth', 'true');
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('dashboard_auth');
+    setIsAuthenticated(false);
+  };
 
   const stats = [
     { label: "Total Views", value: "1,284", change: "+12%", icon: Eye, color: "blue" },
@@ -29,23 +50,41 @@ const Dashboard = () => {
   // Using Mail from lucide-react (imported in a sec)
   const Mail = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
 
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
   return (
     <PageWrapper>
       <div className="space-y-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-              <LayoutDashboard className="text-blue-600" />
-              {t.dashboard}
-            </h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                <LayoutDashboard className="text-blue-600" />
+                {t.dashboard}
+              </h2>
+              <button 
+                onClick={handleLogout}
+                className="md:hidden p-2 text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg"
+              >
+                <LogOut size={20} />
+              </button>
+            </div>
             <p className="text-slate-500 dark:text-slate-400">
-              Welcome back! Here's an overview of your portfolio performance.
+              Bienvenue sur votre espace privé. (Données de démonstration)
             </p>
           </div>
-          <GlassCard className="px-4 py-2 flex items-center gap-3 text-sm font-medium text-slate-600 dark:text-slate-300">
-            <Clock size={16} className="text-blue-500" />
-            Last updated: Today, 10:45 AM
-          </GlassCard>
+          <div className="flex items-center gap-4">
+            <GlassCard className="px-4 py-2 flex items-center gap-3 text-sm font-medium text-slate-600 dark:text-slate-300">
+              <Clock size={16} className="text-blue-500" />
+              Last updated: Today, 10:45 AM
+            </GlassCard>
+            <Button variant="secondary" onClick={handleLogout} className="hidden md:flex gap-2 text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300">
+              <LogOut size={16} />
+              Déconnexion
+            </Button>
+          </div>
         </div>
 
         {/* Stats Grid */}
