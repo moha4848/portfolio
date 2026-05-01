@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Navbar } from '../shared/components/Navbar';
+import { Footer } from '../shared/components/Footer';
 
 // Lazy loading features
 const Home = lazy(() => import('../features/home'));
@@ -19,20 +21,25 @@ const LoadingFallback = () => (
 
 export const AppRouter = () => {
   const location = useLocation();
+  const isDashboard = location.pathname.startsWith('/dashboard');
 
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </AnimatePresence>
+      {!isDashboard && <Navbar />}
+      <main className={!isDashboard ? "relative z-10" : "w-full h-screen"}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/dashboard/*" element={<Dashboard />} />
+          </Routes>
+        </AnimatePresence>
+      </main>
+      {!isDashboard && <Footer />}
     </Suspense>
   );
 };
