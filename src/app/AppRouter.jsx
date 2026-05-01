@@ -8,7 +8,6 @@ const About = lazy(() => import('../features/about'));
 const Skills = lazy(() => import('../features/skills'));
 const Projects = lazy(() => import('../features/projects'));
 const Experience = lazy(() => import('../features/experience'));
-const Education = lazy(() => import('../features/education'));
 const Contact = lazy(() => import('../features/contact'));
 const Dashboard = lazy(() => import('../features/dashboard'));
 
@@ -30,7 +29,6 @@ export const AppRouter = () => {
           <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/experience" element={<Experience />} />
-          <Route path="/education" element={<Education />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
