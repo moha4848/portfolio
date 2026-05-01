@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from 'react';
+import {
+  Menu, X, Github, Linkedin, Mail, Phone, MapPin, Code, Database, Instagram,
   Server, GraduationCap, ChevronRight, Globe, ChevronDown, ExternalLink
 } from 'lucide-react';
 import logo from './logo.png';
