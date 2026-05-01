@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Menu, X, Github, Linkedin, Mail, Phone, MapPin, Code, Database, Instagram,
   Server, GraduationCap, ChevronRight, Globe, ChevronDown, ExternalLink
 } from 'lucide-react';
+import logo from './logo.png';
 
 // Composants de démonstration
 const CalculatriceDemo = () => (
@@ -631,7 +629,7 @@ export default function Portfolio() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+              <img src={logo} alt="Logo" className="h-10 w-auto" />
             </div>
 
             {/* Desktop Menu */}
@@ -816,7 +814,7 @@ export default function Portfolio() {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            Yousfi Mohammed
+            Yousfi Mohammed ✦
           </h1>
 
           <p className="text-xl md:text-2xl text-blue-300 mb-8 max-w-2xl mx-auto">
