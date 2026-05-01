@@ -70,6 +70,7 @@ const repoMap = {
   4: "gallery",
   5: "clock",
   6: "quiz",
+  7: "souk",
 };
 
 /* ================= CALCULATRICE ================= */
@@ -440,6 +441,13 @@ const translations = {
         details: 'Application de quiz avec questions à choix multiples, système de score et affichage des bonnes réponses.',
         fonctionnalites: ['Questions multiples', 'Calcul du score', 'Feedback immédiat', 'Affichage du résultat final'],
         technologies: ['HTML', 'CSS', 'JavaScript']
+      },
+      {
+        titre: 'SOUK - Marketplace SaaS',
+        description: 'Plateforme de commerce électronique multi-vendeurs (SaaS)',
+        details: 'Une application de marketplace multi-tenant permettant aux vendeurs de créer leurs propres boutiques. Architecture propre avec Laravel (Backend) et React (Frontend).',
+        fonctionnalites: ['Multi-tenant (Boutiques séparées)', 'Tableau de bord Vendeur/Acheteur/Admin', 'Gestion des commandes et produits', 'Interface bilingue (Arabe/Français)', 'Sécurité RBAC'],
+        technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
     ],
     
@@ -449,6 +457,7 @@ const translations = {
     description: 'Description',
     techUsed: 'Technologies utilisées',
     features: 'Fonctionnalités',
+    demoNotAvailable: 'Démonstration en direct non disponible pour ce projet complexe. Veuillez consulter le code sur GitHub.',
     
     formationTitle: 'Formation',
     formations: [
@@ -606,6 +615,13 @@ const translations = {
         details: 'Quiz application with multiple choice questions, scoring system, and correct answers display.',
         fonctionnalites: ['Multiple questions', 'Score calculation', 'Immediate feedback', 'Final result display'],
         technologies: ['HTML', 'CSS', 'JavaScript']
+      },
+      {
+        titre: 'SOUK - SaaS Marketplace',
+        description: 'Multi-vendor e-commerce platform (SaaS)',
+        details: 'A multi-tenant marketplace application allowing vendors to create their own stores. Clean architecture with Laravel (Backend) and React (Frontend).',
+        fonctionnalites: ['Multi-tenant (Separate stores)', 'Vendor/Buyer/Admin dashboards', 'Order and product management', 'Bilingual interface (Arabic/French)', 'RBAC security'],
+        technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
     ],
     
@@ -615,6 +631,7 @@ const translations = {
     description: 'Description',
     techUsed: 'Technologies Used',
     features: 'Features',
+    demoNotAvailable: 'Live demo not available for this complex project. Please check the code on GitHub.',
     
     formationTitle: 'Education',
     formations: [
@@ -772,6 +789,13 @@ const translations = {
         details: 'تطبيق اختبار مع أسئلة متعددة الخيارات، نظام النقاط، وعرض الإجابات الصحيحة.',
         fonctionnalites: ['أسئلة متعددة', 'حساب النقاط', 'تغذية راجعة فورية', 'عرض النتيجة النهائية'],
         technologies: ['HTML', 'CSS', 'JavaScript']
+      },
+      {
+        titre: 'SOUK - منصة سحابية للتجارة الإلكترونية',
+        description: 'منصة تجارة إلكترونية متعددة البائعين (SaaS)',
+        details: 'تطبيق سوق متعدد المستأجرين يتيح للبائعين إنشاء متاجرهم الخاصة. هندسة نظيفة باستخدام Laravel (الخلفية) و React (الواجهة).',
+        fonctionnalites: ['تعدد المستأجرين (متاجر منفصلة)', 'لوحات تحكم للبائع/المشتري/المدير', 'إدارة الطلبات والمنتجات', 'واجهة ثنائية اللغة (عربي/فرنسي)', 'أمان RBAC'],
+        technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
     ],
     
@@ -781,6 +805,7 @@ const translations = {
     description: 'الوصف',
     techUsed: 'التقنيات المستخدمة',
     features: 'المميزات',
+    demoNotAvailable: 'العرض المباشر غير متاح لهذا المشروع المعقد. يرجى الاطلاع على الكود على GitHub.',
     
     formationTitle: 'التعليم',
     formations: [
@@ -937,6 +962,13 @@ const translations = {
         details: 'Aplicación de cuestionario con preguntas de opción múltiple, sistema de puntuación y visualización de respuestas correctas.',
         fonctionnalites: ['Preguntas múltiples', 'Cálculo de puntuación', 'Retroalimentación inmediata', 'Visualización del resultado final'],
         technologies: ['HTML', 'CSS', 'JavaScript']
+      },
+      {
+        titre: 'SOUK - Marketplace SaaS',
+        description: 'Plataforma de comercio electrónico multivendedor (SaaS)',
+        details: 'Una aplicación de mercado multi-inquilino que permite a los vendedores crear sus propias tiendas. Arquitectura limpia con Laravel (Backend) y React (Frontend).',
+        fonctionnalites: ['Multi-inquilino (Tiendas separadas)', 'Tableros de Vendedor/Comprador/Admin', 'Gestión de pedidos y productos', 'Interfaz bilingüe (Árabe/Francés)', 'Seguridad RBAC'],
+        technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
     ],
     
@@ -946,6 +978,7 @@ const translations = {
     description: 'Descripción',
     techUsed: 'Tecnologías Utilizadas',
     features: 'Características',
+    demoNotAvailable: 'Demostración en vivo no disponible para este proyecto complejo. Por favor, consulte el código en GitHub.',
     
     formationTitle: 'Formación',
     formations: [
@@ -1090,7 +1123,8 @@ const [, setActiveSection] = useState('home');
     { id: 3, technologies: ['HTML', 'CSS', 'JavaScript', 'Regex'], difficulte: 'intermediate', demo: 'contact' },
     { id: 4, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'gallery' },
     { id: 5, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'beginner', demo: 'clock' },
-    { id: 6, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'quiz' }
+    { id: 6, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'quiz' },
+    { id: 7, technologies: ['Laravel', 'React', 'Tailwind', 'MySQL'], difficulte: 'advanced', demo: 'souk' }
   ];
 
   const LINKS = {
@@ -1491,6 +1525,7 @@ const [, setActiveSection] = useState('home');
                       {projet.demo === 'gallery' && <Image size={64} strokeWidth={1.5} />}
                       {projet.demo === 'clock' && <Clock size={64} strokeWidth={1.5} />}
                       {projet.demo === 'quiz' && <HelpCircle size={64} strokeWidth={1.5} />}
+                      {projet.demo === 'souk' && <Layout size={64} strokeWidth={1.5} />}
                     </div>
 
                   </div>
@@ -1598,6 +1633,7 @@ const [, setActiveSection] = useState('home');
                 {selectedProject.id === 1 && <CalculatriceDemo t={t} />}
                 {selectedProject.id === 2 && <TodoDemo t={t} />}
                 {selectedProject.id === 3 && <ContactDemo t={t} />}
+                {selectedProject.id === 7 && <div className="p-8 text-center text-slate-400">{t.demoNotAvailable}</div>}
                 {selectedProject.id === 4 && <GalleryDemo t={t} />}
                 {selectedProject.id === 5 && <ClockDemo t={t} />}
                 {selectedProject.id === 6 && <QuizDemo t={t} />}
