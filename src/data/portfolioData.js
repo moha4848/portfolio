@@ -125,7 +125,7 @@ export const portfolioData = {
     }
   ],
   nav: {
-    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Expérience & Formation", contact: "Contact", dashboard: "Tableau de Bord" },
+    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Mon Parcours", contact: "Contact", dashboard: "Tableau de Bord" },
     en: { home: "Home", about: "About", skills: "Skills", projects: "Projects", experience: "Experience & Education", contact: "Contact", dashboard: "Dashboard" },
     ar: { home: "الرئيسية", about: "حول", skills: "المهارات", projects: "المشاريع", experience: "الخبرة والتعليم", contact: "اتصل بنا", dashboard: "لوحة التحكم" },
     es: { home: "Inicio", about: "Sobre mí", skills: "Habilidades", projects: "Proyectos", experience: "Experiencia y Formación", contact: "Contacto", dashboard: "Panel de Control" }
