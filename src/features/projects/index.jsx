@@ -66,7 +66,7 @@ const Projects = () => {
                     </span>
                   </div>
                   
-                  <p className="text-slate-600 dark:text-slate-400 text-sm line-clamp-3">
+                  <p className="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
                     {project.description[language]}
                   </p>
 

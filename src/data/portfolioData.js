@@ -93,6 +93,57 @@ export const portfolioData = {
       },
       tech: ["React", "LocalStorage", "Tailwind CSS"],
       github: "https://github.com/moha4848/todo",
+    },
+    {
+      id: "contact-form",
+      title: "Formulaire de Contact",
+      description: {
+        fr: "Un formulaire de contact professionnel avec validation en temps réel des champs email, téléphone et message.",
+        en: "A professional contact form with real-time validation for email, phone, and message fields.",
+        ar: "نموذج اتصال احترافي مع تحقق فوري من حقول البريد الإلكتروني، الهاتف، والرسالة.",
+        es: "Un formulario de contacto profesional con validación en tiempo real para los campos de correo electrónico, teléfono y mensaje."
+      },
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "https://github.com/moha4848/contact-form",
+      category: "Frontend"
+    },
+    {
+      id: "image-gallery",
+      title: "Galerie d'Images",
+      description: {
+        fr: "Une galerie d'images interactive avec possibilité d'agrandir les images en plein écran et de naviguer entre elles.",
+        en: "An interactive image gallery with the ability to expand images to full screen and navigate between them.",
+        ar: "معرض صور تفاعلي مع إمكانية تكبير الصور بملء الشاشة والتنقل بينها.",
+        es: "Una galería de imágenes interactiva con la capacidad de expandir imágenes a pantalla completa y navegar entre ellas."
+      },
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "https://github.com/moha4848/gallery",
+      category: "Frontend"
+    },
+    {
+      id: "digital-clock",
+      title: "Horloge Digitale",
+      description: {
+        fr: "Une horloge numérique qui affiche l'heure et la date en temps réel avec un design élégant.",
+        en: "A digital clock that displays the time and date in real-time with an elegant design.",
+        ar: "ساعة رقمية تعرض الوقت والتاريخ في الوقت الفعلي بتصميم أنيق.",
+        es: "Un reloj digital que muestra la hora y la fecha en tiempo real con un diseño elegante."
+      },
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "https://github.com/moha4848/clock",
+      category: "Frontend"
+    },
+    {
+      id: "quiz-app",
+      title: "Quiz Interactif",
+      description: {
+        fr: "Application de quiz avec questions à choix multiples, système de score et affichage des bonnes réponses.",
+        en: "Quiz application with multiple-choice questions, scoring system, and display of correct answers.",
+        ar: "تطبيق مسابقة مع أسئلة متعددة الخيارات، نظام تسجيل درجات، وعرض الإجابات الصحيحة.",
+        es: "Aplicación de cuestionario con preguntas de opción múltiple, sistema de puntuación y visualización de respuestas correctas."
+      },
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "https://github.com/moha4848/quiz",
       category: "Frontend"
     }
   ],
