@@ -125,10 +125,10 @@ export const portfolioData = {
     }
   ],
   nav: {
-    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Expérience", education: "Formation", contact: "Contact" },
-    en: { home: "Home", about: "About", skills: "Skills", projects: "Projects", experience: "Experience", education: "Education", contact: "Contact" },
-    ar: { home: "الرئيسية", about: "حول", skills: "المهارات", projects: "المشاريع", experience: "الخبرة", education: "التعليم", contact: "اتصل بنا" },
-    es: { home: "Inicio", about: "Sobre mí", skills: "Habilidades", projects: "Proyectos", experience: "Experiencia", education: "Educación", contact: "Contacto" }
+    fr: { home: "Accueil", about: "À propos", skills: "Compétences", projects: "Projets", experience: "Expérience", education: "Formation", contact: "Contact", dashboard: "Tableau de Bord" },
+    en: { home: "Home", about: "About", skills: "Skills", projects: "Projects", experience: "Experience", education: "Education", contact: "Contact", dashboard: "Dashboard" },
+    ar: { home: "الرئيسية", about: "حول", skills: "المهارات", projects: "المشاريع", experience: "الخبرة", education: "التعليم", contact: "اتصل بنا", dashboard: "لوحة التحكم" },
+    es: { home: "Inicio", about: "Sobre mí", skills: "Habilidades", projects: "Proyectos", experience: "Experiencia", education: "Educación", contact: "Contacto", dashboard: "Panel de Control" }
   },
   common: {
     fr: { viewProject: "Voir le projet", github: "GitHub", details: "Détails", send: "Envoyer", name: "Nom", email: "Email", message: "Message" },

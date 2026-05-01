@@ -10,6 +10,7 @@ const Projects = lazy(() => import('../features/projects'));
 const Experience = lazy(() => import('../features/experience'));
 const Education = lazy(() => import('../features/education'));
 const Contact = lazy(() => import('../features/contact'));
+const Dashboard = lazy(() => import('../features/dashboard'));
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -31,6 +32,7 @@ export const AppRouter = () => {
           <Route path="/experience" element={<Experience />} />
           <Route path="/education" element={<Education />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </AnimatePresence>
     </Suspense>
