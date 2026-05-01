@@ -23,9 +23,17 @@ export default function Dashboard() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-4xl font-black tracking-tighter">Tableau de Bord Admin</h2>
-          <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all">
-            <Plus size={20} /> Nouveau Projet
-          </button>
+          <div className="flex gap-4">
+            <button 
+              onClick={() => { localStorage.removeItem('is_admin'); window.location.href = '/login'; }} 
+              className="px-6 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl font-bold hover:bg-slate-50 transition-all"
+            >
+              Déconnexion
+            </button>
+            <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all">
+              <Plus size={20} /> Nouveau Projet
+            </button>
+          </div>
         </div>
 
         {/* Stats Grid */}
