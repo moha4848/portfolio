@@ -1364,17 +1364,22 @@ const [, setActiveSection] = useState('home');
         }
       `}</style>
 
-      {/* Background Pattern */}
-      <div className="fixed inset-0 bg-grid opacity-20 pointer-events-none -z-10"></div>
+      {/* Background */}
+      <div className="fixed inset-0 bg-subtle opacity-40 pointer-events-none -z-10"></div>
 
       {/* Navigation */}
       <nav className="nav-pro">
         <div className="nav-container">
-          <div className="text-lg font-bold tracking-tighter">
-            YOUSFI <span className="text-slate-500">M.</span>
+          <div className="flex items-center gap-4">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/10">
+              <img src="/profile.jpeg" alt="Yousfi" className="w-full h-full object-cover" />
+            </div>
+            <div className="text-sm font-bold tracking-tight text-white uppercase">
+              Yousfi Mohammed
+            </div>
           </div>
 
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-6">
             {t.nav.map((item, index) => {
               const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
               return (
@@ -1389,36 +1394,36 @@ const [, setActiveSection] = useState('home');
             })}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-2 px-2 py-1 rounded border border-white/10 text-xs font-bold uppercase hover:bg-white/5 transition-all"
+              className="px-3 py-1.5 rounded-md border border-[#30363d] bg-[#161b22] text-xs font-semibold text-white hover:border-[#8b949e] transition-all flex items-center gap-2"
             >
-              {lang} <ChevronDown size={12} className={langMenuOpen ? 'rotate-180' : ''} />
+              {lang.toUpperCase()} <ChevronDown size={12} className={langMenuOpen ? 'rotate-180' : ''} />
             </button>
             {langMenuOpen && (
-              <div className="absolute top-16 right-6 w-32 bg-black border border-white/10 rounded-lg shadow-2xl overflow-hidden z-[101]">
+              <div className="absolute top-16 right-8 w-40 bg-[#161b22] border border-[#30363d] rounded-md shadow-xl z-[101]">
                 {languages.map((l) => (
-                  <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-3 text-xs text-left hover:bg-white/5 flex gap-2">
+                  <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-3 text-xs text-left text-white hover:bg-[#30363d] flex gap-2">
                     <span>{l.flag}</span> {l.label}
                   </button>
                 ))}
               </div>
             )}
-            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white">
               <Menu size={20} />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black z-[99] md:hidden flex flex-col items-center justify-center gap-8">
+        <div className="fixed inset-0 bg-[#0d1117] z-[99] md:hidden flex flex-col items-center justify-center gap-6">
           {t.nav.map((item, index) => {
             const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
             return (
-              <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-2xl font-bold">
+              <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-xl font-bold text-white">
                 {item}
               </button>
             );
@@ -1427,56 +1432,67 @@ const [, setActiveSection] = useState('home');
       )}
 
       {/* Hero */}
-      <section id="accueil-section" className="section-container min-h-screen flex flex-col justify-center items-center text-center">
-        <div className="badge-pro mb-8">{t.role}</div>
-        <h1 className="text-7xl md:text-8xl mb-8 text-gradient">
-          Digital <br /> Engineer
-        </h1>
-        <p className="text-lg text-slate-400 mb-12 max-w-xl mx-auto">
-          {t.aboutText1.substring(0, 160)}...
-        </p>
-        <div className="flex gap-4">
-          <a href="/CV_Yousfi_Mohammed.pdf" download className="btn-black">
-            {t.downloadCV}
-          </a>
-          <button onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })} className="btn-outline">
-            {t.contactMe}
-          </button>
+      <section id="accueil-section" className="section-container flex flex-col md:flex-row items-center gap-16 min-h-[90vh]">
+        <div className="flex-1 space-y-8">
+          <div className="badge-pro w-fit">{t.role}</div>
+          <h1 className="text-5xl md:text-7xl leading-tight">
+            Building digital <br /> 
+            <span className="text-[#58a6ff]">experiences</span> that matter.
+          </h1>
+          <p className="text-xl text-slate-400 max-w-lg">
+            {t.aboutText1.substring(0, 160)}...
+          </p>
+          <div className="flex gap-4">
+            <a href="/CV_Yousfi_Mohammed.pdf" download className="btn-primary">
+              {t.downloadCV}
+            </a>
+            <button onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })} className="btn-outline">
+              {t.contactMe}
+            </button>
+          </div>
+        </div>
+        <div className="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden border-2 border-[#30363d] shadow-2xl">
+          <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover" />
         </div>
       </section>
 
       {/* About */}
       <section id="propos-section" className="section-container">
-        <h2 className="text-4xl mb-12">{t.aboutTitle}</h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          <div className="md:col-span-2 space-y-6 text-slate-400 text-lg">
-            <p>{t.aboutText1}</p>
-            <p>{t.aboutText2}</p>
-          </div>
-          <div className="space-y-4">
-            {[
-              { icon: MapPin, val: t.address },
-              { icon: Mail, val: t.email },
-              { icon: Phone, val: t.phoneNumber }
-            ].map((i, idx) => (
-              <div key={idx} className="flex items-center gap-3 text-sm">
-                <i.icon size={16} className="text-slate-500" />
-                <span>{i.val}</span>
-              </div>
-            ))}
+        <div className="pro-card">
+          <h2 className="text-3xl mb-8">{t.aboutTitle}</h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            <div className="md:col-span-2 space-y-6 text-slate-300 text-lg">
+              <p>{t.aboutText1}</p>
+              <p>{t.aboutText2}</p>
+            </div>
+            <div className="space-y-6">
+              <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">{t.contactInfo}</div>
+              {[
+                { icon: MapPin, val: t.address },
+                { icon: Mail, val: t.email },
+                { icon: Phone, val: t.phoneNumber }
+              ].map((i, idx) => (
+                <div key={idx} className="flex items-center gap-4 text-sm text-slate-400">
+                  <div className="p-2 rounded bg-[#21262d] border border-[#30363d]">
+                    <i.icon size={16} />
+                  </div>
+                  <span>{i.val}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Experience */}
       <section id="experience-section" className="section-container">
-        <h2 className="text-4xl mb-16">{t.experienceTitle}</h2>
+        <h2 className="text-3xl mb-12">{t.experienceTitle}</h2>
         <div className="timeline-pro">
           {t.experiences.map((exp, idx) => (
             <div key={idx} className="timeline-item">
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">{exp.periode}</div>
+              <div className="badge-pro mb-4">{exp.periode}</div>
               <h3 className="text-2xl mb-4">{exp.titre}</h3>
-              <p className="text-slate-400 max-w-2xl">{exp.description}</p>
+              <p className="text-slate-400 text-lg leading-relaxed max-w-3xl">{exp.description}</p>
             </div>
           ))}
         </div>
@@ -1528,35 +1544,35 @@ const [, setActiveSection] = useState('home');
 
       {/* Projects */}
       <section id="projets-section" className="section-container">
-        <h2 className="text-4xl mb-16">{t.projectsTitle}</h2>
-        <div className="space-y-12">
+        <h2 className="text-3xl mb-12">{t.projectsTitle}</h2>
+        <div className="grid md:grid-cols-2 gap-8">
           {projets.map((projet, idx) => {
             const projectData = t.projects[idx];
             return (
-              <div key={projet.id} className="card-minimal flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-full md:w-1/3 aspect-square bg-white/5 rounded-xl flex items-center justify-center text-slate-700">
-                  {projet.demo === 'calculatrice' && <Calculator size={80} />}
-                  {projet.demo === 'todo' && <CheckSquare size={80} />}
-                  {projet.demo === 'contact' && <Mail size={80} />}
-                  {projet.demo === 'gallery' && <Image size={80} />}
-                  {projet.demo === 'clock' && <Clock size={80} />}
-                  {projet.demo === 'quiz' && <HelpCircle size={80} />}
-                  {projet.demo === 'souk' && <Layout size={80} />}
-                </div>
-                <div className="flex-1">
+              <div key={projet.id} className="pro-card flex flex-col justify-between">
+                <div>
+                  <div className="aspect-video bg-[#0d1117] border border-[#30363d] rounded-md mb-6 flex items-center justify-center text-slate-800">
+                    {projet.demo === 'calculatrice' && <Calculator size={60} />}
+                    {projet.demo === 'todo' && <CheckSquare size={60} />}
+                    {projet.demo === 'contact' && <Mail size={60} />}
+                    {projet.demo === 'gallery' && <Image size={60} />}
+                    {projet.demo === 'clock' && <Clock size={60} />}
+                    {projet.demo === 'quiz' && <HelpCircle size={60} />}
+                    {projet.demo === 'souk' && <Layout size={60} />}
+                  </div>
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold">{projectData.titre}</h3>
+                    <h3 className="text-xl font-bold">{projectData.titre}</h3>
                     <div className="badge-pro">{t.difficulty[projet.difficulte]}</div>
                   </div>
-                  <p className="text-slate-400 mb-6">{projectData.description}</p>
-                  <div className="flex gap-4">
-                    <button onClick={() => setSelectedProject({ ...projet, ...projectData })} className="nav-link !text-white font-bold">
-                      {t.details} →
-                    </button>
-                    <a href={`https://github.com/moha4848/${repoMap[projet.id]}`} target="_blank" rel="noopener noreferrer" className="nav-link">
-                      GitHub
-                    </a>
-                  </div>
+                  <p className="text-slate-400 text-sm mb-6 line-clamp-3">{projectData.description}</p>
+                </div>
+                <div className="flex gap-4 pt-4 border-t border-[#30363d]">
+                  <button onClick={() => setSelectedProject({ ...projet, ...projectData })} className="text-[#58a6ff] text-sm font-bold hover:underline">
+                    {t.details} →
+                  </button>
+                  <a href={`https://github.com/moha4848/${repoMap[projet.id]}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 text-sm hover:text-white transition-colors">
+                    GitHub
+                  </a>
                 </div>
               </div>
             );
@@ -1686,13 +1702,13 @@ const [, setActiveSection] = useState('home');
 
       {/* Education */}
       <section id="formation-section" className="section-container">
-        <h2 className="text-4xl mb-16">{t.formationTitle}</h2>
+        <h2 className="text-3xl mb-12">{t.formationTitle}</h2>
         <div className="timeline-pro">
           {t.formations.map((f, idx) => (
             <div key={idx} className="timeline-item">
-              <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">{f.periode}</div>
+              <div className="badge-pro mb-4">{f.periode}</div>
               <h3 className="text-2xl mb-2">{f.titre}</h3>
-              <p className="text-white font-bold mb-4">{f.etablissement}</p>
+              <p className="text-[#58a6ff] font-bold mb-4">{f.etablissement}</p>
               <p className="text-slate-400 max-w-2xl">{f.description}</p>
             </div>
           ))}
