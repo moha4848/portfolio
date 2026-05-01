@@ -432,7 +432,7 @@ export const SoukOverview = ({ t }) => {
 
 const translations = {
   fr: {
-    nav: ['Accueil', 'À Propos', 'Compétences', 'Projets', 'Formation', 'Contact'],
+    nav: ['Accueil', 'À Propos', 'Expérience', 'Compétences', 'Projets', 'Formation', 'Contact'],
     role: 'Stagiaire en Développement Digital - ISTA',
     downloadCV: 'Télécharger CV',
     contactMe: 'Me Contacter',
@@ -446,15 +446,28 @@ const translations = {
     
     skillsTitle: 'Mes Compétences',
     skills: [
-      { nom: 'Développement Web', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
-      { nom: 'Backend', details: 'PHP, Node.js, API REST', icon: 'server' },
-      { nom: 'Bases de Données', details: 'MySQL', icon: 'database' },
+      { nom: 'Frontend', details: 'React.js, Tailwind CSS, HTML5/CSS3, JS', icon: 'layout' },
+      { nom: 'Backend', details: 'Laravel, Node.js, REST API', icon: 'server' },
+      { nom: 'Bases de Données', details: 'MySQL, MongoDB', icon: 'database' },
+      { nom: 'Outils', details: 'Git, GitHub, Postman, VS Code', icon: 'wrench' },
       { nom: 'Programmation', details: 'Python', icon: 'code' },
-      { nom: 'Outils', details: 'Git, VS Code, Figma', icon: 'wrench' },
-      { nom: 'Soft Skills', details: 'Communication, Travail d\'équipe', icon: 'users' }
+      { nom: 'Soft Skills', details: 'Communication, Travail d\'équipe, Agile', icon: 'users' }
     ],
 
-    
+    experienceTitle: 'Expérience',
+    experiences: [
+      {
+        titre: 'Stage – ONEE (Office National de l\'Électricité et de l\'Eau Potable)',
+        periode: '2024',
+        description: 'Développement d’une application de gestion de laboratoire et de suivi des équipements techniques. Travail en équipe sur un projet réel en environnement professionnel. Contribution à l’analyse, conception et développement de l’application. Utilisation des bonnes pratiques de développement et collaboration avec l’équipe technique.'
+      },
+      {
+        titre: 'Projet personnel – SOUK SaaS Platform',
+        periode: '2024 - 2025',
+        description: 'Développement d’une plateforme SaaS multi-tenant de type marketplace. Création d’un système de gestion des rôles (Admin, Seller, Customer). Développement de dashboards pour les vendeurs (ventes, produits, statistiques). Intégration backend Laravel + frontend React.'
+      }
+    ],
+
     projectsTitle: 'Mes Projets',
     projects: [
       {
@@ -501,8 +514,8 @@ const translations = {
       },
       {
         titre: 'SOUK - Marketplace SaaS',
-        description: 'Plateforme de commerce électronique multi-vendeurs (SaaS)',
-        details: 'Une application de marketplace multi-tenant permettant aux vendeurs de créer leurs propres boutiques. Architecture propre avec Laravel (Backend) et React (Frontend).',
+        description: 'Plateforme SaaS multi-tenant de type marketplace',
+        details: 'Développement d’une plateforme SaaS multi-tenant de type marketplace. Création d’un système de gestion des rôles (Admin, Seller, Customer). Développement de dashboards pour les vendeurs (ventes, produits, statistiques). Intégration backend Laravel + frontend React.',
         fonctionnalites: ['Multi-tenant (Boutiques séparées)', 'Tableau de bord Vendeur/Acheteur/Admin', 'Gestion des commandes et produits', 'Interface bilingue (Arabe/Français)', 'Sécurité RBAC'],
         technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
@@ -624,7 +637,7 @@ const translations = {
   },
 
   en: {
-    nav: ['Home', 'About', 'Skills', 'Projects', 'Education', 'Contact'],
+    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Education', 'Contact'],
     role: 'Digital Development Intern - ISTA',
     downloadCV: 'Download CV',
     contactMe: 'Contact Me',
@@ -638,15 +651,28 @@ const translations = {
     
     skillsTitle: 'My Skills',
     skills: [
-      { nom: 'Web Development', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
-      { nom: 'Backend', details: 'PHP, Node.js, REST API', icon: 'server' },
-      { nom: 'Databases', details: 'MySQL', icon: 'database' },
+      { nom: 'Frontend', details: 'React.js, Tailwind CSS, HTML5/CSS3, JS', icon: 'layout' },
+      { nom: 'Backend', details: 'Laravel, Node.js, REST API', icon: 'server' },
+      { nom: 'Databases', details: 'MySQL, MongoDB', icon: 'database' },
+      { nom: 'Tools', details: 'Git, GitHub, Postman, VS Code', icon: 'wrench' },
       { nom: 'Programming', details: 'Python', icon: 'code' },
-      { nom: 'Tools', details: 'Git, VS Code, Figma', icon: 'wrench' },
-      { nom: 'Soft Skills', details: 'Communication, Teamwork', icon: 'users' }
+      { nom: 'Soft Skills', details: 'Communication, Teamwork, Agile', icon: 'users' }
     ],
 
-    
+    experienceTitle: 'Experience',
+    experiences: [
+      {
+        titre: 'Internship – ONEE (National Office of Electricity and Potable Water)',
+        periode: '2024',
+        description: 'Development of a laboratory management and technical equipment tracking application. Teamwork in a real professional environment. Contribution to the analysis, design, and development of the application. Use of best development practices and collaboration with the technical team.'
+      },
+      {
+        titre: 'Personal Project – SOUK SaaS Platform',
+        periode: '2024 - 2025',
+        description: 'Development of a multi-tenant SaaS marketplace platform. Creation of a role management system (Admin, Seller, Customer). Development of dashboards for sellers (sales, products, statistics). Laravel backend + React frontend integration.'
+      }
+    ],
+
     projectsTitle: 'My Projects',
     projects: [
       {
@@ -693,8 +719,8 @@ const translations = {
       },
       {
         titre: 'SOUK - SaaS Marketplace',
-        description: 'Multi-vendor e-commerce platform (SaaS)',
-        details: 'A multi-tenant marketplace application allowing vendors to create their own stores. Clean architecture with Laravel (Backend) and React (Frontend).',
+        description: 'Multi-tenant SaaS marketplace platform',
+        details: 'Development of a multi-tenant SaaS marketplace platform. Creation of a role management system (Admin, Seller, Customer). Development of dashboards for sellers (sales, products, statistics). Laravel backend + React frontend integration.',
         fonctionnalites: ['Multi-tenant (Separate stores)', 'Vendor/Buyer/Admin dashboards', 'Order and product management', 'Bilingual interface (Arabic/French)', 'RBAC security'],
         technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
@@ -816,7 +842,7 @@ const translations = {
   },
 
   ar: {
-    nav: ['الرئيسية', 'من أنا', 'المهارات', 'المشاريع', 'التعليم', 'اتصل بي'],
+    nav: ['الرئيسية', 'من أنا', 'الخبرة', 'المهارات', 'المشاريع', 'التعليم', 'اتصل بي'],
     role: 'متدرب في التطوير الرقمي - ISTA',
     downloadCV: 'تحميل السيرة الذاتية',
     contactMe: 'اتصل بي',
@@ -830,15 +856,28 @@ const translations = {
     
     skillsTitle: 'مهاراتي',
     skills: [
-      { nom: 'تطوير الويب', details: 'HTML, CSS, JavaScript, React', icon: 'globe' },
-      { nom: 'الخلفية', details: 'PHP, Node.js, REST API', icon: 'server' },
-      { nom: 'قواعد البيانات', details: 'MySQL', icon: 'database' },
+      { nom: 'الواجهة الأمامية', details: 'React.js, Tailwind CSS, HTML5/CSS3, JS', icon: 'layout' },
+      { nom: 'الخلفية', details: 'Laravel, Node.js, REST API', icon: 'server' },
+      { nom: 'قواعد البيانات', details: 'MySQL, MongoDB', icon: 'database' },
+      { nom: 'الأدوات', details: 'Git, GitHub, Postman, VS Code', icon: 'wrench' },
       { nom: 'البرمجة', details: 'Python', icon: 'code' },
-      { nom: 'الأدوات', details: 'Git, VS Code, Figma', icon: 'wrench' },
-      { nom: 'المهارات الناعمة', details: 'التواصل، العمل الجماعي', icon: 'users' }
+      { nom: 'المهارات الناعمة', details: 'التواصل، العمل الجماعي، Agile', icon: 'users' }
     ],
 
-    
+    experienceTitle: 'الخبرة',
+    experiences: [
+      {
+        titre: 'تدريب – ONEE (المكتب الوطني للكهرباء والماء الصالح للشرب)',
+        periode: '2024',
+        description: 'تطوير تطبيق لإدارة المختبرات وتتبع المعدات التقنية. العمل الجماعي في بيئة مهنية حقيقية. المساهمة في تحليل وتصميم وتطوير التطبيق. استخدام أفضل ممارسات التطوير والتعاون مع الفريق التقني.'
+      },
+      {
+        titre: 'مشروع شخصي – منصة SOUK SaaS',
+        periode: '2024 - 2025',
+        description: 'تطوير منصة SaaS متعددة المستأجرين من نوع marketplace. إنشاء نظام لإدارة الأدوار (مدير، بائع، عميل). تطوير لوحات تحكم للبائعين (المبيعات، المنتجات، الإحصائيات). تكامل Laravel في الخلفية مع React في الواجهة الأمامية.'
+      }
+    ],
+
     projectsTitle: 'مشاريعي',
     projects: [
       {
@@ -885,8 +924,8 @@ const translations = {
       },
       {
         titre: 'SOUK - منصة سحابية للتجارة الإلكترونية',
-        description: 'منصة تجارة إلكترونية متعددة البائعين (SaaS)',
-        details: 'تطبيق سوق متعدد المستأجرين يتيح للبائعين إنشاء متاجرهم الخاصة. هندسة نظيفة باستخدام Laravel (الخلفية) و React (الواجهة).',
+        description: 'منصة SaaS متعددة المستأجرين من نوع marketplace',
+        details: 'تطوير منصة SaaS متعددة المستأجرين من نوع marketplace. إنشاء نظام لإدارة الأدوار (مدير، بائع، عميل). تطوير لوحات تحكم للبائعين (المبيعات، المنتجات، الإحصائيات). تكامل Laravel في الخلفية مع React في الواجهة الأمامية.',
         fonctionnalites: ['تعدد المستأجرين (متاجر منفصلة)', 'لوحات تحكم للبائع/المشتري/المدير', 'إدارة الطلبات والمنتجات', 'واجهة ثنائية اللغة (عربي/فرنسي)', 'أمان RBAC'],
         technologies: ['Laravel', 'React', 'Tailwind CSS', 'MySQL', 'REST API']
       }
@@ -1344,7 +1383,7 @@ const [, setActiveSection] = useState('home');
               {/* Desktop Menu */}
               <div className="hidden md:flex items-center space-x-6">
                 {t.nav.map((item, index) => {
-                  const sectionIds = ['accueil-section', 'propos-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
+                  const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
                   return (
                     <button
                       key={item}
@@ -1453,7 +1492,7 @@ const [, setActiveSection] = useState('home');
             </div>
             
             {t.nav.map((item, index) => {
-              const sectionIds = ['accueil-section', 'propos-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
+              const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
               return (
                 <button
                   key={item}
@@ -1574,6 +1613,34 @@ const [, setActiveSection] = useState('home');
 
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Expérience */}
+      <section id="experience-section" className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                {t.experienceTitle}
+              </span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="space-y-8">
+            {t.experiences.map((exp, idx) => (
+              <div key={idx} className="glass-card p-8 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300">
+                <div className="flex flex-col md:flex-row justify-between mb-4 gap-4">
+                  <h3 className="text-2xl font-bold text-white">{exp.titre}</h3>
+                  <span className="text-cyan-400 font-semibold px-4 py-1.5 bg-cyan-900/20 rounded-full h-fit">
+                    {exp.periode}
+                  </span>
+                </div>
+                <p className="text-slate-300 text-lg leading-relaxed">{exp.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
