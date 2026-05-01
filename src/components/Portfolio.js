@@ -32,7 +32,8 @@ import {
   Lock,
   Search,
   Layout,
-  Cpu
+  Cpu,
+  Languages
 } from 'lucide-react';
 
 const IconMapper = ({ iconKey, size = 24, className = "" }) => {
