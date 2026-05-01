@@ -4,12 +4,12 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
-import { Globe, Server, Database, Code, Wrench, Users } from 'lucide-react';
+import { Globe, Server, Database, Code, Wrench, Users, Layers } from 'lucide-react';
 
 const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
-  const icons = { Globe, Server, Database, Code, Wrench, Users };
+  const icons = { Globe, Server, Database, Code, Wrench, Users, Layers };
 
   return (
     <PageWrapper>
@@ -32,9 +32,14 @@ const Skills = () => {
                   <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
                     <Icon size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                    {skill.name}
-                  </h3>
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                      {skill.name}
+                    </h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      {skill.details}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
