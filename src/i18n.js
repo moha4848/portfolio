@@ -986,21 +986,15 @@ export default function Portfolio() {
                       <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">
                         {projectData.titre}
                       </h3>
-                      {projet.featured ? (
-                        <span className="text-xs px-3 py-1.5 rounded-full font-semibold bg-blue-900/40 text-blue-300 border border-blue-500/50">
-                          ⭐ Featured
-                        </span>
-                      ) : (
-                        <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
-                          projet.difficulte === 'beginner'
-                            ? 'bg-green-900/30 text-green-400 border border-green-500/30'
-                            : projet.difficulte === 'intermediate'
-                            ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
-                            : 'bg-red-900/30 text-red-400 border border-red-500/30'
-                        }`}>
-                          {t.difficulty[projet.difficulte]}
-                        </span>
-                      )}
+                      <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
+                        projet.difficulte === 'beginner'
+                          ? 'bg-green-900/30 text-green-400 border border-green-500/30'
+                          : projet.difficulte === 'intermediate'
+                          ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
+                          : 'bg-red-900/30 text-red-400 border border-red-500/30'
+                      }`}>
+                        {t.difficulty[projet.difficulte]}
+                      </span>
                     </div>
                     
                     <p className="text-slate-400 mb-4 line-clamp-2">
