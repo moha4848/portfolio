@@ -11,7 +11,7 @@ export const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Simple hardcoded password for the static portfolio
-    if (password === 'admin123') {
+    if (password === 'zimo0820') {
       onLogin();
     } else {
       setError('Mot de passe incorrect');
