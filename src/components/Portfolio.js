@@ -130,9 +130,13 @@ const translations = {
     ],
     projectsTitle: 'Projets Réalisés',
     projects: [
-      { id: 1, titre: 'Calculatrice', desc: 'Opérations mathématiques de base', details: 'Une calculatrice interactive développée en JavaScript.', tech: ['JS', 'CSS'] },
-      { id: 2, titre: 'Todo List', desc: 'Gestionnaire de tâches', details: 'Application de productivité avec stockage local.', tech: ['React'] },
-      { id: 7, titre: 'SOUK Platform', desc: 'E-commerce SaaS', details: 'Plateforme complète pour vendeurs et acheteurs.', tech: ['Laravel', 'React'] },
+      { id: 1, titre: 'Calculatrice', desc: 'Opérations mathématiques de base', details: 'Une calculatrice interactive développée en JavaScript pour effectuer des calculs rapides.', tech: ['JS', 'CSS'] },
+      { id: 2, titre: 'Todo List', desc: 'Gestionnaire de tâches', details: 'Une application de productivité pour organiser vos tâches quotidiennes avec stockage local.', tech: ['React', 'LocalStorage'] },
+      { id: 3, titre: 'Contact Form', desc: 'Formulaire avec validation', details: 'Un formulaire de contact professionnel avec validation Regex en temps réel.', tech: ['JS', 'Regex'] },
+      { id: 4, titre: 'Galerie d\'Images', desc: 'Galerie responsive', details: 'Une galerie interactive avec effet lightbox pour visualiser des images.', tech: ['JS', 'CSS'] },
+      { id: 5, titre: 'Horloge Digitale', desc: 'Affichage temps réel', details: 'Une horloge précise affichant l\'heure et la date avec un design moderne.', tech: ['JS'] },
+      { id: 6, titre: 'Quiz Interactif', desc: 'Testez vos connaissances', details: 'Un quiz avec calcul de score et feedback immédiat sur les réponses.', tech: ['JS'] },
+      { id: 7, titre: 'SOUK Platform', desc: 'Marketplace SaaS Complète', details: 'Plateforme e-commerce multi-vendeurs avec dashboards Admin, Vendeur et Client.', tech: ['Laravel', 'React', 'MySQL'] },
     ],
     formationTitle: 'Formation & Diplômes',
     formations: [
@@ -315,6 +319,10 @@ export default function Portfolio() {
                       <div className="aspect-video bg-slate-100 flex items-center justify-center text-slate-300 group-hover:scale-105 transition-transform duration-500">
                         {p.id === 1 && <Calculator size={100} strokeWidth={1} />}
                         {p.id === 2 && <CheckSquare size={100} strokeWidth={1} />}
+                        {p.id === 3 && <Mail size={100} strokeWidth={1} />}
+                        {p.id === 4 && <Image size={100} strokeWidth={1} />}
+                        {p.id === 5 && <Clock size={100} strokeWidth={1} />}
+                        {p.id === 6 && <HelpCircle size={100} strokeWidth={1} />}
                         {p.id === 7 && <Layout size={100} strokeWidth={1} />}
                       </div>
                       <div className="p-10">
