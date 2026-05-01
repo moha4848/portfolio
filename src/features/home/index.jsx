@@ -72,13 +72,17 @@ const Home = () => {
           {/* Animated Glow Background */}
           <div className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full animate-pulse" />
           
-          <div className="relative aspect-square rounded-3xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl rotate-3">
+          <motion.div 
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white dark:border-slate-900 shadow-2xl rotate-3"
+          >
             <img 
               src="/profile.jpeg" 
               alt="Yousfi Mohammed" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110"
             />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </PageWrapper>
