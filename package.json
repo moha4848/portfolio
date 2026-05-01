@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "ajv": "^8.12.0",
     "ajv-keywords": "^5.1.0",
+    "framer-motion": "^12.38.0",
     "homepage": ".",
     "i18next": "^22.5.1",
     "lucide-react": "^0.344.0",
