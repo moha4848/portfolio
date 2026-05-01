@@ -1364,64 +1364,61 @@ const [, setActiveSection] = useState('home');
         }
       `}</style>
 
-      {/* Background Layer */}
-      <div className="fixed inset-0 bg-mesh pointer-events-none -z-10"></div>
-      <div className="fixed inset-0 opacity-[0.02] pointer-events-none -z-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+      {/* Background */}
+      <div className="fixed inset-0 bg-white -z-10"></div>
 
       {/* Navigation */}
-      <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
-        <div className="nav-pill flex justify-between items-center shadow-2xl">
-          <div className="text-xl font-black tracking-tighter text-white">
-            YM <span className="text-sky-500">.</span>
+      <header className="nav-corp">
+        <div className="container-corp w-full flex justify-between items-center">
+          <div className="text-2xl font-extrabold tracking-tighter text-blue-600">
+            YM<span className="text-slate-900">.</span>
           </div>
 
-          <div className="hidden md:flex gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {t.nav.map((item, index) => {
               const sectionIds = ['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'];
               return (
                 <button
                   key={item}
                   onClick={() => document.getElementById(sectionIds[index])?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-sky-400 transition-colors"
+                  className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors"
                 >
                   {item}
                 </button>
               );
             })}
-          </div>
+          </nav>
 
           <div className="flex items-center gap-4">
-            {/* Language Selector */}
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 rounded border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50"
               >
-                <span className="text-[10px] font-black text-white">{lang.toUpperCase()}</span>
-                <ChevronDown size={12} className={`text-slate-500 transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
+                {lang.toUpperCase()} <ChevronDown size={14} className={langMenuOpen ? 'rotate-180' : ''} />
               </button>
               {langMenuOpen && (
-                <div className="absolute top-full right-0 mt-4 w-40 glass-panel rounded-2xl overflow-hidden z-[60]">
+                <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-slate-200 rounded shadow-lg z-[101]">
                   {languages.map((l) => (
-                    <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-4 text-xs text-left text-white hover:bg-white/5 flex gap-3">
+                    <button key={l.code} onClick={() => { setLang(l.code); setLangMenuOpen(false); }} className="w-full p-3 text-xs text-left text-slate-700 hover:bg-slate-50 flex gap-2">
                       <span>{l.flag}</span> {l.label}
                     </button>
                   ))}
                 </div>
               )}
             </div>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-white">
-              <Menu size={20} />
+            <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-slate-900">
+              <Menu size={24} />
             </button>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-[#020617] z-[55] md:hidden flex flex-col items-center justify-center gap-10">
+        <div className="fixed inset-0 bg-white z-[99] md:hidden flex flex-col p-8 gap-6 pt-24">
           {t.nav.map((item, index) => (
-            <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'][index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-4xl font-black text-white tracking-tighter italic">
+            <button key={item} onClick={() => { setMenuOpen(false); document.getElementById(['accueil-section', 'propos-section', 'experience-section', 'competences-section', 'projets-section', 'formation-section', 'contact-section'][index])?.scrollIntoView({ behavior: 'smooth' }); }} className="text-2xl font-bold text-slate-900 text-left border-b border-slate-100 pb-4">
               {item}
             </button>
           ))}
@@ -1429,79 +1426,62 @@ const [, setActiveSection] = useState('home');
       )}
 
       {/* Hero Section */}
-      <section id="accueil-section" className="min-h-screen flex items-center justify-center px-4 pt-20">
-        <div className="max-w-6xl w-full grid md:grid-cols-2 gap-16 items-center">
-          <div className="animate-fade-up">
-            <div className="badge-saas mb-6 w-fit">{t.role}</div>
-            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] text-hero-gradient">
-              Full Stack <br /> 
-              <span className="text-white">Developer</span>
+      <section id="accueil-section" className="bg-slate-50">
+        <div className="container-corp grid md:grid-cols-2 gap-12 items-center">
+          <div className="fade-in">
+            <h1 className="text-5xl md:text-7xl mb-6 leading-tight">
+              Yousfi <br /> 
+              <span className="text-blue-600">Mohammed</span>
             </h1>
-            <p className="text-xl text-slate-400 mb-12 max-w-lg leading-relaxed">
-              {t.aboutText1.substring(0, 180)}...
-            </p>
-            <div className="flex flex-wrap gap-6">
-              <button 
-                onClick={() => document.getElementById('projets-section')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-premium"
-              >
-                View Projects <ArrowRight size={20} />
-              </button>
-              <button 
-                onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-premium-outline"
-              >
-                {t.contactMe}
-              </button>
-            </div>
-          </div>
-
-          <div className="relative animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="aspect-square rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl relative z-10">
-              <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover scale-105" />
-            </div>
-            {/* Decorative Elements */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-sky-500/20 blur-3xl rounded-full"></div>
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
-            <div className="absolute top-1/2 -right-6 p-6 glass-panel rounded-3xl z-20">
-              <div className="text-3xl font-black text-white">2+</div>
-              <div className="text-[10px] font-black uppercase text-sky-400 tracking-tighter">Years of Experience</div>
+          <div>
+            <h1 className="text-5xl md:text-7xl mb-6 leading-tight font-extrabold">Yousfi <span className="text-blue-600">Mohammed</span></h1>
+            <p className="text-xl font-bold text-slate-500 mb-4 uppercase tracking-widest">{t.role}</p>
+            <p className="text-lg text-slate-600 mb-10 max-w-lg">{t.aboutText1.substring(0, 200)}...</p>
+            <div className="flex flex-wrap gap-4">
+              <button onClick={() => document.getElementById('projets-section')?.scrollIntoView({ behavior: 'smooth' })} className="btn-corp">{t.projectsTitle}</button>
+              <a href="/CV_Yousfi_Mohammed.pdf" download className="btn-corp-outline">{t.downloadCV}</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="propos-section" className="py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
-            <div className="animate-fade-up">
-              <h2 className="text-4xl md:text-5xl font-black mb-8 text-white">{t.aboutTitle}</h2>
-              <div className="space-y-6 text-lg text-slate-400 leading-relaxed">
-                <p>{t.aboutText1}</p>
-                <p>{t.aboutText2}</p>
-              </div>
-              <div className="mt-12 grid grid-cols-2 gap-6">
-                {[
-                  { icon: Mail, val: t.email, label: 'Email' },
-                  { icon: MapPin, val: t.address, label: 'Location' }
-                ].map((item, idx) => (
-                  <div key={idx} className="saas-card !p-6">
-                    <item.icon size={20} className="text-sky-500 mb-3" />
-                    <div className="text-[10px] uppercase font-bold text-slate-500 mb-1">{item.label}</div>
-                    <div className="text-xs font-bold text-white truncate">{item.val}</div>
+      {/* Skills Section */}
+      <section id="competences-section">
+        <div className="container-corp">
+          <h2 className="text-4xl mb-12 border-b border-slate-100 pb-6">{t.skillsTitle}</h2>
+          <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
+            {t.skills.map((skill, index) => (
+              <div key={index} className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <IconMapper iconKey={skill.icon} size={20} className="text-blue-600" />
+                    <h3 className="text-lg font-bold">{skill.nom}</h3>
                   </div>
-                ))}
+                  <span className="text-sm font-bold text-slate-400">{competences[index].niveau}%</span>
+                </div>
+                <div className="skill-track">
+                  <div className="skill-fill" style={{ width: `${competences[index].niveau}%` }}></div>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="grid grid-cols-2 gap-4 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-              {t.skills.slice(0, 4).map((skill, idx) => (
-                <div key={idx} className="saas-card flex flex-col items-center text-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-500">
-                    <IconMapper iconKey={skill.icon} size={24} />
-                  </div>
-                  <div className="font-bold text-sm text-white">{skill.nom}</div>
+      {/* Contact Section */}
+      <section id="contact-section" className="bg-slate-50">
+        <div className="container-corp">
+          <h2 className="text-4xl mb-12 border-b border-slate-200 pb-6">{t.contactTitle}</h2>
+          <div className="grid md:grid-cols-3 gap-16">
+            <div className="md:col-span-2 text-lg text-slate-600 space-y-6">
+              <p>{t.aboutText1}</p>
+            </div>
+            <div className="space-y-8">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">Contact</h3>
+              {[ { icon: Mail, val: t.email }, { icon: MapPin, val: t.address }, { icon: Phone, val: t.phoneNumber } ].map((i, idx) => (
+                <div key={idx} className="flex items-center gap-4 text-slate-600">
+                  <div className="p-2 rounded bg-slate-100 text-blue-600"><i.icon size={18} /></div>
+                  <span className="font-medium">{i.val}</span>
                 </div>
               ))}
             </div>
@@ -1509,19 +1489,19 @@ const [, setActiveSection] = useState('home');
         </div>
       </section>
 
-      {/* Experience Timeline */}
-      <section id="experience-section" className="py-32 px-4 bg-slate-900/20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.experienceTitle}</h2>
-          <div className="timeline-track space-y-16">
+      {/* Experience Section */}
+      <section id="experience-section" className="bg-slate-50">
+        <div className="container-corp">
+          <h2 className="text-4xl mb-12 border-b border-slate-200 pb-6">{t.experienceTitle}</h2>
+          <div className="corp-timeline space-y-12">
             {t.experiences.map((exp, idx) => (
-              <div key={idx} className="relative animate-fade-up">
-                <div className="timeline-dot"></div>
-                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
-                  <h3 className="text-2xl font-bold text-white">{exp.titre}</h3>
-                  <div className="badge-saas h-fit">{exp.periode}</div>
+              <div key={idx} className="relative">
+                <div className="corp-timeline-dot"></div>
+                <div className="flex flex-col md:flex-row justify-between mb-4">
+                  <h3 className="text-2xl font-bold text-slate-900">{exp.titre}</h3>
+                  <span className="corp-badge h-fit mt-2 md:mt-0">{exp.periode}</span>
                 </div>
-                <p className="text-lg text-slate-400 leading-relaxed">{exp.description}</p>
+                <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">{exp.description}</p>
               </div>
             ))}
           </div>
@@ -1572,59 +1552,41 @@ const [, setActiveSection] = useState('home');
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section id="projets-section" className="py-32 px-4 bg-slate-900/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.projectsTitle}</h2>
+      {/* Projects Section */}
+      <section id="projets-section" className="bg-slate-50">
+        <div className="container-corp">
+          <h2 className="text-4xl mb-12 border-b border-slate-200 pb-6">{t.projectsTitle}</h2>
           <div className="grid md:grid-cols-2 gap-10">
             {projets.map((projet, idx) => {
               const projectData = t.projects[idx];
               return (
-                <div key={projet.id} className="saas-card group !p-0">
-                  <div className="aspect-video relative overflow-hidden bg-slate-950">
-                    <div className="absolute inset-0 flex items-center justify-center text-slate-800 transition-transform duration-700 group-hover:scale-110">
-                      {projet.demo === 'calculatrice' && <Calculator size={120} />}
-                      {projet.demo === 'todo' && <CheckSquare size={120} />}
-                      {projet.demo === 'contact' && <Mail size={120} />}
-                      {projet.demo === 'gallery' && <Image size={120} />}
-                      {projet.demo === 'clock' && <Clock size={120} />}
-                      {projet.demo === 'quiz' && <HelpCircle size={120} />}
-                      {projet.demo === 'souk' && <Layout size={120} />}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60"></div>
-                    <div className="absolute top-6 right-6">
-                      <div className="badge-saas !bg-white/10 !backdrop-blur-md">{t.difficulty[projet.difficulte]}</div>
-                    </div>
+                <div key={projet.id} className="corp-card flex flex-col">
+                  <div className="aspect-video bg-slate-100 rounded-md mb-8 flex items-center justify-center text-slate-300">
+                    {projet.demo === 'calculatrice' && <Calculator size={80} />}
+                    {projet.demo === 'todo' && <CheckSquare size={80} />}
+                    {projet.demo === 'contact' && <Mail size={80} />}
+                    {projet.demo === 'gallery' && <Image size={80} />}
+                    {projet.demo === 'clock' && <Clock size={80} />}
+                    {projet.demo === 'quiz' && <HelpCircle size={80} />}
+                    {projet.demo === 'souk' && <Layout size={80} />}
                   </div>
-                  
-                  <div className="p-10">
-                    <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-sky-400 transition-colors">{projectData.titre}</h3>
-                    <p className="text-lg text-slate-400 mb-8 line-clamp-2 leading-relaxed">{projectData.description}</p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-10">
-                      {projet.technologies.map((tech, i) => (
-                        <span key={i} className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-white/5 rounded-full border border-white/5 text-slate-500">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center gap-6">
-                      <button 
-                        onClick={() => setSelectedProject({ ...projet, ...projectData })}
-                        className="text-white font-bold text-sm flex items-center gap-2 hover:text-sky-400 transition-colors"
-                      >
-                        {t.details} <ChevronRight size={18} />
-                      </button>
-                      <a 
-                        href={`https://github.com/moha4848/${repoMap[projet.id]}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-white/5 border border-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
-                      >
-                        <Github size={20} />
-                      </a>
-                    </div>
+                  <h3 className="text-2xl font-bold mb-4">{projectData.titre}</h3>
+                  <p className="text-slate-600 mb-8 flex-1">{projectData.description}</p>
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-100">
+                    <button 
+                      onClick={() => setSelectedProject({ ...projet, ...projectData })}
+                      className="text-blue-600 font-bold hover:underline"
+                    >
+                      {t.details}
+                    </button>
+                    <a 
+                      href={`https://github.com/moha4848/${repoMap[projet.id]}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-slate-900 transition-colors"
+                    >
+                      <Github size={20} />
+                    </a>
                   </div>
                 </div>
               );
@@ -1753,45 +1715,39 @@ const [, setActiveSection] = useState('home');
         </div>
       )}
 
-      {/* Education Timeline */}
-      <section id="formation-section" className="py-32 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center text-white">{t.formationTitle}</h2>
-          <div className="timeline-track space-y-16">
+      {/* Formation Section */}
+      <section id="formation-section">
+        <div className="container-corp">
+          <h2 className="text-4xl mb-12 border-b border-slate-100 pb-6">{t.formationTitle}</h2>
+          <div className="corp-timeline space-y-12">
             {t.formations.map((f, idx) => (
-              <div key={idx} className="relative animate-fade-up">
-                <div className="timeline-dot"></div>
-                <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{f.titre}</h3>
-                    <div className="text-sky-400 font-bold text-sm tracking-tight">{f.etablissement}</div>
-                  </div>
-                  <div className="badge-saas h-fit">{f.periode}</div>
-                </div>
-                <p className="text-lg text-slate-400 leading-relaxed">{f.description}</p>
+              <div key={idx} className="relative">
+                <div className="corp-timeline-dot"></div>
+                <h3 className="text-2xl font-bold text-slate-900">{f.titre}</h3>
+                <p className="text-blue-600 font-bold mb-2">{f.etablissement} • {f.periode}</p>
+                <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Footer */}
-      <footer id="contact-section" className="py-20 px-4 border-t border-white/5">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-5xl font-black text-white mb-8 tracking-tighter">Ready to build something <span className="text-sky-500">great?</span></h2>
+      {/* Footer */}
+      <footer id="contact-section" className="bg-slate-900 py-20">
+        <div className="container-corp text-center">
+          <h2 className="text-4xl font-bold text-white mb-8">{t.contactMe}</h2>
           <div className="flex justify-center gap-8 mb-12">
             {[
               { icon: Github, url: 'https://github.com/moha4848' },
-              { icon: Mail, url: `mailto:${t.email}` },
-              { icon: ExternalLink, url: '#' }
+              { icon: Mail, url: `mailto:${t.email}` }
             ].map((item, idx) => (
-              <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full glass-panel flex items-center justify-center text-slate-400 hover:text-white hover:border-white transition-all shadow-xl">
+              <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded bg-white/10 flex items-center justify-center text-white hover:bg-blue-600 transition-all">
                 <item.icon size={24} />
               </a>
             ))}
           </div>
-          <div className="text-xs font-bold text-slate-600 uppercase tracking-widest">
-            &copy; 2024 Yousfi Mohammed • Full Stack Engineer
+          <div className="text-slate-500 text-sm font-medium">
+            &copy; 2024 Yousfi Mohammed. All rights reserved.
           </div>
         </div>
       </footer>
