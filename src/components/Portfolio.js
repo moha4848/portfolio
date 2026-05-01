@@ -33,7 +33,10 @@ import {
   Search,
   Layout,
   Cpu,
-  Languages
+  Languages,
+  ShieldCheck,
+  ShoppingBag,
+  User
 } from 'lucide-react';
 
 const IconMapper = ({ iconKey, size = 24, className = "" }) => {
@@ -374,6 +377,59 @@ export const QuizDemo = ({ t }) => {
   );
 };
 
+/* ================= SOUK OVERVIEW ================= */
+export const SoukOverview = ({ t }) => {
+  const stats = [
+    { label: t.soukStats.merchants, value: '50+', icon: Users, color: 'text-cyan-400' },
+    { label: t.soukStats.products, value: '1.2k+', icon: Layout, color: 'text-indigo-400' },
+    { label: t.soukStats.security, value: 'RBAC', icon: Lock, color: 'text-green-400' },
+    { label: t.soukStats.architecture, value: 'SaaS', icon: Server, color: 'text-purple-400' },
+  ];
+
+  const dashboards = [
+    { name: t.soukDashboards.admin, desc: t.soukDashboards.adminDesc, icon: ShieldCheck },
+    { name: t.soukDashboards.vendor, desc: t.soukDashboards.vendorDesc, icon: ShoppingBag },
+    { name: t.soukDashboards.client, desc: t.soukDashboards.clientDesc, icon: User },
+  ];
+
+  return (
+    <div className="p-6 glass-card rounded-2xl space-y-8 text-left">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent mb-2">
+          {t.soukOverviewTitle}
+        </h2>
+        <p className="text-slate-400">{t.soukOverviewSubtitle}</p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((stat, idx) => (
+          <div key={idx} className="p-4 rounded-xl bg-slate-900/50 border border-slate-700/30 text-center group hover:border-cyan-500/50 transition-all">
+            <stat.icon className={`mx-auto mb-2 ${stat.color} group-hover:scale-110 transition-transform`} size={24} />
+            <div className="text-xl font-bold text-white">{stat.value}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {dashboards.map((dash, idx) => (
+          <div key={idx} className="p-5 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 hover:border-indigo-500/30 transition-all">
+            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4">
+              <dash.icon size={20} />
+            </div>
+            <h4 className="font-bold text-white mb-2">{dash.name}</h4>
+            <p className="text-sm text-slate-400">{dash.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="p-4 rounded-xl bg-cyan-900/10 border border-cyan-500/20 text-center">
+        <p className="text-cyan-300 text-sm italic">{t.soukArchitectureNote}</p>
+      </div>
+    </div>
+  );
+};
+
 const translations = {
   fr: {
     nav: ['Accueil', 'À Propos', 'Compétences', 'Projets', 'Formation', 'Contact'],
@@ -459,6 +515,24 @@ const translations = {
     techUsed: 'Technologies utilisées',
     features: 'Fonctionnalités',
     demoNotAvailable: 'Démonstration en direct non disponible pour ce projet complexe. Veuillez consulter le code sur GitHub.',
+    
+    soukOverviewTitle: 'Aperçu du Système SOUK',
+    soukOverviewSubtitle: 'Architecture SaaS Multi-vendeurs de pointe',
+    soukStats: {
+      merchants: 'Vendeurs',
+      products: 'Produits',
+      security: 'Sécurité',
+      architecture: 'Structure'
+    },
+    soukDashboards: {
+      admin: 'Gouvernance Admin',
+      adminDesc: 'Contrôle total du système, validation des vendeurs et gestion globale.',
+      vendor: 'Espace Vendeur',
+      vendorDesc: 'Gestion des boutiques, produits, commandes et statistiques de vente.',
+      client: 'Expérience Acheteur',
+      clientDesc: 'Suivi des commandes, gestion du profil et points de fidélité.'
+    },
+    soukArchitectureNote: 'Propulsé par Laravel (Clean Architecture) et React (Modular Design)',
     
     formationTitle: 'Formation',
     formations: [
@@ -634,6 +708,24 @@ const translations = {
     features: 'Features',
     demoNotAvailable: 'Live demo not available for this complex project. Please check the code on GitHub.',
     
+    soukOverviewTitle: 'SOUK System Overview',
+    soukOverviewSubtitle: 'Cutting-edge Multi-vendor SaaS Architecture',
+    soukStats: {
+      merchants: 'Merchants',
+      products: 'Products',
+      security: 'Security',
+      architecture: 'Structure'
+    },
+    soukDashboards: {
+      admin: 'Admin Governance',
+      adminDesc: 'Full system control, vendor validation, and global management.',
+      vendor: 'Vendor Space',
+      vendorDesc: 'Store management, products, orders, and sales statistics.',
+      client: 'Buyer Experience',
+      clientDesc: 'Order tracking, profile management, and loyalty points.'
+    },
+    soukArchitectureNote: 'Powered by Laravel (Clean Architecture) and React (Modular Design)',
+    
     formationTitle: 'Education',
     formations: [
       {
@@ -808,6 +900,24 @@ const translations = {
     features: 'المميزات',
     demoNotAvailable: 'العرض المباشر غير متاح لهذا المشروع المعقد. يرجى الاطلاع على الكود على GitHub.',
     
+    soukOverviewTitle: 'نظرة عامة على نظام SOUK',
+    soukOverviewSubtitle: 'هندسة سحابية متطورة لتعدد البائعين',
+    soukStats: {
+      merchants: 'البائعين',
+      products: 'المنتجات',
+      security: 'الأمان',
+      architecture: 'البنية'
+    },
+    soukDashboards: {
+      admin: 'إدارة النظام',
+      adminDesc: 'تحكم كامل في النظام، تفعيل البائعين والإدارة الشاملة.',
+      vendor: 'مساحة البائع',
+      vendorDesc: 'إدارة المتجر، المنتجات، الطلبات وإحصائيات المبيعات.',
+      client: 'تجربة المشتري',
+      clientDesc: 'تتبع الطلبات، إدارة الملف الشخصي ونقاط الولاء.'
+    },
+    soukArchitectureNote: 'يعمل بواسطة Laravel (الهندسة النظيفة) و React (التصميم المعياري)',
+    
     formationTitle: 'التعليم',
     formations: [
       {
@@ -980,6 +1090,24 @@ const translations = {
     techUsed: 'Tecnologías Utilizadas',
     features: 'Características',
     demoNotAvailable: 'Demostración en vivo no disponible para este proyecto complejo. Por favor, consulte el código en GitHub.',
+    
+    soukOverviewTitle: 'Vista General de SOUK',
+    soukOverviewSubtitle: 'Arquitectura SaaS Multi-vendedor de Vanguardia',
+    soukStats: {
+      merchants: 'Vendedores',
+      products: 'Productos',
+      security: 'Seguridad',
+      architecture: 'Estructura'
+    },
+    soukDashboards: {
+      admin: 'Gobernanza Admin',
+      adminDesc: 'Control total del sistema, validación de vendedores y gestión global.',
+      vendor: 'Espacio Vendedor',
+      vendorDesc: 'Gestión de tiendas, productos, pedidos y estadísticas de ventas.',
+      client: 'Experiencia Comprador',
+      clientDesc: 'Seguimiento de pedidos, gestión de perfil y puntos de fidelidad.'
+    },
+    soukArchitectureNote: 'Impulsado por Laravel (Arquitectura Limpia) y React (Diseño Modular)',
     
     formationTitle: 'Formación',
     formations: [
@@ -1634,7 +1762,7 @@ const [, setActiveSection] = useState('home');
                 {selectedProject.id === 1 && <CalculatriceDemo t={t} />}
                 {selectedProject.id === 2 && <TodoDemo t={t} />}
                 {selectedProject.id === 3 && <ContactDemo t={t} />}
-                {selectedProject.id === 7 && <div className="p-8 text-center text-slate-400">{t.demoNotAvailable}</div>}
+                {selectedProject.id === 7 && <SoukOverview t={t} />}
                 {selectedProject.id === 4 && <GalleryDemo t={t} />}
                 {selectedProject.id === 5 && <ClockDemo t={t} />}
                 {selectedProject.id === 6 && <QuizDemo t={t} />}
