@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Github, Mail, Phone, MapPin, ExternalLink, Download, Layout, Calculator, CheckSquare, Image, Clock, HelpCircle, ChevronDown, Menu, X, ArrowRight, BookOpen, Briefcase, Cpu, User, Send, ChevronRight, Globe, Server, Database, Wrench, Code, Users, Smartphone, Palette, BarChart3, Cloud, Lock, ShieldCheck, ShoppingBag
 } from 'lucide-react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 
 const repoMap = {
   1: "calculatrice",
@@ -19,7 +19,6 @@ export const CalculatriceDemo = ({ t }) => {
   const [display, setDisplay] = useState('0');
   const [operation, setOperation] = useState('');
   const [previousValue, setPreviousValue] = useState('');
-
   const handleNumber = (num) => setDisplay(display === '0' ? num : display + num);
   const handleOperation = (op) => { setOperation(op); setPreviousValue(display); setDisplay('0'); };
   const calculate = () => {
@@ -130,13 +129,9 @@ const translations = {
     ],
     projectsTitle: 'Projets Réalisés',
     projects: [
-      { id: 1, titre: 'Calculatrice', desc: 'Opérations mathématiques de base', details: 'Une calculatrice interactive développée en JavaScript pour effectuer des calculs rapides.', tech: ['JS', 'CSS'] },
-      { id: 2, titre: 'Todo List', desc: 'Gestionnaire de tâches', details: 'Une application de productivité pour organiser vos tâches quotidiennes avec stockage local.', tech: ['React', 'LocalStorage'] },
-      { id: 3, titre: 'Contact Form', desc: 'Formulaire avec validation', details: 'Un formulaire de contact professionnel avec validation Regex en temps réel.', tech: ['JS', 'Regex'] },
-      { id: 4, titre: 'Galerie d\'Images', desc: 'Galerie responsive', details: 'Une galerie interactive avec effet lightbox pour visualiser des images.', tech: ['JS', 'CSS'] },
-      { id: 5, titre: 'Horloge Digitale', desc: 'Affichage temps réel', details: 'Une horloge précise affichant l\'heure et la date avec un design moderne.', tech: ['JS'] },
-      { id: 6, titre: 'Quiz Interactif', desc: 'Testez vos connaissances', details: 'Un quiz avec calcul de score et feedback immédiat sur les réponses.', tech: ['JS'] },
-      { id: 7, titre: 'SOUK Platform', desc: 'Marketplace SaaS Complète', details: 'Plateforme e-commerce multi-vendeurs avec dashboards Admin, Vendeur et Client.', tech: ['Laravel', 'React', 'MySQL'] },
+      { id: 1, titre: 'Calculatrice', desc: 'Opérations mathématiques de base', details: 'Une calculatrice interactive développée en JavaScript.', tech: ['JS', 'CSS'] },
+      { id: 2, titre: 'Todo List', desc: 'Gestionnaire de tâches', details: 'Application de productivité avec stockage local.', tech: ['React'] },
+      { id: 7, titre: 'SOUK Platform', desc: 'E-commerce SaaS', details: 'Plateforme complète pour vendeurs et acheteurs.', tech: ['Laravel', 'React'] },
     ],
     formationTitle: 'Formation & Diplômes',
     formations: [
@@ -152,7 +147,6 @@ const translations = {
 export default function Portfolio() {
   const [lang, setLang] = useState('fr');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
   const location = useLocation();
   const t = translations[lang];
 
@@ -170,13 +164,64 @@ export default function Portfolio() {
     );
   };
 
+  const ProjectDetail = () => {
+    const { id } = useParams();
+    const p = t.projects.find(proj => proj.id === parseInt(id));
+    
+    if (!p) return <div className="py-24 text-center">Project not found</div>;
+
+    return (
+      <div className="py-24 bg-white min-h-screen fade-in">
+        <div className="max-w-4xl mx-auto px-6">
+          <Link to="/projects" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 mb-12 font-bold no-underline">
+            <ArrowRight className="rotate-180" size={20} /> Retour aux projets
+          </Link>
+          
+          <div className="mb-16">
+            <h1 className="text-6xl font-black mb-6 tracking-tighter">{p.titre}</h1>
+            <div className="flex flex-wrap gap-2">
+              {p.tech.map(tc => <span key={tc} className="px-4 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest">{tc}</span>)}
+            </div>
+          </div>
+
+          <div className="mb-20">
+            {p.id === 1 && <CalculatriceDemo t={t} />}
+            {p.id === 2 && <TodoDemo t={t} />}
+            {p.id === 7 && <SoukOverview t={t} />}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Description</h2>
+              <p className="text-xl text-slate-600 leading-relaxed">{p.details}</p>
+            </div>
+            <div className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100">
+              <h2 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6">Informations</h2>
+              <div className="space-y-6">
+                <div>
+                  <p className="text-slate-400 text-sm mb-1 uppercase font-bold tracking-wider">Repository</p>
+                  <a href={`https://github.com/moha4848/${repoMap[p.id]}`} target="_blank" rel="noreferrer" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
+                    <Github size={18} /> View on GitHub
+                  </a>
+                </div>
+                <div>
+                  <p className="text-slate-400 text-sm mb-1 uppercase font-bold tracking-wider">Difficulté</p>
+                  <p className="font-bold text-slate-900">Avancé</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900">
       {/* Navigation */}
       <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-100">
         <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
           <Link to="/" className="text-2xl font-black tracking-tighter text-blue-600 no-underline">YM<span className="text-slate-900">.</span></Link>
-          
           <nav className="hidden md:flex items-center gap-10">
             <NavLink to="/">{t.nav[0]}</NavLink>
             <NavLink to="/about">{t.nav[1]}</NavLink>
@@ -184,7 +229,6 @@ export default function Portfolio() {
             <NavLink to="/skills">{t.nav[3]}</NavLink>
             <NavLink to="/projects">{t.nav[4]}</NavLink>
           </nav>
-
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-slate-900">
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -205,7 +249,6 @@ export default function Portfolio() {
       {/* Main Content */}
       <main className="pt-20">
         <Routes>
-          {/* HOME PAGE */}
           <Route path="/" element={
             <div className="fade-in">
               <section className="min-h-[80vh] flex items-center bg-slate-50 border-b border-slate-100">
@@ -226,19 +269,9 @@ export default function Portfolio() {
                   </div>
                 </div>
               </section>
-              <section className="py-24 bg-white">
-                <div className="max-w-6xl mx-auto px-6 text-center">
-                  <h2 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-12">Me Contacter Directement</h2>
-                  <div className="flex justify-center gap-12">
-                    <a href={`mailto:${t.email}`} className="text-slate-900 hover:text-blue-600 transition-colors"><Mail size={40} /></a>
-                    <a href="https://github.com/moha4848" className="text-slate-900 hover:text-blue-600 transition-colors"><Github size={40} /></a>
-                  </div>
-                </div>
-              </section>
             </div>
           } />
 
-          {/* ABOUT PAGE */}
           <Route path="/about" element={
             <div className="py-24 fade-in">
               <div className="max-w-4xl mx-auto px-6">
@@ -247,7 +280,6 @@ export default function Portfolio() {
                   <p className="bg-blue-50 p-8 rounded-3xl text-blue-900 font-medium italic border-l-8 border-blue-600">{t.aboutText1}</p>
                   <p>{t.aboutText2}</p>
                 </div>
-
                 <div className="mt-24">
                   <h3 className="text-3xl font-black mb-12 tracking-tighter">{t.formationTitle}</h3>
                   <div className="space-y-10 border-l-2 border-slate-100 pl-8 ml-4">
@@ -265,7 +297,6 @@ export default function Portfolio() {
             </div>
           } />
 
-          {/* EXPERIENCE PAGE */}
           <Route path="/experience" element={
             <div className="py-24 bg-slate-50 min-h-screen fade-in">
               <div className="max-w-4xl mx-auto px-6">
@@ -285,7 +316,6 @@ export default function Portfolio() {
             </div>
           } />
 
-          {/* SKILLS PAGE */}
           <Route path="/skills" element={
             <div className="py-24 fade-in">
               <div className="max-w-6xl mx-auto px-6">
@@ -308,7 +338,6 @@ export default function Portfolio() {
             </div>
           } />
 
-          {/* PROJECTS PAGE */}
           <Route path="/projects" element={
             <div className="py-24 bg-slate-50 min-h-screen fade-in">
               <div className="max-w-6xl mx-auto px-6">
@@ -319,10 +348,6 @@ export default function Portfolio() {
                       <div className="aspect-video bg-slate-100 flex items-center justify-center text-slate-300 group-hover:scale-105 transition-transform duration-500">
                         {p.id === 1 && <Calculator size={100} strokeWidth={1} />}
                         {p.id === 2 && <CheckSquare size={100} strokeWidth={1} />}
-                        {p.id === 3 && <Mail size={100} strokeWidth={1} />}
-                        {p.id === 4 && <Image size={100} strokeWidth={1} />}
-                        {p.id === 5 && <Clock size={100} strokeWidth={1} />}
-                        {p.id === 6 && <HelpCircle size={100} strokeWidth={1} />}
                         {p.id === 7 && <Layout size={100} strokeWidth={1} />}
                       </div>
                       <div className="p-10">
@@ -332,7 +357,7 @@ export default function Portfolio() {
                           {p.tech.map(t => <span key={t} className="px-4 py-1.5 bg-slate-50 text-slate-600 rounded-full text-xs font-bold uppercase tracking-widest">{t}</span>)}
                         </div>
                         <div className="flex justify-between items-center pt-8 border-t border-slate-50">
-                          <button onClick={() => setSelectedProject(p)} className="text-blue-600 font-black hover:underline tracking-tighter text-lg">{t.details}</button>
+                          <Link to={`/project/${p.id}`} className="text-blue-600 font-black hover:underline tracking-tighter text-lg no-underline">{t.details}</Link>
                           <a href={`https://github.com/moha4848/${repoMap[p.id]}`} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-slate-900 transition-colors"><Github size={24} /></a>
                         </div>
                       </div>
@@ -342,46 +367,9 @@ export default function Portfolio() {
               </div>
             </div>
           } />
+          <Route path="/project/:id" element={<ProjectDetail />} />
         </Routes>
       </main>
-
-      {/* Project Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xl z-[100] flex items-center justify-center p-6" onClick={() => setSelectedProject(null)}>
-          <div className="bg-white rounded-[3rem] max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-3xl animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-            <div className="p-12">
-              <div className="flex justify-between items-start mb-10">
-                <h2 className="text-4xl font-black tracking-tighter">{selectedProject.titre}</h2>
-                <button onClick={() => setSelectedProject(null)} className="p-3 bg-slate-50 rounded-full text-slate-400 hover:text-slate-900 transition-colors"><X size={32} /></button>
-              </div>
-              
-              <div className="mb-12">
-                {selectedProject.id === 1 && <CalculatriceDemo t={t} />}
-                {selectedProject.id === 2 && <TodoDemo t={t} />}
-                {selectedProject.id === 7 && <SoukOverview t={t} />}
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-12">
-                <div>
-                  <h3 className="text-xl font-bold mb-4 uppercase tracking-widest text-slate-400">Description</h3>
-                  <p className="text-lg text-slate-600 leading-relaxed">{selectedProject.details}</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-4 uppercase tracking-widest text-slate-400">Technologies</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProject.tech.map(tc => <span key={tc} className="px-6 py-3 bg-blue-50 text-blue-600 rounded-2xl font-bold">{tc}</span>)}
-                  </div>
-                  <div className="mt-8 pt-8 border-t border-slate-100">
-                    <a href={`https://github.com/moha4848/${repoMap[selectedProject.id]}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-black transition-all no-underline">
-                      <Github size={20} /> Repository GitHub
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Footer */}
       <footer className="py-20 border-t border-slate-100">
