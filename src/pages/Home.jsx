@@ -1,38 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Github } from 'lucide-react';
+import { Mail, Github, ArrowRight, Download } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 export default function Home() {
   const { t } = usePortfolio();
-  
+
   return (
     <div className="fade-in">
-      <section className="min-h-[85vh] flex items-center bg-slate-950">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative z-10">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm font-bold mb-6 tracking-wide uppercase border border-blue-500/20">Portfolio 2024</span>
-            <h1 className="text-6xl md:text-8xl font-black leading-[0.9] mb-8 text-white tracking-tighter">YOUSFI <br /><span className="text-blue-500">MOHAMMED</span></h1>
-            <p className="text-xl text-slate-400 font-medium max-w-lg mb-10 leading-relaxed">{t.role}</p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/projects" className="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold shadow-xl shadow-blue-500/20 hover:bg-blue-700 hover:-translate-y-1 transition-all no-underline">Voir Mes Projets</Link>
-              <Link to="/about" className="px-8 py-4 bg-slate-900 border border-white/5 text-white rounded-xl font-bold hover:bg-slate-800 hover:-translate-y-1 transition-all no-underline">En Savoir Plus</Link>
+      {/* HERO */}
+      <section className="hero-section">
+        <div className="container-corp">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }}
+               className="md:grid-cols-2">
+            <div>
+              <div className="hero-badge">Portfolio 2024</div>
+              <h1 className="hero-title">
+                Yousfi<br />
+                <span style={{ color: 'var(--accent-primary)' }}>Mohammed</span>
+              </h1>
+              <p style={{ fontSize: '1.125rem', color: 'var(--text-secondary)', maxWidth: '440px', margin: '24px 0 40px', fontWeight: 500, lineHeight: 1.7 }}>
+                {t.role}
+              </p>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                <Link to="/projects" className="btn-corp">Voir Mes Projets <ArrowRight size={16} /></Link>
+                <Link to="/about" className="btn-corp-outline">À Propos</Link>
+              </div>
             </div>
-          </div>
-          <div className="relative hidden md:block">
-            <div className="absolute inset-0 bg-blue-500/20 blur-[120px] rounded-full"></div>
-            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden border-8 border-white/5 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-              <img src="/profile.jpeg" alt="Yousfi Mohammed" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+            <div style={{ display: 'flex', justifyContent: 'center' }} className="hidden-mobile">
+              <div style={{
+                width: '340px', height: '420px',
+                borderRadius: '24px', overflow: 'hidden',
+                border: '6px solid white',
+                boxShadow: '0 32px 64px -16px rgba(37,99,235,0.2)',
+                transform: 'rotate(2deg)',
+                transition: 'transform 0.5s ease'
+              }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'rotate(0deg)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'rotate(2deg)'}>
+                <img src="/profile.jpeg" alt="Yousfi Mohammed" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="py-24 bg-slate-950 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-12">Me Contacter Directement</h2>
-          <div className="flex justify-center gap-12">
-            <a href={`mailto:${t.email}`} className="text-slate-400 hover:text-blue-500 transition-all hover:scale-110"><Mail size={40} /></a>
-            <a href="https://github.com/moha4848" className="text-slate-400 hover:text-blue-500 transition-all hover:scale-110"><Github size={40} /></a>
+
+      {/* CONTACT RAPIDE */}
+      <section className="section-corp" style={{ background: 'white', borderBottom: '1px solid var(--border-color)' }}>
+        <div className="container-corp" style={{ textAlign: 'center' }}>
+          <p className="section-subtitle">Contact Direct</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginTop: '32px' }}>
+            <a href={`mailto:${t.email}`} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 24px', border: '1.5px solid var(--border-color)', borderRadius: '12px', fontWeight: 600, color: 'var(--text-primary)', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent-primary)'; e.currentTarget.style.color = 'var(--accent-primary)'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.color = 'var(--text-primary)'; }}>
+              <Mail size={20} /> {t.email}
+            </a>
+            <a href="https://github.com/moha4848" target="_blank" rel="noreferrer"
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 24px', border: '1.5px solid var(--border-color)', borderRadius: '12px', fontWeight: 600, color: 'var(--text-primary)', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#0f172a'; e.currentTarget.style.background = '#0f172a'; e.currentTarget.style.color = 'white'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.background = 'white'; e.currentTarget.style.color = 'var(--text-primary)'; }}>
+              <Github size={20} /> GitHub
+            </a>
           </div>
         </div>
       </section>

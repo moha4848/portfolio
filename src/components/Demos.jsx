@@ -1,83 +1,115 @@
 import React, { useState } from 'react';
-import { Users, Layout, Lock, Trash2 } from 'lucide-react';
+import { Trash2, Users, Layout, Lock } from 'lucide-react';
 
 export const CalculatriceDemo = () => {
   const [display, setDisplay] = useState('0');
-  const [operation, setOperation] = useState('');
-  const [previousValue, setPreviousValue] = useState('');
+  const [op, setOp] = useState('');
+  const [prev, setPrev] = useState('');
 
-  const handleNumber = (num) => setDisplay(display === '0' ? num : display + num);
-  const handleOperation = (op) => { setOperation(op); setPreviousValue(display); setDisplay('0'); };
-  const calculate = () => {
-    const prev = parseFloat(previousValue);
-    const current = parseFloat(display);
-    let result;
-    switch (operation) {
-      case '+': result = prev + current; break;
-      case '-': result = prev - current; break;
-      case '×': result = prev * current; break;
-      case '÷': result = current !== 0 ? prev / current : 'Error'; break;
-      default: return;
-    }
-    setDisplay(result.toString()); setOperation(''); setPreviousValue('');
+  const handleNum = (n) => setDisplay(display === '0' ? n : display + n);
+  const handleOp = (o) => { setOp(o); setPrev(display); setDisplay('0'); };
+  const calc = () => {
+    const a = parseFloat(prev), b = parseFloat(display);
+    const res = op === '+' ? a + b : op === '-' ? a - b : op === '×' ? a * b : op === '÷' && b !== 0 ? a / b : 'Error';
+    setDisplay(String(res)); setOp(''); setPrev('');
   };
-  const clear = () => { setDisplay('0'); setOperation(''); setPreviousValue(''); };
+  const clear = () => { setDisplay('0'); setOp(''); setPrev(''); };
 
   return (
-    <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-xs mx-auto">
-      <div className="bg-white p-4 rounded-xl border border-slate-200 mb-4 text-right text-2xl font-mono h-16 flex items-center justify-end">{display}</div>
-      <div className="grid grid-cols-4 gap-2">
+    <div style={{ maxWidth: '300px', margin: '0 auto', background: 'white', border: '1px solid var(--border-color)', borderRadius: '20px', overflow: 'hidden', boxShadow: 'var(--card-shadow)' }}>
+      <div style={{ background: 'var(--text-primary)', padding: '24px 20px 16px', textAlign: 'right' }}>
+        <p style={{ color: '#475569', fontSize: '0.75rem', height: '18px', marginBottom: '4px' }}>{prev && `${prev} ${op}`}</p>
+        <p style={{ color: 'white', fontSize: '2.5rem', fontWeight: 700, letterSpacing: '-0.04em', fontFamily: 'monospace' }}>{display}</p>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'var(--border-color)' }}>
         {['7','8','9','÷','4','5','6','×','1','2','3','-','C','0','.','+'].map(btn => (
           <button key={btn} onClick={() => {
             if (btn === 'C') clear();
-            else if (['+','-','×','÷'].includes(btn)) handleOperation(btn);
-            else handleNumber(btn);
-          }} className="p-3 bg-white border border-slate-200 rounded hover:bg-slate-100 font-bold">{btn}</button>
+            else if (['+','-','×','÷'].includes(btn)) handleOp(btn);
+            else handleNum(btn);
+          }} style={{ padding: '16px', background: ['+','-','×','÷'].includes(btn) ? '#eff6ff' : 'white', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: '1rem', color: ['+','-','×','÷'].includes(btn) ? 'var(--accent-primary)' : btn === 'C' ? '#dc2626' : 'var(--text-primary)', transition: 'background 0.15s' }}
+            onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-secondary)'}
+            onMouseLeave={e => e.currentTarget.style.background = ['+','-','×','÷'].includes(btn) ? '#eff6ff' : 'white'}>
+            {btn}
+          </button>
         ))}
-        <button onClick={calculate} className="col-span-4 p-3 bg-blue-600 text-white rounded font-bold">=</button>
+        <button onClick={calc} style={{ gridColumn: 'span 4', padding: '16px', background: 'var(--accent-primary)', border: 'none', cursor: 'pointer', fontWeight: 800, fontSize: '1.1rem', color: 'white', transition: 'background 0.15s' }}
+          onMouseEnter={e => e.currentTarget.style.background = '#1d4ed8'}
+          onMouseLeave={e => e.currentTarget.style.background = 'var(--accent-primary)'}>
+          =
+        </button>
       </div>
     </div>
   );
 };
 
 export const TodoDemo = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([{ id: 1, text: 'Exemple de tâche', done: false }]);
   const [newTask, setNewTask] = useState('');
-  const addTask = () => { if (newTask.trim()) { setTasks([...tasks, { id: Date.now(), text: newTask, done: false }]); setNewTask(''); } };
+
+  const addTask = () => {
+    if (!newTask.trim()) return;
+    setTasks([...tasks, { id: Date.now(), text: newTask, done: false }]);
+    setNewTask('');
+  };
+
   return (
-    <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl max-w-md mx-auto">
-      <div className="flex gap-2 mb-4">
-        <input value={newTask} onChange={e => setNewTask(e.target.value)} className="flex-1 p-2 border border-slate-200 rounded" placeholder="New task..." />
-        <button onClick={addTask} className="px-4 py-2 bg-blue-600 text-white rounded font-bold">+</button>
+    <div style={{ maxWidth: '420px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
+        <input value={newTask} onChange={e => setNewTask(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && addTask()}
+          className="input-corp" style={{ flex: 1, paddingLeft: '16px' }} placeholder="Ajouter une tâche..." />
+        <button onClick={addTask} className="btn-corp" style={{ padding: '12px 20px', flexShrink: 0 }}>+</button>
       </div>
-      <div className="space-y-2">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {tasks.map(task => (
-          <div key={task.id} className="flex items-center gap-2 p-2 bg-white border border-slate-100 rounded">
-            <input type="checkbox" checked={task.done} onChange={() => setTasks(tasks.map(tk => tk.id === task.id ? { ...tk, done: !tk.done } : tk))} />
-            <span className={task.done ? 'line-through text-slate-400' : ''}>{task.text}</span>
-            <button onClick={() => setTasks(tasks.filter(tk => tk.id !== task.id))} className="ml-auto text-slate-300 hover:text-red-500"><Trash2 size={16} /></button>
+          <div key={task.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', background: 'white', border: '1px solid var(--border-color)', borderRadius: '12px', transition: 'all 0.2s' }}>
+            <input type="checkbox" checked={task.done} onChange={() => setTasks(tasks.map(t => t.id === task.id ? { ...t, done: !t.done } : t))}
+              style={{ accentColor: 'var(--accent-primary)', width: '16px', height: '16px', cursor: 'pointer' }} />
+            <span style={{ flex: 1, fontWeight: 500, color: task.done ? '#94a3b8' : 'var(--text-primary)', textDecoration: task.done ? 'line-through' : 'none', fontSize: '0.95rem' }}>
+              {task.text}
+            </span>
+            <button onClick={() => setTasks(tasks.filter(t => t.id !== task.id))}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#cbd5e1', transition: 'color 0.2s', padding: '4px' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#dc2626'}
+              onMouseLeave={e => e.currentTarget.style.color = '#cbd5e1'}>
+              <Trash2 size={16} />
+            </button>
           </div>
         ))}
       </div>
+      <p style={{ marginTop: '12px', fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600, textAlign: 'right' }}>
+        {tasks.filter(t => t.done).length}/{tasks.length} terminées
+      </p>
     </div>
   );
 };
 
 export const SoukOverview = () => {
   const stats = [
-    { label: "Vendeurs", value: '50+', icon: Users, color: 'text-blue-600' },
-    { label: "Produits", value: '1.2k+', icon: Layout, color: 'text-blue-600' },
-    { label: "Sécurité", value: 'RBAC', icon: Lock, color: 'text-blue-600' },
+    { label: 'Vendeurs Actifs', value: '50+', icon: Users, color: 'var(--accent-primary)', bg: '#dbeafe' },
+    { label: 'Produits Listés', value: '1.2k+', icon: Layout, color: '#059669', bg: '#d1fae5' },
+    { label: 'Sécurité', value: 'RBAC', icon: Lock, color: '#7c3aed', bg: '#ede9fe' },
   ];
+
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      {stats.map((s, i) => (
-        <div key={i} className="p-4 bg-white border border-slate-200 rounded-xl text-center">
-          <s.icon className={`mx-auto mb-2 ${s.color}`} size={24} />
-          <div className="text-xl font-bold">{s.value}</div>
-          <div className="text-xs text-slate-500 uppercase">{s.label}</div>
-        </div>
-      ))}
+    <div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
+        {stats.map((s, i) => (
+          <div key={i} style={{ background: 'white', border: '1px solid var(--border-color)', borderRadius: '16px', padding: '24px', textAlign: 'center', boxShadow: 'var(--card-shadow)' }}>
+            <div style={{ background: s.bg, width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', color: s.color }}>
+              <s.icon size={22} />
+            </div>
+            <p style={{ fontSize: '1.6rem', fontWeight: 900, letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>{s.value}</p>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: '4px' }}>{s.label}</p>
+          </div>
+        ))}
+      </div>
+      <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', textAlign: 'center' }}>
+        <p style={{ color: 'var(--accent-primary)', fontSize: '0.875rem', fontWeight: 600 }}>
+          ⚡ Propulsé par Laravel (Clean Architecture) + React (Modular Design)
+        </p>
+      </div>
     </div>
   );
 };

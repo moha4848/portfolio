@@ -1,38 +1,61 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 
+const experiences = [
+  {
+    titre: 'Stage de fin de formation – ONEE',
+    company: 'Office National de l\'Électricité et de l\'Eau Potable',
+    periode: '2024 · 2 mois',
+    type: 'Stage',
+    description: 'Développement d\'une application de gestion de laboratoire et de suivi des équipements techniques. Contribution à l\'analyse, conception et développement. Utilisation de PHP/Laravel pour le backend et collaboration avec l\'équipe technique.',
+    tasks: ['Analyse des besoins', 'Conception base de données', 'Développement PHP/Laravel', 'Tests et validation']
+  },
+  {
+    titre: 'Développeur Full Stack',
+    company: 'SOUK SaaS Marketplace',
+    periode: '2024 – 2025',
+    type: 'Projet Personnel',
+    description: 'Création d\'une plateforme e-commerce multi-vendeurs SaaS avec tableau de bord complet pour Admin, Vendeurs et Clients. Architecture clean avec gestion des rôles (RBAC).',
+    tasks: ['Architecture multi-tenant', 'API REST Laravel', 'Frontend React', 'Système RBAC']
+  }
+];
+
 export default function Experience() {
   const { t } = usePortfolio();
-  
-  const experiences = [
-    {
-      titre: 'Stage de fin de formation – ONEE',
-      periode: '2024 (2 mois)',
-      description: 'Développement d’une application de gestion de laboratoire et de suivi des équipements techniques. Utilisation de PHP/Laravel pour le backend.'
-    },
-    {
-      titre: 'Projet SOUK SaaS',
-      periode: '2024 - 2025',
-      description: 'Création d’une marketplace multi-vendeurs avec gestion complète des stocks et des commandes.'
-    }
-  ];
 
   return (
-    <div className="py-24 bg-slate-950 min-h-screen fade-in">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-5xl font-black mb-16 tracking-tighter text-center text-white">{t.experienceTitle}</h2>
-        <div className="space-y-16">
-          {experiences.map((exp, idx) => (
-            <div key={idx} className="bg-slate-900 p-10 rounded-[2rem] border border-white/5 shadow-2xl hover:border-blue-500/20 transition-all border-t-8 border-t-blue-600">
-              <div className="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
-                <h3 className="text-3xl font-bold text-white leading-tight">{exp.titre}</h3>
-                <span className="px-5 py-2 bg-blue-500/10 text-blue-400 rounded-full font-bold text-sm whitespace-nowrap border border-blue-500/20">{exp.periode}</span>
+    <div className="fade-in">
+      <section className="section-corp-alt">
+        <div className="container-corp">
+          <p className="section-subtitle">Parcours professionnel</p>
+          <h2 className="section-title" style={{ marginBottom: '64px' }}>{t.experienceTitle}</h2>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            {experiences.map((exp, i) => (
+              <div key={i} className="exp-card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '4px' }}>{exp.titre}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontWeight: 600, fontSize: '0.95rem' }}>{exp.company}</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <span style={{ background: '#f0f9ff', color: '#0284c7', border: '1px solid #bae6fd', padding: '4px 12px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{exp.type}</span>
+                    <span className="period-badge">{exp.periode}</span>
+                  </div>
+                </div>
+
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '24px', fontSize: '0.95rem' }}>{exp.description}</p>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {exp.tasks.map((task, j) => (
+                    <span key={j} className="tech-badge">{task}</span>
+                  ))}
+                </div>
               </div>
-              <p className="text-xl text-slate-400 leading-relaxed">{exp.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

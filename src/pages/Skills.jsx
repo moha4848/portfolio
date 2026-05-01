@@ -1,28 +1,45 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 
+const skillLevels = [90, 70, 85, 80, 75, 90];
+
 export default function Skills() {
   const { t, skills } = usePortfolio();
-  
+
   return (
-    <div className="py-24 bg-slate-950 min-h-screen fade-in">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-5xl font-black mb-16 tracking-tighter border-b border-white/5 pb-8 text-white">{t.skillsTitle}</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((skill, i) => (
-            <div key={i} className="p-8 bg-slate-900 border border-white/5 rounded-3xl shadow-xl hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300">
-              <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 mb-6 border border-blue-500/20">
-                <skill.icon size={32} />
+    <div className="fade-in">
+      <section className="section-corp">
+        <div className="container-corp">
+          <p className="section-subtitle">Expertise technique</p>
+          <h2 className="section-title" style={{ marginBottom: '64px' }}>{t.skillsTitle}</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
+            {skills.map((skill, i) => (
+              <div key={i} className="corp-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div style={{ background: '#dbeafe', padding: '12px', borderRadius: '12px', color: 'var(--accent-primary)', flexShrink: 0 }}>
+                    <skill.icon size={26} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, marginBottom: '2px' }}>{skill.nom}</h3>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{skill.details}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8' }}>Maîtrise</span>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-primary)' }}>{skillLevels[i]}%</span>
+                  </div>
+                  <div className="skill-track">
+                    <div className="skill-fill" style={{ width: `${skillLevels[i]}%` }}></div>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-white">{skill.nom}</h3>
-              <p className="text-slate-500 font-medium mb-6">{skill.details}</p>
-              <div className="w-full bg-slate-950 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/5">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-400 h-1.5 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.3)]" style={{ width: '85%' }}></div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

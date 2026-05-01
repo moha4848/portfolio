@@ -8,55 +8,75 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
-  const NavLink = ({ to, children }) => {
-    const active = location.pathname === to;
-    return (
-      <Link 
-        to={to} 
-        className={`text-sm font-bold transition-all ${active ? 'text-blue-400 scale-110' : 'text-slate-400 hover:text-blue-400'}`} 
-        onClick={() => setMenuOpen(false)}
-      >
-        {children}
-      </Link>
-    );
-  };
+  const navItems = [
+    { to: '/', label: t.nav[0] },
+    { to: '/about', label: t.nav[1] },
+    { to: '/experience', label: t.nav[2] },
+    { to: '/skills', label: t.nav[3] },
+    { to: '/projects', label: t.nav[4] },
+  ];
+
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-xl z-50 border-b border-white/5">
-      <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-black tracking-tighter text-blue-500 no-underline">
-          YM<span className="text-white">.</span>
-        </Link>
-        
-        <nav className="hidden md:flex items-center gap-10">
-          <NavLink to="/">{t.nav[0]}</NavLink>
-          <NavLink to="/about">{t.nav[1]}</NavLink>
-          <NavLink to="/experience">{t.nav[2]}</NavLink>
-          <NavLink to="/skills">{t.nav[3]}</NavLink>
-          <NavLink to="/projects">{t.nav[4]}</NavLink>
-          <Link 
-            to="/dashboard" 
-            className="px-4 py-2 bg-white text-slate-950 rounded-lg text-xs font-black hover:bg-blue-400 transition-all no-underline"
-          >
-            ADMIN
+    <>
+      <header className="nav-corp">
+        <div className="container-corp" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          {/* Logo */}
+          <Link to="/" style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '-0.05em', color: 'var(--accent-primary)' }}>
+            YM<span style={{ color: 'var(--text-primary)' }}>.</span>
           </Link>
-        </nav>
 
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-white">
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+          {/* Desktop Nav */}
+          <nav style={{ display: 'flex', gap: '8px', alignItems: 'center' }} className="desktop-nav">
+            {navItems.map(item => (
+              <Link key={item.to} to={item.to}
+                className={`nav-link ${isActive(item.to) ? 'active' : ''}`}
+                style={{ padding: '8px 16px' }}>
+                {item.label}
+              </Link>
+            ))}
+            <div style={{ width: '1px', height: '20px', background: 'var(--border-color)', margin: '0 8px' }} />
+            <Link to="/dashboard"
+              style={{ padding: '8px 18px', background: 'var(--text-primary)', color: 'white', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.02em', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-primary)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'var(--text-primary)'; }}>
+              Admin
+            </Link>
+          </nav>
 
+          {/* Mobile Burger */}
+          <button onClick={() => setMenuOpen(!menuOpen)}
+            style={{ display: 'none', padding: '8px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}
+            className="mobile-burger">
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-slate-950 z-[49] md:hidden flex flex-col p-10 pt-32 gap-8 animate-in slide-in-from-top duration-300">
-          <NavLink to="/">{t.nav[0]}</NavLink>
-          <NavLink to="/about">{t.nav[1]}</NavLink>
-          <NavLink to="/experience">{t.nav[2]}</NavLink>
-          <NavLink to="/skills">{t.nav[3]}</NavLink>
-          <NavLink to="/projects">{t.nav[4]}</NavLink>
-          <NavLink to="/dashboard">Dashboard Admin</NavLink>
+        <div style={{ position: 'fixed', inset: 0, background: 'white', zIndex: 99, display: 'flex', flexDirection: 'column', padding: '100px 32px 48px' }}>
+          {navItems.map(item => (
+            <Link key={item.to} to={item.to}
+              onClick={() => setMenuOpen(false)}
+              style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.04em', color: isActive(item.to) ? 'var(--accent-primary)' : 'var(--text-primary)', borderBottom: '1px solid var(--border-color)', paddingBottom: '20px', marginBottom: '20px' }}>
+              {item.label}
+            </Link>
+          ))}
+          <Link to="/dashboard" onClick={() => setMenuOpen(false)}
+            style={{ fontSize: '1.2rem', fontWeight: 700, color: '#94a3b8', marginTop: '16px' }}>
+            Dashboard Admin →
+          </Link>
         </div>
       )}
-    </header>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-burger { display: flex !important; }
+        }
+      `}</style>
+    </>
   );
 }

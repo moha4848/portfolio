@@ -1,42 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calculator, CheckSquare, Layout, Github } from 'lucide-react';
+import { Github, ArrowRight, Calculator, CheckSquare, Layout, Mail, Clock, HelpCircle, Image } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+
+const iconMap = { 1: Calculator, 2: CheckSquare, 3: Mail, 4: Image, 5: Clock, 6: HelpCircle, 7: Layout };
 
 export default function Projects() {
   const { t, projects } = usePortfolio();
-  
+
   return (
-    <div className="py-24 bg-slate-950 min-h-screen fade-in">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-5xl font-black mb-16 tracking-tighter text-center text-white">{t.projectsTitle}</h2>
-        <div className="grid md:grid-cols-2 gap-12">
-          {projects.map((p) => (
-            <div key={p.id} className="group bg-slate-900 rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl hover:border-blue-500/30 transition-all duration-500">
-              <div className="aspect-video bg-slate-950 flex items-center justify-center text-slate-700 group-hover:scale-105 transition-transform duration-700">
-                {p.id === 1 && <Calculator size={100} strokeWidth={1} />}
-                {p.id === 2 && <CheckSquare size={100} strokeWidth={1} />}
-                {p.id === 7 && <Layout size={100} strokeWidth={1} />}
-              </div>
-              <div className="p-10">
-                <h3 className="text-3xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">{p.titre}</h3>
-                <p className="text-lg text-slate-400 mb-8 leading-relaxed">{p.desc}</p>
-                <div className="flex flex-wrap gap-2 mb-10">
-                  {p.tech.map(tag => (
-                    <span key={tag} className="px-4 py-1.5 bg-slate-950 text-slate-400 rounded-full text-xs font-bold uppercase tracking-widest border border-white/5">
-                      {tag}
-                    </span>
-                  ))}
+    <div className="fade-in">
+      <section className="section-corp-alt">
+        <div className="container-corp">
+          <p className="section-subtitle">Réalisations</p>
+          <h2 className="section-title" style={{ marginBottom: '64px' }}>{t.projectsTitle}</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '28px' }}>
+            {projects.map((p) => {
+              const Icon = iconMap[p.id] || Layout;
+              return (
+                <div key={p.id} className="project-card">
+                  <div className="project-thumb">
+                    <Icon size={80} strokeWidth={0.8} />
+                  </div>
+
+                  <div style={{ padding: '28px' }}>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '8px' }}>{p.titre}</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: 1.7, fontSize: '0.9rem' }}>{p.desc}</p>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '24px' }}>
+                      {p.tech.map(tag => <span key={tag} className="tech-badge">{tag}</span>)}
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
+                      <Link to={`/project/${p.id}`} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.9rem', transition: 'gap 0.2s' }}>
+                        Voir Détails <ArrowRight size={16} />
+                      </Link>
+                      <a href={`https://github.com/moha4848/${p.repo}`} target="_blank" rel="noreferrer"
+                        style={{ color: '#94a3b8', transition: 'color 0.2s' }}
+                        onMouseEnter={e => e.currentTarget.style.color = '#0f172a'}
+                        onMouseLeave={e => e.currentTarget.style.color = '#94a3b8'}>
+                        <Github size={22} />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center pt-8 border-t border-white/5">
-                  <Link to={`/project/${p.id}`} className="text-blue-500 font-black hover:text-blue-300 tracking-tighter text-lg no-underline transition-colors">Voir Détails</Link>
-                  <a href={`https://github.com/moha4848/${p.repo}`} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-white transition-all hover:scale-110"><Github size={24} /></a>
-                </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

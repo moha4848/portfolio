@@ -1,62 +1,84 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowRight, Github } from 'lucide-react';
+import { ArrowLeft, Github, Code, CheckCircle } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { CalculatriceDemo, TodoDemo, SoukOverview } from '../components/Demos';
 
 export default function ProjectDetail() {
   const { id } = useParams();
-  const { projects, t } = usePortfolio();
+  const { projects } = usePortfolio();
   const p = projects.find(proj => proj.id === parseInt(id));
-  
-  if (!p) return <div className="py-24 text-center text-white">Project not found</div>;
+
+  if (!p) return (
+    <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+      <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Projet introuvable.</p>
+      <Link to="/projects" className="btn-corp">Retour aux projets</Link>
+    </div>
+  );
 
   return (
-    <div className="py-24 bg-slate-950 min-h-screen fade-in">
-      <div className="max-w-4xl mx-auto px-6">
-        <Link to="/projects" className="flex items-center gap-2 text-slate-500 hover:text-blue-400 mb-12 font-bold no-underline transition-colors">
-          <ArrowRight className="rotate-180" size={20} /> Retour aux projets
-        </Link>
-        
-        <div className="mb-16">
-          <h1 className="text-6xl font-black mb-6 tracking-tighter text-white">{p.titre}</h1>
-          <div className="flex flex-wrap gap-2">
-            {p.tech.map(tc => <span key={tc} className="px-4 py-1 bg-blue-500/10 text-blue-400 rounded-full text-xs font-bold uppercase tracking-widest border border-blue-500/20">{tc}</span>)}
-          </div>
-        </div>
+    <div className="fade-in">
+      <section className="section-corp">
+        <div className="container-corp">
+          {/* Back */}
+          <Link to="/projects" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.9rem', marginBottom: '48px', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-primary)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
+            <ArrowLeft size={18} /> Retour aux projets
+          </Link>
 
-        <div className="mb-20">
-          <div className="p-1 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-[2.5rem]">
-            <div className="bg-slate-900 rounded-[2.4rem] p-12 shadow-2xl">
-              {p.id === 1 && <CalculatriceDemo />}
-              {p.id === 2 && <TodoDemo />}
-              {p.id === 7 && <SoukOverview />}
+          {/* Header */}
+          <div style={{ marginBottom: '48px' }}>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.04em', marginBottom: '16px' }}>{p.titre}</h1>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {p.tech.map(tc => <span key={tc} className="tech-badge">{tc}</span>)}
             </div>
           </div>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-16">
-          <div>
-            <h2 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-6">Description</h2>
-            <p className="text-xl text-slate-400 leading-relaxed">{p.details}</p>
+          {/* Demo */}
+          <div style={{ background: 'var(--bg-secondary)', borderRadius: '20px', padding: '40px', border: '1px solid var(--border-color)', marginBottom: '48px' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '24px' }}>Démonstration interactive</p>
+            {p.id === 1 && <CalculatriceDemo />}
+            {p.id === 2 && <TodoDemo />}
+            {p.id === 7 && <SoukOverview />}
+            {![1, 2, 7].includes(p.id) && (
+              <div style={{ textAlign: 'center', padding: '40px 0', color: 'var(--text-secondary)' }}>
+                <Code size={48} style={{ marginBottom: '12px', opacity: 0.4 }} />
+                <p style={{ fontWeight: 600 }}>Voir le code sur GitHub</p>
+              </div>
+            )}
           </div>
-          <div className="p-10 bg-slate-900 rounded-[2.5rem] border border-white/5 shadow-xl">
-            <h2 className="text-sm font-black uppercase tracking-widest text-slate-500 mb-6">Informations</h2>
-            <div className="space-y-6">
-              <div>
-                <p className="text-slate-500 text-sm mb-1 uppercase font-bold tracking-wider">Repository</p>
-                <a href={`https://github.com/moha4848/${p.repo}`} target="_blank" rel="noreferrer" className="text-blue-400 font-bold hover:text-blue-300 flex items-center gap-2 no-underline transition-colors">
-                  <Github size={18} /> View on GitHub
+
+          {/* Details */}
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+            <div>
+              <h2 style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '16px' }}>Description</h2>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>{p.details}</p>
+            </div>
+
+            <div style={{ background: 'var(--bg-secondary)', borderRadius: '16px', padding: '28px', border: '1px solid var(--border-color)' }}>
+              <h2 style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '24px' }}>Informations</h2>
+              <div style={{ marginBottom: '24px' }}>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: '#94a3b8', marginBottom: '8px' }}>Repository</p>
+                <a href={`https://github.com/moha4848/${p.repo}`} target="_blank" rel="noreferrer"
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-primary)', fontWeight: 700, fontSize: '0.9rem' }}>
+                  <Github size={18} /> GitHub →
                 </a>
               </div>
-              <div>
-                <p className="text-slate-500 text-sm mb-1 uppercase font-bold tracking-wider">Difficulté</p>
-                <p className="font-bold text-white">Avancé</p>
+              <div style={{ paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: '#94a3b8', marginBottom: '8px' }}>Stack</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {p.tech.map(tc => (
+                    <div key={tc} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.9rem' }}>
+                      <CheckCircle size={14} style={{ color: 'var(--accent-primary)' }} /> {tc}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
