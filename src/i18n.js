@@ -128,46 +128,61 @@ const translations = {
     projectsTitle: 'Mes Projets',
     projects: [
       {
+        titre: 'SOUK — Plateforme SaaS Marketplace',
+        description: 'Plateforme marketplace multi-tenant construite avec Laravel et React.',
+        details: 'Une plateforme SaaS complète de type marketplace permettant à des vendeurs d\'ouvrir leur boutique en ligne, de gérer leurs produits, commandes et finances. Inclut un système RBAC multi-rôles (Admin, Vendeur, Client), une API REST sécurisée et une interface React moderne.',
+        fonctionnalites: ['Multi-tenant (plusieurs boutiques)', 'RBAC : Admin / Vendeur / Client', 'Gestion des produits & commandes', 'API REST sécurisée (Laravel Sanctum)', 'Interface React + Tailwind CSS'],
+        technologies: ['Laravel', 'React', 'MySQL', 'Tailwind CSS', 'Sanctum'],
+        github: 'https://github.com/moha4848/souk',
+        featured: true
+      },
+      {
         titre: 'Calculatrice Simple',
         description: 'Calculatrice avec opérations de base et interface moderne',
         details: 'Une calculatrice interactive qui permet d\'effectuer les opérations mathématiques de base : addition, soustraction, multiplication et division.',
         fonctionnalites: ['Addition, soustraction, multiplication, division', 'Interface responsive', 'Affichage des résultats', 'Bouton clear pour réinitialiser'],
-        technologies: ['HTML', 'CSS', 'JavaScript']
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        github: 'https://github.com/moha4848'
       },
       {
         titre: 'Liste de Tâches (To-Do List)',
         description: 'Application pour gérer vos tâches quotidiennes',
         details: 'Une application simple pour créer, marquer comme terminées et supprimer des tâches. Les données sont sauvegardées dans le navigateur.',
         fonctionnalites: ['Ajouter des tâches', 'Marquer comme terminé', 'Supprimer des tâches', 'Compteur de tâches'],
-        technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage']
+        technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
+        github: 'https://github.com/moha4848'
       },
       {
         titre: 'Formulaire de Contact',
         description: 'Formulaire avec validation des données',
         details: 'Un formulaire de contact professionnel avec validation en temps réel des champs email, téléphone et message.',
         fonctionnalites: ['Validation email', 'Validation téléphone', 'Messages d\'erreur', 'Design moderne'],
-        technologies: ['HTML', 'CSS', 'JavaScript', 'Regex']
+        technologies: ['HTML', 'CSS', 'JavaScript', 'Regex'],
+        github: 'https://github.com/moha4848'
       },
       {
         titre: 'Galerie d\'Images',
         description: 'Galerie responsive avec effet lightbox',
         details: 'Une galerie d\'images interactive avec possibilité d\'agrandir les images en plein écran et de naviguer entre elles.',
         fonctionnalites: ['Affichage en grille', 'Mode plein écran', 'Navigation entre images', 'Animations fluides'],
-        technologies: ['HTML', 'CSS', 'JavaScript']
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        github: 'https://github.com/moha4848'
       },
       {
         titre: 'Horloge Digitale',
         description: 'Horloge en temps réel avec date',
         details: 'Une horloge numérique qui affiche l\'heure et la date en temps réel avec un design élégant.',
         fonctionnalites: ['Heure en temps réel', 'Date du jour', 'Format 24h', 'Design animé'],
-        technologies: ['HTML', 'CSS', 'JavaScript']
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        github: 'https://github.com/moha4848'
       },
       {
         titre: 'Quiz Interactif',
         description: 'Quiz avec score et correction',
         details: 'Application de quiz avec questions à choix multiples, système de score et affichage des bonnes réponses.',
         fonctionnalites: ['Questions multiples', 'Calcul du score', 'Feedback immédiat', 'Affichage du résultat final'],
-        technologies: ['HTML', 'CSS', 'JavaScript']
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        github: 'https://github.com/moha4848'
       }
     ],
     difficulty: { beginner: 'Débutant', intermediate: 'Intermédiaire', advanced: 'Avancé' },
@@ -546,12 +561,13 @@ export default function Portfolio() {
   ];
 
   const projets = [
-    { id: 1, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'beginner', demo: 'calculatrice' },
-    { id: 2, technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'], difficulte: 'beginner', demo: 'todo' },
-    { id: 3, technologies: ['HTML', 'CSS', 'JavaScript', 'Regex'], difficulte: 'intermediate', demo: 'contact' },
-    { id: 4, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'gallery' },
-    { id: 5, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'beginner', demo: 'clock' },
-    { id: 6, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'quiz' }
+    { id: 0, technologies: ['Laravel', 'React', 'MySQL', 'Tailwind CSS', 'Sanctum'], difficulte: 'advanced', demo: null, github: 'https://github.com/moha4848/souk', featured: true },
+    { id: 1, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'beginner', demo: 'calculatrice', github: 'https://github.com/moha4848' },
+    { id: 2, technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'], difficulte: 'beginner', demo: 'todo', github: 'https://github.com/moha4848' },
+    { id: 3, technologies: ['HTML', 'CSS', 'JavaScript', 'Regex'], difficulte: 'intermediate', demo: 'contact', github: 'https://github.com/moha4848' },
+    { id: 4, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'gallery', github: 'https://github.com/moha4848' },
+    { id: 5, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'beginner', demo: 'clock', github: 'https://github.com/moha4848' },
+    { id: 6, technologies: ['HTML', 'CSS', 'JavaScript'], difficulte: 'intermediate', demo: 'quiz', github: 'https://github.com/moha4848' }
   ];
 
   const LINKS = {
@@ -970,15 +986,21 @@ export default function Portfolio() {
                       <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">
                         {projectData.titre}
                       </h3>
-                      <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
-                        projet.difficulte === 'beginner'
-                          ? 'bg-green-900/30 text-green-400 border border-green-500/30'
-                          : projet.difficulte === 'intermediate'
-                          ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
-                          : 'bg-red-900/30 text-red-400 border border-red-500/30'
-                      }`}>
-                        {t.difficulty[projet.difficulte]}
-                      </span>
+                      {projet.featured ? (
+                        <span className="text-xs px-3 py-1.5 rounded-full font-semibold bg-blue-900/40 text-blue-300 border border-blue-500/50">
+                          ⭐ Featured
+                        </span>
+                      ) : (
+                        <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
+                          projet.difficulte === 'beginner'
+                            ? 'bg-green-900/30 text-green-400 border border-green-500/30'
+                            : projet.difficulte === 'intermediate'
+                            ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
+                            : 'bg-red-900/30 text-red-400 border border-red-500/30'
+                        }`}>
+                          {t.difficulty[projet.difficulte]}
+                        </span>
+                      )}
                     </div>
                     
                     <p className="text-slate-400 mb-4 line-clamp-2">
@@ -1041,7 +1063,7 @@ export default function Portfolio() {
               
               <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <a
-                  href={`https://github.com/moha4848/${['calculatrice', 'todo', 'contact', 'gallery', 'clock', 'quiz'][selectedProject.id - 1]}`}
+                  href={selectedProject.github || `https://github.com/moha4848`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg"
