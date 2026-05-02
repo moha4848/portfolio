@@ -14,11 +14,6 @@ const Home = () => {
 
   const icons = { Github, Linkedin, Instagram, Mail };
 
-  const handleDownloadCV = () => {
-    statsService.trackCVDownload();
-    window.open(process.env.PUBLIC_URL + '/CV_Yousfi_Mohammed.pdf', '_blank');
-  };
-
   const handleContactMe = () => {
     window.location.href = '#/contact'; // Or navigate using useNavigate
   };
@@ -45,10 +40,15 @@ const Home = () => {
           </p>
  
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <Button variant="primary" className="group" onClick={handleDownloadCV}>
+            <a 
+              href={process.env.PUBLIC_URL + '/CV_Yousfi_Mohammed.pdf'} 
+              download="CV_Yousfi_Mohammed.pdf"
+              onClick={() => statsService.trackCVDownload()}
+              className="px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-xl shadow-blue-500/20 hover:shadow-blue-500/40 hover:scale-105 active:scale-95"
+            >
               <Download size={20} className="group-hover:-translate-y-1 transition-transform" />
               {p.downloadCV}
-            </Button>
+            </a>
             <Button variant="secondary" onClick={() => window.location.href = '/portfolio/contact'}>
               {p.contactMe}
             </Button>
