@@ -8,6 +8,8 @@ const initialStats = {
   views: 1284,
   projectClicks: 432,
   cvDownloads: 89,
+  visitorCountry: 'Morocco',
+  visitorFlag: '🇲🇦',
   lastUpdated: new Date().toISOString()
 };
 
@@ -22,11 +24,23 @@ export const statsService = {
     }
   },
 
-  // Track a page view
-  trackView: () => {
+  // Track a page view and detect country
+  trackView: async () => {
     const stats = JSON.parse(localStorage.getItem(STATS_KEY) || JSON.stringify(initialStats));
     stats.views += 1;
     stats.lastUpdated = new Date().toISOString();
+    
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      if (data.country_name) {
+        stats.visitorCountry = data.country_name;
+        stats.visitorFlag = data.country_code; // We'll convert this to emoji in UI
+      }
+    } catch (e) {
+      console.warn("Could not detect country:", e);
+    }
+    
     localStorage.setItem(STATS_KEY, JSON.stringify(stats));
   },
 

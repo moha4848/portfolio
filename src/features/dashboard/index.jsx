@@ -80,7 +80,13 @@ const Dashboard = () => {
   const maxTraffic = Math.max(...visitorTraffic);
 
   const geographicReach = [
-    { country: "Morocco", flag: "🇲🇦", percent: 65 },
+    { 
+      country: localStats.visitorCountry || "Morocco", 
+      flag: localStats.visitorFlag?.length === 2 ? 
+        String.fromCodePoint(...[...localStats.visitorFlag.toUpperCase()].map(c => c.charCodeAt() + 127397)) : 
+        "🇲🇦", 
+      percent: 65 
+    },
     { country: "France", flag: "🇫🇷", percent: 20 },
     { country: "USA", flag: "🇺🇸", percent: 10 },
     { country: "Other", flag: "🌍", percent: 5 }
