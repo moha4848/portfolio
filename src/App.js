@@ -3,9 +3,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { AppRouter } from './app/AppRouter';
+import { statsService } from './shared/services/statsService';
 import './index.css';
 
 function App() {
+  React.useEffect(() => {
+    statsService.init();
+    statsService.trackView();
+  }, []);
+
   return (
     <ThemeProvider>
       <LanguageProvider>

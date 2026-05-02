@@ -5,12 +5,18 @@ import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card, Button } from '../../shared/ui';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, X, Layout, Layers, Terminal } from 'lucide-react';
+import { statsService } from '../../shared/services/statsService';
 
 const Projects = () => {
   const { language } = useLanguage();
   const [filter, setFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
   const t = portfolioData.common[language];
+
+  const handleSelectProject = (project) => {
+    statsService.trackProjectClick();
+    setSelectedProject(project);
+  };
 
   const categories = ['All', 'Full-Stack', 'Frontend'];
   const projects = portfolioData.projects;
@@ -82,7 +88,7 @@ const Projects = () => {
                     <Button 
                       variant="secondary" 
                       className="w-full text-sm"
-                      onClick={() => setSelectedProject(project)}
+                      onClick={() => handleSelectProject(project)}
                     >
                       {t.details}
                     </Button>

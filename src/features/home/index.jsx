@@ -5,6 +5,7 @@ import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Button } from '../../shared/ui';
 import { Github, Linkedin, Instagram, Mail, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { statsService } from '../../shared/services/statsService';
 
 const Home = () => {
   const { language } = useLanguage();
@@ -12,6 +13,15 @@ const Home = () => {
   const social = portfolioData.social;
 
   const icons = { Github, Linkedin, Instagram, Mail };
+
+  const handleDownloadCV = () => {
+    statsService.trackCVDownload();
+    window.open(process.env.PUBLIC_URL + '/CV_Yousfi_Mohammed.pdf', '_blank');
+  };
+
+  const handleContactMe = () => {
+    window.location.href = '#/contact'; // Or navigate using useNavigate
+  };
 
   return (
     <PageWrapper>
@@ -29,17 +39,17 @@ const Home = () => {
               {p.name}
             </h1>
           </motion.div>
-
+ 
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
             {p.description}
           </p>
-
+ 
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-            <Button variant="primary" className="group">
+            <Button variant="primary" className="group" onClick={handleDownloadCV}>
               <Download size={20} className="group-hover:-translate-y-1 transition-transform" />
               {p.downloadCV}
             </Button>
-            <Button variant="secondary">
+            <Button variant="secondary" onClick={() => window.location.href = '/portfolio/contact'}>
               {p.contactMe}
             </Button>
           </div>
