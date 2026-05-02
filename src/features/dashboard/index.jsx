@@ -48,6 +48,10 @@ const Dashboard = () => {
     };
 
     fetchData();
+    
+    // Auto-refresh stats every 5 seconds for a "real-time" feel
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
   }, [isAuthenticated]);
 
   const handleLogin = () => {

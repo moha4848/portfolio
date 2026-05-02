@@ -150,7 +150,10 @@ const Projects = () => {
                 </div>
 
                 <div className="flex gap-4 pt-4">
-                  <Button variant="primary" className="flex-1" onClick={() => window.open(selectedProject.github, '_blank')}>
+                  <Button variant="primary" className="flex-1" onClick={() => {
+                    statsService.trackProjectClick();
+                    window.open(selectedProject.github, '_blank');
+                  }}>
                     <Github size={20} />
                     {t.github}
                   </Button>

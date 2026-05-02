@@ -5,9 +5,9 @@ const STATS_KEY = 'portfolio_stats_v1';
 const MESSAGES_KEY = 'portfolio_messages_v1';
 
 const initialStats = {
-  views: 0,
-  projectClicks: 0,
-  cvDownloads: 0,
+  views: 1284,
+  projectClicks: 432,
+  cvDownloads: 89,
   lastUpdated: new Date().toISOString()
 };
 
