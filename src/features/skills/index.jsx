@@ -6,6 +6,49 @@ import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
 import { Globe, Server, Database, Code, Wrench, Users, Layers, Map } from 'lucide-react';
 
+const categoryColors = {
+  "Frontend": {
+    line: "bg-blue-500 dark:bg-blue-400",
+    lineLight: "bg-blue-400/50 dark:bg-blue-500/50",
+    text: "text-blue-600 dark:text-blue-400",
+    bgLight: "bg-blue-50 dark:bg-blue-900/30",
+    border: "border-blue-500",
+    hoverBorder: "hover:border-blue-500/50",
+  },
+  "Backend": {
+    line: "bg-emerald-500 dark:bg-emerald-400",
+    lineLight: "bg-emerald-400/50 dark:bg-emerald-500/50",
+    text: "text-emerald-600 dark:text-emerald-400",
+    bgLight: "bg-emerald-50 dark:bg-emerald-900/30",
+    border: "border-emerald-500",
+    hoverBorder: "hover:border-emerald-500/50",
+  },
+  "Database": {
+    line: "bg-amber-500 dark:bg-amber-400",
+    lineLight: "bg-amber-400/50 dark:bg-amber-500/50",
+    text: "text-amber-600 dark:text-amber-400",
+    bgLight: "bg-amber-50 dark:bg-amber-900/30",
+    border: "border-amber-500",
+    hoverBorder: "hover:border-amber-500/50",
+  },
+  "Tools": {
+    line: "bg-violet-500 dark:bg-violet-400",
+    lineLight: "bg-violet-400/50 dark:bg-violet-500/50",
+    text: "text-violet-600 dark:text-violet-400",
+    bgLight: "bg-violet-50 dark:bg-violet-900/30",
+    border: "border-violet-500",
+    hoverBorder: "hover:border-violet-500/50",
+  },
+  "Other": {
+    line: "bg-rose-500 dark:bg-rose-400",
+    lineLight: "bg-rose-400/50 dark:bg-rose-500/50",
+    text: "text-rose-600 dark:text-rose-400",
+    bgLight: "bg-rose-50 dark:bg-rose-900/30",
+    border: "border-rose-500",
+    hoverBorder: "hover:border-rose-500/50",
+  }
+};
+
 const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
@@ -41,7 +84,7 @@ const Skills = () => {
             whileInView={{ height: 48 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="w-1.5 bg-gradient-to-b from-blue-600 to-blue-500 rounded-full"
+            className="w-1.5 bg-slate-300 dark:bg-slate-600 rounded-full"
           />
           
           {/* Level 1: Branches Container */}
@@ -52,13 +95,14 @@ const Skills = () => {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
-              className="absolute top-0 left-[10%] right-[10%] h-1.5 bg-blue-500 rounded-full origin-center"
+              className="absolute top-0 left-[10%] right-[10%] h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full origin-center"
             />
             
             <div className="flex justify-between w-full">
               {skills.map((skill, catIndex) => {
                 const Icon = icons[skill.icon] || Code;
                 const subSkills = skill.details.split(', ');
+                const theme = categoryColors[skill.name] || categoryColors["Frontend"];
                 
                 return (
                   <div key={skill.name} className="flex flex-col items-center w-1/5 px-2 lg:px-3 relative">
@@ -68,7 +112,7 @@ const Skills = () => {
                       whileInView={{ height: 40 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.8 + catIndex * 0.1 }}
-                      className="w-1.5 bg-blue-500 rounded-full"
+                      className={`w-1.5 rounded-full ${theme.line}`}
                     />
                     
                     {/* Level 1: Category Card */}
@@ -79,14 +123,14 @@ const Skills = () => {
                       transition={{ duration: 0.5, delay: 1 + catIndex * 0.1 }}
                       className="w-full relative z-10"
                     >
-                      <Card className="p-4 border-b-4 border-blue-500 hover:-translate-y-1 transition-transform duration-300 shadow-lg flex flex-col items-center gap-2">
-                        <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                      <Card className={`p-4 border-b-4 ${theme.border} hover:-translate-y-1 transition-transform duration-300 shadow-lg flex flex-col items-center gap-2`}>
+                        <div className={`p-2 rounded-lg ${theme.bgLight} ${theme.text}`}>
                           <Icon size={24} />
                         </div>
                         <h3 className="font-extrabold text-slate-900 dark:text-white text-md lg:text-lg text-center">
                           {skill.name}
                         </h3>
-                        <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">
+                        <span className={`text-[10px] font-bold ${theme.text} ${theme.bgLight} px-2 py-0.5 rounded-full`}>
                           {skill.level}%
                         </span>
                       </Card>
@@ -100,7 +144,7 @@ const Skills = () => {
                         whileInView={{ height: 'calc(100% - 24px)' }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 1.2 + catIndex * 0.1 }}
-                        className="absolute top-0 left-1/2 -translate-x-1/2 w-1 bg-cyan-500/50 rounded-full"
+                        className={`absolute top-0 left-1/2 -translate-x-1/2 w-1 rounded-full ${theme.lineLight}`}
                       />
 
                       {subSkills.map((tech, leafIndex) => (
@@ -112,7 +156,7 @@ const Skills = () => {
                           transition={{ duration: 0.3, delay: 1.4 + catIndex * 0.1 + leafIndex * 0.1 }}
                           className="w-full px-2 lg:px-4 mt-4 relative z-10"
                         >
-                          <Card className="py-2.5 px-2 hover:scale-105 transition-transform duration-300 border border-slate-200 dark:border-slate-700 hover:border-cyan-500/50 shadow-sm flex justify-center items-center bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm">
+                          <Card className={`py-2.5 px-2 hover:scale-105 transition-transform duration-300 border border-slate-200 dark:border-slate-700 ${theme.hoverBorder} shadow-sm flex justify-center items-center bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm`}>
                             <span className="text-[11px] lg:text-sm font-bold text-slate-700 dark:text-slate-300 text-center break-words">
                               {tech}
                             </span>
@@ -149,6 +193,7 @@ const Skills = () => {
               const Icon = icons[skill.icon] || Code;
               const subSkills = skill.details.split(', ');
               const isLastCat = catIndex === skills.length - 1;
+              const theme = categoryColors[skill.name] || categoryColors["Frontend"];
               
               return (
                 <div key={skill.name} className="relative pt-6 pb-4">
@@ -157,7 +202,7 @@ const Skills = () => {
                      initial={{ height: 0 }}
                      whileInView={{ height: isLastCat ? 48 : '100%' }}
                      viewport={{ once: true }}
-                     className="absolute left-[0px] top-0 w-1 bg-blue-500 rounded-full z-0"
+                     className={`absolute left-[0px] top-0 w-1 rounded-full z-0 ${theme.line}`}
                    />
                    
                    {/* Horizontal branch to Category */}
@@ -165,7 +210,7 @@ const Skills = () => {
                      initial={{ width: 0 }}
                      whileInView={{ width: 32 }}
                      viewport={{ once: true }}
-                     className="absolute left-[0px] top-[48px] h-1 bg-blue-500 rounded-full origin-left z-0"
+                     className={`absolute left-[0px] top-[48px] h-1 rounded-full origin-left z-0 ${theme.line}`}
                    />
                    
                    {/* Level 1: Category Card */}
@@ -175,15 +220,15 @@ const Skills = () => {
                      viewport={{ once: true }}
                      className="ml-8 relative z-10"
                    >
-                     <Card className="p-4 shadow-md border-b-4 border-blue-500 flex items-center gap-4">
-                       <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                     <Card className={`p-4 shadow-md border-b-4 ${theme.border} flex items-center gap-4`}>
+                       <div className={`p-2 rounded-xl ${theme.bgLight} ${theme.text}`}>
                          <Icon size={24} />
                        </div>
                        <div>
                          <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
                            {skill.name}
                          </h3>
-                         <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full mt-1 inline-block">
+                         <span className={`text-[10px] font-bold ${theme.text} ${theme.bgLight} px-2 py-0.5 rounded-full mt-1 inline-block`}>
                            Niveau: {skill.level}%
                          </span>
                        </div>
@@ -201,7 +246,7 @@ const Skills = () => {
                                initial={{ height: 0 }}
                                whileInView={{ height: isLastLeaf ? 24 : '100%' }}
                                viewport={{ once: true }}
-                               className="absolute left-0 top-0 w-1 bg-cyan-500/50 rounded-full z-0"
+                               className={`absolute left-0 top-0 w-1 rounded-full z-0 ${theme.lineLight}`}
                              />
                              
                              {/* Horizontal branch to Leaf */}
@@ -209,7 +254,7 @@ const Skills = () => {
                                initial={{ width: 0 }}
                                whileInView={{ width: 16 }}
                                viewport={{ once: true }}
-                               className="absolute left-0 top-[24px] h-1 bg-cyan-500/50 rounded-full origin-left z-0"
+                               className={`absolute left-0 top-[24px] h-1 rounded-full origin-left z-0 ${theme.lineLight}`}
                              />
                              
                              <motion.div
@@ -219,7 +264,7 @@ const Skills = () => {
                                transition={{ delay: 0.1 * leafIndex }}
                                className="ml-6 relative z-10"
                              >
-                               <Card className="p-2.5 shadow-sm bg-white/95 dark:bg-slate-800/95 border border-slate-100 dark:border-slate-700">
+                               <Card className={`p-2.5 shadow-sm bg-white/95 dark:bg-slate-800/95 border border-slate-100 dark:border-slate-700 ${theme.hoverBorder}`}>
                                  <span className="font-bold text-slate-700 dark:text-slate-300 text-sm">{tech}</span>
                                </Card>
                              </motion.div>
