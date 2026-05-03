@@ -33,7 +33,7 @@ const Contact = () => {
 
   const contactDetails = [
     { icon: Mail, label: t.email, value: "myousfi610@gmail.com", href: "mailto:myousfi610@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+212 6XXXXXXXX", href: "tel:+2126XXXXXXXX" },
+    { icon: Phone, label: "Phone", value: "+212 716288974", href: "tel:+212716288974" },
     { icon: MapPin, label: "Location", value: "Oujda, Maroc", href: "#" }
   ];
 
