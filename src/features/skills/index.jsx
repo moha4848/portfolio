@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { portfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
-import { motion } from 'framer-motion';
-import { Globe, Server, Database, Code, Wrench, Users, Layers, ChevronRight, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Globe, Server, Database, Code, Wrench, Users, Layers, Zap, ChevronRight, Activity } from 'lucide-react';
 
 const categoryColors = {
   "Frontend": "blue",
@@ -18,101 +18,134 @@ const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
   const icons = { Globe, Server, Database, Code, Wrench, Users, Layers };
+  const [activeCategory, setActiveCategory] = useState(null);
 
   return (
     <PageWrapper>
-      <div className="relative min-h-screen py-20 px-4 bg-white dark:bg-slate-950">
-        <div className="max-w-6xl mx-auto">
+      <div className="relative min-h-screen py-24 px-4 bg-slate-50 dark:bg-slate-950 overflow-hidden">
+        {/* Futuristic Background Grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-[0.03] dark:opacity-[0.07] -z-10" />
+        
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-20 text-center lg:text-left">
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-4">
-              Skills <span className="text-blue-600">Map</span>
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400 max-w-xl">
-              Une vue panoramique et connectée de mon expertise technique.
-            </p>
+          <div className="mb-24 relative flex flex-col items-center lg:items-start">
+             <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               className="flex items-center gap-3 mb-4"
+             >
+               <div className="w-12 h-1 bg-blue-600 rounded-full" />
+               <span className="text-sm font-black uppercase tracking-[0.3em] text-blue-600">Expertise Ecosystem</span>
+             </motion.div>
+             <h2 className="text-5xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+               Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Architecture</span>
+             </h2>
           </div>
 
-          {/* --- HORIZONTAL MIND MAP (Desktop) --- */}
-          <div className="hidden lg:flex items-start gap-0 relative">
+          {/* --- ADVANCED HORIZONTAL TECH-TREE (Desktop) --- */}
+          <div className="hidden xl:flex items-stretch relative min-h-[700px]">
             
-            {/* 1. ROOT NODE (Left) */}
-            <div className="flex flex-col justify-center min-h-[600px] z-20">
+            {/* 1. MASTER HUB (Left) */}
+            <div className="flex flex-col justify-center relative z-30">
               <motion.div 
-                initial={{ x: -50, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                className="p-6 bg-slate-900 rounded-2xl border-2 border-slate-700 shadow-2xl flex flex-col items-center gap-3 w-48 text-center"
+                whileHover={{ scale: 1.05 }}
+                className="relative group cursor-pointer"
               >
-                <div className="p-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/50">
-                  <Zap className="text-white fill-white" size={24} />
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+                <div className="relative p-8 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center gap-4 w-44 shadow-2xl">
+                  <div className="relative">
+                    <Activity className="text-blue-500 animate-pulse" size={40} />
+                    <Zap className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fill-white" size={16} />
+                  </div>
+                  <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Main Core</span>
                 </div>
-                <span className="text-sm font-black text-white uppercase tracking-widest">Yousfi.Dev</span>
               </motion.div>
             </div>
 
-            {/* 2. THE MAIN HUB & CATEGORIES */}
-            <div className="flex-1 flex flex-col justify-center gap-12 pl-24 relative">
-              {/* Vertical line connecting categories */}
-              <div className="absolute left-0 top-[10%] bottom-[10%] w-1 bg-slate-200 dark:bg-slate-800 rounded-full" />
-              
+            {/* 2. CATEGORY BRANCHES & CONNECTIONS */}
+            <div className="flex-1 flex flex-col justify-between py-10 pl-32 relative">
+              {/* Dynamic SVG Connection Layer */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none -z-10 overflow-visible">
+                {skills.map((_, i) => (
+                  <motion.path
+                    key={i}
+                    d={`M -128,${350} C -60,${350} -60,${120 + (i * 120)} 0,${120 + (i * 120)}`}
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 0.15 }}
+                    className="text-slate-400 dark:text-slate-700"
+                  />
+                ))}
+              </svg>
+
               {skills.map((skill, idx) => {
                 const color = categoryColors[skill.name] || "blue";
                 const Icon = icons[skill.icon] || Code;
+                const isActive = activeCategory === skill.name;
                 
                 return (
-                  <div key={skill.name} className="relative group">
-                    {/* Horizontal connection from root vertical line */}
-                    <div className="absolute left-[-96px] top-1/2 -translate-y-1/2 w-24 h-1 bg-slate-200 dark:bg-slate-800" />
-                    {/* Small junction point */}
-                    <div className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-600" />
-
-                    <div className="flex items-start gap-12">
-                       {/* Category Card */}
-                       <motion.div
-                         initial={{ opacity: 0, x: 20 }}
-                         whileInView={{ opacity: 1, x: 0 }}
-                         viewport={{ once: true }}
-                         transition={{ delay: idx * 0.1 }}
-                         className="w-64 flex-shrink-0"
-                       >
-                         <div className={`p-4 rounded-xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-xl group-hover:border-${color}-500 transition-colors duration-300`}>
-                            <div className="flex items-center gap-3">
-                               <div className={`p-2 rounded-lg bg-${color}-500/10 text-${color}-500`}>
-                                 <Icon size={20} />
-                               </div>
-                               <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">
+                  <div 
+                    key={skill.name} 
+                    className="relative flex items-center gap-16 group"
+                    onMouseEnter={() => setActiveCategory(skill.name)}
+                    onMouseLeave={() => setActiveCategory(null)}
+                  >
+                    {/* Category Node */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="w-72 flex-shrink-0"
+                    >
+                      <div className={`p-6 rounded-2xl bg-white dark:bg-slate-900/50 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-2xl transition-all duration-500 hover:shadow-${color}-500/20 group-hover:scale-105 group-hover:border-${color}-500/50`}>
+                         <div className="flex items-center gap-4 mb-2">
+                            <div className={`p-3 rounded-xl bg-${color}-500/10 text-${color}-500 group-hover:bg-${color}-500 group-hover:text-white transition-all duration-300`}>
+                              <Icon size={24} />
+                            </div>
+                            <div>
+                               <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight text-lg leading-none mb-1">
                                  {skill.name}
                                </h3>
-                               <ChevronRight className="ml-auto text-slate-400" size={16} />
-                            </div>
-                         </div>
-                       </motion.div>
-
-                       {/* Sub-Groups (Horizontal distribution) */}
-                       <div className="flex gap-8 items-start pt-2">
-                          {skill.groups.map((group, gIdx) => (
-                            <div key={group.name} className="flex flex-col gap-3 min-w-[140px] relative">
-                               {/* Connection to category */}
-                               <div className="absolute left-[-32px] top-3 w-8 h-px bg-slate-200 dark:bg-slate-800" />
-                               
-                               <h4 className={`text-[10px] font-black uppercase tracking-widest text-${color}-600 dark:text-${color}-400 mb-1`}>
-                                 {group.name}
-                               </h4>
-                               
-                               <div className="space-y-1.5">
-                                 {group.items.map(item => (
-                                   <div key={item} className="flex items-center gap-2 group/item">
-                                      <div className={`w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600 group-hover/item:bg-${color}-500 transition-colors`} />
-                                      <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors cursor-default">
-                                        {item}
-                                      </span>
-                                   </div>
-                                 ))}
+                               <div className={`text-[10px] font-bold text-${color}-500 uppercase tracking-widest opacity-60`}>
+                                 Expertise Level
                                </div>
                             </div>
-                          ))}
-                       </div>
+                         </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Sub-Groups (Horizontal Grid) */}
+                    <div className="flex gap-10 items-start overflow-visible">
+                      {skill.groups.map((group, gIdx) => (
+                        <motion.div 
+                          key={group.name} 
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 + (gIdx * 0.1) }}
+                          className="flex flex-col gap-4 min-w-[160px] relative"
+                        >
+                           {/* Connection Liaison to Category */}
+                           <div className={`absolute left-[-40px] top-4 w-10 h-[2px] bg-gradient-to-r from-${color}-500 to-transparent opacity-20 group-hover:opacity-100 transition-opacity duration-500`} />
+                           
+                           <h4 className={`text-[11px] font-black uppercase tracking-[0.2em] text-${color}-600 dark:text-${color}-400 flex items-center gap-2`}>
+                             <div className={`w-1.5 h-1.5 rounded-full bg-${color}-500 shadow-[0_0_8px_rgba(var(--tw-shadow-color),0.5)]`} />
+                             {group.name}
+                           </h4>
+                           
+                           <div className="space-y-2">
+                             {group.items.map(item => (
+                               <div key={item} className="group/item relative px-3 py-2 bg-white/50 dark:bg-slate-900/30 rounded-lg border border-slate-200/50 dark:border-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-all cursor-default">
+                                  <span className="text-xs font-bold text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors">
+                                    {item}
+                                  </span>
+                               </div>
+                             ))}
+                           </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
                 );
@@ -120,40 +153,50 @@ const Skills = () => {
             </div>
           </div>
 
-          {/* --- MOBILE VIEW --- */}
-          <div className="lg:hidden space-y-16">
+          {/* --- MOBILE VIEW (Vertical Tech-Stack) --- */}
+          <div className="xl:hidden space-y-12">
             {skills.map((skill, idx) => {
               const color = categoryColors[skill.name] || "blue";
               const Icon = icons[skill.icon] || Code;
               
               return (
-                <div key={skill.name}>
-                   <div className="flex items-center gap-4 mb-8">
-                      <div className={`p-4 rounded-2xl bg-${color}-500/10 text-${color}-500 border-2 border-${color}-500/20 shadow-lg`}>
-                        <Icon size={28} />
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className={`p-8 border-t-8 border-${color}-500 relative overflow-hidden group`}>
+                    <div className={`absolute top-0 right-0 p-10 bg-${color}-500/5 rounded-bl-full group-hover:scale-110 transition-transform duration-700`} />
+                    
+                    <div className="flex items-center gap-4 mb-10">
+                      <div className={`p-4 rounded-2xl bg-${color}-500/10 text-${color}-500`}>
+                        <Icon size={32} />
                       </div>
-                      <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+                      <h3 className="text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
                         {skill.name}
                       </h3>
-                   </div>
+                    </div>
 
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pl-4 border-l-2 border-slate-100 dark:border-slate-800 ml-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                       {skill.groups.map(group => (
-                        <div key={group.name}>
-                           <h4 className={`text-xs font-black uppercase tracking-widest text-${color}-600 dark:text-${color}-400 mb-4`}>
+                        <div key={group.name} className="relative">
+                           <h4 className={`text-xs font-black uppercase tracking-widest text-${color}-500 mb-6 flex items-center gap-2`}>
+                             <div className={`w-2 h-2 rounded-full bg-${color}-500`} />
                              {group.name}
                            </h4>
-                           <div className="flex flex-wrap gap-2">
+                           <div className="flex flex-wrap gap-3">
                              {group.items.map(item => (
-                               <span key={item} className="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300">
+                               <span key={item} className="px-4 py-2 bg-slate-100 dark:bg-slate-800/80 backdrop-blur shadow-sm rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                                  {item}
                                </span>
                              ))}
                            </div>
                         </div>
                       ))}
-                   </div>
-                </div>
+                    </div>
+                  </Card>
+                </motion.div>
               );
             })}
           </div>
