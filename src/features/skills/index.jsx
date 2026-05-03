@@ -86,11 +86,15 @@ const Skills = () => {
                           <h3 className="font-bold text-slate-900 dark:text-white text-md lg:text-lg">
                             {skill.name}
                           </h3>
-                          <p className="text-[11px] lg:text-xs text-slate-500 dark:text-slate-400 font-medium h-12 flex items-center justify-center">
-                            {skill.details}
-                          </p>
+                          <div className="flex flex-wrap justify-center gap-1.5 min-h-[60px] w-full">
+                            {skill.details.split(', ').map((tech, i) => (
+                              <span key={i} className="px-2 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded border border-slate-200 dark:border-slate-700 shadow-sm text-[10px] lg:text-[11px] font-bold">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                           
-                          <div className="w-full space-y-1 mt-2">
+                          <div className="w-full space-y-1 mt-1">
                             <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase">
                               <span>Niveau</span>
                               <span className="text-blue-600 dark:text-blue-400">{skill.level}%</span>
@@ -171,13 +175,17 @@ const Skills = () => {
                            <h3 className="font-bold text-slate-900 dark:text-white text-lg">
                              {skill.name}
                            </h3>
-                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                             {skill.details}
-                           </p>
+                           <div className="flex flex-wrap gap-1.5 mt-2">
+                             {skill.details.split(', ').map((tech, i) => (
+                               <span key={i} className="px-2 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded border border-slate-200 dark:border-slate-700 shadow-sm text-[11px] font-bold">
+                                 {tech}
+                               </span>
+                             ))}
+                           </div>
                          </div>
                        </div>
                        
-                       <div className="space-y-1 mt-2">
+                       <div className="space-y-1 mt-1">
                          <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase">
                            <span>Niveau</span>
                            <span className="text-blue-600 dark:text-blue-400">{skill.level}%</span>

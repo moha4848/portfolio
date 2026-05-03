@@ -48,7 +48,7 @@ export const portfolioData = {
     { name: "Email", url: "mailto:myousfi610@gmail.com", icon: "Mail" }
   ],
   skills: [
-    { name: "Frontend", details: "HTML, CSS, JavaScript, React", level: 90, icon: "Globe", category: "frontend" },
+    { name: "Frontend", details: "HTML, CSS, JS, React, Tailwind CSS, Bootstrap", level: 90, icon: "Globe", category: "frontend" },
     { name: "Backend", details: "PHP, Laravel, Node.js", level: 80, icon: "Server", category: "backend" },
     { name: "Database", details: "MySQL, MongoDB", level: 85, icon: "Database", category: "backend" },
     { name: "Tools", details: "Git, GitHub, Postman, VS Code", level: 80, icon: "Wrench", category: "tools" },
