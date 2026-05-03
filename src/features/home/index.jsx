@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { portfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
@@ -9,13 +10,14 @@ import { statsService } from '../../shared/services/statsService';
 
 const Home = () => {
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const p = portfolioData.profile[language];
   const social = portfolioData.social;
 
   const icons = { Github, Linkedin, Instagram, Mail };
 
   const handleContactMe = () => {
-    window.location.href = '#/contact'; // Or navigate using useNavigate
+    navigate('/contact');
   };
 
   return (
@@ -49,7 +51,7 @@ const Home = () => {
               <Download size={20} className="group-hover:-translate-y-1 transition-transform" />
               {p.downloadCV}
             </a>
-            <Button variant="secondary" onClick={() => window.location.href = '/portfolio/contact'}>
+            <Button variant="secondary" onClick={() => navigate('/contact')}>
               {p.contactMe}
             </Button>
           </div>
