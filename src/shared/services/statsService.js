@@ -31,10 +31,10 @@ export const statsService = {
     stats.lastUpdated = new Date().toISOString();
     
     try {
-      const res = await fetch('https://ipapi.co/json/');
+      const res = await fetch('https://ipwho.is/');
       const data = await res.json();
-      if (data.country_name) {
-        stats.visitorCountry = data.country_name;
+      if (data.success && data.country) {
+        stats.visitorCountry = data.country;
         stats.visitorFlag = data.country_code; // We'll convert this to emoji in UI
       }
     } catch (e) {
