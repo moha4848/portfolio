@@ -31,11 +31,11 @@ export const statsService = {
     stats.lastUpdated = new Date().toISOString();
     
     try {
-      const res = await fetch('https://ipwho.is/');
+      const res = await fetch('https://freeipapi.com/api/json/');
       const data = await res.json();
-      if (data.success && data.country) {
-        stats.visitorCountry = data.country;
-        stats.visitorFlag = data.country_code; // We'll convert this to emoji in UI
+      if (data.countryName) {
+        stats.visitorCountry = data.countryName;
+        stats.visitorFlag = data.countryCode; // We'll convert this to emoji in UI
       }
     } catch (e) {
       console.warn("Could not detect country:", e);
