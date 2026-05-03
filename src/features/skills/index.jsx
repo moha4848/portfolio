@@ -4,222 +4,150 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
-import { Globe, Server, Database, Code, Wrench, Users, Layers, Cpu, Terminal, Shield, Workflow, Zap } from 'lucide-react';
+import { Globe, Server, Database, Code, Wrench, Users, Layers, ChevronRight, Zap } from 'lucide-react';
 
 const categoryColors = {
-  "Frontend": {
-    color: "#3b82f6",
-    glow: "shadow-blue-500/20",
-    line: "from-blue-500 to-cyan-400",
-    text: "text-blue-500",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/50"
-  },
-  "Backend": {
-    color: "#10b981",
-    glow: "shadow-emerald-500/20",
-    line: "from-emerald-500 to-teal-400",
-    text: "text-emerald-500",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/50"
-  },
-  "Database": {
-    color: "#f59e0b",
-    glow: "shadow-amber-500/20",
-    line: "from-amber-500 to-orange-400",
-    text: "text-amber-500",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/50"
-  },
-  "Tools": {
-    color: "#8b5cf6",
-    glow: "shadow-violet-500/20",
-    line: "from-violet-500 to-purple-400",
-    text: "text-violet-500",
-    bg: "bg-violet-500/10",
-    border: "border-violet-500/50"
-  },
-  "Other": {
-    color: "#ef4444",
-    glow: "shadow-rose-500/20",
-    line: "from-rose-500 to-pink-400",
-    text: "text-rose-500",
-    bg: "bg-rose-500/10",
-    border: "border-rose-500/50"
-  }
+  "Frontend": "blue",
+  "Backend": "emerald",
+  "Database": "amber",
+  "Tools": "violet",
+  "Other": "rose"
 };
 
 const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
-  const icons = { Globe, Server, Database, Code, Wrench, Users, Layers, Cpu, Terminal, Shield, Workflow, Zap };
+  const icons = { Globe, Server, Database, Code, Wrench, Users, Layers };
 
   return (
     <PageWrapper>
-      <div className="relative min-h-screen py-20 px-4 bg-slate-50 dark:bg-slate-950 overflow-hidden">
-        {/* Background Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] -z-10" />
-
-        <div className="max-w-7xl mx-auto">
+      <div className="relative min-h-screen py-20 px-4 bg-white dark:bg-slate-950">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-block mb-4 px-6 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 font-bold text-sm tracking-widest uppercase"
-            >
-              Unified Skill Architecture
-            </motion.div>
-            <h2 className="text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter mb-6 uppercase">
-              Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Tree</span>
+          <div className="mb-20 text-center lg:text-left">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-4">
+              Skills <span className="text-blue-600">Map</span>
             </h2>
+            <p className="text-slate-500 dark:text-slate-400 max-w-xl">
+              Une vue panoramique et connectée de mon expertise technique.
+            </p>
           </div>
 
-          {/* --- THE GREAT CENTRAL TREE (Desktop) --- */}
-          <div className="hidden lg:block relative">
+          {/* --- HORIZONTAL MIND MAP (Desktop) --- */}
+          <div className="hidden lg:flex items-start gap-0 relative">
             
-            {/* The Heart / Root Node */}
-            <div className="flex justify-center mb-0 relative z-30">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="relative"
+            {/* 1. ROOT NODE (Left) */}
+            <div className="flex flex-col justify-center min-h-[600px] z-20">
+              <motion.div 
+                initial={{ x: -50, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                className="p-6 bg-slate-900 rounded-2xl border-2 border-slate-700 shadow-2xl flex flex-col items-center gap-3 w-48 text-center"
               >
-                <div className="absolute -inset-6 bg-blue-600/20 rounded-full blur-3xl animate-pulse" />
-                <div className="px-10 py-6 bg-slate-900 rounded-3xl border-2 border-slate-700 shadow-2xl flex flex-col items-center gap-2">
-                  <div className="p-4 bg-blue-600 rounded-2xl shadow-lg shadow-blue-500/50">
-                    <Zap className="text-white fill-white" size={32} />
-                  </div>
-                  <span className="text-xl font-black text-white uppercase tracking-widest">Master Trunk</span>
+                <div className="p-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/50">
+                  <Zap className="text-white fill-white" size={24} />
                 </div>
+                <span className="text-sm font-black text-white uppercase tracking-widest">Yousfi.Dev</span>
               </motion.div>
             </div>
 
-            {/* The Main Vertical Trunk Line */}
-            <div className="flex justify-center h-20">
-              <div className="w-2 bg-gradient-to-b from-blue-600 to-slate-400 dark:to-slate-700 relative shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-                 <motion.div 
-                   animate={{ top: ["0%", "100%"] }}
-                   transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                   className="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-white/80 to-transparent"
-                 />
-              </div>
-            </div>
-
-            {/* The Great Horizontal Branch */}
-            <div className="relative h-1">
-              <div className="absolute left-[5%] right-[5%] h-full bg-slate-400 dark:bg-slate-700 rounded-full shadow-lg">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full -mt-1.5 shadow-xl border-2 border-white dark:border-slate-900" />
-              </div>
-            </div>
-
-            {/* The Categories Distribution */}
-            <div className="flex justify-between relative px-4">
+            {/* 2. THE MAIN HUB & CATEGORIES */}
+            <div className="flex-1 flex flex-col justify-center gap-12 pl-24 relative">
+              {/* Vertical line connecting categories */}
+              <div className="absolute left-0 top-[10%] bottom-[10%] w-1 bg-slate-200 dark:bg-slate-800 rounded-full" />
+              
               {skills.map((skill, idx) => {
-                const theme = categoryColors[skill.name] || categoryColors["Frontend"];
+                const color = categoryColors[skill.name] || "blue";
                 const Icon = icons[skill.icon] || Code;
                 
                 return (
-                  <div key={skill.name} className="flex-1 flex flex-col items-center relative pt-10">
-                    {/* Connection Line to Horizontal Branch */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-10 w-1 bg-slate-400 dark:bg-slate-700" />
-                    
-                    {/* Category Node */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      className="relative z-20 mb-10 w-full px-4"
-                    >
-                      <Card className={`p-5 rounded-2xl border-b-8 ${theme.border} bg-white dark:bg-slate-900 shadow-2xl transition-all duration-300 hover:-translate-y-2 group`}>
-                         <div className="flex flex-col items-center gap-3">
-                            <div className={`p-4 rounded-2xl ${theme.bg} ${theme.text} group-hover:scale-110 transition-transform`}>
-                              <Icon size={28} />
+                  <div key={skill.name} className="relative group">
+                    {/* Horizontal connection from root vertical line */}
+                    <div className="absolute left-[-96px] top-1/2 -translate-y-1/2 w-24 h-1 bg-slate-200 dark:bg-slate-800" />
+                    {/* Small junction point */}
+                    <div className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-600" />
+
+                    <div className="flex items-start gap-12">
+                       {/* Category Card */}
+                       <motion.div
+                         initial={{ opacity: 0, x: 20 }}
+                         whileInView={{ opacity: 1, x: 0 }}
+                         viewport={{ once: true }}
+                         transition={{ delay: idx * 0.1 }}
+                         className="w-64 flex-shrink-0"
+                       >
+                         <div className={`p-4 rounded-xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 shadow-xl group-hover:border-${color}-500 transition-colors duration-300`}>
+                            <div className="flex items-center gap-3">
+                               <div className={`p-2 rounded-lg bg-${color}-500/10 text-${color}-500`}>
+                                 <Icon size={20} />
+                               </div>
+                               <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight text-sm">
+                                 {skill.name}
+                               </h3>
+                               <ChevronRight className="ml-auto text-slate-400" size={16} />
                             </div>
-                            <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-tight text-lg">
-                              {skill.name}
-                            </h3>
                          </div>
+                       </motion.div>
 
-                         {/* SUB-TREE LIAISONS */}
-                         <div className="mt-10 space-y-8 relative pl-6">
-                            {/* The vertical sub-trunk */}
-                            <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${theme.line} opacity-40 rounded-full`} />
-                            
-                            {skill.groups.map((group, gIdx) => (
-                              <div key={group.name} className="relative group/group">
-                                {/* Horizontal Branch to Group */}
-                                <div className={`absolute left-[-24px] top-4 w-6 h-1 bg-gradient-to-r ${theme.line} opacity-50 rounded-full`} />
-                                
-                                <div className="mb-4">
-                                  <span className={`inline-block text-[11px] font-black uppercase tracking-widest ${theme.text} px-3 py-1 bg-white dark:bg-slate-800 border border-current rounded-lg shadow-sm`}>
-                                    {group.name}
-                                  </span>
-                                </div>
-
-                                {/* Skills in Group with individual liaisons */}
-                                <div className="space-y-3 pl-4 relative">
-                                   <div className="absolute left-0 top-0 bottom-6 w-px bg-slate-300 dark:bg-slate-700 opacity-50" />
-                                   
-                                   {group.items.map((item, iIdx) => (
-                                     <motion.div 
-                                       key={item}
-                                       whileHover={{ x: 6 }}
-                                       className="flex items-center gap-3 relative group/item"
-                                     >
-                                       {/* The specific liaison line */}
-                                       <div className="absolute left-[-16px] top-3 w-4 h-px bg-slate-300 dark:bg-slate-700 opacity-40" />
-                                       
-                                       <div className={`w-2 h-2 rounded-full ${theme.bg} border border-current opacity-60 group-hover/item:opacity-100 group-hover/item:scale-125 transition-all`} />
-                                       <span className="text-[13px] font-bold text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white">
-                                         {item}
-                                       </span>
-                                     </motion.div>
-                                   ))}
-                                </div>
-                              </div>
-                            ))}
-                         </div>
-                      </Card>
-                    </motion.div>
+                       {/* Sub-Groups (Horizontal distribution) */}
+                       <div className="flex gap-8 items-start pt-2">
+                          {skill.groups.map((group, gIdx) => (
+                            <div key={group.name} className="flex flex-col gap-3 min-w-[140px] relative">
+                               {/* Connection to category */}
+                               <div className="absolute left-[-32px] top-3 w-8 h-px bg-slate-200 dark:bg-slate-800" />
+                               
+                               <h4 className={`text-[10px] font-black uppercase tracking-widest text-${color}-600 dark:text-${color}-400 mb-1`}>
+                                 {group.name}
+                               </h4>
+                               
+                               <div className="space-y-1.5">
+                                 {group.items.map(item => (
+                                   <div key={item} className="flex items-center gap-2 group/item">
+                                      <div className={`w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600 group-hover/item:bg-${color}-500 transition-colors`} />
+                                      <span className="text-[11px] font-bold text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors cursor-default">
+                                        {item}
+                                      </span>
+                                   </div>
+                                 ))}
+                               </div>
+                            </div>
+                          ))}
+                       </div>
+                    </div>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          {/* --- MOBILE TREE (The "File System" Connected Look) --- */}
-          <div className="lg:hidden space-y-12 pl-4 border-l-4 border-blue-500/20">
+          {/* --- MOBILE VIEW --- */}
+          <div className="lg:hidden space-y-16">
             {skills.map((skill, idx) => {
-              const theme = categoryColors[skill.name] || categoryColors["Frontend"];
+              const color = categoryColors[skill.name] || "blue";
               const Icon = icons[skill.icon] || Code;
               
               return (
-                <div key={skill.name} className="relative">
-                   {/* Connection point from mobile main trunk */}
-                   <div className="absolute left-[-20px] top-8 w-5 h-1 bg-blue-500/20 rounded-full" />
-                   
+                <div key={skill.name}>
                    <div className="flex items-center gap-4 mb-8">
-                      <div className={`p-4 rounded-2xl ${theme.bg} ${theme.text} border ${theme.border} shadow-lg`}>
-                        <Icon size={32} />
+                      <div className={`p-4 rounded-2xl bg-${color}-500/10 text-${color}-500 border-2 border-${color}-500/20 shadow-lg`}>
+                        <Icon size={28} />
                       </div>
                       <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
                         {skill.name}
                       </h3>
                    </div>
 
-                   <div className="pl-10 space-y-10">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pl-4 border-l-2 border-slate-100 dark:border-slate-800 ml-8">
                       {skill.groups.map(group => (
-                        <div key={group.name} className="relative border-l-2 border-slate-200 dark:border-slate-800 pl-6">
-                           <div className={`absolute left-[-2px] top-0 w-1 h-6 bg-gradient-to-b ${theme.line}`} />
-                           <h4 className={`text-xs font-black uppercase tracking-widest ${theme.text} mb-4 flex items-center gap-2`}>
-                             <Workflow size={14} /> {group.name}
+                        <div key={group.name}>
+                           <h4 className={`text-xs font-black uppercase tracking-widest text-${color}-600 dark:text-${color}-400 mb-4`}>
+                             {group.name}
                            </h4>
-                           <div className="grid grid-cols-2 gap-3">
+                           <div className="flex flex-wrap gap-2">
                              {group.items.map(item => (
-                               <div key={item} className="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-2">
-                                  <div className={`w-1.5 h-1.5 rounded-full ${theme.bg} border border-current`} />
-                                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{item}</span>
-                               </div>
+                               <span key={item} className="px-3 py-1.5 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300">
+                                 {item}
+                               </span>
                              ))}
                            </div>
                         </div>
