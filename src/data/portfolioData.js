@@ -48,11 +48,59 @@ export const portfolioData = {
     { name: "Email", url: "mailto:myousfi610@gmail.com", icon: "Mail" }
   ],
   skills: [
-    { name: "Frontend", details: "HTML, CSS, JS, React, Tailwind CSS, Bootstrap", level: 90, icon: "Globe", category: "frontend" },
-    { name: "Backend", details: "PHP, Laravel, Node.js", level: 80, icon: "Server", category: "backend" },
-    { name: "Database", details: "MySQL, MongoDB", level: 85, icon: "Database", category: "backend" },
-    { name: "Tools", details: "Git, GitHub, GitLab, Postman, VS Code, Figma, Antigravity", level: 80, icon: "Wrench", category: "tools" },
-    { name: "Other", details: "REST APIs, Agile/Scrum", level: 75, icon: "Users", category: "other" }
+    {
+      name: "Frontend",
+      level: 90,
+      icon: "Globe",
+      category: "frontend",
+      groups: [
+        { name: "Core", items: ["HTML", "CSS", "JS"] },
+        { name: "Frameworks", items: ["React", "Bootstrap"] },
+        { name: "Styling", items: ["Tailwind CSS"] }
+      ]
+    },
+    {
+      name: "Backend",
+      level: 80,
+      icon: "Server",
+      category: "backend",
+      groups: [
+        { name: "Languages", items: ["PHP", "Node.js"] },
+        { name: "Frameworks", items: ["Laravel"] }
+      ]
+    },
+    {
+      name: "Database",
+      level: 85,
+      icon: "Database",
+      category: "backend",
+      groups: [
+        { name: "SQL", items: ["MySQL"] },
+        { name: "NoSQL", items: ["MongoDB"] }
+      ]
+    },
+    {
+      name: "Tools",
+      level: 80,
+      icon: "Wrench",
+      category: "tools",
+      groups: [
+        { name: "Editors", items: ["VS Code", "Antigravity"] },
+        { name: "VCS", items: ["Git", "GitHub", "GitLab"] },
+        { name: "Design", items: ["Figma"] },
+        { name: "Testing", items: ["Postman"] }
+      ]
+    },
+    {
+      name: "Other",
+      level: 75,
+      icon: "Users",
+      category: "other",
+      groups: [
+        { name: "API", items: ["REST APIs"] },
+        { name: "Methods", items: ["Agile/Scrum"] }
+      ]
+    }
   ],
   projects: [
     {

@@ -62,11 +62,11 @@ const Skills = () => {
             {portfolioData.nav[language].skills}
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Mon écosystème technique structuré en un seul grand arbre global.
+            Mon écosystème technique structuré par catégories et sous-groupes spécialisés.
           </p>
         </div>
 
-        {/* --- DESKTOP TREE (Unified Multi-Level Org-Chart) --- */}
+        {/* --- DESKTOP TREE (4-Level Unified Tree) --- */}
         <div className="hidden md:flex flex-col items-center w-full">
           {/* Level 0: Root Node */}
           <motion.div 
@@ -75,7 +75,7 @@ const Skills = () => {
             viewport={{ once: true }}
             className="px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl text-white shadow-xl shadow-blue-500/30 font-extrabold text-3xl flex items-center gap-4 z-10"
           >
-            <Layers size={36} /> L'Arbre des Compétences
+            <Layers size={36} /> Arbre des Compétences
           </motion.div>
           
           {/* Main Trunk */}
@@ -87,7 +87,7 @@ const Skills = () => {
             className="w-1.5 bg-slate-300 dark:bg-slate-600 rounded-full"
           />
           
-          {/* Level 1: Branches Container */}
+          {/* Level 1: Categories Branches Container */}
           <div className="relative w-full">
             {/* Horizontal Main Branch */}
             <motion.div 
@@ -101,7 +101,6 @@ const Skills = () => {
             <div className="flex justify-between w-full">
               {skills.map((skill, catIndex) => {
                 const Icon = icons[skill.icon] || Code;
-                const subSkills = skill.details.split(', ');
                 const theme = categoryColors[skill.name] || categoryColors["Frontend"];
                 
                 return (
@@ -130,38 +129,53 @@ const Skills = () => {
                         <h3 className="font-extrabold text-slate-900 dark:text-white text-md lg:text-lg text-center">
                           {skill.name}
                         </h3>
-                        <span className={`text-[10px] font-bold ${theme.text} ${theme.bgLight} px-2 py-0.5 rounded-full`}>
-                          {skill.level}%
-                        </span>
                       </Card>
                     </motion.div>
 
-                    {/* Level 2: Leaves (Stacked vertically) */}
-                    <div className="w-full flex flex-col items-center mt-0 relative">
-                      {/* Sub-Trunk behind leaves */}
+                    {/* Level 2 & 3: Groups and Items (Nested) */}
+                    <div className="w-full flex flex-col mt-4 space-y-8 relative pb-10">
+                      {/* Sub-Trunk for Category groups */}
                       <motion.div 
                         initial={{ height: 0 }}
-                        whileInView={{ height: 'calc(100% - 24px)' }}
+                        whileInView={{ height: '100%' }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 1.2 + catIndex * 0.1 }}
                         className={`absolute top-0 left-1/2 -translate-x-1/2 w-1 rounded-full ${theme.lineLight}`}
                       />
 
-                      {subSkills.map((tech, leafIndex) => (
-                        <motion.div 
-                          key={tech}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 1.4 + catIndex * 0.1 + leafIndex * 0.1 }}
-                          className="w-full px-2 lg:px-4 mt-4 relative z-10"
-                        >
-                          <Card className={`py-2.5 px-2 hover:scale-105 transition-transform duration-300 border border-slate-200 dark:border-slate-700 ${theme.hoverBorder} shadow-sm flex justify-center items-center bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm`}>
-                            <span className="text-[11px] lg:text-sm font-bold text-slate-700 dark:text-slate-300 text-center break-words">
-                              {tech}
-                            </span>
-                          </Card>
-                        </motion.div>
+                      {skill.groups.map((group, groupIndex) => (
+                        <div key={group.name} className="flex flex-col items-center relative">
+                          {/* Level 2: Group Node */}
+                          <motion.div 
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 1.4 + catIndex * 0.1 + groupIndex * 0.1 }}
+                            className={`px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider ${theme.text} ${theme.bgLight} border ${theme.border}/30 z-10 shadow-sm`}
+                          >
+                            {group.name}
+                          </motion.div>
+
+                          {/* Level 3: Items within Group */}
+                          <div className="flex flex-col gap-2 mt-2 w-full px-2">
+                            {group.items.map((tech, itemIndex) => (
+                              <motion.div 
+                                key={tech}
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 1.6 + catIndex * 0.1 + groupIndex * 0.1 + itemIndex * 0.05 }}
+                                className="relative z-10"
+                              >
+                                <Card className={`py-2 px-2 hover:scale-105 transition-transform duration-300 border border-slate-200 dark:border-slate-700 ${theme.hoverBorder} shadow-sm flex justify-center items-center bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm`}>
+                                  <span className="text-[10px] lg:text-xs font-bold text-slate-700 dark:text-slate-300 text-center">
+                                    {tech}
+                                  </span>
+                                </Card>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -171,7 +185,7 @@ const Skills = () => {
           </div>
         </div>
 
-        {/* --- MOBILE TREE (Unified Nested File-Tree) --- */}
+        {/* --- MOBILE TREE (Unified Nested 4-Level) --- */}
         <div className="md:hidden flex flex-col w-full px-2">
           {/* Level 0: Root Node */}
           <motion.div 
@@ -191,7 +205,6 @@ const Skills = () => {
           <div className="relative w-full pl-6">
             {skills.map((skill, catIndex) => {
               const Icon = icons[skill.icon] || Code;
-              const subSkills = skill.details.split(', ');
               const isLastCat = catIndex === skills.length - 1;
               const theme = categoryColors[skill.name] || categoryColors["Frontend"];
               
@@ -224,32 +237,27 @@ const Skills = () => {
                        <div className={`p-2 rounded-xl ${theme.bgLight} ${theme.text}`}>
                          <Icon size={24} />
                        </div>
-                       <div>
-                         <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
-                           {skill.name}
-                         </h3>
-                         <span className={`text-[10px] font-bold ${theme.text} ${theme.bgLight} px-2 py-0.5 rounded-full mt-1 inline-block`}>
-                           Niveau: {skill.level}%
-                         </span>
-                       </div>
+                       <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
+                         {skill.name}
+                       </h3>
                      </Card>
                    </motion.div>
 
-                   {/* Nested Level 2: Leaves */}
+                   {/* Nested Level 2: Groups */}
                    <div className="relative ml-12 mt-4 pl-6">
-                      {subSkills.map((tech, leafIndex) => {
-                        const isLastLeaf = leafIndex === subSkills.length - 1;
+                      {skill.groups.map((group, groupIndex) => {
+                        const isLastGroup = groupIndex === skill.groups.length - 1;
                         return (
-                          <div key={tech} className="relative pt-3 pb-1">
+                          <div key={group.name} className="relative pt-6 pb-2">
                              {/* Level 2 Trunk segment */}
                              <motion.div 
                                initial={{ height: 0 }}
-                               whileInView={{ height: isLastLeaf ? 24 : '100%' }}
+                               whileInView={{ height: isLastGroup ? 24 : '100%' }}
                                viewport={{ once: true }}
                                className={`absolute left-0 top-0 w-1 rounded-full z-0 ${theme.lineLight}`}
                              />
                              
-                             {/* Horizontal branch to Leaf */}
+                             {/* Horizontal branch to Group */}
                              <motion.div 
                                initial={{ width: 0 }}
                                whileInView={{ width: 16 }}
@@ -257,17 +265,28 @@ const Skills = () => {
                                className={`absolute left-0 top-[24px] h-1 rounded-full origin-left z-0 ${theme.lineLight}`}
                              />
                              
-                             <motion.div
-                               initial={{ opacity: 0, x: 10 }}
-                               whileInView={{ opacity: 1, x: 0 }}
-                               viewport={{ once: true }}
-                               transition={{ delay: 0.1 * leafIndex }}
-                               className="ml-6 relative z-10"
-                             >
-                               <Card className={`p-2.5 shadow-sm bg-white/95 dark:bg-slate-800/95 border border-slate-100 dark:border-slate-700 ${theme.hoverBorder}`}>
-                                 <span className="font-bold text-slate-700 dark:text-slate-300 text-sm">{tech}</span>
-                               </Card>
-                             </motion.div>
+                             <div className="ml-6 relative z-10">
+                               <div className={`text-[10px] font-bold uppercase tracking-widest ${theme.text} mb-3 opacity-80`}>
+                                 {group.name}
+                               </div>
+                               
+                               {/* Nested Level 3: Items */}
+                               <div className="space-y-2">
+                                  {group.items.map((tech, itemIndex) => (
+                                    <motion.div
+                                      key={tech}
+                                      initial={{ opacity: 0, x: 10 }}
+                                      whileInView={{ opacity: 1, x: 0 }}
+                                      viewport={{ once: true }}
+                                      transition={{ delay: 0.1 * itemIndex }}
+                                    >
+                                      <Card className={`p-2.5 shadow-sm bg-white/95 dark:bg-slate-800/95 border border-slate-100 dark:border-slate-700 ${theme.hoverBorder}`}>
+                                        <span className="font-bold text-slate-700 dark:text-slate-300 text-sm">{tech}</span>
+                                      </Card>
+                                    </motion.div>
+                                  ))}
+                               </div>
+                             </div>
                           </div>
                         )
                       })}
