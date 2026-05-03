@@ -51,8 +51,8 @@ export const portfolioData = {
     { name: "Frontend", details: "HTML, CSS, JS, React, Tailwind CSS, Bootstrap", level: 90, icon: "Globe", category: "frontend" },
     { name: "Backend", details: "PHP, Laravel, Node.js", level: 80, icon: "Server", category: "backend" },
     { name: "Database", details: "MySQL, MongoDB", level: 85, icon: "Database", category: "backend" },
-    { name: "Tools", details: "Git, GitHub, Postman, VS Code", level: 80, icon: "Wrench", category: "tools" },
-    { name: "Other", details: "API Integration, Responsive Design", level: 85, icon: "Layers", category: "general" }
+    { name: "Tools", details: "Git, GitHub, GitLab, Postman, VS Code, Figma, Antigravity", level: 80, icon: "Wrench", category: "tools" },
+    { name: "Other", details: "REST APIs, Agile/Scrum", level: 75, icon: "Users", category: "other" }
   ],
   projects: [
     {
