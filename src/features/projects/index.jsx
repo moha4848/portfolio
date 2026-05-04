@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card, Button } from '../../shared/ui';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, X, Layout, Layers, Terminal, Search, Eye } from 'lucide-react';
+import { Github, ExternalLink, X, Layout, Layers, Terminal, Search, Eye, Play } from 'lucide-react';
 import { statsService } from '../../shared/services/statsService';
 
 // Import project images
@@ -12,10 +12,29 @@ import soukImg from '../../assets/projects/souk.png';
 import calculatorImg from '../../assets/projects/calculator.png';
 import todoImg from '../../assets/projects/todo.png';
 
+// Import Demos
+import { 
+  CalculatriceDemo, 
+  TodoDemo, 
+  ContactDemo, 
+  GalleryDemo, 
+  ClockDemo, 
+  QuizDemo 
+} from '../../components/demos/Demos';
+
 const projectImages = {
   "souk.png": soukImg,
   "calculator.png": calculatorImg,
   "todo.png": todoImg
+};
+
+const projectDemos = {
+  "calculator": <CalculatriceDemo />,
+  "todo-list": <TodoDemo />,
+  "contact-form": <ContactDemo />,
+  "image-gallery": <GalleryDemo />,
+  "digital-clock": <ClockDemo />,
+  "quiz-app": <QuizDemo />
 };
 
 const Projects = () => {
@@ -44,7 +63,7 @@ const Projects = () => {
             {portfolioData.nav[language].projects}
           </h2>
           <p className="text-slate-500 dark:text-slate-400">
-            Une sélection de mes travaux les plus récents, allant des outils frontend aux plateformes full-stack.
+            Une sélection de mes travaux les plus récents. Cliquez sur "Détails" pour tester les applications en direct.
           </p>
           
           <div className="flex justify-center gap-3 pt-6 flex-wrap">
@@ -97,9 +116,10 @@ const Projects = () => {
                     <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                       <button 
                         onClick={() => handleSelectProject(project)}
-                        className="p-4 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-xl"
+                        className="p-4 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-xl flex items-center gap-2 font-bold px-6"
                       >
-                        <Eye size={24} />
+                        {projectDemos[project.id] ? <Play size={20} className="fill-current" /> : <Eye size={20} />}
+                        {projectDemos[project.id] ? "Tester" : "Voir"}
                       </button>
                     </div>
 
@@ -133,7 +153,7 @@ const Projects = () => {
                         className="w-full text-xs font-black uppercase tracking-widest group-hover:bg-blue-600 group-hover:text-white transition-all"
                         onClick={() => handleSelectProject(project)}
                       >
-                        {t.details}
+                        {projectDemos[project.id] ? "Tester l'application" : t.details}
                       </Button>
                     </div>
                   </div>
@@ -144,7 +164,7 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      {/* Project Modal (L'aperçu détaillé) */}
+      {/* Project Modal (L'aperçu interactif) */}
       <AnimatePresence>
         {selectedProject && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
@@ -170,29 +190,40 @@ const Projects = () => {
                 <X size={20} />
               </button>
 
-              {/* Left Side: Image Preview */}
-              <div className="lg:w-3/5 bg-slate-100 dark:bg-slate-800 relative h-[300px] lg:h-auto">
-                {selectedProject.image && projectImages[selectedProject.image] ? (
-                  <img 
-                    src={projectImages[selectedProject.image]} 
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 to-purple-600/20">
-                    <Layout size={120} className="text-blue-500 opacity-30" />
+              {/* Left Side: LIVE DEMO or Image */}
+              <div className="lg:w-3/5 bg-slate-100 dark:bg-slate-950 relative h-[400px] lg:h-auto overflow-y-auto custom-scrollbar flex items-center justify-center p-6 md:p-12">
+                {projectDemos[selectedProject.id] ? (
+                  <div className="w-full max-w-md mx-auto transform scale-90 md:scale-100">
+                    {projectDemos[selectedProject.id]}
                   </div>
+                ) : (
+                  selectedProject.image && projectImages[selectedProject.image] ? (
+                    <img 
+                      src={projectImages[selectedProject.image]} 
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 to-purple-600/20">
+                      <Layout size={120} className="text-blue-500 opacity-30" />
+                    </div>
+                  )
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent lg:hidden" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent lg:hidden pointer-events-none" />
               </div>
 
               {/* Right Side: Details */}
-              <div className="lg:w-2/5 p-8 md:p-12 overflow-y-auto space-y-10 custom-scrollbar">
+              <div className="lg:w-2/5 p-8 md:p-12 overflow-y-auto space-y-10 custom-scrollbar bg-white dark:bg-slate-900">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
                       {selectedProject.category || 'Personal'}
                     </span>
+                    {projectDemos[selectedProject.id] && (
+                       <span className="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 flex items-center gap-1">
+                         <Play size={10} className="fill-current" /> Live Demo
+                       </span>
+                    )}
                   </div>
                   <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">
                     {selectedProject.title}
