@@ -169,7 +169,8 @@ export const portfolioData = {
         ar: "معرض صور تفاعلي مع إمكانية تكبير الصور بملء الشاشة والتنقل بينها.",
         es: "Una galería de imágenes interactiva con la capacidad de expandir imágenes a pantalla completa y navegar entre ellas."
       },
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "Grid"],
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
       github: "https://github.com/moha4848/gallery",
       category: "Frontend"
     },
@@ -182,7 +183,8 @@ export const portfolioData = {
         ar: "ساعة رقمية تعرض الوقت والتاريخ في الوقت الفعلي بتصميم أنيق.",
         es: "Un reloj digital que muestra la hora y la fecha en tiempo real con un diseño elegante."
       },
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "Real-time"],
+      image: "https://images.unsplash.com/photo-1508962914676-139425cf831c?q=80&w=1000&auto=format&fit=crop",
       github: "https://github.com/moha4848/clock",
       category: "Frontend"
     },
@@ -195,7 +197,8 @@ export const portfolioData = {
         ar: "تطبيق مسابقة مع أسئلة متعددة الخيارات، نظام تسجيل درجات، وعرض الإجابات الصحيحة.",
         es: "Aplicación de cuestionario con preguntas de opción múltiple, sistema de puntuación y visualización de respuestas correctas."
       },
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "UX", "Quiz"],
+      image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=1000&auto=format&fit=crop",
       github: "https://github.com/moha4848/quiz",
       category: "Frontend"
     }
@@ -238,7 +241,7 @@ export const portfolioData = {
     fr: { viewProject: "Voir le projet", github: "GitHub", details: "Détails", send: "Envoyer", name: "Nom", email: "Email", message: "Message" },
     en: { viewProject: "View Project", github: "GitHub", details: "Details", send: "Send", name: "Name", email: "Email", message: "Message" },
     ar: { viewProject: "عرض المشروع", github: "جيت هاب", details: "التفاصيل", send: "إرسال", name: "الاسم", email: "الإيميل", message: "الرسالة" },
-    es: { viewProject: "Ver proyecto", github: "GitHub", details: "Detalles", send: "Enviar", name: "Nombre", email: "Email", message: "Mensaje" }
+    es: { viewProject: "Ver proyecto", github: "GitHub", details: "Detalles", send: "Enviar", name: "Nombre", email: "Email", message: "Message" }
   }
 };
 
