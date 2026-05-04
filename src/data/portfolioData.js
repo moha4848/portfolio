@@ -113,6 +113,7 @@ export const portfolioData = {
         es: "Plataforma de mercado multitienda construida con Laravel y React."
       },
       tech: ["Laravel", "React", "PostgreSQL", "Tailwind CSS"],
+      image: "projects/souk.png",
       github: "https://github.com/moha4848/souk",
       category: "Full-Stack",
       featured: true
@@ -127,6 +128,7 @@ export const portfolioData = {
         es: "Una calculadora interactiva con un diseño moderno y responsive."
       },
       tech: ["HTML", "CSS", "JavaScript"],
+      image: "projects/calculator.png",
       github: "https://github.com/moha4848/calculator",
       category: "Frontend"
     },
@@ -140,6 +142,7 @@ export const portfolioData = {
         es: "Aplicación de gestión de tareas con almacenamiento local e interfaz intuitiva."
       },
       tech: ["React", "LocalStorage", "Tailwind CSS"],
+      image: "projects/todo.png",
       github: "https://github.com/moha4848/todo",
     },
     {
