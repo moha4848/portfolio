@@ -3,7 +3,7 @@ import { portfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card, Button } from '../../shared/ui';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 import { statsService } from '../../shared/services/statsService';
 

@@ -2,12 +2,13 @@ import React from 'react';
 import { portfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
-import { Card, GlassCard } from '../../shared/ui';
+import { GlassCard } from '../../shared/ui';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Heart, Target, Zap, Coffee, Sparkles } from 'lucide-react';
 
 const About = () => {
   const { language } = useLanguage();
+  const p = portfolioData.profile[language];
   const t = portfolioData.common[language];
 
   const values = [
