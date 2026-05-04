@@ -19,8 +19,7 @@ export const Navbar = () => {
     { name: t.skills, path: '/skills' },
     { name: t.projects, path: '/projects' },
     { name: t.experience, path: '/experience' },
-    { name: t.contact, path: '/contact' },
-    { name: t.dashboard, path: '/dashboard' }
+    { name: t.contact, path: '/contact' }
   ];
 
   return (
