@@ -4,13 +4,14 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card, Button } from '../../shared/ui';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, X, Layout, Layers, Terminal, Search, Eye, Play } from 'lucide-react';
+import { Github, X, Layout, Layers, Terminal, Eye, Play, Sparkles, Code2, Globe } from 'lucide-react';
 import { statsService } from '../../shared/services/statsService';
 
 // Import project images
 import soukImg from '../../assets/projects/souk.png';
 import calculatorImg from '../../assets/projects/calculator.png';
 import todoImg from '../../assets/projects/todo.png';
+import contactImg from '../../assets/projects/contact.png';
 
 // Import Demos
 import { 
@@ -25,7 +26,8 @@ import {
 const projectImages = {
   "souk.png": soukImg,
   "calculator.png": calculatorImg,
-  "todo.png": todoImg
+  "todo.png": todoImg,
+  "contact.png": contactImg
 };
 
 const projectDemos = {
@@ -57,24 +59,35 @@ const Projects = () => {
 
   return (
     <PageWrapper>
-      <div className="space-y-16 py-10">
-        <div className="text-center space-y-4 max-w-2xl mx-auto">
-          <h2 className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase">
-            {portfolioData.nav[language].projects}
+      <div className="space-y-24 py-10">
+        {/* Pro Header */}
+        <div className="text-center space-y-8 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] border border-blue-500/20"
+          >
+            <Sparkles size={12} /> Projets Sélectionnés
+          </motion.div>
+          
+          <h2 className="text-6xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.8]">
+            Work <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Showcase</span>
           </h2>
-          <p className="text-slate-500 dark:text-slate-400">
-            Une sélection de mes travaux les plus récents. Cliquez sur "Détails" pour tester les applications en direct.
+          
+          <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+            Une immersion dans mes projets les plus ambitieux. <br className="hidden md:block" />
+            Chaque projet est un défi relevé avec passion et précision.
           </p>
           
-          <div className="flex justify-center gap-3 pt-6 flex-wrap">
+          <div className="flex justify-center gap-4 pt-6 flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-8 py-2.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${
+                className={`px-10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
                   filter === cat 
-                  ? 'bg-blue-600 text-white shadow-xl shadow-blue-500/30 ring-4 ring-blue-500/10' 
-                  : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 hover:text-blue-600'
+                  ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] scale-105' 
+                  : 'bg-white dark:bg-slate-900 text-slate-400 dark:text-slate-500 border border-slate-100 dark:border-slate-800 hover:border-blue-500/50 hover:text-blue-600'
                 }`}
               >
                 {cat}
@@ -83,180 +96,187 @@ const Projects = () => {
           </div>
         </div>
 
+        {/* Pro Grid */}
         <motion.div 
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid md:grid-cols-2 gap-12"
         >
           <AnimatePresence mode='popLayout'>
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="h-full"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.8 }}
+                className="group"
               >
-                <Card className="group h-full flex flex-col overflow-hidden border-2 border-transparent hover:border-blue-500/30 transition-all duration-500 shadow-xl hover:shadow-2xl">
-                  {/* Project Image / Preview */}
-                  <div className="relative h-56 bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                <div 
+                  className="relative h-[500px] rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl transition-all duration-700 hover:scale-[0.98] group-hover:shadow-blue-500/20"
+                  onClick={() => handleSelectProject(project)}
+                >
+                  {/* Background Layer */}
+                  <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800">
                     {project.image && projectImages[project.image] ? (
                       <img 
                         src={projectImages[project.image]} 
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
-                        {project.id === 'souk-saas' ? <Layers size={80} className="text-blue-500 opacity-20" /> : <Terminal size={80} className="text-slate-400 opacity-20" />}
+                      <div className="w-full h-full bg-gradient-to-br from-blue-600 to-purple-700 p-20 flex items-center justify-center">
+                        <div className="text-white/20 scale-[4]">
+                           {project.id.includes('clock') ? <Terminal /> : <Code2 />}
+                        </div>
                       </div>
                     )}
-                    
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                      <button 
-                        onClick={() => handleSelectProject(project)}
-                        className="p-4 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform shadow-xl flex items-center gap-2 font-bold px-6"
-                      >
-                        {projectDemos[project.id] ? <Play size={20} className="fill-current" /> : <Eye size={20} />}
-                        {projectDemos[project.id] ? "Tester" : "Voir"}
-                      </button>
-                    </div>
+                  </div>
 
-                    <div className="absolute top-4 right-4">
-                       <span className="px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg border border-slate-200/50 dark:border-slate-800/50">
-                         {project.category || 'Personal'}
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-12 flex flex-col justify-end space-y-6">
+                    <div className="flex items-center gap-3">
+                       <span className="px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-white border border-white/20">
+                         {project.category || 'Development'}
                        </span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-8 flex-1 flex flex-col space-y-4 bg-white dark:bg-slate-900">
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">
-                      {project.description[language]}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {project.tech.slice(0, 4).map(t => (
-                        <span key={t} className="text-[10px] font-black px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-lg uppercase tracking-wider">
-                          {t}
-                        </span>
-                      ))}
+                       {projectDemos[project.id] && (
+                         <span className="px-4 py-1.5 bg-blue-500 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xl shadow-blue-500/40">
+                           <Play size={10} className="fill-current" /> Live Demo
+                         </span>
+                       )}
                     </div>
 
-                    <div className="pt-6 mt-auto">
-                      <Button 
-                        variant="secondary" 
-                        className="w-full text-xs font-black uppercase tracking-widest group-hover:bg-blue-600 group-hover:text-white transition-all"
-                        onClick={() => handleSelectProject(project)}
-                      >
-                        {projectDemos[project.id] ? "Tester l'application" : t.details}
-                      </Button>
+                    <div className="space-y-2">
+                       <h3 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">
+                         {project.title}
+                       </h3>
+                       <p className="text-slate-300 text-lg font-medium max-w-md line-clamp-2">
+                         {project.description[language]}
+                       </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4">
+                       <div className="flex -space-x-2">
+                          {project.tech.slice(0, 3).map((t, i) => (
+                            <div key={i} className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-[10px] font-black text-white uppercase">
+                               {t[0]}
+                            </div>
+                          ))}
+                       </div>
+                       <div className="w-14 h-14 rounded-full bg-white text-slate-950 flex items-center justify-center group-hover:scale-125 transition-transform duration-500 shadow-2xl">
+                          <Eye size={24} />
+                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
 
-      {/* Project Modal (L'aperçu interactif) */}
+      {/* Full-Screen Pro Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-10">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-slate-950/90 backdrop-blur-md"
+              className="absolute inset-0 bg-slate-950/95 backdrop-blur-2xl"
             />
             
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              initial={{ opacity: 0, scale: 0.9, y: 100 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 40 }}
-              className="relative w-full max-w-5xl bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/10 flex flex-col lg:flex-row max-h-[90vh]"
+              exit={{ opacity: 0, scale: 0.9, y: 100 }}
+              className="relative w-full h-full md:h-[90vh] max-w-7xl bg-white dark:bg-slate-900 md:rounded-[4rem] shadow-2xl overflow-hidden border border-white/10 flex flex-col lg:flex-row"
             >
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full transition-all z-50 text-white border border-white/20"
+                className="absolute top-10 right-10 p-5 bg-slate-900 text-white rounded-full hover:scale-110 transition-all z-50 shadow-2xl"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
 
-              {/* Left Side: LIVE DEMO or Image */}
-              <div className="lg:w-3/5 bg-slate-100 dark:bg-slate-950 relative h-[400px] lg:h-auto overflow-y-auto custom-scrollbar flex items-center justify-center p-6 md:p-12">
+              {/* Demo Section */}
+              <div className="lg:w-2/3 bg-slate-50 dark:bg-slate-950 relative overflow-hidden flex items-center justify-center p-6 md:p-20">
+                <div className="absolute inset-0 opacity-10">
+                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500 to-transparent blur-3xl" />
+                </div>
+                
                 {projectDemos[selectedProject.id] ? (
-                  <div className="w-full max-w-md mx-auto transform scale-90 md:scale-100">
-                    {projectDemos[selectedProject.id]}
+                  <div className="w-full max-w-2xl mx-auto z-10">
+                    <div className="bg-slate-900 rounded-[2rem] p-4 shadow-2xl border-8 border-slate-800">
+                       <div className="flex gap-2 mb-4 px-2">
+                          <div className="w-3 h-3 rounded-full bg-red-500" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                          <div className="w-3 h-3 rounded-full bg-green-500" />
+                       </div>
+                       {projectDemos[selectedProject.id]}
+                    </div>
                   </div>
                 ) : (
-                  selectedProject.image && projectImages[selectedProject.image] ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-8 z-10">
                     <img 
-                      src={projectImages[selectedProject.image]} 
+                      src={projectImages[selectedProject.image] || soukImg} 
                       alt={selectedProject.title}
-                      className="w-full h-full object-cover"
+                      className="w-full max-w-2xl rounded-3xl shadow-2xl rotate-2"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 to-purple-600/20">
-                      <Layout size={120} className="text-blue-500 opacity-30" />
+                    <div className="flex gap-4">
+                       <Button variant="primary" onClick={() => window.open(selectedProject.github, '_blank')}>
+                          <Github size={20} /> Repository Code
+                       </Button>
                     </div>
-                  )
+                  </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent lg:hidden pointer-events-none" />
               </div>
 
-              {/* Right Side: Details */}
-              <div className="lg:w-2/5 p-8 md:p-12 overflow-y-auto space-y-10 custom-scrollbar bg-white dark:bg-slate-900">
-                <div className="space-y-4">
+              {/* Info Section */}
+              <div className="lg:w-1/3 p-10 md:p-16 overflow-y-auto space-y-12 custom-scrollbar bg-white dark:bg-slate-900 border-l border-slate-100 dark:border-slate-800">
+                <div className="space-y-6">
                   <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
-                      {selectedProject.category || 'Personal'}
+                    <span className="px-5 py-2 rounded-2xl bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-blue-500/20">
+                      Case Study
                     </span>
-                    {projectDemos[selectedProject.id] && (
-                       <span className="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 flex items-center gap-1">
-                         <Play size={10} className="fill-current" /> Live Demo
-                       </span>
-                    )}
                   </div>
-                  <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">
+                  <h3 className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">
                     {selectedProject.title}
                   </h3>
-                  <div className="w-16 h-1.5 bg-blue-600 rounded-full" />
+                  <div className="h-2 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" />
                 </div>
 
-                <div className="space-y-4">
-                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Description</h4>
-                  <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                <div className="space-y-6">
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Background</h4>
+                  <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                     {selectedProject.description[language]}
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
+                <div className="space-y-6">
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Tech Stack</h4>
+                  <div className="grid grid-cols-2 gap-3">
                     {selectedProject.tech.map(tech => (
-                      <span key={tech} className="px-4 py-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-800">
+                      <div key={tech} className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl text-xs font-black text-slate-900 dark:text-white border border-slate-100 dark:border-slate-800 text-center uppercase tracking-tighter">
                         {tech}
-                      </span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-8 flex gap-4">
-                  <Button variant="primary" className="flex-1 py-4 text-xs font-black uppercase tracking-[0.2em] shadow-xl shadow-blue-500/30" onClick={() => {
-                    statsService.trackProjectClick();
-                    window.open(selectedProject.github, '_blank');
-                  }}>
-                    <Github size={20} />
-                    {t.github}
+                <div className="pt-10 space-y-4">
+                  <Button variant="primary" className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-blue-500/40 group" onClick={() => window.open(selectedProject.github, '_blank')}>
+                    <Github size={20} className="group-hover:rotate-12 transition-transform" />
+                    Explorer le Code
                   </Button>
+                  <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                    Available on GitHub for review
+                  </p>
                 </div>
               </div>
             </motion.div>

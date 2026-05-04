@@ -127,7 +127,7 @@ export const portfolioData = {
         ar: "آلة حاسبة تفاعلية بتصميم حديث ومتجاوب.",
         es: "Una calculadora interactiva con un diseño moderno y responsive."
       },
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "Logic"],
       image: "calculator.png",
       github: "https://github.com/moha4848/calculator",
       category: "Frontend"
@@ -141,9 +141,10 @@ export const portfolioData = {
         ar: "تطبيق إدارة المهام مع تخزين محلي وواجهة سهلة الاستخدام.",
         es: "Aplicación de gestión de tareas con almacenamiento local e interfaz intuitiva."
       },
-      tech: ["React", "LocalStorage", "Tailwind CSS"],
+      tech: ["React", "LocalStorage", "Tailwind CSS", "UX"],
       image: "todo.png",
       github: "https://github.com/moha4848/todo",
+      category: "Frontend"
     },
     {
       id: "contact-form",
@@ -154,7 +155,8 @@ export const portfolioData = {
         ar: "نموذج اتصال احترافي مع تحقق فوري من حقول البريد الإلكتروني، الهاتف، والرسالة.",
         es: "Un formulario de contacto profesional con validación en tiempo real para los campos de correo electrónico, teléfono y mensaje."
       },
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "Validation"],
+      image: "contact.png",
       github: "https://github.com/moha4848/contact-form",
       category: "Frontend"
     },
