@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe, Sparkles } from 'lucide-react';
 import { translations, languages } from '../../data/portfolioData';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar({ lang, setLang }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,67 +33,92 @@ export default function Navbar({ lang, setLang }) {
     { name: t.nav[5], path: '/contact' }
   ];
 
+  const currentLang = languages.find(l => l.code === lang);
+
   return (
-    <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm shadow-xl z-50 border-b border-slate-800">
+    <nav className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-2xl z-[100] border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center">
-              <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-10 w-auto" />
+        <div className="flex justify-between items-center h-20">
+          <div className="flex items-center gap-12">
+            <Link to="/" className="flex items-center group relative">
+              <div className="absolute -inset-2 bg-blue-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img src={process.env.PUBLIC_URL + '/logo.png'} alt="Logo" className="h-12 w-auto relative z-10" />
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative group px-3 py-2 transition-colors ${location.pathname === link.path ? 'text-white font-bold' : 'text-slate-300 hover:text-white'}`}
+                  className={`relative px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                    location.pathname === link.path 
+                    ? 'text-white bg-white/5' 
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  }`}
                 >
-                  <span className="relative z-10">{link.name}</span>
-                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transform transition-transform duration-300 ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  {link.name}
+                  {location.pathname === link.path && (
+                    <motion.div 
+                      layoutId="nav-active"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"
+                    />
+                  )}
                 </Link>
               ))}
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* Language Selector */}
-            <div className="relative language-selector">
+          <div className="flex items-center gap-6">
+            {/* Pro Language Switcher */}
+            <div className="relative language-selector hidden sm:block">
               <button
                 onClick={(e) => { e.stopPropagation(); setLangMenuOpen(!langMenuOpen); }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 transition-all duration-300 border border-slate-700 hover:border-blue-500/50 shadow-lg"
+                className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all group"
               >
-                <span className="emoji-flag text-xl">{languages.find(l => l.code === lang)?.flag}</span>
-                <span className="text-sm font-medium hidden sm:block text-white">
-                  {languages.find(l => l.code === lang)?.code.toUpperCase()}
+                <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm border border-blue-500/30">
+                  {currentLang?.flag}
+                </div>
+                <span className="text-[10px] font-black text-white uppercase tracking-widest">
+                  {currentLang?.label}
                 </span>
-                <ChevronDown size={16} className={`text-white ${langMenuOpen ? 'rotate-180 transition-transform' : ''}`} />
+                <ChevronDown size={14} className={`text-slate-500 group-hover:text-white transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              {langMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-gradient-to-b from-slate-900 to-slate-950 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden border border-slate-700/50 z-50">
-                  <div className="p-2">
-                    {languages.map((language) => (
-                      <button
-                        key={language.code}
-                        onClick={() => { setLang(language.code); setLangMenuOpen(false); }}
-                        className={`w-full flex items-center gap-3 p-3 text-white rounded-lg transition-all duration-200 ${lang === language.code ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30' : 'hover:bg-slate-800/80'}`}
-                      >
-                        <span className="emoji-flag text-xl">{language.flag}</span>
-                        <span className="flex-1 text-left font-medium">{language.label}</span>
-                        {lang === language.code && <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <AnimatePresence>
+                {langMenuOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 mt-4 w-56 bg-slate-900/90 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-white/10 p-3 z-50"
+                  >
+                    <div className="space-y-1">
+                      {languages.map((l) => (
+                        <button
+                          key={l.code}
+                          onClick={() => { setLang(l.code); setLangMenuOpen(false); }}
+                          className={`w-full flex items-center gap-4 p-3 rounded-[1.2rem] transition-all group ${
+                            lang === l.code 
+                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                            : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          <span className="text-xl">{l.flag}</span>
+                          <span className="flex-1 text-left text-[11px] font-black uppercase tracking-widest">{l.label}</span>
+                          {lang === l.code && <Sparkles size={14} className="animate-pulse" />}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-lg text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-700 hover:to-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300"
+              className="lg:hidden p-4 rounded-2xl text-white bg-white/5 border border-white/10"
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -101,33 +127,53 @@ export default function Navbar({ lang, setLang }) {
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
-          <div className="p-4 border-b border-slate-800">
-            <div className="grid grid-cols-2 gap-2">
-              {languages.map((language) => (
-                <button
-                  key={language.code}
-                  onClick={() => { setLang(language.code); setMenuOpen(false); }}
-                  className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all ${lang === language.code ? 'bg-gradient-to-r from-blue-900/40 to-cyan-900/30 border border-blue-500/50 text-white' : 'bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300'}`}
-                >
-                  <span className="emoji-flag text-2xl mb-1">{language.flag}</span>
-                  <span className="text-sm font-medium">{language.label}</span>
-                </button>
-              ))}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-slate-950 border-t border-white/5 overflow-hidden"
+          >
+            <div className="p-6 space-y-6">
+              {/* Mobile Lang Selector */}
+              <div className="flex gap-2 overflow-x-auto pb-4 custom-scrollbar">
+                {languages.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => { setLang(l.code); setMenuOpen(false); }}
+                    className={`flex items-center gap-3 px-6 py-3 rounded-2xl whitespace-nowrap border transition-all ${
+                      lang === l.code 
+                      ? 'bg-blue-600 border-blue-500 text-white shadow-lg' 
+                      : 'bg-white/5 border-white/10 text-slate-400'
+                    }`}
+                  >
+                    <span className="text-xl">{l.flag}</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest">{l.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="grid gap-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`w-full px-6 py-4 rounded-2xl text-sm font-black uppercase tracking-widest transition-all ${
+                      location.pathname === link.path 
+                      ? 'bg-white/10 text-white border border-white/20' 
+                      : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`w-full text-left px-6 py-4 transition-colors border-b border-slate-800/50 block ${location.pathname === link.path ? 'text-blue-400 font-bold bg-slate-800/30' : 'text-slate-300 hover:bg-slate-800/50'}`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
+
