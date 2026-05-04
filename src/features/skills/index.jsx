@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
-import { Globe, Server, Database, Code, Wrench, Users, Layers, Zap } from 'lucide-react';
+import { Globe, Server, Database, Code, Wrench, Users, Layers, Zap, Terminal, Cpu, Workflow } from 'lucide-react';
 
 const categoryColors = {
   "Frontend": {
@@ -39,6 +39,37 @@ const categoryColors = {
   }
 };
 
+const groupIcons = {
+  "Core": <Terminal size={14} />,
+  "Frameworks": <Cpu size={14} />,
+  "Styling": <Globe size={14} />,
+  "Languages": <Code size={14} />,
+  "SQL": <Database size={14} />,
+  "NoSQL": <Database size={14} />,
+  "Editors": <Wrench size={14} />,
+  "VCS": <Workflow size={14} />,
+  "Design": <Globe size={14} />,
+  "Testing": <Activity size={14} />,
+  "API": <Zap size={14} />,
+  "Methods": <Users size={14} />
+};
+
+const Activity = ({ size, className }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+);
+
 const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
@@ -59,10 +90,10 @@ const Skills = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm mb-6"
             >
               <Zap size={14} className="text-blue-500 fill-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Full-Stack Ecosystem</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tech Stack Architecture</span>
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-6 leading-none">
-              Compétences <span className="text-blue-600">&</span> Expertise
+              Skills <span className="text-blue-600">Tree</span>
             </h2>
           </div>
 
@@ -114,10 +145,13 @@ const Skills = () => {
                       transition={{ delay: idx * 0.1 }}
                       className="w-full mb-10 z-20"
                     >
-                      <Card className={`p-6 border-b-4 ${theme.border} bg-white dark:bg-slate-900 shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+                      <Card className={`p-6 border-b-4 ${theme.border} bg-white dark:bg-slate-900 shadow-xl hover:-translate-y-2 transition-all duration-300 relative group`}>
                         <div className="flex flex-col items-center text-center gap-4">
-                          <div className={`p-4 ${theme.bg} ${theme.text} rounded-2xl shadow-inner`}>
+                          <div className={`p-4 ${theme.bg} ${theme.text} rounded-2xl shadow-inner relative`}>
                             <Icon size={32} />
+                            <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-slate-900 text-white text-[8px] font-bold rounded-full border border-slate-700">
+                              {skill.level}%
+                            </div>
                           </div>
                           <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
                             {skill.name}
@@ -127,20 +161,24 @@ const Skills = () => {
                         {/* Sub-Groups (Connected Tree) */}
                         <div className="mt-10 space-y-8 relative pl-4">
                           {/* Vertical line for sub-groups */}
-                          <div className={`absolute left-0 top-0 bottom-4 w-1 bg-gradient-to-b ${theme.bg.replace('bg-', 'from-').replace('/10', '')} to-transparent opacity-20`} />
+                          <div className={`absolute left-0 top-0 bottom-4 w-1 bg-gradient-to-b ${theme.main === '#3b82f6' ? 'from-blue-500' : theme.main === '#10b981' ? 'from-emerald-500' : theme.main === '#f59e0b' ? 'from-amber-500' : theme.main === '#8b5cf6' ? 'from-violet-500' : 'from-rose-500'} to-transparent opacity-20`} />
                           
                           {skill.groups.map((group, gIdx) => (
-                            <div key={group.name} className="relative group/group">
+                            <div key={group.name} className="relative">
                               {/* Horizontal branch to group */}
                               <div className={`absolute left-[-16px] top-4 w-4 h-1 ${theme.bg} opacity-40`} />
                               
-                              <h4 className={`text-[10px] font-black uppercase tracking-widest ${theme.text} mb-3 opacity-80`}>
+                              <h4 className={`text-[10px] font-black uppercase tracking-widest ${theme.text} mb-3 opacity-80 flex items-center gap-2`}>
+                                <span className="p-1 bg-white dark:bg-slate-800 rounded-md border border-current shadow-sm">
+                                  {groupIcons[group.name] || <Zap size={12} />}
+                                </span>
                                 {group.name}
                               </h4>
 
-                              <div className="space-y-2 pl-4 border-l border-slate-200 dark:border-slate-800">
+                              <div className="space-y-2 pl-6 relative">
                                 {group.items.map(item => (
-                                  <div key={item} className="flex items-center gap-2 group/item py-0.5">
+                                  <div key={item} className="flex items-center gap-2 group/item py-0.5 relative">
+                                    <div className={`absolute left-[-10px] top-1/2 -translate-y-1/2 w-2 h-px bg-slate-200 dark:bg-slate-800`} />
                                     <div className={`w-1.5 h-1.5 rounded-full ${theme.bg} border border-current opacity-60 group-hover/item:scale-125 transition-transform`} />
                                     <span className="text-[13px] font-bold text-slate-600 dark:text-slate-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white transition-colors">
                                       {item}
@@ -159,7 +197,7 @@ const Skills = () => {
             </div>
           </div>
 
-          {/* --- MOBILE VIEW (Simple Connected List) --- */}
+          {/* --- MOBILE VIEW --- */}
           <div className="lg:hidden space-y-12 pl-4 border-l-4 border-slate-200 dark:border-slate-800">
             {skills.map((skill, idx) => {
               const theme = categoryColors[skill.name] || categoryColors["Frontend"];
@@ -169,8 +207,11 @@ const Skills = () => {
                 <div key={skill.name} className="relative">
                    <div className="absolute left-[-24px] top-8 w-6 h-1 bg-slate-300 dark:bg-slate-700 rounded-full" />
                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`p-4 rounded-2xl ${theme.bg} ${theme.text} border ${theme.border} shadow-lg`}>
+                      <div className={`p-4 rounded-2xl ${theme.bg} ${theme.text} border ${theme.border} shadow-lg relative`}>
                         <Icon size={28} />
+                        <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-slate-900 text-white text-[8px] font-bold rounded-full">
+                          {skill.level}%
+                        </div>
                       </div>
                       <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
                         {skill.name}
@@ -181,8 +222,8 @@ const Skills = () => {
                       {skill.groups.map(group => (
                         <div key={group.name} className="border-l-2 border-slate-200 dark:border-slate-800 pl-6 relative">
                            <div className={`absolute left-[-2px] top-0 w-0.5 h-6 bg-${theme.main}`} />
-                           <h4 className={`text-xs font-black uppercase tracking-widest ${theme.text} mb-4`}>
-                             {group.name}
+                           <h4 className={`text-xs font-black uppercase tracking-widest ${theme.text} mb-4 flex items-center gap-2`}>
+                             {groupIcons[group.name] || <Zap size={14} />} {group.name}
                            </h4>
                            <div className="grid grid-cols-2 gap-3">
                              {group.items.map(item => (
