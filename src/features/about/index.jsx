@@ -105,23 +105,6 @@ const About = () => {
             ))}
           </div>
         </div>
- 
-        {/* Fun Fact Section */}
-        {t.anecdote && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="p-12 bg-slate-900 rounded-[3rem] text-center space-y-6 shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 p-12 opacity-10">
-              <Coffee size={200} className="text-white" />
-            </div>
-            <h4 className="text-blue-400 font-black uppercase tracking-[0.3em] text-sm">{t.anecdote}</h4>
-            <p className="text-2xl md:text-4xl font-bold text-white max-w-3xl mx-auto leading-tight">
-              {t.anecdoteDesc}
-            </p>
-          </motion.div>
-        )}
       </div>
     </PageWrapper>
   );
