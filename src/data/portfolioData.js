@@ -115,6 +115,7 @@ export const portfolioData = {
       tech: ["Laravel", "React", "PostgreSQL", "Tailwind CSS"],
       image: "souk.png",
       github: "https://github.com/moha4848/souk",
+      demo: "https://souk-frontend.vercel.app/",
       category: "Full-Stack",
       featured: true
     },

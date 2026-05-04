@@ -154,7 +154,7 @@ const Projects = () => {
                        <span className="px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-white border border-white/20">
                          {project.category || 'Development'}
                        </span>
-                       {projectDemos[project.id] && (
+                       {(projectDemos[project.id] || project.demo) && (
                          <span className="px-4 py-1.5 bg-blue-500 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xl shadow-blue-500/40">
                            <Play size={10} className="fill-current" /> Live Demo
                          </span>
@@ -282,7 +282,13 @@ const Projects = () => {
                 </div>
 
                 <div className="pt-10 space-y-4">
-                  <Button variant="primary" className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-blue-500/40 group" onClick={() => window.open(selectedProject.github, '_blank')}>
+                  {selectedProject.demo && (
+                    <Button variant="primary" className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-emerald-500/40 group !bg-gradient-to-r !from-emerald-500 !to-teal-500 hover:!from-emerald-600 hover:!to-teal-600" onClick={() => window.open(selectedProject.demo, '_blank')}>
+                      <Globe size={20} className="group-hover:scale-110 transition-transform" />
+                      Live Demo
+                    </Button>
+                  )}
+                  <Button variant={selectedProject.demo ? "secondary" : "primary"} className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-blue-500/40 group" onClick={() => window.open(selectedProject.github, '_blank')}>
                     <Github size={20} className="group-hover:rotate-12 transition-transform" />
                     {t.exploreCode}
                   </Button>
