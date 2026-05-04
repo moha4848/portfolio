@@ -7,6 +7,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, X, Layout, Layers, Terminal, Search, Eye } from 'lucide-react';
 import { statsService } from '../../shared/services/statsService';
 
+// Import project images
+import soukImg from '../../assets/projects/souk.png';
+import calculatorImg from '../../assets/projects/calculator.png';
+import todoImg from '../../assets/projects/todo.png';
+
+const projectImages = {
+  "souk.png": soukImg,
+  "calculator.png": calculatorImg,
+  "todo.png": todoImg
+};
+
 const Projects = () => {
   const { language } = useLanguage();
   const [filter, setFilter] = useState('All');
@@ -70,14 +81,14 @@ const Projects = () => {
                 <Card className="group h-full flex flex-col overflow-hidden border-2 border-transparent hover:border-blue-500/30 transition-all duration-500 shadow-xl hover:shadow-2xl">
                   {/* Project Image / Preview */}
                   <div className="relative h-56 bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                    {project.image ? (
+                    {project.image && projectImages[project.image] ? (
                       <img 
-                        src={process.env.PUBLIC_URL + '/' + project.image} 
+                        src={projectImages[project.image]} 
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
                         {project.id === 'souk-saas' ? <Layers size={80} className="text-blue-500 opacity-20" /> : <Terminal size={80} className="text-slate-400 opacity-20" />}
                       </div>
                     )}
@@ -161,9 +172,9 @@ const Projects = () => {
 
               {/* Left Side: Image Preview */}
               <div className="lg:w-3/5 bg-slate-100 dark:bg-slate-800 relative h-[300px] lg:h-auto">
-                {selectedProject.image ? (
+                {selectedProject.image && projectImages[selectedProject.image] ? (
                   <img 
-                    src={process.env.PUBLIC_URL + '/' + selectedProject.image} 
+                    src={projectImages[selectedProject.image]} 
                     alt={selectedProject.title}
                     className="w-full h-full object-cover"
                   />
