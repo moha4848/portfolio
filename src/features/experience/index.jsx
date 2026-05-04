@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, MapPin, ChevronDown, Rocket, CheckCircle2 } from 'lucide-react';
+import { Briefcase, GraduationCap, MapPin, ChevronDown, Rocket, CheckCircle2, Star, Award } from 'lucide-react';
 
 const Parcours = () => {
   const { language } = useLanguage();
@@ -34,105 +34,123 @@ const Parcours = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-4xl mx-auto space-y-16">
-        <div className="text-center space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+      <div className="max-w-5xl mx-auto space-y-20 py-10">
+        <div className="text-center space-y-6">
+          <div className="flex justify-center">
+             <span className="px-4 py-1.5 bg-blue-500/10 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] border border-blue-500/20">
+               Timeline
+             </span>
+          </div>
+          <h2 className="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none">
             {t.experience}
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">
-            {language === 'ar' ? 'رحلتي المهنية والأكاديمية (تنازلي)' : 'Ma progression chronologique (Décroissante)'}
+          <p className="text-slate-500 dark:text-slate-400 font-medium max-w-xl mx-auto">
+            {language === 'ar' ? 'رحلتي المهنية والأكاديمية (تنازلي)' : 'Une rétrospective de mon parcours académique et de mes premières immersions professionnelles.'}
           </p>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full" />
         </div>
 
-        <div className="relative space-y-20">
+        <div className="relative space-y-32">
           {/* Main Path Line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-slate-100 dark:bg-slate-800 -translate-x-1/2 z-0" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1.5 bg-slate-100 dark:bg-slate-800 -translate-x-1/2 z-0 rounded-full" />
 
           {path.map((phase, phaseIndex) => (
-            <div key={phaseIndex} className="relative z-10 space-y-8">
+            <div key={phaseIndex} className="relative z-10 space-y-12">
               {/* Major Phase Marker */}
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 className="flex items-center md:justify-center"
               >
-                <div className="flex flex-col items-center gap-2">
-                  <div className={`w-14 h-14 rounded-full border-4 border-white dark:border-slate-950 shadow-2xl flex items-center justify-center z-20 ${
-                    phase.status === 'in-progress' ? 'bg-blue-600 text-white' : 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
+                <div className="flex flex-col items-center gap-4">
+                  <div className={`w-20 h-20 rounded-[2rem] border-8 border-white dark:border-slate-950 shadow-2xl flex items-center justify-center z-20 transition-transform hover:scale-110 ${
+                    phase.status === 'in-progress' ? 'bg-blue-600 text-white animate-pulse' : 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
                   }`}>
-                    {phase.status === 'in-progress' ? <Rocket size={24} className="animate-pulse" /> : <CheckCircle2 size={24} />}
+                    {phase.status === 'in-progress' ? <Rocket size={32} /> : <Award size={32} />}
                   </div>
-                  <span className="text-[10px] font-black bg-slate-900 text-white px-3 py-1 rounded-full uppercase tracking-widest">
+                  <div className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl">
                     {phase[language].period}
-                  </span>
+                  </div>
                 </div>
               </motion.div>
 
               {/* Major Phase Card */}
               <div className="flex flex-col items-center">
-                <Card className="w-full md:w-[85%] p-8 border-2 border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl overflow-visible relative">
-                  {phase.status === 'in-progress' && (
-                    <div className="absolute -top-3 -right-3 px-4 py-1 bg-emerald-500 text-white text-[10px] font-black uppercase rounded-lg shadow-lg rotate-12">
-                      Current
-                    </div>
-                  )}
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-                        <GraduationCap size={28} />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="w-full md:w-[90%]"
+                >
+                  <Card className="p-10 md:p-14 border-none bg-white dark:bg-slate-900 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-blue-500/5 relative overflow-visible rounded-[3rem]">
+                    {phase.status === 'in-progress' && (
+                      <div className="absolute -top-4 -right-4 px-6 py-2 bg-emerald-500 text-white text-[12px] font-black uppercase rounded-2xl shadow-2xl rotate-6 border-4 border-white dark:border-slate-900">
+                        En Cours
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white leading-tight">
-                        {phase[language].title}
-                      </h3>
-                    </div>
+                    )}
                     
-                    <div className="flex items-center gap-2 text-blue-600 font-bold ml-1">
-                      <MapPin size={18} />
-                      {phase[language].place}
+                    <div className="flex flex-col md:flex-row gap-8 items-start">
+                      <div className="p-6 rounded-[2.5rem] bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 shrink-0">
+                        <GraduationCap size={48} />
+                      </div>
+                      
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <h3 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">
+                            {phase[language].title}
+                          </h3>
+                          <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-black uppercase tracking-widest text-sm">
+                            <MapPin size={18} />
+                            {phase[language].place}
+                          </div>
+                        </div>
+                        
+                        <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                          {phase[language].desc}
+                        </p>
+
+                        <div className="flex flex-wrap gap-3 pt-4">
+                           <span className="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-xl text-xs font-bold text-slate-500 flex items-center gap-2">
+                              <Star size={14} className="text-yellow-500 fill-current" /> Excellence Académique
+                           </span>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <p className="text-slate-600 dark:text-slate-400 font-medium ml-1">
-                      {phase[language].desc}
-                    </p>
-                  </div>
-                </Card>
+                  </Card>
+                </motion.div>
               </div>
 
               {/* Nested Children (Work/Projects) */}
               {phase.children.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-8 px-6 md:px-0 mt-12">
+                <div className="grid md:grid-cols-2 gap-10 px-4 md:px-0 mt-20">
                   {phase.children.map((child, childIndex) => (
                     <motion.div
                       key={childIndex}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, scale: 0.9, x: childIndex % 2 === 0 ? -30 : 30 }}
+                      whileInView={{ opacity: 1, scale: 1, x: 0 }}
                       viewport={{ once: true }}
-                      className="relative"
                     >
-                      <Card className="h-full p-8 bg-slate-50/50 dark:bg-slate-800/30 border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all group">
-                        <div className="space-y-5">
+                      <Card className="h-full p-10 bg-slate-50/50 dark:bg-slate-800/30 border-none rounded-[2.5rem] hover:bg-white dark:hover:bg-slate-800 transition-all group shadow-xl hover:shadow-2xl">
+                        <div className="space-y-6">
                           <div className="flex items-center justify-between">
-                            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 text-blue-600 shadow-sm border border-slate-100 dark:border-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                              <Briefcase size={20} />
+                            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 text-blue-600 shadow-xl border border-slate-100 dark:border-slate-800 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                              <Briefcase size={24} />
                             </div>
-                            <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                            <span className="px-3 py-1 bg-slate-900 text-white rounded-lg text-[10px] font-black uppercase tracking-[0.2em]">
                               {child[language].period}
                             </span>
                           </div>
                           
-                          <div className="space-y-1">
-                            <h4 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                          <div className="space-y-2">
+                            <h4 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight group-hover:text-blue-600 transition-colors">
                               {child[language].title}
                             </h4>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                            <p className="text-sm text-blue-600 dark:text-blue-400 font-black uppercase tracking-widest">
                               {child[language].place}
                             </p>
                           </div>
 
-                          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                             {child[language].desc}
                           </p>
                         </div>
@@ -144,8 +162,13 @@ const Parcours = () => {
 
               {/* Visual Divider */}
               {phaseIndex < path.length - 1 && (
-                <div className="flex justify-center py-6">
-                  <ChevronDown className="text-slate-200 dark:text-slate-800" size={32} />
+                <div className="flex justify-center py-10">
+                  <motion.div 
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <ChevronDown className="text-slate-200 dark:text-slate-800" size={48} />
+                  </motion.div>
                 </div>
               )}
             </div>
