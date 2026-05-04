@@ -118,9 +118,9 @@ const Projects = () => {
                 >
                   {/* Background Layer */}
                   <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800">
-                    {project.image && projectImages[project.image] ? (
+                    {project.image ? (
                       <img 
-                        src={projectImages[project.image]} 
+                        src={project.image.startsWith('http') ? project.image : projectImages[project.image]} 
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                       />
@@ -224,7 +224,7 @@ const Projects = () => {
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-8 z-10">
                     <img 
-                      src={projectImages[selectedProject.image] || soukImg} 
+                      src={selectedProject.image?.startsWith('http') ? selectedProject.image : (projectImages[selectedProject.image] || soukImg)} 
                       alt={selectedProject.title}
                       className="w-full max-w-2xl rounded-3xl shadow-2xl rotate-2"
                     />
