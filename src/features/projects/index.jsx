@@ -156,7 +156,7 @@ const Projects = () => {
                        </span>
                        {(projectDemos[project.id] || project.demo) && (
                          <span className="px-4 py-1.5 bg-blue-500 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xl shadow-blue-500/40">
-                           <Play size={10} className="fill-current" /> Live Demo
+                           <Play size={10} className="fill-current" /> {t.viewProject}
                          </span>
                        )}
                     </div>
@@ -285,7 +285,7 @@ const Projects = () => {
                   {selectedProject.demo && (
                     <Button variant="primary" className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-emerald-500/40 group !bg-gradient-to-r !from-emerald-500 !to-teal-500 hover:!from-emerald-600 hover:!to-teal-600" onClick={() => window.open(selectedProject.demo, '_blank')}>
                       <Globe size={20} className="group-hover:scale-110 transition-transform" />
-                      Live Demo
+                      {t.viewProject}
                     </Button>
                   )}
                   <Button variant={selectedProject.demo ? "secondary" : "primary"} className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-blue-500/40 group" onClick={() => window.open(selectedProject.github, '_blank')}>
