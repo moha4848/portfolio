@@ -212,10 +212,10 @@ export const portfolioData = {
       es: { title: "Proyecto Plataforma SOUK SaaS", place: "Proyecto Personal", period: "2026", desc: "Desarrollo de una plataforma SaaS multitienda tipo marketplace (Laravel + React)." }
     },
     {
-      fr: { title: "Stage – ONEE", place: "Office National de l'Électricité et de l'Eau Potable", period: "2024", desc: "Développement d’une application de gestion de laboratoire et de suivi des équipements techniques." },
-      en: { title: "Internship – ONEE", place: "National Office of Electricity and Drinking Water", period: "2024", desc: "Development of a laboratory management application and tracking of technical equipment." },
-      ar: { title: "تدريب – ONEE", place: "المكتب الوطني للكهرباء والماء الصالح والشرب", period: "2024", desc: "تطوير تطبيق لإدارة المختبرات وتتبع المعدات التقنية." },
-      es: { title: "Pasantía – ONEE", place: "Oficina Nacional de Electricidad y Agua Potable", period: "2024", desc: "Desarrollo de una aplicación de gestión de laboratorios y seguimiento de equipos técnicos." }
+      fr: { title: "Stage – ONEE", place: "Office National de l'Électricité et de l'Eau Potable", period: "2026", desc: "Développement d’une application de gestion de laboratoire et de suivi des équipements techniques." },
+      en: { title: "Internship – ONEE", place: "National Office of Electricity and Drinking Water", period: "2026", desc: "Development of a laboratory management application and tracking of technical equipment." },
+      ar: { title: "تدريب – ONEE", place: "المكتب الوطني للكهرباء والماء الصالح والشرب", period: "2026", desc: "تطوير تطبيق لإدارة المختبرات وتتبع المعدات التقنية." },
+      es: { title: "Pasantía – ONEE", place: "Oficina Nacional de Electricidad y Agua Potable", period: "2026", desc: "Desarrollo de una aplicación de gestión de laboratorios y seguimiento de equipos técnicos." }
     }
   ],
   education: [
