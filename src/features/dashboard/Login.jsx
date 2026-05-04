@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { portfolioData } from '../../data/portfolioData';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card, Button } from '../../shared/ui';
 import { Lock, User, KeyRound } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Login = ({ onLogin }) => {
+  const { language } = useLanguage();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const t = portfolioData.common[language];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +18,7 @@ export const Login = ({ onLogin }) => {
     if (password === 'zimo0820') {
       onLogin();
     } else {
-      setError('Mot de passe incorrect');
+      setError(t.incorrectPassword);
     }
   };
 
@@ -32,10 +36,10 @@ export const Login = ({ onLogin }) => {
                 <Lock size={32} />
               </div>
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-                Accès Restreint
+                {t.restrictedAccess}
               </h2>
               <p className="text-slate-500 dark:text-slate-400">
-                Veuillez entrer le mot de passe pour accéder au tableau de bord.
+                {t.loginPrompt}
               </p>
             </div>
 
@@ -53,16 +57,16 @@ export const Login = ({ onLogin }) => {
                       setError('');
                     }}
                     className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white"
-                    placeholder="Mot de passe..."
+                    placeholder={t.passwordPlaceholder}
                   />
                 </div>
                 {error && (
-                  <p className="text-red-500 text-sm font-medium pl-1">{error}</p>
+                   <p className="text-red-500 text-sm font-medium pl-1">{error}</p>
                 )}
               </div>
 
               <Button type="submit" variant="primary" className="w-full justify-center">
-                Se Connecter
+                {t.loginButton}
               </Button>
             </form>
           </Card>

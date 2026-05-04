@@ -46,7 +46,6 @@ const Projects = () => {
   const t = portfolioData.common[language];
 
   const handleSelectProject = (project) => {
-    statsService.trackProjectClick();
     setSelectedProject(project);
   };
 
@@ -243,7 +242,7 @@ const Projects = () => {
                     />
                     <div className="flex gap-4">
                        <Button variant="primary" onClick={() => window.open(selectedProject.github, '_blank')}>
-                          <Github size={20} /> Repository Code
+                          <Github size={20} /> {t.repoCode}
                        </Button>
                     </div>
                   </div>
@@ -255,7 +254,7 @@ const Projects = () => {
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
                     <span className="px-5 py-2 rounded-2xl bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-blue-500/20">
-                      Case Study
+                      {t.caseStudy}
                     </span>
                   </div>
                   <h3 className="text-5xl font-black text-slate-900 dark:text-white tracking-tighter leading-none">
@@ -265,14 +264,14 @@ const Projects = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Background</h4>
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">{t.background}</h4>
                   <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
                     {selectedProject.description[language]}
                   </p>
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Tech Stack</h4>
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">{t.techStack}</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {selectedProject.tech.map(tech => (
                       <div key={tech} className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl text-xs font-black text-slate-900 dark:text-white border border-slate-100 dark:border-slate-800 text-center uppercase tracking-tighter">
@@ -285,10 +284,10 @@ const Projects = () => {
                 <div className="pt-10 space-y-4">
                   <Button variant="primary" className="w-full py-6 text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl shadow-blue-500/40 group" onClick={() => window.open(selectedProject.github, '_blank')}>
                     <Github size={20} className="group-hover:rotate-12 transition-transform" />
-                    Explorer le Code
+                    {t.exploreCode}
                   </Button>
                   <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                    Available on GitHub for review
+                    {t.githubReview}
                   </p>
                 </div>
               </div>

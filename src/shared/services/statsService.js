@@ -1,15 +1,15 @@
 // Simple stats service using localStorage to simulate real-time tracking
 // In a production environment, this would call a real backend API
 
-const STATS_KEY = 'portfolio_stats_v1';
-const MESSAGES_KEY = 'portfolio_messages_v1';
+const STATS_KEY = 'portfolio_stats_v2';
+const MESSAGES_KEY = 'portfolio_messages_v2';
 
 const initialStats = {
-  views: 1284,
-  projectClicks: 432,
-  cvDownloads: 89,
-  visitorCountry: 'Morocco',
-  visitorFlag: '🇲🇦',
+  views: 0,
+  projectClicks: 0,
+  cvDownloads: 0,
+  visitorCountry: 'Detecting...',
+  visitorFlag: '',
   lastUpdated: new Date().toISOString()
 };
 

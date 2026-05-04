@@ -4,9 +4,18 @@ import { portfolioData } from '../../data/portfolioData';
 import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Button } from '../../shared/ui';
-import { Github, Linkedin, Instagram, Mail, Download, ExternalLink, Code2, Database, Layout } from 'lucide-react';
+import { Github, Linkedin, Instagram, Mail, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { statsService } from '../../shared/services/statsService';
+import { 
+  SiReact, 
+  SiLaravel, 
+  SiTailwindcss, 
+  SiJavascript, 
+  SiPhp, 
+  SiPostgresql,
+  SiFigma
+} from 'react-icons/si';
 
 const Home = () => {
   const { language } = useLanguage();
@@ -17,9 +26,9 @@ const Home = () => {
   const icons = { Github, Linkedin, Instagram, Mail };
 
   const techFloating = [
-    { icon: <Code2 size={24} />, label: "React", color: "blue", pos: "top-0 -left-10" },
-    { icon: <Database size={24} />, label: "Laravel", color: "red", pos: "bottom-10 -right-10" },
-    { icon: <Layout size={24} />, label: "UI/UX", color: "purple", pos: "-bottom-5 left-1/4" }
+    { icon: <SiReact size={32} className="text-cyan-400" />, label: "React", pos: "top-0 -left-10" },
+    { icon: <SiLaravel size={32} className="text-red-500" />, label: "Laravel", pos: "bottom-10 -right-10" },
+    { icon: <SiFigma size={32} className="text-purple-500" />, label: "UI/UX", pos: "-bottom-5 left-1/4" }
   ];
 
   return (
@@ -94,9 +103,10 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 + (i * 0.1) }}
                   whileHover={{ y: -5, scale: 1.1 }}
-                  className="p-4 rounded-2xl bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-xl border border-slate-100 dark:border-slate-800"
+                  className="relative p-4 rounded-2xl bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-white transition-all duration-500 shadow-xl border border-slate-100 dark:border-slate-800 group overflow-hidden"
                 >
-                  <Icon size={22} />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Icon size={22} className="relative z-10 group-hover:rotate-[360deg] transition-transform duration-700" />
                 </motion.a>
               );
             })}

@@ -18,7 +18,7 @@ export const Footer = () => {
             Yousfi Mohammed
           </p>
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-            © {new Date().getFullYear()} — Créé par Yousfi Mohammed
+            © {new Date().getFullYear()} — {portfolioData.common[language].createdBy} Yousfi Mohammed
           </p>
         </div>
 

@@ -4,7 +4,25 @@ import { useLanguage } from '../../context/LanguageContext';
 import { PageWrapper } from '../../shared/components/PageWrapper';
 import { Card } from '../../shared/ui';
 import { motion } from 'framer-motion';
-import { Globe, Server, Database, Code, Wrench, Users, Layers, Zap, Terminal, Cpu, Workflow, ChevronRight } from 'lucide-react';
+import { Globe, Server, Database, Code, Wrench, Users, Layers, Zap, Terminal, Cpu, Workflow } from 'lucide-react';
+import { 
+  SiHtml5, 
+  SiCss3, 
+  SiJavascript, 
+  SiReact, 
+  SiBootstrap, 
+  SiTailwindcss, 
+  SiPhp, 
+  SiLaravel, 
+  SiNodedotjs, 
+  SiMysql, 
+  SiMongodb,
+  SiVisualstudiocode,
+  SiGit,
+  SiGithub,
+  SiFigma,
+  SiPostman
+} from 'react-icons/si';
 
 const categoryColors = {
   "Frontend": {
@@ -40,16 +58,16 @@ const categoryColors = {
 };
 
 const groupIcons = {
-  "Core": <Terminal size={14} />,
-  "Frameworks": <Cpu size={14} />,
-  "Styling": <Globe size={14} />,
-  "Languages": <Code size={14} />,
-  "SQL": <Database size={14} />,
-  "NoSQL": <Database size={14} />,
-  "Editors": <Wrench size={14} />,
-  "VCS": <Workflow size={14} />,
-  "Design": <Globe size={14} />,
-  "Testing": <Zap size={14} />,
+  "Core": <SiJavascript size={14} />,
+  "Frameworks": <SiReact size={14} />,
+  "Styling": <SiTailwindcss size={14} />,
+  "Languages": <SiPhp size={14} />,
+  "SQL": <SiMysql size={14} />,
+  "NoSQL": <SiMongodb size={14} />,
+  "Editors": <SiVisualstudiocode size={14} />,
+  "VCS": <SiGit size={14} />,
+  "Design": <SiFigma size={14} />,
+  "Testing": <SiPostman size={14} />,
   "API": <Zap size={14} />,
   "Methods": <Users size={14} />
 };
@@ -57,7 +75,39 @@ const groupIcons = {
 const Skills = () => {
   const { language } = useLanguage();
   const skills = portfolioData.skills;
-  const icons = { Globe, Server, Database, Code, Wrench, Users, Layers };
+  const icons = { 
+    Globe: SiReact, 
+    Server: SiLaravel, 
+    Database: SiMysql, 
+    Code: SiJavascript, 
+    Wrench: SiVisualstudiocode, 
+    Users: Users, 
+    Layers: Layers 
+  };
+  const t = portfolioData.common[language];
+
+  const categoryLabels = {
+    "Frontend": t.catFrontend,
+    "Backend": t.catBackend,
+    "Database": t.catDatabase,
+    "Tools": t.catTools,
+    "Other": t.catOther
+  };
+
+  const groupLabels = {
+    "Core": t.grpCore,
+    "Frameworks": t.grpFrameworks,
+    "Styling": t.grpStyling,
+    "Languages": t.grpLanguages,
+    "SQL": t.grpSQL,
+    "NoSQL": t.grpNoSQL,
+    "Editors": t.grpEditors,
+    "VCS": t.grpVCS,
+    "Design": t.grpDesign,
+    "Testing": t.grpTesting,
+    "API": t.grpAPI,
+    "Methods": t.grpMethods
+  };
 
   return (
     <PageWrapper>
@@ -74,10 +124,10 @@ const Skills = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm mb-6"
             >
               <Zap size={14} className="text-blue-500 fill-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tech Stack Architecture</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{t.techArchitecture}</span>
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-6 leading-none">
-              Skills <span className="text-blue-600">Tree</span>
+              {t.skillsTree.split(' ')[0]} <span className="text-blue-600">{t.skillsTree.split(' ')[1]}</span>
             </h2>
           </div>
 
@@ -95,7 +145,7 @@ const Skills = () => {
               <Card className="px-12 py-5 bg-slate-900 border-slate-700 shadow-2xl relative overflow-hidden group">
                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                  <span className="text-xl font-black text-white uppercase tracking-[0.3em] flex items-center gap-4 relative z-10">
-                   <Layers size={28} className="text-blue-400" /> {portfolioData.common[language].globalTree}
+                   <Layers size={28} className="text-blue-400" /> {t.globalTree}
                  </span>
               </Card>
             </motion.div>
@@ -127,14 +177,16 @@ const Skills = () => {
                     >
                       <Card className={`p-6 border-b-4 ${theme.border} bg-white dark:bg-slate-900 shadow-xl hover:-translate-y-2 transition-all duration-300 relative group`}>
                         <div className="flex flex-col items-center text-center gap-4">
-                          <div className={`p-4 ${theme.bg} ${theme.text} rounded-2xl shadow-inner relative`}>
-                            <Icon size={32} />
-                            <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-slate-900 text-white text-[8px] font-bold rounded-full border border-slate-700">
+                          <div className={`relative p-5 rounded-2xl ${theme.bg} ${theme.text} shadow-inner group-hover:scale-110 transition-transform duration-500 overflow-hidden`}>
+                            {/* Inner Glow effect */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <Icon size={36} strokeWidth={1.5} className="relative z-10" />
+                            <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-slate-900 text-white text-[8px] font-black rounded-full border border-slate-700">
                               {skill.level}%
                             </div>
                           </div>
                           <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
-                            {skill.name}
+                            {categoryLabels[skill.name]}
                           </h3>
                         </div>
 
@@ -144,10 +196,10 @@ const Skills = () => {
                             <div key={group.name} className="relative">
                               <div className={`absolute left-[-16px] top-4 w-4 h-1 ${theme.bg} opacity-40`} />
                               <h4 className={`text-[10px] font-black uppercase tracking-widest ${theme.text} mb-3 opacity-80 flex items-center gap-2`}>
-                                <span className="p-1 bg-white dark:bg-slate-800 rounded-md border border-current shadow-sm">
+                                <span className={`p-1.5 rounded-lg border border-current/20 bg-current/5 shadow-sm`}>
                                   {groupIcons[group.name] || <Zap size={12} />}
                                 </span>
-                                {group.name}
+                                {groupLabels[group.name]}
                               </h4>
                               <div className="space-y-2 pl-6 relative">
                                 {group.items.map(item => (
@@ -177,7 +229,7 @@ const Skills = () => {
             <div className="flex justify-center mb-10">
                <div className="px-6 py-3 bg-slate-900 rounded-2xl border border-slate-700 shadow-xl flex items-center gap-3">
                  <Layers size={20} className="text-blue-500" />
-                 <span className="text-sm font-black text-white uppercase tracking-widest">{portfolioData.common[language].globalTree}</span>
+                 <span className="text-sm font-black text-white uppercase tracking-widest">{t.globalTree}</span>
                </div>
             </div>
 
@@ -204,7 +256,7 @@ const Skills = () => {
                                <Icon size={24} />
                              </div>
                              <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
-                               {skill.name}
+                               {categoryLabels[skill.name]}
                              </h3>
                           </div>
                           <span className={`text-[10px] font-black px-2 py-1 ${theme.bg} ${theme.text} rounded-lg`}>
@@ -216,7 +268,7 @@ const Skills = () => {
                           {skill.groups.map(group => (
                             <div key={group.name} className="relative">
                                <h4 className={`text-[10px] font-black uppercase tracking-[0.2em] ${theme.text} mb-4 flex items-center gap-2 opacity-80`}>
-                                 {groupIcons[group.name] || <Zap size={12} />} {group.name}
+                                 {groupIcons[group.name] || <Zap size={12} />} {groupLabels[group.name]}
                                </h4>
                                <div className="grid grid-cols-2 gap-3">
                                  {group.items.map(item => (
