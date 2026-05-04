@@ -116,25 +116,31 @@ const Projects = () => {
                   className="relative h-[500px] rounded-[3rem] overflow-hidden cursor-pointer shadow-2xl transition-all duration-700 hover:scale-[0.98] group-hover:shadow-blue-500/20"
                   onClick={() => handleSelectProject(project)}
                 >
-                  {/* Background Layer */}
+                  {/* Background Layer (Real Preview or Image) */}
                   <div className="absolute inset-0 bg-slate-100 dark:bg-slate-800">
-                    {project.image ? (
+                    {project.id === 'souk-saas' ? (
                       <img 
-                        src={project.image.startsWith('http') ? project.image : projectImages[project.image]} 
+                        src={soukImg} 
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                       />
+                    ) : projectDemos[project.id] ? (
+                      <div className="w-full h-full p-8 flex items-center justify-center overflow-hidden">
+                        <div className="w-[400px] transform scale-[0.6] origin-center opacity-40 group-hover:opacity-80 group-hover:scale-[0.65] transition-all duration-700 pointer-events-none grayscale group-hover:grayscale-0">
+                           {projectDemos[project.id]}
+                        </div>
+                      </div>
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-blue-600 to-purple-700 p-20 flex items-center justify-center">
                         <div className="text-white/20 scale-[4]">
-                           {project.id.includes('clock') ? <Terminal /> : <Code2 />}
+                           <Code2 />
                         </div>
                       </div>
                     )}
                   </div>
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                  {/* Gradient Overlay (Darker for contrast) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-80 transition-opacity" />
 
                   {/* Content Overlay */}
                   <div className="absolute inset-0 p-12 flex flex-col justify-end space-y-6">
