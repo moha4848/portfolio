@@ -206,10 +206,10 @@ export const portfolioData = {
   ],
   experience: [
     {
-      fr: { title: "Projet SOUK SaaS Platform", place: "Projet Personnel", period: "2024", desc: "Développement d’une plateforme SaaS multi-tenant de type marketplace (Laravel + React)." },
-      en: { title: "SOUK SaaS Platform Project", place: "Personal Project", period: "2024", desc: "Development of a multi-tenant SaaS marketplace platform (Laravel + React)." },
-      ar: { title: "مشروع منصة SOUK SaaS", place: "مشروع شخصي", period: "2024", desc: "تطوير منصة SaaS متعددة المتاجر من نوع marketplace (Laravel + React)." },
-      es: { title: "Proyecto Plataforma SOUK SaaS", place: "Proyecto Personal", period: "2024", desc: "Desarrollo de una plataforma SaaS multitienda tipo marketplace (Laravel + React)." }
+      fr: { title: "Projet SOUK SaaS Platform", place: "Projet Personnel", period: "2026", desc: "Développement d’une plateforme SaaS multi-tenant de type marketplace (Laravel + React)." },
+      en: { title: "SOUK SaaS Platform Project", place: "Personal Project", period: "2026", desc: "Development of a multi-tenant SaaS marketplace platform (Laravel + React)." },
+      ar: { title: "مشروع منصة SOUK SaaS", place: "مشروع شخصي", period: "2026", desc: "تطوير منصة SaaS متعددة المتاجر من نوع marketplace (Laravel + React)." },
+      es: { title: "Proyecto Plataforma SOUK SaaS", place: "Proyecto Personal", period: "2026", desc: "Desarrollo de una plataforma SaaS multitienda tipo marketplace (Laravel + React)." }
     },
     {
       fr: { title: "Stage – ONEE", place: "Office National de l'Électricité et de l'Eau Potable", period: "2024", desc: "Développement d’une application de gestion de laboratoire et de suivi des équipements techniques." },
