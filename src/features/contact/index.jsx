@@ -33,8 +33,8 @@ const Contact = () => {
 
   const contactDetails = [
     { icon: Mail, label: t.email, value: "myousfi610@gmail.com", href: "mailto:myousfi610@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+212 716288974", href: "tel:+212716288974" },
-    { icon: MapPin, label: "Location", value: "Oujda, Maroc", href: "#" }
+    { icon: Phone, label: t.phone, value: "+212 716288974", href: "tel:+212716288974" },
+    { icon: MapPin, label: t.location, value: t.locationValue, href: "#" }
   ];
 
   return (
@@ -46,7 +46,7 @@ const Contact = () => {
               {portfolioData.nav[language].contact}
             </h2>
             <p className="text-slate-600 dark:text-slate-400 text-lg">
-              Have a project in mind or just want to say hi? Feel free to reach out!
+              {t.contactTagline}
             </p>
           </div>
 
@@ -72,17 +72,20 @@ const Contact = () => {
 
         <div className="lg:col-span-3">
           <Card className="p-8 sm:p-10 shadow-2xl relative overflow-hidden">
-            {isSuccess && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute inset-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6"
-              >
-                <CheckCircle size={64} className="text-emerald-500 mb-4" />
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Message Envoyé !</h3>
-                <p className="text-slate-600 dark:text-slate-400">Merci {formData.name}, je vous répondrai dès que possible.</p>
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {isSuccess && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  className="absolute inset-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6"
+                >
+                  <CheckCircle size={64} className="text-emerald-500 mb-4" />
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t.messageSent}</h3>
+                  <p className="text-slate-600 dark:text-slate-400">{t.thankYou.replace('{name}', formData.name)}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
@@ -117,7 +120,7 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  placeholder="Tell me about your project..."
+                  placeholder={t.messagePlaceholder}
                   className="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-600 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 text-slate-900 dark:text-white transition-all outline-none resize-none"
                 ></textarea>
               </div>

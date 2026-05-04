@@ -31,6 +31,7 @@ const Parcours = () => {
   ];
 
   const t = portfolioData.nav[language];
+  const common = portfolioData.common[language];
 
   return (
     <PageWrapper>
@@ -38,14 +39,14 @@ const Parcours = () => {
         <div className="text-center space-y-6">
           <div className="flex justify-center">
              <span className="px-4 py-1.5 bg-blue-500/10 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] border border-blue-500/20">
-               Timeline
+               {common.timeline}
              </span>
           </div>
           <h2 className="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none">
             {t.experience}
           </h2>
           <p className="text-slate-500 dark:text-slate-400 font-medium max-w-xl mx-auto">
-            {language === 'ar' ? 'رحلتي المهنية والأكاديمية (تنازلي)' : 'Une rétrospective de mon parcours académique et de mes premières immersions professionnelles.'}
+            {common.timelineDesc}
           </p>
         </div>
 
@@ -85,7 +86,7 @@ const Parcours = () => {
                   <Card className="p-10 md:p-14 border-none bg-white dark:bg-slate-900 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] dark:shadow-blue-500/5 relative overflow-visible rounded-[3rem]">
                     {phase.status === 'in-progress' && (
                       <div className="absolute -top-4 -right-4 px-6 py-2 bg-emerald-500 text-white text-[12px] font-black uppercase rounded-2xl shadow-2xl rotate-6 border-4 border-white dark:border-slate-900">
-                        En Cours
+                        {common.inProgress}
                       </div>
                     )}
                     
@@ -111,7 +112,7 @@ const Parcours = () => {
 
                         <div className="flex flex-wrap gap-3 pt-4">
                            <span className="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-xl text-xs font-bold text-slate-500 flex items-center gap-2">
-                              <Star size={14} className="text-yellow-500 fill-current" /> Excellence Académique
+                              <Star size={14} className="text-yellow-500 fill-current" /> {common.academicExcellence}
                            </span>
                         </div>
                       </div>

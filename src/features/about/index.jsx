@@ -8,12 +8,12 @@ import { CheckCircle2, Heart, Target, Zap, Coffee, Sparkles } from 'lucide-react
 
 const About = () => {
   const { language } = useLanguage();
-  const p = portfolioData.profile[language];
+  const t = portfolioData.common[language];
 
   const values = [
-    { icon: Target, title: "Précision", desc: "Code propre et architecture robuste." },
-    { icon: Zap, title: "Efficacité", desc: "Solutions rapides et optimisées." },
-    { icon: Heart, title: "Passion", desc: "Toujours à la pointe des technos." }
+    { icon: Target, title: t.precision, desc: t.precisionDesc },
+    { icon: Zap, title: t.efficiency, desc: t.efficiencyDesc },
+    { icon: Heart, title: t.passion, desc: t.passionDesc }
   ];
 
   return (
@@ -40,7 +40,7 @@ const About = () => {
                 "{p.about}"
               </p>
             </div>
-
+ 
             <div className="flex gap-4 pt-4">
                {values.map((v, i) => (
                  <div key={i} className="flex flex-col items-center gap-2">
@@ -52,7 +52,7 @@ const About = () => {
                ))}
             </div>
           </motion.div>
-
+ 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -65,21 +65,21 @@ const About = () => {
             </div>
             <div className="absolute bottom-10 left-10 right-10 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
                <p className="text-sm font-bold text-white uppercase tracking-[0.2em] text-center">
-                 "Transformer des idées en réalités numériques"
+                 "{t.tagline}"
                </p>
             </div>
           </motion.div>
         </div>
-
+ 
         {/* Bottom Section: Skills Bento Grid */}
         <div className="space-y-10">
           <div className="text-center">
             <h3 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
-              Mes Atouts Personnels
+              {t.softSkillsTitle}
             </h3>
-            <p className="text-slate-500 dark:text-slate-400">Ce qui me définit au-delà de la technique</p>
+            <p className="text-slate-500 dark:text-slate-400">{t.softSkillsDesc}</p>
           </div>
-
+ 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {p.softSkills.map((skill, index) => (
               <motion.div
@@ -104,7 +104,7 @@ const About = () => {
             ))}
           </div>
         </div>
-
+ 
         {/* Fun Fact Section */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -114,9 +114,9 @@ const About = () => {
           <div className="absolute top-0 right-0 p-12 opacity-10">
             <Coffee size={200} className="text-white" />
           </div>
-          <h4 className="text-blue-400 font-black uppercase tracking-[0.3em] text-sm">Anecdote</h4>
+          <h4 className="text-blue-400 font-black uppercase tracking-[0.3em] text-sm">{t.anecdote}</h4>
           <p className="text-2xl md:text-4xl font-bold text-white max-w-3xl mx-auto leading-tight">
-            Je carbure au café et à la curiosité. Si je ne code pas, je suis probablement en train d'explorer une nouvelle technologie.
+            {t.anecdoteDesc}
           </p>
         </motion.div>
       </div>

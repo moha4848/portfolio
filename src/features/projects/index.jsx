@@ -50,7 +50,12 @@ const Projects = () => {
     setSelectedProject(project);
   };
 
-  const categories = ['All', 'Full-Stack', 'Frontend'];
+  const categories = [
+    { id: 'All', label: t.all },
+    { id: 'Full-Stack', label: t.fullstack },
+    { id: 'Frontend', label: t.frontend }
+  ];
+
   const projects = portfolioData.projects;
 
   const filteredProjects = filter === 'All' 
@@ -67,30 +72,32 @@ const Projects = () => {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-[0.3em] border border-blue-500/20"
           >
-            <Sparkles size={12} /> Projets Sélectionnés
+            <Sparkles size={12} /> {t.featuredProjects}
           </motion.div>
           
           <h2 className="text-6xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.8]">
-            Work <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Showcase</span>
+             {t.workShowcase.split(' ')[0]} <br /> 
+             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+               {t.workShowcase.split(' ').slice(1).join(' ')}
+             </span>
           </h2>
           
           <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-            Une immersion dans mes projets les plus ambitieux. <br className="hidden md:block" />
-            Chaque projet est un défi relevé avec passion et précision.
+            {t.workDesc}
           </p>
           
           <div className="flex justify-center gap-4 pt-6 flex-wrap">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setFilter(cat)}
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
                 className={`px-10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
-                  filter === cat 
+                  filter === cat.id 
                   ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] scale-105' 
                   : 'bg-white dark:bg-slate-900 text-slate-400 dark:text-slate-500 border border-slate-100 dark:border-slate-800 hover:border-blue-500/50 hover:text-blue-600'
                 }`}
               >
-                {cat}
+                {cat.label}
               </button>
             ))}
           </div>

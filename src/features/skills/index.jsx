@@ -95,7 +95,7 @@ const Skills = () => {
               <Card className="px-12 py-5 bg-slate-900 border-slate-700 shadow-2xl relative overflow-hidden group">
                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                  <span className="text-xl font-black text-white uppercase tracking-[0.3em] flex items-center gap-4 relative z-10">
-                   <Layers size={28} className="text-blue-400" /> Arbre Global
+                   <Layers size={28} className="text-blue-400" /> {portfolioData.common[language].globalTree}
                  </span>
               </Card>
             </motion.div>
@@ -177,7 +177,7 @@ const Skills = () => {
             <div className="flex justify-center mb-10">
                <div className="px-6 py-3 bg-slate-900 rounded-2xl border border-slate-700 shadow-xl flex items-center gap-3">
                  <Layers size={20} className="text-blue-500" />
-                 <span className="text-sm font-black text-white uppercase tracking-widest">Arbre Global</span>
+                 <span className="text-sm font-black text-white uppercase tracking-widest">{portfolioData.common[language].globalTree}</span>
                </div>
             </div>
 

@@ -145,7 +145,9 @@ const Home = () => {
             className="absolute -bottom-6 -right-6 z-20 bg-blue-600 text-white p-6 rounded-3xl shadow-2xl flex flex-col items-center justify-center min-w-[120px] rotate-6"
           >
             <span className="text-3xl font-black">2+</span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ans d'Études</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-blue-100">
+              {portfolioData.common[language].yearsStudy}
+            </span>
           </motion.div>
         </motion.div>
       </div>
